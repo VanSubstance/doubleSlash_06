@@ -2,13 +2,13 @@ package com.example.temporal;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 public class interfaceMain extends AppCompatActivity {
 
@@ -66,5 +66,19 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
+    }
+
+    public void changeFragment(int usage) {
+        switch (usage) {
+            case 1:
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                communityWrite next = new communityWrite();
+                fragmentTransaction.replace(R.id.frameMain, next);
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            default:
+                break;
+        }
     }
 }
