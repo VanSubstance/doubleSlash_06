@@ -30,6 +30,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="@drawable/border_square_black_1dp"
             android:text="폐기물 처리법" />
 
         <TextView
@@ -38,6 +39,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="@drawable/border_square_black_1dp"
             android:text="게시판" />
 
         <TextView
@@ -46,6 +48,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="@drawable/border_square_black_1dp"
             android:text="지도" />
 
         <TextView
@@ -54,6 +57,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="@drawable/border_square_black_1dp"
             android:text="개인 정보" />
 
     </LinearLayout>
