@@ -15,9 +15,20 @@ public class interfaceMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interface_main);
+        TextView buttonMethod = findViewById(R.id.menuMethod);
         TextView buttonBoard = findViewById(R.id.menuBoard);
         TextView buttonMap = findViewById(R.id.menuMap);
         TextView buttonInfo = findViewById(R.id.menuInfo);
+
+        buttonMethod.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                methodMain next = new methodMain();
+                fragmentTransaction.replace(R.id.frameMain, next);
+                fragmentTransaction.addToBackStack(null).commit();
+            }
+        });
 
         buttonBoard.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {

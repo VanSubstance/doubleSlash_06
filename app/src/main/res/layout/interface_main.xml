@@ -25,6 +25,14 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
+            android:id="@+id/menuMethod"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="폐기물 처리법" />
+
+        <TextView
             android:id="@+id/menuBoard"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -47,5 +55,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="개인 정보" />
+
     </LinearLayout>
 </LinearLayout>
