@@ -23,7 +23,7 @@ public class interfaceMain extends AppCompatActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         homeMain next = new homeMain();
-        fragmentTransaction.replace(R.id.frameMain, next);
+        fragmentTransaction.replace(R.id.mainFrame, next);
         fragmentTransaction.commit();
 
         buttonHome.setOnClickListener(new Button.OnClickListener() {
@@ -31,7 +31,7 @@ public class interfaceMain extends AppCompatActivity {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 homeMain next = new homeMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
+                fragmentTransaction.replace(R.id.mainFrame, next);
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
@@ -41,7 +41,7 @@ public class interfaceMain extends AppCompatActivity {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 townMain next = new townMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
+                fragmentTransaction.replace(R.id.mainFrame, next);
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
@@ -51,7 +51,7 @@ public class interfaceMain extends AppCompatActivity {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 enrollMain next = new enrollMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
+                fragmentTransaction.replace(R.id.mainFrame, next);
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
@@ -61,14 +61,18 @@ public class interfaceMain extends AppCompatActivity {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 infoMain next = new infoMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
+                fragmentTransaction.replace(R.id.mainFrame, next);
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
     }
 
     // 해당 엑티비티 내에서 프레그먼트 바꿀때 사용
+    // 백의 자리: 하단 메뉴바 좌측에서부터 1, 2, 3, 4
+    // 십 + 일의 자리: 각 메뉴 내부의 프레그먼트
     public void changeFragment(int usage) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (usage) {
             case 1:
                 /**
@@ -78,6 +82,18 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameMain, next);
                 fragmentTransaction.addToBackStack(null).commit();
                  */
+                break;
+            case 200: // 우리동네 최초 클릭시
+                fragmentTransaction.replace(R.id.townMainFrame, new townTown());
+                fragmentTransaction.commit();
+                break;
+            case 210: // 우리동네 -> 우리동네
+                fragmentTransaction.replace(R.id.townMainFrame, new townTown());
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 220: // 우리동네 -> 포인트 사용
+                fragmentTransaction.replace(R.id.townMainFrame, new townPoint());
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             default:
                 break;
