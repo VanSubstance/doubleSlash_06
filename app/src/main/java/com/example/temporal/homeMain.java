@@ -6,10 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class methodMain extends Fragment {
+public class homeMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.method_main, container, false);
+        return inflater.inflate(R.layout.home_main, container, false);
     }
 
 }

@@ -2,7 +2,6 @@ package com.example.temporal;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,42 +15,42 @@ public class interfaceMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interface_main);
 
-        TextView buttonMethod = findViewById(R.id.menuMethod);
-        TextView buttonBoard = findViewById(R.id.menuBoard);
-        TextView buttonMap = findViewById(R.id.menuMap);
+        TextView buttonHome = findViewById(R.id.menuHome);
+        TextView buttonTown = findViewById(R.id.menuTown);
+        TextView buttonEnroll = findViewById(R.id.menuEnroll);
         TextView buttonInfo = findViewById(R.id.menuInfo);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        methodMain next = new methodMain();
+        homeMain next = new homeMain();
         fragmentTransaction.replace(R.id.frameMain, next);
-        fragmentTransaction.addToBackStack(null).commit();
+        fragmentTransaction.commit();
 
-        buttonMethod.setOnClickListener(new Button.OnClickListener() {
+        buttonHome.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                methodMain next = new methodMain();
+                homeMain next = new homeMain();
                 fragmentTransaction.replace(R.id.frameMain, next);
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
 
-        buttonBoard.setOnClickListener(new Button.OnClickListener() {
+        buttonTown.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                communityMain next = new communityMain();
+                townMain next = new townMain();
                 fragmentTransaction.replace(R.id.frameMain, next);
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
 
-        buttonMap.setOnClickListener(new Button.OnClickListener() {
+        buttonEnroll.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                mapMain next = new mapMain();
+                enrollMain next = new enrollMain();
                 fragmentTransaction.replace(R.id.frameMain, next);
                 fragmentTransaction.addToBackStack(null).commit();
             }
@@ -68,14 +67,17 @@ public class interfaceMain extends AppCompatActivity {
         });
     }
 
+    // 해당 엑티비티 내에서 프레그먼트 바꿀때 사용
     public void changeFragment(int usage) {
         switch (usage) {
             case 1:
+                /**
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 communityWrite next = new communityWrite();
                 fragmentTransaction.replace(R.id.frameMain, next);
                 fragmentTransaction.addToBackStack(null).commit();
+                 */
                 break;
             default:
                 break;

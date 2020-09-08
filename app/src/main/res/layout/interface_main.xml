@@ -25,40 +25,40 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/menuMethod"
+            android:id="@+id/menuHome"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/border_square_black_1dp"
-            android:text="폐기물 처리법" />
+            android:gravity="center"
+            android:text="홈" />
 
         <TextView
-            android:id="@+id/menuBoard"
+            android:id="@+id/menuTown"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/border_square_black_1dp"
-            android:text="게시판" />
+            android:gravity="center"
+            android:text="우리동네" />
 
         <TextView
-            android:id="@+id/menuMap"
+            android:id="@+id/menuEnroll"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/border_square_black_1dp"
-            android:text="지도" />
+            android:gravity="center"
+            android:text="등록" />
 
         <TextView
             android:id="@+id/menuInfo"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/border_square_black_1dp"
-            android:text="개인 정보" />
+            android:gravity="center"
+            android:text="마이" />
 
     </LinearLayout>
 </LinearLayout>

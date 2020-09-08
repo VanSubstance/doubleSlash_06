@@ -6,10 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class communityWrite extends Fragment {
+public class enrollMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.community_write, container, false);
+        return inflater.inflate(R.layout.enroll_main, container, false);
     }
 
 }

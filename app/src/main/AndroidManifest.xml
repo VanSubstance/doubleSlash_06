@@ -16,6 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".interfaceMain"></activity>
+        <activity android:name=".signupMain"></activity>
+        <activity android:name=".splashMain"></activity>
     </application>
 
 </manifest>
