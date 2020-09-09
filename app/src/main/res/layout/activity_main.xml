@@ -16,32 +16,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/text_id"
+        android:id="@+id/inputEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="300dp"
-        android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="아이디"
-        android:inputType="textPersonName"
+        android:hint="이메일"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/text_pass"
+        android:id="@+id/inputPw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="패스워드"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_id" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
     <Button
         android:id="@+id/buttonSignin"
@@ -49,10 +45,10 @@
         android:layout_height="46dp"
         android:layout_marginTop="24dp"
         android:text="로그인"
-        app:layout_constraintEnd_toEndOf="@+id/text_pass"
+        app:layout_constraintEnd_toEndOf="@+id/inputPw"
         app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toStartOf="@+id/text_pass"
-        app:layout_constraintTop_toBottomOf="@+id/text_pass" />
+        app:layout_constraintStart_toStartOf="@+id/inputPw"
+        app:layout_constraintTop_toBottomOf="@+id/inputPw" />
 
     <Button
         android:id="@+id/buttonSignup"

@@ -17,7 +17,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/townMenuReward"
+                android:id="@+id/challengeMenuReward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -26,7 +26,7 @@
                 android:gravity="center"/>
 
             <TextView
-                android:id="@+id/townMenuFunding"
+                android:id="@+id/challengeMenuFunding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -34,7 +34,7 @@
                 android:text="펀딩"
                 android:gravity="center"/>
             <TextView
-                android:id="@+id/townMenuFriend"
+                android:id="@+id/challengeMenuFriend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -44,7 +44,7 @@
         </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/townMainFrame"
+            android:id="@+id/frameChallengeMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="9">

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +27,18 @@ public class MainActivity extends AppCompatActivity {
         buttonSignin.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(intentSignin);
+                EditText editEmail = findViewById(R.id.inputEmail);
+                String inputEmail = editEmail.getText().toString();
+                EditText editPw = findViewById(R.id.inputPw);
+                String inputPw = editPw.getText().toString();
+                // 서버 연결
+                // 1. 이메일 / 패스워드 확인
+                if (inputEmail.equals("asd") && inputPw.equals("asd")) {
+                    startActivity(intentSignin);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "아이디와 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

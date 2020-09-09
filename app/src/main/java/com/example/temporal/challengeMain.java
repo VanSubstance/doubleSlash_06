@@ -14,11 +14,11 @@ public class challengeMain extends Fragment {
         View view = inflater.inflate(R.layout.challenge_main, container,false);
 
         ((interfaceMain)getActivity()).changeFragment(200);
-        TextView buttonTown = view.findViewById(R.id.townMenuReward);
-        TextView buttonPoint = view.findViewById(R.id.townMenuFunding);
-        TextView buttonFriend = view.findViewById(R.id.townMenuFriend);
+        TextView buttonchallenge = view.findViewById(R.id.challengeMenuReward);
+        TextView buttonPoint = view.findViewById(R.id.challengeMenuFunding);
+        TextView buttonFriend = view.findViewById(R.id.challengeMenuFriend);
 
-        buttonTown.setOnClickListener(new Button.OnClickListener() {
+        buttonchallenge.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((interfaceMain)getActivity()).changeFragment(210);
