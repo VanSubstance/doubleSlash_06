@@ -17,21 +17,29 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/townMenuTown"
+                android:id="@+id/townMenuReward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:layout_weight="1"
-                android:text="우리동네"
+                android:text="메인"
                 android:gravity="center"/>
 
             <TextView
-                android:id="@+id/townMenuPoint"
+                android:id="@+id/townMenuFunding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:layout_weight="1"
-                android:text="포인트 사용"
+                android:text="펀딩"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/townMenuFriend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_weight="1"
+                android:text="친구"
                 android:gravity="center"/>
         </LinearLayout>
 

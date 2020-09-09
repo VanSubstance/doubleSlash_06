@@ -40,7 +40,7 @@ public class interfaceMain extends AppCompatActivity {
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                townMain next = new townMain();
+                challengeMain next = new challengeMain();
                 fragmentTransaction.replace(R.id.mainFrame, next);
                 fragmentTransaction.addToBackStack(null).commit();
             }
@@ -83,16 +83,20 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.addToBackStack(null).commit();
                  */
                 break;
-            case 200: // 우리동네 최초 클릭시
-                fragmentTransaction.replace(R.id.townMainFrame, new townTown());
+            case 200: // 도전과제 최초 클릭시
+                fragmentTransaction.replace(R.id.townMainFrame, new challengeTown());
                 fragmentTransaction.commit();
                 break;
-            case 210: // 우리동네 -> 우리동네
-                fragmentTransaction.replace(R.id.townMainFrame, new townTown());
+            case 210: // 도전과제 -> 리워드
+                fragmentTransaction.replace(R.id.townMainFrame, new challengeTown());
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
-            case 220: // 우리동네 -> 포인트 사용
-                fragmentTransaction.replace(R.id.townMainFrame, new townPoint());
+            case 220: // 도전과제 -> 펀딩
+                fragmentTransaction.replace(R.id.townMainFrame, new challengePoint());
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 230: // 도전과제 -> 친구리스트
+                fragmentTransaction.replace(R.id.townMainFrame, new challengeFriend());
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
             default:

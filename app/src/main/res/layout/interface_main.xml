@@ -12,9 +12,7 @@
         android:layout_height="match_parent"
         android:layout_weight="9"
         app:layout_constraintBottom_toTopOf="@id/layoutMenu"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
         android:id="@+id/layoutMenu"
@@ -40,7 +38,7 @@
             android:layout_weight="1"
             android:background="@drawable/border_square_black_1dp"
             android:gravity="center"
-            android:text="우리동네" />
+            android:text="도전과제" />
 
         <TextView
             android:id="@+id/menuEnroll"
@@ -58,7 +56,7 @@
             android:layout_weight="1"
             android:background="@drawable/border_square_black_1dp"
             android:gravity="center"
-            android:text="마이" />
+            android:text="마이페이지" />
 
     </LinearLayout>
 </LinearLayout>

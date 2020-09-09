@@ -6,10 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class townPoint extends Fragment {
+public class challengePoint extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.town_point, container,false);
+        View view = inflater.inflate(R.layout.challenge_point, container,false);
 
         return view;
     }}
