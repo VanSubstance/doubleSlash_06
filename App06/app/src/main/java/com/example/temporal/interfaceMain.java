@@ -17,6 +17,7 @@ public class interfaceMain extends AppCompatActivity {
 
         TextView buttonHome = findViewById(R.id.menuHome);
         TextView buttonchallenge = findViewById(R.id.menuchallenge);
+        TextView buttonfunding = findViewById(R.id.menufunding);
         TextView buttonEnroll = findViewById(R.id.menuEnroll);
         TextView buttonInfo = findViewById(R.id.menuInfo);
 
@@ -41,6 +42,16 @@ public class interfaceMain extends AppCompatActivity {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 challengeMain next = new challengeMain();
+                fragmentTransaction.replace(R.id.frameMain, next);
+                fragmentTransaction.addToBackStack(null).commit();
+            }
+        });
+
+        buttonfunding.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fundingMain next = new fundingMain();
                 fragmentTransaction.replace(R.id.frameMain, next);
                 fragmentTransaction.addToBackStack(null).commit();
             }

@@ -38,7 +38,16 @@
             android:layout_weight="1"
             android:background="@drawable/border_square_black_1dp"
             android:gravity="center"
-            android:text="도전과제" />
+            android:text="챌린지" />
+
+        <TextView
+            android:id="@+id/menufunding"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_square_black_1dp"
+            android:gravity="center"
+            android:text="펀딩" />
 
         <TextView
             android:id="@+id/menuEnroll"
