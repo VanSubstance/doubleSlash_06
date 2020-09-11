@@ -10,12 +10,63 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <EditText
+                android:id="@+id/inputSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="카테고리 검색"
+                android:inputType="textPersonName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/buttonSearch"/>
+
+            <Button
+                android:id="@+id/buttonSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="검색"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <FrameLayout
-            android:id="@+id/frameChallengeMain"
+            android:id="@+id/frameChallengeMap"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="9">
+            android:layout_weight="6"
+            android:layout_margin="20dp"
+            android:background="@drawable/border_square_black_1dp">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameChallengeList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:layout_margin="20dp"
+            android:background="@drawable/border_square_black_1dp">
 
         </FrameLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonEnroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="추가"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

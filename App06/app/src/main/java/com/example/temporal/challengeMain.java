@@ -10,8 +10,31 @@ import android.widget.TextView;
 
 public class challengeMain extends Fragment {
 
+    String inputSearch;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.challenge_main, container,false);
+        View view = inflater.inflate(R.layout.challenge_main, container, false);
+        ((interfaceMain) getActivity()).changeFragment(200);
+        TextView editSearch = view.findViewById(R.id.inputSearch);
+        inputSearch = editSearch.getText().toString();
+
+        Button buttonSearch = view.findViewById(R.id.buttonSearch);
+        Button buttonEnroll = view.findViewById(R.id.buttonEnroll);
+
+        buttonSearch.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((interfaceMain)getActivity()).changeFragmentChallengeList(inputSearch);
+            }
+        });
+
+        buttonEnroll.setOnClickListener((new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((interfaceMain)getActivity()).changeFragment(210);
+            }
+        }));
 
         return view;
-    }}
+    }
+}

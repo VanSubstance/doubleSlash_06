@@ -78,6 +78,15 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameHomeMain, new homeWaste());
                 fragmentTransaction.commit();
                 break;
+            case 200: // 도전과제 화면 최초 클릭시
+                fragmentTransaction.replace(R.id.frameChallengeMap, new challengeMap());
+                fragmentTransaction.commit();
+                changeFragmentChallengeList("all");
+                break;
+            case 210: // 챌린지 -> 추가 버튼
+                fragmentTransaction.replace(R.id.frameMain, new challengeEnroll());
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
             case 310: // 등록 -> 등록 버튼
                 fragmentTransaction.replace(R.id.frameMain, new enrollComplete());
                 fragmentTransaction.addToBackStack(null).commit();
@@ -110,4 +119,23 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
+    // 도전과제(챌린지)의 리스트 프레그먼트를 불러오기 위한 함수
+    // parameter: 아마 검색 키워드가 아닐까?
+    public void changeFragmentChallengeList(String wordSearch) {
+        if (wordSearch.equals("all")) { // 도전과제 화면 최초 클릭시 리스트 불러오기
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            challengeList newPage = new challengeList();
+            fragmentTransaction.replace(R.id.frameChallengeList, newPage);
+            fragmentTransaction.commit();
+        } else { // 도전과제 화면 -> 검색 클릭시 리스트 불러오기
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            challengeList newPage = new challengeList();
+            fragmentTransaction.replace(R.id.frameChallengeList, newPage);
+            fragmentTransaction.addToBackStack(null).commit();
+        }
+    }
+
 }
