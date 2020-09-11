@@ -78,22 +78,6 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameHomeMain, new homeWaste());
                 fragmentTransaction.commit();
                 break;
-            case 200: // 도전과제 최초 클릭시
-                fragmentTransaction.replace(R.id.frameChallengeMain, new challengeTown());
-                fragmentTransaction.commit();
-                break;
-            case 210: // 도전과제 -> 리워드
-                fragmentTransaction.replace(R.id.frameChallengeMain, new challengeTown());
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            case 220: // 도전과제 -> 펀딩
-                fragmentTransaction.replace(R.id.frameChallengeMain, new challengePoint());
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            case 230: // 도전과제 -> 친구리스트
-                fragmentTransaction.replace(R.id.frameChallengeMain, new challengeFriend());
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
             case 310: // 등록 -> 등록 버튼
                 fragmentTransaction.replace(R.id.frameMain, new enrollComplete());
                 fragmentTransaction.addToBackStack(null).commit();
