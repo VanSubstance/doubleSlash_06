@@ -67,7 +67,7 @@ public class enrollMain extends Fragment {
                 if (textCtgr.getText().toString().equals("카테고리")) {
                     Toast.makeText(container.getContext(), "카테고리를 설정해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
-                    ((interfaceMain)getActivity()).changeFragment(310);
+                    ((interfaceMain)getActivity()).changeFragment(410);
                 }
             }
         });

@@ -98,10 +98,16 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameMain, new challengeEnroll());
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
-            case 310: // 등록 -> 등록 버튼
+            case 300: // 도전과제 화면 최초 클릭시
+                fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
+                fragmentTransaction.commit();
+                changeFragmnetFundingList();
+                break;
+            case 410: // 등록 -> 등록 버튼
                 fragmentTransaction.replace(R.id.frameMain, new enrollComplete());
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
+
             default:
                 break;
         }
@@ -147,6 +153,17 @@ public class interfaceMain extends AppCompatActivity {
             fragmentTransaction.replace(R.id.frameChallengeList, newPage);
             fragmentTransaction.addToBackStack(null).commit();
         }
+    }
+
+    // 펀딩의 리스트 프레그먼트를 불러오기 위한 함수
+    // parameter : 스피너 값
+    public void changeFragmnetFundingList() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fundingList newPage = new fundingList();
+        fragmentTransaction.replace(R.id.frameFundingList, newPage);
+        fragmentTransaction.commit();
+
     }
 
 }
