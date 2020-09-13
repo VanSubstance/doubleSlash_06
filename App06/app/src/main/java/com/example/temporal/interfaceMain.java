@@ -87,12 +87,13 @@ public class interfaceMain extends AppCompatActivity {
         switch (usage) {
             case 100: // 홈 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameHomeMain, new homeWaste());
+                changeFragmentChallengeList(1, "init");
                 fragmentTransaction.commit();
                 break;
             case 200: // 도전과제 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameChallengeMap, new challengeMap());
                 fragmentTransaction.commit();
-                changeFragmentChallengeList("all");
+                changeFragmentChallengeList(2, "init");
                 break;
             case 210: // 챌린지 -> 추가 버튼
                 fragmentTransaction.replace(R.id.frameMain, new challengeEnroll());
@@ -101,7 +102,7 @@ public class interfaceMain extends AppCompatActivity {
             case 300: // 도전과제 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
                 fragmentTransaction.commit();
-                changeFragmnetFundingList();
+                changeFragmentFundingList();
                 break;
             case 410: // 등록 -> 등록 버튼
                 fragmentTransaction.replace(R.id.frameMain, new enrollComplete());
@@ -139,25 +140,45 @@ public class interfaceMain extends AppCompatActivity {
 
     // 도전과제(챌린지)의 리스트 프레그먼트를 불러오기 위한 함수
     // parameter: 아마 검색 키워드가 아닐까?
-    public void changeFragmentChallengeList(String wordSearch) {
-        if (wordSearch.equals("all")) { // 도전과제 화면 최초 클릭시 리스트 불러오기
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            challengeList newPage = new challengeList();
-            fragmentTransaction.replace(R.id.frameChallengeList, newPage);
-            fragmentTransaction.commit();
-        } else { // 도전과제 화면 -> 검색 클릭시 리스트 불러오기
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            challengeList newPage = new challengeList();
-            fragmentTransaction.replace(R.id.frameChallengeList, newPage);
-            fragmentTransaction.addToBackStack(null).commit();
+    public void changeFragmentChallengeList(int page, String wordSearch) {
+        switch (page) {
+            case 1: // 홈 페이지에서 불러오기
+                if (wordSearch.equals("init")) { // 도전과제 화면 최초 클릭시 리스트 불러오기
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    challengeList newPage = new challengeList();
+                    fragmentTransaction.replace(R.id.frameHomeChallengeList, newPage);
+                    fragmentTransaction.commit();
+                } else { // 도전과제 화면 -> 검색 클릭시 리스트 불러오기
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    challengeList newPage = new challengeList();
+                    fragmentTransaction.replace(R.id.frameHomeChallengeList, newPage);
+                    fragmentTransaction.addToBackStack(null).commit();
+                }
+                break;
+            case 2: // 챌린지 페이지에서 불러오기
+                if (wordSearch.equals("init")) { // 도전과제 화면 최초 클릭시 리스트 불러오기
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    challengeList newPage = new challengeList();
+                    fragmentTransaction.replace(R.id.frameChallengeChallengeList, newPage);
+                    fragmentTransaction.commit();
+                } else { // 도전과제 화면 -> 검색 클릭시 리스트 불러오기
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    challengeList newPage = new challengeList();
+                    fragmentTransaction.replace(R.id.frameChallengeChallengeList, newPage);
+                    fragmentTransaction.addToBackStack(null).commit();
+                }
+                break;
         }
+
     }
 
     // 펀딩의 리스트 프레그먼트를 불러오기 위한 함수
     // parameter : 스피너 값
-    public void changeFragmnetFundingList() {
+    public void changeFragmentFundingList() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fundingList newPage = new fundingList();
@@ -166,4 +187,13 @@ public class interfaceMain extends AppCompatActivity {
 
     }
 
+    // 챌린지 클릭시 세부페이지를 열기 위한 함수
+    public void changeFragmentChallengeItemSpecific(challengeItem newOne) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        challengeItemSpecific newPage = new challengeItemSpecific();
+        newPage.setItem(newOne);
+        fragmentTransaction.replace(R.id.frameMain, newPage);
+        fragmentTransaction.addToBackStack(null).commit();
+    }
 }

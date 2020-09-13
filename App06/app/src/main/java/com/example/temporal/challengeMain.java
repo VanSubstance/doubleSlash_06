@@ -24,7 +24,7 @@ public class challengeMain extends Fragment {
         buttonSearch.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((interfaceMain)getActivity()).changeFragmentChallengeList(inputSearch);
+                ((interfaceMain)getActivity()).changeFragmentChallengeList(2, inputSearch);
             }
         });
 
