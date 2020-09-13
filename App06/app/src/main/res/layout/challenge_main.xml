@@ -14,11 +14,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/staticServiceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="챌린지"
+                android:textSize="20dp" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp">
+                android:layout_margin="10dp">
 
                 <EditText
                     android:id="@+id/inputSearch"
@@ -53,6 +62,15 @@
                 android:background="@drawable/border_square_black_1dp">
 
             </FrameLayout>
+
+            <TextView
+                android:id="@+id/todaychallenge_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_margin="10dp"
+                android:text="오늘의 챌린지"
+                android:textSize="20dp" />
 
             <FrameLayout
                 android:id="@+id/frameChallengeList"
