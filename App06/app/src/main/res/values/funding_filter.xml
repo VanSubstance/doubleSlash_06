@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="filter_array">
+    <string-array name="fundingfilter_array">
     <item>인기 순</item>
     <item>조회 순</item>
     <item>마감임박 순</item>

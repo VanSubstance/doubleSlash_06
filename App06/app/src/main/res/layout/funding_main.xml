@@ -30,7 +30,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="right"
                 android:layout_margin="20dp"
-                android:entries="@array/filter_array"
+                android:entries="@array/fundingfilter_array"
                 android:textSize="20dp" />
 
             <FrameLayout
