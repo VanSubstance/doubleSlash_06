@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -86,8 +87,8 @@ public class interfaceMain extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (usage) {
             case 100: // 홈 화면 최초 클릭시
-                fragmentTransaction.replace(R.id.frameHomeMain, new homeWaste());
                 changeFragmentChallengeList(1, "init");
+                changeFragmentWasteList();
                 fragmentTransaction.commit();
                 break;
             case 200: // 도전과제 화면 최초 클릭시
@@ -114,31 +115,17 @@ public class interfaceMain extends AppCompatActivity {
         }
     }
 
-    // 홈 프레그먼트의 분리배출법 세부 페이지를 열기 위한 함수
-    // parameter: 해당 분리배출법 id(int? String?) <- 데이터베이스
-    public void changeFragmentHome(int id) {
+    // 홈의 분리배출법 리스트 불러오기
+    // parameter : 스피너 값
+    public void changeFragmentWasteList() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        homeWasteSpecific newPage = new homeWasteSpecific();
-        // 1. id를 이용하여 데이터베이스에서 정보 불러오기
-        // 2. 정보 newPage 프레그먼트 변수에 각각 할당
-        fragmentTransaction.replace(R.id.frameMain, newPage);
-        fragmentTransaction.addToBackStack(null).commit();
-    }
-
-    // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수
-    // parameter: 아직 생각 안해봄
-    public void changeFragmentEnroll() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        enrollChecklist newPage = new enrollChecklist();
-        // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
-        fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
+        wasteList newPage = new wasteList();
+        fragmentTransaction.replace(R.id.frameHomeWasteList, newPage);
         fragmentTransaction.commit();
-
     }
 
-    // 도전과제(챌린지)의 리스트 프레그먼트를 불러오기 위한 함수
+    // 챌린지 리스트 불러오기
     // parameter: 아마 검색 키워드가 아닐까?
     public void changeFragmentChallengeList(int page, String wordSearch) {
         switch (page) {
@@ -176,7 +163,7 @@ public class interfaceMain extends AppCompatActivity {
 
     }
 
-    // 펀딩의 리스트 프레그먼트를 불러오기 위한 함수
+    // 펀딩 리스트 불러오기
     // parameter : 스피너 값
     public void changeFragmentFundingList() {
         FragmentManager fragmentManager = getFragmentManager();
@@ -185,6 +172,30 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameFundingList, newPage);
         fragmentTransaction.commit();
     }
+
+    // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수
+    // parameter: 아직 생각 안해봄
+    public void changeFragmentEnroll() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        enrollChecklist newPage = new enrollChecklist();
+        // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
+        fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
+        fragmentTransaction.commit();
+
+    }
+
+    // 분리배출법 세부페이지
+    public void changeFragmentWasteItemSpecific(wasteItem newOne) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        wasteItemSpecific newPage = new wasteItemSpecific();
+        newPage.setItem(newOne);
+        fragmentTransaction.replace(R.id.frameMain, newPage);
+        fragmentTransaction.addToBackStack(null).commit();
+    }
+
+    // 펀딩 세부페이지
     public void changeFragmentFundingItemSpecific(fundingItem newOne) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -194,7 +205,7 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null).commit();
     }
 
-    // 챌린지 클릭시 세부페이지를 열기 위한 함수
+    // 챌린지 세부페이지
     public void changeFragmentChallengeItemSpecific(challengeItem newOne) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -203,4 +214,5 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();
     }
+
 }
