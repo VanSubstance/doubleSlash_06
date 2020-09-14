@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class interfaceMain extends AppCompatActivity {
 
@@ -175,10 +176,14 @@ public class interfaceMain extends AppCompatActivity {
 
     // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수
     // parameter: 아직 생각 안해봄
-    public void changeFragmentEnroll() {
+    public void changeFragmentEnroll(enrollChecklistItem item) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         enrollChecklist newPage = new enrollChecklist();
+        Bundle bd = new Bundle(2);
+        bd.putString("ctgr", item.ctgr);
+        bd.putStringArrayList("seq", item.seq);
+        newPage.setArguments(bd);
         // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
         fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
         fragmentTransaction.commit();
