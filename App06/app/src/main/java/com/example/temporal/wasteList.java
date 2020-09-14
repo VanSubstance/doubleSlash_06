@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class wasteList extends Fragment implements OnItemClickForWaste {
 
         RecyclerView viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(viewList);
 
         wasteItemAdapter adapter = new wasteItemAdapter(listwaste, this);
         viewList.setAdapter(adapter);
