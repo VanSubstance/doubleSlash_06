@@ -15,16 +15,8 @@ public class homeMain extends Fragment {
         EditText editSearch = view.findViewById(R.id.inputSearch);
         String inputSearch = editSearch.getText().toString();
         Button buttonSearch = view.findViewById(R.id.buttonSearch);
-        FrameLayout frameMain = view.findViewById(R.id.frameHomeMain);
+        FrameLayout frameMain = view.findViewById(R.id.frameHomeWasteList);
         ((interfaceMain)getActivity()).changeFragment(100);
-
-        frameMain.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 분리배출법 id 고안해야 함
-                ((interfaceMain)getActivity()).changeFragmentHome(11111111);
-            }
-        });
 
         return view;
     }

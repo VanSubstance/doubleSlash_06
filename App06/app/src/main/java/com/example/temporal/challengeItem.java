@@ -6,7 +6,7 @@ public class challengeItem {
 
     // 테스트를 위한 함수
     public void init(int i) {
-        title = "테스트" + i;
-        description = "설명" + i;
+        title = "챌린지 테스트" + i;
+        description = "챌린지 설명" + i;
     }
 }
