@@ -24,8 +24,6 @@
         </activity>
         <activity android:name=".interfaceMain" android:windowSoftInputMode="stateAlwaysHidden"
             />
-        <activity android:name=".signupMain" android:windowSoftInputMode="stateAlwaysHidden"
-            />
         <activity android:name=".splashMain" android:windowSoftInputMode="stateAlwaysHidden"
             />
     </application>

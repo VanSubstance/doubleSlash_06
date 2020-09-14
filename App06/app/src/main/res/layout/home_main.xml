@@ -54,10 +54,19 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="분리배출법"
+                android:textSize="20dp"/>
+
             <FrameLayout
                 android:id="@+id/frameHomeWasteList"
                 android:layout_width="match_parent"
-                android:layout_height="534dp"
+                android:layout_height="300dp"
                 android:layout_margin="20dp"
                 android:layout_weight="5"
                 android:background="@drawable/border_square_black_1dp">
@@ -76,7 +85,7 @@
             <FrameLayout
                 android:id="@+id/frameHomeChallengeList"
                 android:layout_width="match_parent"
-                android:layout_height="442dp"
+                android:layout_height="300dp"
                 android:layout_margin="20dp"
                 android:layout_weight="5"
                 android:background="@drawable/border_square_black_1dp">

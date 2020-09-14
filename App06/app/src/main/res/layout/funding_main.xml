@@ -5,43 +5,38 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/staticServiceTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="펀딩 목록"
+            android:textSize="25dp" />
 
-            <TextView
-                android:id="@+id/staticServiceTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="20dp"
-                android:text="펀딩 목록"
-                android:textSize="25dp" />
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right"
+            android:layout_margin="20dp"
+            android:entries="@array/fundingfilter_array"
+            android:textSize="20dp" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="right"
-                android:layout_margin="20dp"
-                android:entries="@array/fundingfilter_array"
-                android:textSize="20dp" />
-
-            <FrameLayout
-                android:id="@+id/frameFundingList"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_margin="20dp"
-                android:layout_weight="5"
-                android:background="@drawable/border_square_black_1dp">
-            </FrameLayout>
-        </LinearLayout>
-    </ScrollView>
+        <FrameLayout
+            android:id="@+id/frameFundingList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="5"
+            android:background="@drawable/border_square_black_1dp">
+        </FrameLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
