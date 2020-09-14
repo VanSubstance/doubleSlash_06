@@ -15,16 +15,19 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".interfaceMain" />
-        <activity android:name=".signupMain" />
-        <activity android:name=".splashMain" />
+        <activity android:name=".interfaceMain" android:windowSoftInputMode="stateAlwaysHidden"
+            />
+        <activity android:name=".signupMain" android:windowSoftInputMode="stateAlwaysHidden"
+            />
+        <activity android:name=".splashMain" android:windowSoftInputMode="stateAlwaysHidden"
+            />
     </application>
 
 </manifest>
