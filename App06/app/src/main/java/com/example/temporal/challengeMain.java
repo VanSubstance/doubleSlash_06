@@ -37,9 +37,6 @@ public class challengeMain extends Fragment {
             }
         }));
 
-        //TextView switchView = (TextView) view.findViewById(R.id.switchon_text);
-        //switchView.setVisibility(View.VISIBLE);
-
         final Switch sw = (Switch)view.findViewById(R.id.switch1);
         sw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,20 +49,9 @@ public class challengeMain extends Fragment {
                     tv.setText("챌린지 전체");
                 }
             }
-
         });
-
 
         return view;
     }
-//    class visibilitySwitchListener implements CompoundButton.OnCheckedChangeListener{
-//        @Override
-//        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//            if(isChecked)
-//                switchView.setVisibility(View.INVISIBLE);
-//            else
-//                textView.setVisibility(View.VISIBLE);
-//        }
-//    }
 
 }
