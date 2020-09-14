@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class challengeList extends Fragment implements OnItemClick{
+public class challengeList extends Fragment implements OnItemClickForChallenge {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_list, container,false);

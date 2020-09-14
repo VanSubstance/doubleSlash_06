@@ -36,7 +36,7 @@
             <FrameLayout
                 android:id="@+id/frameFundingList"
                 android:layout_width="match_parent"
-                android:layout_height="994dp"
+                android:layout_height="400dp"
                 android:layout_margin="20dp"
                 android:layout_weight="5"
                 android:background="@drawable/border_square_black_1dp">

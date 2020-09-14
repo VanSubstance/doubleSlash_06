@@ -184,7 +184,14 @@ public class interfaceMain extends AppCompatActivity {
         fundingList newPage = new fundingList();
         fragmentTransaction.replace(R.id.frameFundingList, newPage);
         fragmentTransaction.commit();
-
+    }
+    public void changeFragmentFundingItemSpecific(fundingItem newOne) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fundingItemSpecific newPage = new fundingItemSpecific();
+        newPage.setItem(newOne);
+        fragmentTransaction.replace(R.id.frameMain, newPage);
+        fragmentTransaction.addToBackStack(null).commit();
     }
 
     // 챌린지 클릭시 세부페이지를 열기 위한 함수

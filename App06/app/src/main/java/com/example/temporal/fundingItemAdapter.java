@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdapter.ViewHolder> {
+public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.ViewHolder> {
 
-    private ArrayList<challengeItem> mData = null ;
-    private OnItemClickForChallenge mCallback;
+    private ArrayList<fundingItem> mData = null ;
+    private OnItemClickForFunding mCallback;
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -39,26 +39,26 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    challengeItemAdapter(ArrayList<challengeItem> item, OnItemClickForChallenge listener) {
+    fundingItemAdapter(ArrayList<fundingItem> item, OnItemClickForFunding listener) {
         mData = item ;
         this.mCallback = listener;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
-    public challengeItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public fundingItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.challenge_item, parent, false) ;
-        challengeItemAdapter.ViewHolder vh = new challengeItemAdapter.ViewHolder(view) ;
+        View view = inflater.inflate(R.layout.funding_item, parent, false) ;
+        fundingItemAdapter.ViewHolder vh = new fundingItemAdapter.ViewHolder(view) ;
 
         return vh ;
     }
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(challengeItemAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(fundingItemAdapter.ViewHolder holder, int position) {
         String title = mData.get(position).title;
         String description = mData.get(position).description;
         holder.textTitle.setText(title) ;

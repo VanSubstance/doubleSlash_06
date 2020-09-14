@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.temporal">
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="SmallStep"/>
 
     <application
+        android:label="SmallStep"
         android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +15,6 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".challenge_Friend"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

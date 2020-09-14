@@ -1,5 +1,5 @@
 package com.example.temporal;
 
-public interface OnItemClick {
+public interface OnItemClickForChallenge {
     void onClick(challengeItem newOne);
 }
