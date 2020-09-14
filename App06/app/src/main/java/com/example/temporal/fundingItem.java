@@ -4,7 +4,7 @@ public class fundingItem {
     String title;
     String description;
     public void init(int i) {
-        title = "테스트" + i;
-        description = "설명" + i;
+        title = "펀딩 테스트" + i;
+        description = "펀딩 설명" + i;
     }
 }
