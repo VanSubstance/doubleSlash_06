@@ -101,11 +101,16 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameMain, new challengeEnroll());
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
-            case 300: // 도전과제 화면 최초 클릭시
+            case 300: // 펀딩 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
                 fragmentTransaction.commit();
                 changeFragmentFundingList();
                 break;
+//            case 310: // 펀딩 세부페이지-> 펀딩하기 클릭시
+//                fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
+//                fragmentTransaction.commit();
+//                changeFragmentFundingList();
+//                break;
             case 410: // 등록 -> 등록 버튼
                 fragmentTransaction.replace(R.id.frameMain, new enrollComplete());
                 fragmentTransaction.addToBackStack(null).commit();
@@ -219,5 +224,7 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();
     }
+
+
 
 }
