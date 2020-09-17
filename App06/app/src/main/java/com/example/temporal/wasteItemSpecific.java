@@ -17,10 +17,16 @@ public class wasteItemSpecific extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.waste_item_specific, container,false);
+        TextView textCtgr = view.findViewById(R.id.textCtgr);
         TextView textTitle = view.findViewById(R.id.textTitle);
+        TextView textPicture = view.findViewById(R.id.textPicture);
         TextView textDescription = view.findViewById(R.id.textDescription);
+
+        textCtgr.setText(item.ctgr);
         textTitle.setText(item.title);
+        textPicture.setText(item.url);
         textDescription.setText(item.description);
+
 
         return view;
     }}
