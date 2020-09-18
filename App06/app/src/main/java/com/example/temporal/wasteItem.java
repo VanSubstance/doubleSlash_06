@@ -10,9 +10,12 @@ public class wasteItem {
     String content;
     public void init(int i) {
         id = "wasteID_" + i;
-        title = "분리수거법 테스트" + i;
-        description = "분리수거법 설명" + i;
+        title = id +" 테스트" + i;
+        description = id + " 분리수거법 " + i;
         url = "사진" + i;
-        ctgr = "카테고리" + i;
+        ctgr ="카테고리" + i;
+    }
+    public void setCtgr(String ctgr) {
+        this.ctgr = ctgr;
     }
 }

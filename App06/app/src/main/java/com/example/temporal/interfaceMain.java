@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.util.ArrayList;
+
 public class interfaceMain extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,6 @@ public class interfaceMain extends AppCompatActivity {
         switch (usage) {
             case 100: // 홈 화면 최초 클릭시
                 changeFragmentChallengeList(1, "init");
-                changeFragmentWasteList();
                 fragmentTransaction.commit();
                 break;
             case 200: // 도전과제 화면 최초 클릭시
