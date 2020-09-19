@@ -28,7 +28,7 @@ public class homeMain extends Fragment {
             newOne.init(i, "메인");
             aCurrentData.listChallenge.add(newOne);
         }
-        ((interfaceMain)getActivity()).callChallengeList();
+        ((interfaceMain)getActivity()).changeFragmentChallengeList();
 
         // 데이터베이스에서 ctgr 맞는거 불러오기
         aCurrentData.listWaste.clear();

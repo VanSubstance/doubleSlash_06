@@ -6,11 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
 public class listMain extends Fragment {
-    ArrayList<enrollChecklistItem> sampleCtgr = new ArrayList<enrollChecklistItem>();
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_main, container, false);
 
@@ -22,7 +18,7 @@ public class listMain extends Fragment {
             aCurrentData.listChallenge.add(newOne);
         }
 
-        ((interfaceMain)getActivity()).callChallengeList();
+        ((interfaceMain)getActivity()).changeFragmentChallengeList();
 
         return view;
     }

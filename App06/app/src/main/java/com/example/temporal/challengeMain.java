@@ -25,7 +25,7 @@ public class challengeMain extends Fragment {
             newOne.init(i, "챌린지");
             aCurrentData.listChallenge.add(newOne);
         }
-        ((interfaceMain)getActivity()).callChallengeList();
+        ((interfaceMain)getActivity()).changeFragmentChallengeList();
 
         final Switch sw = (Switch)view.findViewById(R.id.switch1);
         sw.setOnClickListener(new View.OnClickListener() {

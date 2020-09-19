@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 public class interfaceMain extends AppCompatActivity {
 
@@ -16,8 +17,8 @@ public class interfaceMain extends AppCompatActivity {
         setContentView(R.layout.interface_main);
 
         TextView buttonHome = findViewById(R.id.menuHome);
-        TextView buttonchallenge = findViewById(R.id.menuchallenge);
-        TextView buttonfunding = findViewById(R.id.menufunding);
+        TextView buttonChallenge = findViewById(R.id.menuChallenge);
+        TextView buttonFunding = findViewById(R.id.menuFunding);
         TextView buttonList = findViewById(R.id.menuList);
         TextView buttonInfo = findViewById(R.id.menuInfo);
 
@@ -27,55 +28,36 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameMain, next);
         fragmentTransaction.commit();
 
-        buttonHome.setOnClickListener(new Button.OnClickListener() {
+        View.OnClickListener btnListener = new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                homeMain next = new homeMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
+                switch (view.getId()) {
+                    case R.id.menuHome:
+                        fragmentTransaction.replace(R.id.frameMain, new homeMain());
+                        break;
+                    case R.id.menuChallenge:
+                        fragmentTransaction.replace(R.id.frameMain, new challengeMain());
+                        break;
+                    case R.id.menuList:
+                        fragmentTransaction.replace(R.id.frameMain, new listMain());
+                        break;
+                    case R.id.menuFunding:
+                        fragmentTransaction.replace(R.id.frameMain, new fundingMain());
+                        break;
+                    case R.id.menuInfo:
+                        fragmentTransaction.replace(R.id.frameMain, new infoMain());
+                        break;
+                }
                 fragmentTransaction.addToBackStack(null).commit();
             }
-        });
-
-        buttonchallenge.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                challengeMain next = new challengeMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
-                fragmentTransaction.addToBackStack(null).commit();
-            }
-        });
-
-        buttonfunding.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fundingMain next = new fundingMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
-                fragmentTransaction.addToBackStack(null).commit();
-            }
-        });
-
-        buttonList.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                listMain next = new listMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
-                fragmentTransaction.addToBackStack(null).commit();
-            }
-        });
-
-        buttonInfo.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                infoMain next = new infoMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
-                fragmentTransaction.addToBackStack(null).commit();
-            }
-        });
+        };
+        buttonHome.setOnClickListener(btnListener);
+        buttonChallenge.setOnClickListener(btnListener);
+        buttonList.setOnClickListener(btnListener);
+        buttonFunding.setOnClickListener(btnListener);
+        buttonInfo.setOnClickListener(btnListener);
     }
 
     // 해당 엑티비티 내에서 프레그먼트 바꿀때 사용
@@ -125,7 +107,7 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void callChallengeList() {
+    public void changeFragmentChallengeList() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeList newPage = new challengeList();
@@ -141,22 +123,6 @@ public class interfaceMain extends AppCompatActivity {
         fundingList newPage = new fundingList();
         fragmentTransaction.replace(R.id.frameFundingList, newPage);
         fragmentTransaction.commit();
-    }
-
-    // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수
-    // parameter: 아직 생각 안해봄
-    public void changeFragmentEnroll(enrollChecklistItem item) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        enrollChecklist newPage = new enrollChecklist();
-        Bundle bd = new Bundle(2);
-        bd.putString("ctgr", item.ctgr);
-        bd.putStringArrayList("seq", item.seq);
-        newPage.setArguments(bd);
-        // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
-        fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
-        fragmentTransaction.commit();
-
     }
 
     // 분리배출법 세부페이지
@@ -189,6 +155,21 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null).commit();
     }
 
-
+    /** 사용 안함
+     // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수
+     // parameter: 아직 생각 안해봄
+     public void changeFragmentEnroll(enrollChecklistItem item) {
+     FragmentManager fragmentManager = getFragmentManager();
+     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+     enrollChecklist newPage = new enrollChecklist();
+     Bundle bd = new Bundle(2);
+     bd.putString("ctgr", item.ctgr);
+     bd.putStringArrayList("seq", item.seq);
+     newPage.setArguments(bd);
+     // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
+     fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
+     fragmentTransaction.commit();
+     }
+     */
 
 }
