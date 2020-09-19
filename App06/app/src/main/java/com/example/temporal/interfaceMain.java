@@ -73,14 +73,14 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameChallengeMap, new challengeMap());
                 fragmentTransaction.commit();
                 break;
-            case 210: // 챌린지 -> 추가 버튼
-                fragmentTransaction.replace(R.id.frameMain, new challengeEnroll());
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
             case 300: // 펀딩 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
                 fragmentTransaction.commit();
                 changeFragmentFundingList();
+                break;
+            case 310: // 챌린지 목록 -> 추가버튼 클릭시
+                fragmentTransaction.replace(R.id.frameMain, new listEnroll());
+                fragmentTransaction.commit();
                 break;
 //            case 310: // 펀딩 세부페이지-> 펀딩하기 클릭시
 //                fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
@@ -97,6 +97,13 @@ public class interfaceMain extends AppCompatActivity {
         }
     }
 
+    public void changeFragmentChallengeEnrollList() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        challengeEnrollList newPage = new challengeEnrollList();
+        fragmentTransaction.replace(R.id.frameChallengeList, newPage);
+        fragmentTransaction.commit();
+    }
     // 홈의 분리배출법 리스트 불러오기
     // parameter : 스피너 값
     public void changeFragmentWasteList() {

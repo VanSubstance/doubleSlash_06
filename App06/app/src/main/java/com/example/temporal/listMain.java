@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class listMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -17,8 +18,15 @@ public class listMain extends Fragment {
             newOne.init(i, "목록");
             aCurrentData.listChallenge.add(newOne);
         }
-
         ((interfaceMain)getActivity()).changeFragmentChallengeList();
+
+        Button buttonAdd = view.findViewById(R.id.buttonAdd);
+        buttonAdd.setOnClickListener( new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((interfaceMain) getActivity()).changeFragment(310);
+            }
+        });
 
         return view;
     }
