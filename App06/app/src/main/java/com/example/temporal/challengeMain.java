@@ -17,25 +17,15 @@ public class challengeMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.challenge_main, container, false);
         ((interfaceMain) getActivity()).changeFragment(200);
-        TextView editSearch = view.findViewById(R.id.inputSearch);
-        inputSearch = editSearch.getText().toString();
 
-        Button buttonSearch = view.findViewById(R.id.buttonSearch);
-        Button buttonEnroll = view.findViewById(R.id.buttonEnroll);
-
-        buttonSearch.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((interfaceMain)getActivity()).changeFragmentChallengeList(2, inputSearch);
-            }
-        });
-
-        buttonEnroll.setOnClickListener((new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((interfaceMain)getActivity()).changeFragment(210);
-            }
-        }));
+        // 맞는 챌린지 불러오기
+        aCurrentData.listChallenge.clear();
+        for (int i = 0; i < 10; i++) {
+            challengeItem newOne = new challengeItem();
+            newOne.init(i, "챌린지");
+            aCurrentData.listChallenge.add(newOne);
+        }
+        ((interfaceMain)getActivity()).callChallengeList();
 
         final Switch sw = (Switch)view.findViewById(R.id.switch1);
         sw.setOnClickListener(new View.OnClickListener() {

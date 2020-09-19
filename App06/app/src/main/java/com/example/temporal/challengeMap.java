@@ -17,6 +17,7 @@ public class challengeMap extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_map, container,false);
+        /**
         MapView mapView = new MapView(inflater.getContext());
         ViewGroup mapViewContainer = (ViewGroup)view.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
@@ -31,5 +32,6 @@ public class challengeMap extends Fragment {
         mapView.zoomIn(true);
         // 줌 아웃
         mapView.zoomOut(true);
+         */
         return view;
     }}

@@ -14,14 +14,21 @@ import java.util.ArrayList;
 public class homeMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_main, container, false);
-        FrameLayout frameMain = view.findViewById(R.id.frameHomeWasteList);
-        ((interfaceMain)getActivity()).changeFragment(100);
         ConstraintLayout buttonMask = view.findViewById(R.id.buttonMask);
         ConstraintLayout buttonPlastic = view.findViewById(R.id.buttonPlastic);
         ConstraintLayout buttonPaper = view.findViewById(R.id.buttonPaper);
         ConstraintLayout buttonCan = view.findViewById(R.id.buttonCan);
         ConstraintLayout buttonVinyl = view.findViewById(R.id.buttonVinyl);
         ConstraintLayout buttonEtc = view.findViewById(R.id.buttonEtc);
+
+        // 맞는 챌린지 불러오기
+        aCurrentData.listChallenge.clear();
+        for (int i = 0; i < 10; i++) {
+            challengeItem newOne = new challengeItem();
+            newOne.init(i, "메인");
+            aCurrentData.listChallenge.add(newOne);
+        }
+        ((interfaceMain)getActivity()).callChallengeList();
 
         // 데이터베이스에서 ctgr 맞는거 불러오기
         aCurrentData.listWaste.clear();
