@@ -78,10 +78,10 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.commit();
                 changeFragmentFundingList();
                 break;
-            case 310: // 펀딩하기 버튼 클릭시
-                fragmentTransaction.replace(R.id.frameMain, new fundingList());
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
+//            case 310: // 펀딩하기 버튼 클릭시
+//                fragmentTransaction.replace(R.id.frameMain, new fundingList());
+//                fragmentTransaction.addToBackStack(null).commit();
+//                break;
             case 310: // 챌린지 목록 -> 추가버튼 클릭시
                 fragmentTransaction.replace(R.id.frameMain, new listEnroll());
                 fragmentTransaction.commit();

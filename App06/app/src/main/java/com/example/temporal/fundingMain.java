@@ -18,6 +18,14 @@ public class fundingMain extends Fragment {
         View view = inflater.inflate(R.layout.funding_main, container, false);
         ((interfaceMain) getActivity()).changeFragment(300);
 
+        aCurrentData.listFunding.clear();
+        for (int i = 0; i < 10; i++) {
+            fundingItem newOne = new fundingItem();
+            newOne.init(i);
+            aCurrentData.listFunding.add(newOne);
+        }
+        ((interfaceMain)getActivity()).changeFragmentFundingList();
+
         Button buttonFunding = view.findViewById(R.id.funding_button);
 
         buttonFunding.setOnClickListener(new Button.OnClickListener() {

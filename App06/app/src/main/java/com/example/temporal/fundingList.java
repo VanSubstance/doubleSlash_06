@@ -13,27 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class fundingList extends Fragment implements OnItemClickForFunding {
+    RecyclerView viewList;
+    fundingItemAdapter adapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.funding_list, container,false);
 
-        ArrayList<fundingItem> listfunding = new ArrayList<fundingItem>();
-        for (int i = 0; i < 10; i++) {
-            fundingItem newOne = new fundingItem();
-            newOne.init(i);
-            listfunding.add(newOne);
-        }
-
-        RecyclerView viewList = view.findViewById(R.id.recyclerView);
+        viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
+        // 부드럽게 넘기기
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
 
-        fundingItemAdapter adapter = new fundingItemAdapter(listfunding, this);
+        adapter = new fundingItemAdapter(aCurrentData.listFunding, this);
         viewList.setAdapter(adapter);
-        
         return view;
+
     }
 
     @Override
