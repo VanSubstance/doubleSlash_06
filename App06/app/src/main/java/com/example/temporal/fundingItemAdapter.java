@@ -1,10 +1,15 @@
 package com.example.temporal;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +24,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textTitle;
         TextView textDescription;
+        TextView textSpecificTitle;
+        TextView textSpecificDescription;
 
         ViewHolder(View itemView) {
             super(itemView) ;
@@ -26,6 +33,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             // 뷰 객체에 대한 참조. (hold strong reference)
             textTitle = itemView.findViewById(R.id.textTitle);
             textDescription = itemView.findViewById(R.id.textDescription);
+            textSpecificTitle = itemView.findViewById(R.id.textSpecificTitle);
+            textSpecificDescription = itemView.findViewById(R.id.textSpecificDescription);
 
             itemView.setOnClickListener( new View.OnClickListener() {
 
@@ -61,8 +70,13 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     public void onBindViewHolder(fundingItemAdapter.ViewHolder holder, int position) {
         String title = mData.get(position).title;
         String description = mData.get(position).description;
+        String specific_title = mData.get(position).specific_title;
+        String specific_description = mData.get(position).specific_description;
+
         holder.textTitle.setText(title) ;
         holder.textDescription.setText(description);
+        holder.textSpecificTitle.setText(specific_title);
+        holder.textSpecificDescription.setText(specific_description);
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
@@ -70,4 +84,5 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     public int getItemCount() {
         return mData.size() ;
     }
+
 }

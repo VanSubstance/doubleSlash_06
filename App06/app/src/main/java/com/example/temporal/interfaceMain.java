@@ -107,6 +107,10 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.commit();
                 changeFragmentFundingList();
                 break;
+//            case 310: // 펀딩하기 버튼 클릭시
+//                fragmentTransaction.replace(R.id.frameMain, new fundingList());
+//                fragmentTransaction.addToBackStack(null).commit();
+//                break;
 //            case 310: // 펀딩 세부페이지-> 펀딩하기 클릭시
 //                fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
 //                fragmentTransaction.commit();
@@ -205,6 +209,13 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();
     }
+
+//    // 펀딩 세부
+//    public void changeFragmentFundingItemSpecific(fundingItem newOne) {
+//        TextView txt = (TextView) findViewById(R.id.textDescription);
+//        txt.setText(btn.getText());
+//
+//    }
 
     // 펀딩 세부페이지
     public void changeFragmentFundingItemSpecific(fundingItem newOne) {

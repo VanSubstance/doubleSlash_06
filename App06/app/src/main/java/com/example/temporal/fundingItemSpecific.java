@@ -25,9 +25,10 @@ public class fundingItemSpecific extends Fragment {
         textTitle.setText(item.title);
         textDescription.setText(item.description);
 
-        final Button buttonFunding = view.findViewById(R.id.funding_button);
+        Button buttonFunding = view.findViewById(R.id.funding_button);
 
-        buttonFunding.setOnClickListener(new View.OnClickListener() {
+        buttonFunding.setOnClickListener(new Button.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("펀딩이 완료되었습니다!");
