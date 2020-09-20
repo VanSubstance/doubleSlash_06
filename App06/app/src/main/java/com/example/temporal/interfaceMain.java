@@ -4,14 +4,11 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import java.util.ArrayList;
+import androidx.fragment.app.Fragment;
 
 public class interfaceMain extends AppCompatActivity {
 
@@ -20,9 +17,9 @@ public class interfaceMain extends AppCompatActivity {
         setContentView(R.layout.interface_main);
 
         TextView buttonHome = findViewById(R.id.menuHome);
-        TextView buttonchallenge = findViewById(R.id.menuchallenge);
-        TextView buttonfunding = findViewById(R.id.menufunding);
-        TextView buttonEnroll = findViewById(R.id.menuEnroll);
+        TextView buttonChallenge = findViewById(R.id.menuChallenge);
+        TextView buttonFunding = findViewById(R.id.menuFunding);
+        TextView buttonList = findViewById(R.id.menuList);
         TextView buttonInfo = findViewById(R.id.menuInfo);
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -31,55 +28,36 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameMain, next);
         fragmentTransaction.commit();
 
-        buttonHome.setOnClickListener(new Button.OnClickListener() {
+        View.OnClickListener btnListener = new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                homeMain next = new homeMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
+                switch (view.getId()) {
+                    case R.id.menuHome:
+                        fragmentTransaction.replace(R.id.frameMain, new homeMain());
+                        break;
+                    case R.id.menuChallenge:
+                        fragmentTransaction.replace(R.id.frameMain, new challengeMain());
+                        break;
+                    case R.id.menuList:
+                        fragmentTransaction.replace(R.id.frameMain, new listMain());
+                        break;
+                    case R.id.menuFunding:
+                        fragmentTransaction.replace(R.id.frameMain, new fundingMain());
+                        break;
+                    case R.id.menuInfo:
+                        fragmentTransaction.replace(R.id.frameMain, new infoMain());
+                        break;
+                }
                 fragmentTransaction.addToBackStack(null).commit();
             }
-        });
-
-        buttonchallenge.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                challengeMain next = new challengeMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
-                fragmentTransaction.addToBackStack(null).commit();
-            }
-        });
-
-        buttonfunding.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fundingMain next = new fundingMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
-                fragmentTransaction.addToBackStack(null).commit();
-            }
-        });
-
-        buttonEnroll.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                enrollMain next = new enrollMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
-                fragmentTransaction.addToBackStack(null).commit();
-            }
-        });
-
-        buttonInfo.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                infoMain next = new infoMain();
-                fragmentTransaction.replace(R.id.frameMain, next);
-                fragmentTransaction.addToBackStack(null).commit();
-            }
-        });
+        };
+        buttonHome.setOnClickListener(btnListener);
+        buttonChallenge.setOnClickListener(btnListener);
+        buttonList.setOnClickListener(btnListener);
+        buttonFunding.setOnClickListener(btnListener);
+        buttonInfo.setOnClickListener(btnListener);
     }
 
     // 해당 엑티비티 내에서 프레그먼트 바꿀때 사용
@@ -90,32 +68,25 @@ public class interfaceMain extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (usage) {
             case 100: // 홈 화면 최초 클릭시
-                changeFragmentChallengeList(1, "init");
-                fragmentTransaction.commit();
                 break;
-            case 200: // 도전과제 화면 최초 클릭시
+            case 200: // 챌린지 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameChallengeMap, new challengeMap());
                 fragmentTransaction.commit();
-                changeFragmentChallengeList(2, "init");
-                break;
-            case 210: // 챌린지 -> 추가 버튼
-                fragmentTransaction.replace(R.id.frameMain, new challengeEnroll());
-                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 300: // 펀딩 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
                 fragmentTransaction.commit();
                 changeFragmentFundingList();
                 break;
-//            case 310: // 펀딩하기 버튼 클릭시
-//                fragmentTransaction.replace(R.id.frameMain, new fundingList());
-//                fragmentTransaction.addToBackStack(null).commit();
-//                break;
-//            case 310: // 펀딩 세부페이지-> 펀딩하기 클릭시
-//                fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
-//                fragmentTransaction.commit();
-//                changeFragmentFundingList();
-//                break;
+            case 310: // 펀딩하기 버튼 클릭시
+                fragmentTransaction.replace(R.id.frameMain, new fundingList());
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 310: // 챌린지 목록 -> 추가버튼 클릭시
+                fragmentTransaction.replace(R.id.frameMain, new listEnroll());
+                fragmentTransaction.commit();
+                break;
+
             case 410: // 등록 -> 등록 버튼
                 fragmentTransaction.replace(R.id.frameMain, new enrollComplete());
                 fragmentTransaction.addToBackStack(null).commit();
@@ -126,6 +97,13 @@ public class interfaceMain extends AppCompatActivity {
         }
     }
 
+    public void changeFragmentChallengeEnrollList() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        challengeEnrollList newPage = new challengeEnrollList();
+        fragmentTransaction.replace(R.id.frameChallengeList, newPage);
+        fragmentTransaction.commit();
+    }
     // 홈의 분리배출법 리스트 불러오기
     // parameter : 스피너 값
     public void changeFragmentWasteList() {
@@ -136,42 +114,12 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    // 챌린지 리스트 불러오기
-    // parameter: 아마 검색 키워드가 아닐까?
-    public void changeFragmentChallengeList(int page, String wordSearch) {
-        switch (page) {
-            case 1: // 홈 페이지에서 불러오기
-                if (wordSearch.equals("init")) { // 도전과제 화면 최초 클릭시 리스트 불러오기
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    challengeList newPage = new challengeList();
-                    fragmentTransaction.replace(R.id.frameHomeChallengeList, newPage);
-                    fragmentTransaction.commit();
-                } else { // 도전과제 화면 -> 검색 클릭시 리스트 불러오기
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    challengeList newPage = new challengeList();
-                    fragmentTransaction.replace(R.id.frameHomeChallengeList, newPage);
-                    fragmentTransaction.addToBackStack(null).commit();
-                }
-                break;
-            case 2: // 챌린지 페이지에서 불러오기
-                if (wordSearch.equals("init")) { // 도전과제 화면 최초 클릭시 리스트 불러오기
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    challengeList newPage = new challengeList();
-                    fragmentTransaction.replace(R.id.frameChallengeChallengeList, newPage);
-                    fragmentTransaction.commit();
-                } else { // 도전과제 화면 -> 검색 클릭시 리스트 불러오기
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    challengeList newPage = new challengeList();
-                    fragmentTransaction.replace(R.id.frameChallengeChallengeList, newPage);
-                    fragmentTransaction.addToBackStack(null).commit();
-                }
-                break;
-        }
-
+    public void changeFragmentChallengeList() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        challengeList newPage = new challengeList();
+        fragmentTransaction.replace(R.id.frameChallengeList, newPage);
+        fragmentTransaction.commit();
     }
 
     // 펀딩 리스트 불러오기
@@ -182,22 +130,6 @@ public class interfaceMain extends AppCompatActivity {
         fundingList newPage = new fundingList();
         fragmentTransaction.replace(R.id.frameFundingList, newPage);
         fragmentTransaction.commit();
-    }
-
-    // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수
-    // parameter: 아직 생각 안해봄
-    public void changeFragmentEnroll(enrollChecklistItem item) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        enrollChecklist newPage = new enrollChecklist();
-        Bundle bd = new Bundle(2);
-        bd.putString("ctgr", item.ctgr);
-        bd.putStringArrayList("seq", item.seq);
-        newPage.setArguments(bd);
-        // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
-        fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
-        fragmentTransaction.commit();
-
     }
 
     // 분리배출법 세부페이지
@@ -237,6 +169,21 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null).commit();
     }
 
-
+    /** 사용 안함
+     // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수
+     // parameter: 아직 생각 안해봄
+     public void changeFragmentEnroll(enrollChecklistItem item) {
+     FragmentManager fragmentManager = getFragmentManager();
+     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+     enrollChecklist newPage = new enrollChecklist();
+     Bundle bd = new Bundle(2);
+     bd.putString("ctgr", item.ctgr);
+     bd.putStringArrayList("seq", item.seq);
+     newPage.setArguments(bd);
+     // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
+     fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
+     fragmentTransaction.commit();
+     }
+     */
 
 }

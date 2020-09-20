@@ -10,13 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
-public class challengeList extends Fragment implements OnItemClickForChallenge {
+public class challengeEnrollList extends Fragment implements OnItemClickForChallengeEnroll {
     RecyclerView viewList;
-    challengeItemAdapter adapter;
+    challengeEnrollItemAdapter adapter;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.challenge_list, container,false);
+        View view = inflater.inflate(R.layout.challenge_enroll_list, container,false);
 
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -25,13 +24,14 @@ public class challengeList extends Fragment implements OnItemClickForChallenge {
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
 
-        adapter = new challengeItemAdapter(aCurrentData.listChallenge, this);
+        adapter = new challengeEnrollItemAdapter(aCurrentData.listChallengeEnroll, this);
         viewList.setAdapter(adapter);
+
         return view;
     }
 
     @Override
-    public void onClick(challengeItem newOne) {
-        ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecific(newOne);
+    public void onClick(challengeEnrollItem newOne) {
+
     }
 }

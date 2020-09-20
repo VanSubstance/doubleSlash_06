@@ -18,7 +18,7 @@ public class enrollMain extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.enroll_main, container, false);
-
+        /**
         Button buttonConfirm = view.findViewById(R.id.buttonConfirm);
 
         final TextView textCtgr = view.findViewById(R.id.textCtgr);
@@ -77,6 +77,7 @@ public class enrollMain extends Fragment {
                 }
             }
         });
+         */
 
         return view;
     }

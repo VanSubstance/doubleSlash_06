@@ -1,6 +1,6 @@
 package com.example.temporal;
 
-public class challengeItem {
+public class challengeEnrollItem {
     String id;
     String title;
     String description;
@@ -13,17 +13,14 @@ public class challengeItem {
     String content;
 
     // 테스트를 위한 함수
-    public void init(int i, String page) {
-        title = page + " 챌린지 테스트" + i;
-        description = "챌린지 설명" + i;
-        regDate = "시작일" + i;
-        closeDate = "마감일" + i;
-        writer = "작성자" + i;
+    public void init(int i) {
+        title = "챌린지 등록 테스트 " + i;
+        description = "챌린지 설명 " + i;
+        regDate = "시작일 " + i;
+        closeDate = "마감일 " + i;
+        writer = "작성자 " + i;
         lat = 0.0 + i;
         lon = 0.0 + i;
-
-
-
 
     }
 }
