@@ -2,11 +2,14 @@ package com.example.temporal;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -15,7 +18,7 @@ public class homeMain extends Fragment {
         View view = inflater.inflate(R.layout.home_main, container, false);
         // 맞는 챌린지 불러오기
         aCurrentData.listChallenge.clear();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             challengeItem newOne = new challengeItem();
             newOne.init(i, "메인");
             aCurrentData.listChallenge.add(newOne);
@@ -34,14 +37,38 @@ public class homeMain extends Fragment {
 
         final ScrollView scrollView = view.findViewById(R.id.viewScroll);
         final Button buttonDownward = view.findViewById(R.id.buttonDownward);
+        final Button buttonUpward = view.findViewById(R.id.buttonUpward);
+        buttonUpward.setVisibility(View.GONE);
+        buttonDownward.setVisibility(View.VISIBLE);
         buttonDownward.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 scrollView.fullScroll(View.FOCUS_DOWN);
                 buttonDownward.setVisibility(View.GONE);
+                buttonUpward.setVisibility(View.VISIBLE);
             }
         });
-
+        buttonUpward.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scrollView.fullScroll(View.FOCUS_UP);
+                buttonUpward.setVisibility(View.GONE);
+                buttonDownward.setVisibility(View.VISIBLE);
+            }
+        });
+        scrollView.setOnTouchListener(new ScrollView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (scrollView.getScrollY() >= 0 && scrollView.getScrollY() < 400) {
+                    buttonDownward.setVisibility(View.VISIBLE);
+                    buttonUpward.setVisibility(View.GONE);
+                } else {
+                    buttonUpward.setVisibility(View.VISIBLE);
+                    buttonDownward.setVisibility(View.GONE);
+                }
+                return false;
+            }
+        });
         new Thread(new Runnable() {
             @Override
             public void run() {
