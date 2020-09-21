@@ -1,5 +1,6 @@
 package com.example.temporal;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
 
 public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.ViewHolder> {
 
@@ -44,7 +46,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
                     mCallback.onClick(mData.get(position));
                 }
             });
-        }
+
+            }
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
@@ -83,6 +86,38 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     @Override
     public int getItemCount() {
         return mData.size() ;
+    }
+
+    public void onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.funding_item, container, false);
+
+        Button buttonFunding = view.findViewById(R.id.funding_button);
+
+        buttonFunding.setOnClickListener(new Button.OnClickListener() {
+            private Context context;
+            private Activity activity;
+
+            @Override
+            public void onClick(View view) {
+
+                final Context context = null;
+                final Activity activity = null;
+                this.context = context;
+                this.activity = activity;
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setTitle("펀딩이 완료되었습니다!");
+                builder.setMessage("펀딩 완료 메시지");
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //토스트 메시지
+                        Toast.makeText(activity.getApplicationContext(), "펀딩 완료", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //builder.setNeutralButton("취소", null);
+                builder.show();
+            }
+        });
     }
 
 }
