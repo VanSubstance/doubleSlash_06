@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class listEnroll extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_enroll, container, false);
-        // 맞는 챌린지 불러오기
+        // 챌린지 틀 목록 불러오기
         aCurrentData.listChallengeEnroll.clear();
         for (int i = 0; i < 10; i++) {
             challengeEnrollItem newOne = new challengeEnrollItem();
@@ -17,6 +18,14 @@ public class listEnroll extends Fragment {
             aCurrentData.listChallengeEnroll.add(newOne);
         }
         ((interfaceMain)getActivity()).changeFragmentChallengeEnrollList();
+
+        Button buttonCustomize = view.findViewById(R.id.buttonCustomize);
+        buttonCustomize.setOnClickListener( new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((interfaceMain)getActivity()).changeFragment(320);
+            }
+        });
 
         return view;
     }

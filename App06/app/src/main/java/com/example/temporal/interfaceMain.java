@@ -67,31 +67,23 @@ public class interfaceMain extends AppCompatActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (usage) {
-            case 100: // 홈 화면 최초 클릭시
-                break;
             case 200: // 챌린지 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameChallengeMap, new challengeMap());
                 fragmentTransaction.commit();
                 break;
-            case 300: // 펀딩 화면 최초 클릭시
+            case 310: // 챌린지 목록 -> 추가 버튼 클릭 -> 챌린지 등록 열기
+                fragmentTransaction.replace(R.id.frameMain, new listEnroll());
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 320: // 챌린지 등록 -> 추가 버튼 클릭 -> 챌린지 생성 열기
+                fragmentTransaction.replace(R.id.frameMain, new listCustomize());
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 400: // 펀딩 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
                 fragmentTransaction.commit();
                 changeFragmentFundingList();
                 break;
-//            case 310: // 펀딩하기 버튼 클릭시
-//                fragmentTransaction.replace(R.id.frameMain, new fundingList());
-//                fragmentTransaction.addToBackStack(null).commit();
-//                break;
-            case 310: // 챌린지 목록 -> 추가버튼 클릭시
-                fragmentTransaction.replace(R.id.frameMain, new listEnroll());
-                fragmentTransaction.commit();
-                break;
-
-            case 410: // 등록 -> 등록 버튼
-                fragmentTransaction.replace(R.id.frameMain, new enrollComplete());
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-
             default:
                 break;
         }

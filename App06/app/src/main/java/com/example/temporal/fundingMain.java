@@ -16,7 +16,7 @@ public class fundingMain extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.funding_main, container, false);
-        ((interfaceMain) getActivity()).changeFragment(300);
+        ((interfaceMain) getActivity()).changeFragment(400);
 
         aCurrentData.listFunding.clear();
         for (int i = 0; i < 10; i++) {
