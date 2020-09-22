@@ -1,32 +1,35 @@
 package com.example.temporal;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+
 import android.content.Intent;
+
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
-import com.kakao.auth.ApiErrorCode;
+
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
+import com.kakao.network.ApiErrorCode;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 
-public class MainActivity extends AppCompatActivity {
 
+
+public class MainActivity extends AppCompatActivity {
     private SessionCallback sessionCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        sessionCallback = new SessionCallback();
-        Session.getCurrentSession().addCallback(sessionCallback);
-        Session.getCurrentSession().checkAndImplicitOpen();
 
         Intent splash = new Intent(this, splashMain.class);
         startActivity(splash);
@@ -41,21 +44,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        ImageButton kakaoSignin=findViewById(R.id.kakao_button);
+        kakaoSignin.setOnClickListener(new Button.OnClickListener(){
 
-        // 세션 콜백 삭제
-        Session.getCurrentSession().removeCallback(sessionCallback);
+            @Override
+            public void onClick(View view) {
+                sessionCallback = new SessionCallback();
+                Session.getCurrentSession().addCallback(sessionCallback);
+                Session.getCurrentSession().checkAndImplicitOpen();
+            }
+        });
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
             return;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(sessionCallback);
     }
 
     private class SessionCallback implements ISessionCallback {
@@ -73,11 +84,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"로그인 도중 오류가 발생했습니다: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
                     }
                 }
+
+                @Override
+                public void onSessionClosed(ErrorResult errorResult) {
+                    Toast.makeText(getApplicationContext(),"세션이 닫혔습니다. 다시 시도해 주세요: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                }
+
                 @Override
                 public void onSuccess(MeV2Response result) {
-                    /* 수정해야 할 부분 앞으로 어떻게 해 갈지에 대해 알아야지 수정할거 같습니다.
-                    
-                    Intent intent = new Intent(getApplicationContext(), homeMain.class);
+                    Intent intent = new Intent(getApplicationContext(), interfaceMain.class);
+                    /*
                     intent.putExtra("name", result.getNickname());
                     intent.putExtra("profile", result.getProfileImagePath());
                     if(result.getKakaoAccount().hasEmail() == OptionalBoolean.TRUE)
@@ -88,27 +104,20 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("gender", result.getKakaoAccount().getGender().getValue());
                     else
                         intent.putExtra("gender", "none");
-
-
+                    */
                     startActivity(intent);
                     finish();
-
-                     */
-
-                }
-
-                @Override
-                public void onSessionClosed(ErrorResult errorResult) {
-                    Toast.makeText(getApplicationContext(),"세션이 닫혔습니다. 다시 시도해 주세요: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
                 }
             });
         }
 
         @Override
-        public void onSessionOpenFailed(KakaoException exception) {
-            Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: ", Toast.LENGTH_SHORT).show();
+        public void onSessionOpenFailed(KakaoException e) {
+            Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: "+e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }
 
 

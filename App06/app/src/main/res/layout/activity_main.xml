@@ -27,10 +27,11 @@
         app:layout_constraintBottom_toTopOf="@id/kakao_button"/>
 
 
-    <com.kakao.usermgmt.LoginButton
+    <ImageButton
         android:id="@+id/kakao_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/kakao_login_medium_narrow"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/buttonSignin"
         app:layout_constraintStart_toStartOf="@+id/buttonSignin"
