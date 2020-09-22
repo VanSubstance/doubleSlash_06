@@ -45,29 +45,24 @@ public class challengeMap extends Fragment {
     public double longitude; //경도
     public double latitude; //위도
     private gpsTracker gpsTracker;
+    public String address;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_map, container,false);
 
         // test
-        TextView tv=(TextView)view.findViewById(R.id.textView2);
-        
         gpsTracker = new gpsTracker(getContext());
         latitude=gpsTracker.getLatitude();
         longitude=gpsTracker.getLongitude();
-        String address=getCurrentAddress(latitude,longitude);
-        tv.setText(address);
+        address=getCurrentAddress(latitude,longitude);
         initView(view);
-
         final Button lc = view.findViewById(R.id.current_button);
         lc.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-
-                                  }
-                              }
-
-        );
+                mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true);
+            }
+        });
         return view;
     }
 
@@ -150,5 +145,16 @@ public class challengeMap extends Fragment {
         mapView= new MapView(getContext());
         ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude, longitude), 3, true);
+        mapView.zoomIn(true);
+        mapView.zoomOut(true);
+        MapPOIItem mapPOIItem = new MapPOIItem();
+        mapPOIItem.setItemName(address);
+        mapPOIItem.setTag(0);
+        mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude));
+        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        mapView.addPOIItem(mapPOIItem);
+
+
     }
  }
