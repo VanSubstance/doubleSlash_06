@@ -50,7 +50,7 @@ public class challengeMap extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_map, container,false);
-
+/*
         // test
         gpsTracker = new gpsTracker(getContext());
         latitude=gpsTracker.getLatitude();
@@ -63,10 +63,10 @@ public class challengeMap extends Fragment {
             public void onClick(View view) {
                 mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true);
             }
-        });
+        });*/
         return view;
     }
-
+/*
     public String getCurrentAddress( double latitude, double longitude){
         //지오코더 ..GPS를 주소로 변환
         Geocoder geocoder=new Geocoder(getContext(), Locale.getDefault());
@@ -157,5 +157,5 @@ public class challengeMap extends Fragment {
         mapView.addPOIItem(mapPOIItem);
 
 
-    }
+    }*/
  }
