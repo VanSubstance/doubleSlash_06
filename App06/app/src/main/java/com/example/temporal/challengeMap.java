@@ -1,8 +1,14 @@
 
 package com.example.temporal;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,50 +22,128 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class challengeMap extends Fragment {
 
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private static final int PERMISSIONS_REQUEST_ACCESS_CALL_PHONE = 2;
-
+    private static final int GPS_ENABLE_REQUEST_CODE = 2000;
+    private static final String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    private static final int PERMISSIONS_REQUEST_CODE = 100;
     // 중요...
-    public LocationManager lm;
-
     // 지도 구현
     private MapView mapView;
 
     public double longitude; //경도
     public double latitude; //위도
-    public double altitude; //고도
-    public float accuracy; //정확도
-    public String provider; //위치제공자
-    public String currentLocation; // 그래서 최종 위치
+    private gpsTracker gpsTracker;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_map, container,false);
-        initView(view);
-        setLocation();
-        /**
-        MapView mapView = new MapView(inflater.getContext());
-        ViewGroup mapViewContainer = (ViewGroup)view.findViewById(R.id.map_view);
-        mapViewContainer.addView(mapView);
 
-        // 중심점 변경
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633), true);
-        // 줌 레벨 변경
-        mapView.setZoomLevel(7, true);
-        // 중심점 변경 + 줌 레벨 변경
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(33.41, 126.52), 9, true);
-        // 줌 인
-        mapView.zoomIn(true);
-        // 줌 아웃
-        mapView.zoomOut(true);
-         */
+        // test
+        TextView tv=(TextView)view.findViewById(R.id.textView2);
+        
+        gpsTracker = new gpsTracker(getContext());
+        latitude=gpsTracker.getLatitude();
+        longitude=gpsTracker.getLongitude();
+        String address=getCurrentAddress(latitude,longitude);
+        tv.setText(address);
+        initView(view);
+
+        final Button lc = view.findViewById(R.id.current_button);
+        lc.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                                  }
+                              }
+
+        );
         return view;
+    }
+
+    public String getCurrentAddress( double latitude, double longitude){
+        //지오코더 ..GPS를 주소로 변환
+        Geocoder geocoder=new Geocoder(getContext(), Locale.getDefault());
+        List<Address> addresses;
+        try {
+            addresses = geocoder.getFromLocation(
+                    latitude,
+                    longitude,
+                    100);
+        } catch (IOException e) {
+            //네트워크 문제
+            Toast.makeText(getContext(),"지오코터 서비스 사용불가",Toast.LENGTH_LONG).show();
+            showDialogForLocationServiceSetting();
+            return "잘못된 GPS 좌표";
+        }
+        if(addresses==null||addresses.size()==0){
+            Toast.makeText(getContext(),"주소 미발견",Toast.LENGTH_LONG).show();
+            showDialogForLocationServiceSetting();
+            return "주소 미발견";
+        }
+        Address address=addresses.get(0);
+        return address.getAddressLine(0).toString();
+    }
+    public boolean checkLocationServicesStatus() {
+        LocationManager locationManager = (LocationManager)getActivity().getSystemService(getContext().LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    private void showDialogForLocationServiceSetting() {
+        AlertDialog.Builder builder= new AlertDialog.Builder(getContext());
+        builder.setTitle("위치 서비스 비활성화");
+        builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n"+"위치 설정을 수정할래용?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int id) {
+                Intent callGPSSettingIntent =
+                        new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case GPS_ENABLE_REQUEST_CODE: //사용자가 GPS 활성 시켰는지 검사
+                if (checkLocationServicesStatus()) {
+                    if (checkLocationServicesStatus()) {
+                    Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
+                    checkGPSPermission();
+                    return;
+                }
+                }
+                break;
+        }
+    }
+    public void checkGPSPermission(){
+        int locationPermissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+        int coarsePermissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION);
+        if(locationPermissionCheck == PackageManager.PERMISSION_DENIED && coarsePermissionCheck == PackageManager.PERMISSION_DENIED){
+            Log.d("permissionCheck", "denied");
+            ActivityCompat.requestPermissions(getActivity(),  REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
+        }
+        else if(locationPermissionCheck == PackageManager.PERMISSION_GRANTED){
+            Log.d("permissionCheck", "granted");
+        }
     }
 
     private void initView(View view) {
@@ -67,98 +151,4 @@ public class challengeMap extends Fragment {
         ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
     }
-    private void setLocation() {
-        lm=(LocationManager)getActivity().getSystemService(getContext().LOCATION_SERVICE);
-        Toast.makeText(getContext(),"현재 위치를 찾고 있습니", Toast.LENGTH_SHORT);
-        getlocation();
-    }
-
-    private void getlocation() {
-        try {
-            // GPS 제공자의 정보가 바뀌면 콜백하도록 리스너 등록하기~!!!
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, // 등록할 위치제공자
-                    100, // 통지사이의 최소 시간간격 (miliSecond)
-                    1, // 통지사이의 최소 변경거리 (m)
-                     mLocationListener);
-            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, // 등록할 위치제공자
-                    100, // 통지사이의 최소 시간간격 (miliSecond)
-                    1, // 통지사이의 최소 변경거리 (m)
-                   mLocationListener);
-
-            //txtCurrentPositionInfo.setText("위치정보 미수신중");
-            //lm.removeUpdates(mLocationListener);  //  미수신할때는 반드시 자원해체를 해주어야 한다.
-
-        } catch (SecurityException ex) {
-
-        }
-    }
-    private final LocationListener mLocationListener = new LocationListener() {
-
-        @Override
-        public void onLocationChanged(Location location) {
-            //여기서 위치값이 갱신되면 이벤트가 발생한다.
-            //값은 Location 형태로 리턴되며 좌표 출력 방법은 다음과 같다.
-
-            Log.d("test", "onLocationChanged, location:" + location);
-            longitude = location.getLongitude(); //경도
-            latitude = location.getLatitude();   //위도
-            altitude = location.getAltitude();   //고도
-            accuracy = location.getAccuracy();    //정확도
-            provider = location.getProvider();   //위치제공자
-            //Gps 위치제공자에 의한 위치변화. 오차범위가 좁다.
-            //Network 위치제공자에 의한 위치변화
-            //Network 위치는 Gps에 비해 정확도가 많이 떨어진다.
-            // 지도를 움직인다
-            setDaumMapCurrentLocation(latitude, longitude);
-
-            lm.removeUpdates( mLocationListener);  //  미수신할때는 반드시 자원해체를 해주어야 한다.
-
-        }
-        public void onProviderDisabled(String provider) {
-            // Disabled시
-            Log.d("test", "onProviderDisabled, provider:" + provider);
-        }
-
-        public void onProviderEnabled(String provider) {
-            // Enabled시
-            Log.d("test", "onProviderEnabled, provider:" + provider);
-        }
-
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            // 변경시
-            Log.d("test", "onStatusChanged, provider:" + provider + ", status:" + status + " ,Bundle:" + extras);
-        }
-    };
-    public void setDaumMapCurrentLocation(double latitude, double longitude) {
-
-        // 중심점 변경
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true);
-
-        // 줌 레벨 변경
-        mapView.setZoomLevel(4, true);
-
-        // 중심점 변경 + 줌 레벨 변경
-        //mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude, longitude), 9, true);
-
-        // 줌 인
-        mapView.zoomIn(true);
-
-        // 줌 아웃
-        //mapView.zoomOut(true);
-
-        // 마커 생성
-        setDaumMapCurrentMarker();
-
-    }
-
-    public void setDaumMapCurrentMarker(){
-        MapPOIItem marker = new MapPOIItem();
-        marker.setItemName("현재 위치");
-        marker.setTag(0);
-        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude));
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-        mapView.addPOIItem(marker);
-    }
-
-}
+ }
