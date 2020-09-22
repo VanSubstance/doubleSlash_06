@@ -6,12 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +15,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/staticServiceTitle"
                     android:layout_width="wrap_content"
@@ -70,16 +63,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="20dp"
-                        android:layout_weight="3"
+                        android:orientation="vertical"
                         android:background="@drawable/border_square_black_1dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+                        app:layout_constraintTop_toTopOf="parent">
+                    </FrameLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,13 +122,9 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
-
                     </FrameLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </LinearLayout>
-
         </LinearLayout>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
