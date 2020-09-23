@@ -20,7 +20,7 @@
         android:windowSoftInputMode="adjustResize">
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="42b6b0567763f72b0a90fdf35e989ab9" />
+            android:value="@string/kakao_app_key" />
 
         <activity android:name=".MainActivity" android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>

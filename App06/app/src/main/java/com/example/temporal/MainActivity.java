@@ -43,17 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentSignin);
             }
         });
+        sessionCallback = new SessionCallback();
+        Session.getCurrentSession().addCallback(sessionCallback);
+        Session.getCurrentSession().checkAndImplicitOpen();
 
-        ImageButton kakaoSignin=findViewById(R.id.kakao_button);
-        kakaoSignin.setOnClickListener(new Button.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                sessionCallback = new SessionCallback();
-                Session.getCurrentSession().addCallback(sessionCallback);
-                Session.getCurrentSession().checkAndImplicitOpen();
-            }
-        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
