@@ -11,9 +11,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 public class challengeMain extends Fragment {
-
-    String inputSearch;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.challenge_main, container, false);
         ((interfaceMain) getActivity()).changeFragment(200);
