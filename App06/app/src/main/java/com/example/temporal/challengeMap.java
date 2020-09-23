@@ -63,7 +63,8 @@ public class challengeMap extends Fragment {
             public void onClick(View view) {
                 mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true);
             }
-        });*/
+        });
+        */
         return view;
     }
 /*
@@ -157,5 +158,6 @@ public class challengeMap extends Fragment {
         mapView.addPOIItem(mapPOIItem);
 
 
-    }*/
+    }
+    */
  }
