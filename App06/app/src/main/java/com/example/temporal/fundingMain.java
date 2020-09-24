@@ -4,11 +4,15 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +27,7 @@ public class fundingMain extends Fragment {
             newOne.init(i);
             aCurrentData.listFunding.add(newOne);
         }
-        ((interfaceMain)getActivity()).changeFragmentFundingList();
+        ((interfaceMain) getActivity()).changeFragmentFundingList();
 
 //        Button buttonFunding = view.findViewById(R.id.funding_button);
 //
@@ -46,6 +50,7 @@ public class fundingMain extends Fragment {
 //        });
 
         return view;
-        //return inflater.inflate(R.layout.funding_main, container, false);
+
     }
+
 }

@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +40,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             textDescription = itemView.findViewById(R.id.textDescription);
             textSpecificTitle = itemView.findViewById(R.id.textSpecificTitle);
             textSpecificDescription = itemView.findViewById(R.id.textSpecificDescription);
+            final RecyclerView viewList = itemView.findViewById(R.id.recyclerView);
 
             itemView.setOnClickListener( new View.OnClickListener() {
 
@@ -46,6 +50,15 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
                     mCallback.onClick(mData.get(position));
                 }
             });
+
+//            textSpecificTitle.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Context context = null;
+//                    Animation anim = AnimationUtils.loadAnimation(context, R.anim.funding_translate_top);   // 에니메이션 설정 파일
+//                    viewList.startAnimation(anim);
+//                }
+//            });
 
             }
     }

@@ -33,28 +33,28 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/funding_list"
             android:layout_width="391dp"
             android:layout_height="1000dp"
-            android:layout_marginTop="580dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="188dp"
+            android:layout_marginEnd="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.668">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textTitle"
-                android:layout_width="184dp"
-                android:layout_height="26dp"
+                android:layout_width="110dp"
+                android:layout_height="22dp"
                 android:text="펀딩 제목"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/textSpecificTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.514"
+                app:layout_constraintHorizontal_bias="0.544"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.238" />
+                app:layout_constraintVertical_bias="0.364" />
 
             <TextView
                 android:id="@+id/textDescription"
@@ -72,7 +72,7 @@
                 android:id="@+id/textSpecificTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="744dp"
+                android:layout_marginBottom="844dp"
                 android:text="펀딩 세부 내용 제목"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -84,18 +84,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="펀딩 세부 내용"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/funding_button"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textSpecificTitle"
-                app:layout_constraintVertical_bias="0.092" />
+                app:layout_constraintTop_toBottomOf="@+id/textSpecificTitle" />
 
             <Button
                 android:id="@+id/funding_button"
                 android:layout_width="280dp"
                 android:layout_height="79dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="304dp"
+                android:layout_marginBottom="700dp"
                 android:text="펀딩하기"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"

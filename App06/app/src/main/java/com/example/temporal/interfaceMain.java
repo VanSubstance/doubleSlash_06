@@ -141,15 +141,15 @@ public class interfaceMain extends AppCompatActivity {
 //
 //    }
 
-    // 펀딩 세부페이지
-    public void changeFragmentFundingItemSpecific(fundingItem newOne) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fundingItemSpecific newPage = new fundingItemSpecific();
-        newPage.setItem(newOne);
-        fragmentTransaction.replace(R.id.frameMain, newPage);
-        fragmentTransaction.addToBackStack(null).commit();
-    }
+//    // 펀딩 세부페이지
+//    public void changeFragmentFundingItemSpecific(fundingItem newOne) {
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fundingItemSpecific newPage = new fundingItemSpecific();
+//        newPage.setItem(newOne);
+//        fragmentTransaction.replace(R.id.frameMain, newPage);
+//        fragmentTransaction.addToBackStack(null).commit();
+//    }
 
     // 챌린지 세부페이지
     public void changeFragmentChallengeItemSpecific(challengeItem newOne) {
