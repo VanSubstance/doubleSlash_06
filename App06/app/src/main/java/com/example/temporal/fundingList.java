@@ -28,23 +28,10 @@ import java.util.ArrayList;
 public class fundingList extends Fragment implements OnItemClickForFunding {
     RecyclerView viewList;
     fundingItemAdapter adapter;
-    //private OnItemClickForFunding dofunding;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.funding_list, container,false);
 
-//        Button buttonFunding = view.findViewById(R.id.funding_button);
-//        buttonFunding.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                buttonFunding.Button.setVisibility(View.GONE);
-//            }
-//        });
-
-        //ConstraintLayout fundinglayout = view.findViewById(R.id.funding_list);
-
-//        Button buttonFunding = view.findViewById(R.id.funding_button);
-//
 //        buttonFunding.setOnClickListener(new Button.OnClickListener() {
 //
 //            @Override
@@ -75,9 +62,6 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         adapter = new fundingItemAdapter(aCurrentData.listFunding, this);
         viewList.setAdapter(adapter);
 
-        TextView textSpecificTitle = view.findViewById(R.id.textSpecificTitle);
-        TextView textSpecificDescription = view.findViewById(R.id.textSpecificDescription);
-
 //        textSpecificTitle.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -92,15 +76,53 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
 
     @Override
         public void onClick(fundingItem newOne) {
-        //((interfaceMain)getActivity()).changeFragmentFundingItemSpecific(newOne);
-//        View view = inflater.inflate(R.layout.funding_list, container,false);
-//        TextView textSpecificTitle = view.findViewById(R.id.textSpecificTitle);
-//        TextView textSpecificDescription = view.findViewById(R.id.textSpecificDescription);
-//
+        TextView textTitle = viewList.findViewById(R.id.textTitle);
+        TextView textDescription = viewList.findViewById(R.id.textDescription);
+         TextView textSpecificTitle = viewList.findViewById(R.id.textSpecificTitle);
+         TextView textSpecificDescription = viewList.findViewById(R.id.textSpecificDescription);
+         Button fundingbutton = viewList.findViewById(R.id.funding_button);
+        TextView textTitleClick = viewList.findViewById(R.id.textTitleClick);
+        TextView textDescriptionClick = viewList.findViewById(R.id.textDescriptionClick);
+
+        textTitleClick.setVisibility(View.VISIBLE);
+        textDescriptionClick.setVisibility(View.VISIBLE);
+        textSpecificTitle.setVisibility(View.VISIBLE);
+        textSpecificDescription.setVisibility(View.VISIBLE);
+        fundingbutton.setVisibility(View.VISIBLE);
+        textTitle.setVisibility(View.GONE);
+        textDescription.setVisibility(View.GONE);
+
+
         Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
         viewList.startAnimation(anim);
 
-//
+
+    }
+
+    @Override
+    public void onScroll(fundingItem newOne) {
+        TextView textTitle = viewList.findViewById(R.id.textTitle);
+        TextView textDescription = viewList.findViewById(R.id.textDescription);
+        TextView textSpecificTitle = viewList.findViewById(R.id.textSpecificTitle);
+        TextView textSpecificDescription = viewList.findViewById(R.id.textSpecificDescription);
+        Button fundingbutton = viewList.findViewById(R.id.funding_button);
+        TextView textTitleClick = viewList.findViewById(R.id.textTitleClick);
+        TextView textDescriptionClick = viewList.findViewById(R.id.textDescriptionClick);
+
+        textTitleClick.setVisibility(View.VISIBLE);
+        textDescriptionClick.setVisibility(View.VISIBLE);
+        textSpecificTitle.setVisibility(View.VISIBLE);
+        textSpecificDescription.setVisibility(View.VISIBLE);
+        fundingbutton.setVisibility(View.VISIBLE);
+        textTitle.setVisibility(View.GONE);
+        textDescription.setVisibility(View.GONE);
+
+
+        Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
+        viewList.startAnimation(anim);
+    }
+
+    //
 ////        textSpecificTitle.(View.VISIBLE);
 //
 //
@@ -119,6 +141,19 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
 ////        getActivity().finish();
 ////        ((MainActivity)getActivity()).overridePendingTransition(R.anim.stay,R.anim.funding_translate_bottom);
 //
+    @Override
+    public void onFundingClick(fundingItem newOne) {
+
+    }
+
+    @Override
+    public void onLeftCLick(fundingItem newOne) {
+
+    }
+
+    @Override
+    public void onRightCLick(fundingItem newOne) {
+
     }
 
 }
