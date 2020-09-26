@@ -41,7 +41,35 @@
 
     </LinearLayout>
 
-<!--    <Button-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/button_left"-->
+<!--            android:layout_width="65dp"-->
+<!--            android:layout_height="574dp"-->
+<!--            android:background="#00ff0000"-->
+<!--            android:text="&lt;"-->
+<!--            android:textSize="50dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/button_right"-->
+<!--            android:layout_width="65dp"-->
+<!--            android:layout_height="574dp"-->
+<!--            android:background="#00ff0000"-->
+<!--            android:layout_marginLeft="250dp"-->
+<!--            android:text="&gt;"-->
+<!--            android:textSize="50dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    </LinearLayout>-->
+
+    <!--    <Button-->
 <!--        android:id="@+id/funding_button"-->
 <!--        android:layout_width="280dp"-->
 <!--        android:layout_height="79dp"-->
