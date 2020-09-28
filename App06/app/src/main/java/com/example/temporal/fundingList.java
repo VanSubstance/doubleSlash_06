@@ -1,7 +1,10 @@
 package com.example.temporal;
 
 import android.app.Fragment;
-import android.os.AsyncTask;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +12,13 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +30,12 @@ import java.net.URL;
 public class fundingList extends Fragment implements OnItemClickForFunding {
     RecyclerView viewList;
     fundingItemAdapter adapter;
+
+//    ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
+//    TextView funding = viewList.findViewById(R.id.funding);
+//    TextView fundingTitle = viewList.findViewById(R.id.fundingTitle);
+//    TextView fundingSpecific = viewList.findViewById(R.id.fundingSpecific);
+//    ConstraintLayout funding_click = viewList.findViewById(R.id.funding_click);
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.funding_list, container,false);
@@ -69,73 +84,77 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
 
     @Override
         public void onClick(fundingItem newOne) {
-        TextView textTitle = viewList.findViewById(R.id.textTitle);
-        TextView textDescription = viewList.findViewById(R.id.textDescription);
-         TextView textSpecificTitle = viewList.findViewById(R.id.textSpecificTitle);
-         TextView textSpecificDescription = viewList.findViewById(R.id.textSpecificDescription);
-         Button fundingbutton = viewList.findViewById(R.id.funding_button);
-        TextView textTitleClick = viewList.findViewById(R.id.textTitleClick);
-        TextView textDescriptionClick = viewList.findViewById(R.id.textDescriptionClick);
+        ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
 
-        textTitleClick.setVisibility(View.VISIBLE);
-        textDescriptionClick.setVisibility(View.VISIBLE);
-        textSpecificTitle.setVisibility(View.VISIBLE);
-        textSpecificDescription.setVisibility(View.VISIBLE);
-        fundingbutton.setVisibility(View.VISIBLE);
-        textTitle.setVisibility(View.GONE);
-        textDescription.setVisibility(View.GONE);
+        TextView funding = viewList.findViewById(R.id.funding);
+        TextView textfunding = viewList.findViewById(R.id.textView13);
+        TextView textNowPoint = viewList.findViewById(R.id.textNowPoint);
+        TextView textPoint = viewList.findViewById(R.id.textPoint);
+        TextView textRestPoint = viewList.findViewById(R.id.textRestPoint);
+        TextView fundingTitle = viewList.findViewById(R.id.fundingTitle);
+        TextView fundingSpecific = viewList.findViewById(R.id.fundingSpecific);
+        Button fundingbutton = viewList.findViewById(R.id.funding_button);
+        SeekBar seekBar = viewList.findViewById(R.id.seekBar);
+        TextView seek_min = viewList.findViewById(R.id.seek_min);
+        TextView seek_max = viewList.findViewById(R.id.seek_max);
 
+
+//        TextView textSpecificDescription = viewList.findViewById(R.id.textSpecificDescription);
+//        Button fundingbutton = viewList.findViewById(R.id.funding_button);
+//        TextView textTitleClick = viewList.findViewById(R.id.textTitleClick);
+//        TextView textDescriptionClick = viewList.findViewById(R.id.textDescriptionClick);
+
+//        textfunding.setVisibility(View.VISIBLE);
+//        textNowPoint.setVisibility(View.VISIBLE);
+//        textPoint.setVisibility(View.VISIBLE);
+//        textRestPoint.setVisibility(View.VISIBLE);
+//        fundingbutton.setVisibility(View.VISIBLE);
+//        seekBar.setVisibility(View.VISIBLE);
+//        seek_min.setVisibility(View.VISIBLE);
+//        seek_max.setVisibility(View.VISIBLE);
+
+        fundingTitle.setVisibility(View.GONE);
+        fundingSpecific.setVisibility(View.GONE);
+        funding.setVisibility(View.GONE);
+        funding_list.setVisibility(View.VISIBLE);
+
+        funding_list.setBackgroundColor(Color.parseColor("#79C3A0"));
 
         Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
-        viewList.startAnimation(anim);
-
-
+        funding_list.startAnimation(anim);
     }
 
     @Override
     public void onScroll(fundingItem newOne) {
-        TextView textTitle = viewList.findViewById(R.id.textTitle);
-        TextView textDescription = viewList.findViewById(R.id.textDescription);
-        TextView textSpecificTitle = viewList.findViewById(R.id.textSpecificTitle);
-        TextView textSpecificDescription = viewList.findViewById(R.id.textSpecificDescription);
-        Button fundingbutton = viewList.findViewById(R.id.funding_button);
-        TextView textTitleClick = viewList.findViewById(R.id.textTitleClick);
-        TextView textDescriptionClick = viewList.findViewById(R.id.textDescriptionClick);
 
-        textTitleClick.setVisibility(View.VISIBLE);
-        textDescriptionClick.setVisibility(View.VISIBLE);
-        textSpecificTitle.setVisibility(View.VISIBLE);
-        textSpecificDescription.setVisibility(View.VISIBLE);
-        fundingbutton.setVisibility(View.VISIBLE);
-        textTitle.setVisibility(View.GONE);
-        textDescription.setVisibility(View.GONE);
+        TextView textNowPoint = viewList.findViewById(R.id.textNowPoint);
+        TextView textPoint = viewList.findViewById(R.id.textPoint);
+        TextView textRestPoint = viewList.findViewById(R.id.textRestPoint);
+//        TextView textSpecificDescription = viewList.findViewById(R.id.textSpecificDescription);
+//        Button fundingbutton = viewList.findViewById(R.id.funding_button);
+//        TextView textTitleClick = viewList.findViewById(R.id.textTitleClick);
+//        TextView textDescriptionClick = viewList.findViewById(R.id.textDescriptionClick);
 
+        textNowPoint.setVisibility(View.VISIBLE);
+        textPoint.setVisibility(View.VISIBLE);
+        textRestPoint.setVisibility(View.VISIBLE);
+//            textSpecificDescription.setVisibility(View.VISIBLE);
+//            fundingbutton.setVisibility(View.VISIBLE);
+//            textTitle.setVisibility(View.GONE);
+//            textDescription.setVisibility(View.GONE);
 
         Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
         viewList.startAnimation(anim);
     }
 
-    //
-////        textSpecificTitle.(View.VISIBLE);
-//
-//
-////          Intent intent = new Intent(getActivity(), fundingList.class);
-////          intent.putExtra("extra_data", "from subactivity");
-////          getActivity().setResult(Activity.RESULT_OK, intent);
-////          getActivity().overridePendingTransition(R.anim.funding_translate_top, R.anim.stay);
-////          getActivity().finish();
-//
-////        Intent intent = new Intent(getActivity(), fundingList.class);
-////        Intent intent = new Intent();
-////        getActivity().startActivity(intent);
-////        (getActivity()).overridePendingTransition(R.anim.funding_translate_top, R.anim.stay);
-////
-////        ((MainActivity)getActivity()).overridePendingTransition(0, 0);
-////        getActivity().finish();
-////        ((MainActivity)getActivity()).overridePendingTransition(R.anim.stay,R.anim.funding_translate_bottom);
-//
     @Override
     public void onFundingClick(fundingItem newOne) {
+        ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
+        ConstraintLayout funding_click = viewList.findViewById(R.id.funding_click);
+
+        funding_list.setVisibility(View.GONE);
+        funding_click.setVisibility(View.VISIBLE);
+        funding_click.setBackgroundColor(Color.parseColor("#79C3A0"));
 
     }
 

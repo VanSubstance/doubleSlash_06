@@ -28,29 +28,37 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textTitle;
-        TextView textDescription;
-        TextView textTitleClick;
-        TextView textDescriptionClick;
-        TextView textSpecificTitle;
-        TextView textSpecificDescription;
+        TextView funding;
+        TextView fundingName;
+        TextView fundingTitle;
+        TextView fundingSpecific;
+        TextView nowPoint;
+        TextView seekmin;
+        TextView seekmax;
+        TextView point;
+        TextView restPoint;
+
+//        TextView textDescriptionClick;
+//        TextView textSpecificTitle;
+//        TextView textSpecificDescription;
 
         ViewHolder(View itemView) {
             super(itemView) ;
 
             // 뷰 객체에 대한 참조. (hold strong reference)
-            textTitle = itemView.findViewById(R.id.textTitle);
-            textDescription = itemView.findViewById(R.id.textDescription);
-            textTitleClick = itemView.findViewById(R.id.textTitleClick);
-            textDescriptionClick = itemView.findViewById(R.id.textDescriptionClick);
-            textSpecificTitle = itemView.findViewById(R.id.textSpecificTitle);
-            textSpecificDescription = itemView.findViewById(R.id.textSpecificDescription);
+            funding = itemView.findViewById(R.id.funding);
+            fundingName = itemView.findViewById(R.id.fundingName);
+            fundingTitle = itemView.findViewById(R.id.fundingTitle);
+            fundingSpecific = itemView.findViewById(R.id.fundingSpecific);
+            nowPoint = itemView.findViewById(R.id.textNowPoint);
+            seekmin = itemView.findViewById(R.id.seek_min);
+            seekmax = itemView.findViewById(R.id.seek_max);
+            point = itemView.findViewById(R.id.textPoint);
+            restPoint = itemView.findViewById(R.id.textRestPoint);
 
             Button funding_button = itemView.findViewById(R.id.funding_button);
-//            Button button_left = itemView.findViewById(R.id.button_left);
-//            Button button_right = itemView.findViewById(R.id.button_right);
 
-            itemView.setOnClickListener( new View.OnClickListener() {
+            funding.setOnClickListener( new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
@@ -120,19 +128,25 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(fundingItemAdapter.ViewHolder holder, int position) {
-        String title = mData.get(position).title;
-        String description = mData.get(position).description;
-        String titleClick = mData.get(position).titleClick;
-        String descriptionClick = mData.get(position).descriptionClick;
-        String specific_title = mData.get(position).specific_title;
-        String specific_description = mData.get(position).specific_description;
+        String name = mData.get(position).fundingName;
+        String title = mData.get(position).fundingTitle;
+        String specific = mData.get(position).fundingSpecific;
+        String nowPoint = mData.get(position).nowPoint;
+        String seekmin = mData.get(position).seekmin;
+        String seekmax = mData.get(position).seekmax;
+        String point = mData.get(position).point;
+        String restPoint = mData.get(position).restPoint;
 
-        holder.textTitle.setText(title) ;
-        holder.textDescription.setText(description);
-        holder.textTitleClick.setText(titleClick) ;
-        holder.textDescriptionClick.setText(descriptionClick);
-        holder.textSpecificTitle.setText(specific_title);
-        holder.textSpecificDescription.setText(specific_description);
+        holder.fundingName.setText(name) ;
+        holder.fundingTitle.setText(title);
+        holder.fundingSpecific.setText(specific);
+        holder.nowPoint.setText(nowPoint);
+        holder.seekmin.setText(seekmin);
+        holder.seekmax.setText(seekmax);
+        holder.point.setText(point);
+        holder.restPoint.setText(restPoint);
+
+
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
@@ -140,37 +154,5 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     public int getItemCount() {
         return mData.size() ;
     }
-
-//    public void onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.funding_item, container, false);
-//
-//        Button buttonFunding = view.findViewById(R.id.funding_button);
-//
-//        buttonFunding.setOnClickListener(new Button.OnClickListener() {
-//            private Context context;
-//            private Activity activity;
-//
-//            @Override
-//            public void onClick(View view) {
-//
-//                final Context context = null;
-//                final Activity activity = null;
-//                this.context = context;
-//                this.activity = activity;
-//                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-//                builder.setTitle("펀딩이 완료되었습니다!");
-//                builder.setMessage("펀딩 완료 메시지");
-//                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        //토스트 메시지
-//                        Toast.makeText(activity.getApplicationContext(), "펀딩 완료", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//                //builder.setNeutralButton("취소", null);
-//                builder.show();
-//            }
-//        });
-//    }
 
 }
