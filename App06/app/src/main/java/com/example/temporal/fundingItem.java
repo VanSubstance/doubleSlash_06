@@ -5,7 +5,7 @@ import android.app.Fragment;
 
 
 public class fundingItem{
-    String id;
+    int id;
     String title;
     String titleClick;
     String specific_title;

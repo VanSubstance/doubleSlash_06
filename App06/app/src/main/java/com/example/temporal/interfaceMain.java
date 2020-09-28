@@ -2,19 +2,61 @@ package com.example.temporal;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.JsonReader;
+import android.util.JsonToken;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class interfaceMain extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interface_main);
+
+        // 인터넷 연결 스레드
+        //      펀딩 연결 -> 1초마다 새로고침
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                URL serverURL;
+                while (true) {
+                    try {
+                        Thread.sleep(1000);
+                        serverURL = new URL("http://101.101.218.146:8080/funding");
+                        System.out.println(serverURL);
+                        HttpURLConnection myConnection = (HttpURLConnection) serverURL.openConnection();
+                        myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
+                        if (myConnection.getResponseCode() == 200) {
+                            System.out.println("펀딩 새로고침");
+                        } else {
+                            System.out.println("연결 실패!");
+                        }
+                        InputStream responseBody = myConnection.getInputStream();
+                        aCurrentData.listFunding = readJsonStreamFunding(responseBody);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
         TextView buttonHome = findViewById(R.id.menuHome);
         TextView buttonChallenge = findViewById(R.id.menuChallenge);
@@ -58,6 +100,55 @@ public class interfaceMain extends AppCompatActivity {
         buttonList.setOnClickListener(btnListener);
         buttonFunding.setOnClickListener(btnListener);
         buttonInfo.setOnClickListener(btnListener);
+    }
+
+    // 펀딩 리스트 서버에서 가져오기
+    public ArrayList<fundingItem> readJsonStreamFunding(InputStream in) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+        try {
+            return readFundingArray(reader);
+        } finally {
+            reader.close();
+        }
+    }
+
+    // 펀딩 리스트 서버에서 가져오기
+    public ArrayList<fundingItem> readFundingArray(JsonReader reader) throws IOException {
+        ArrayList<fundingItem> fundingItems = new ArrayList<fundingItem>();
+        reader.beginArray();
+        while (reader.hasNext()) {
+            fundingItems.add(readFunding(reader));
+        }
+        reader.endArray();
+        return fundingItems;
+    }
+
+    // 펀딩 리스트 서버에서 가져오기
+    public fundingItem readFunding(JsonReader reader) throws IOException {
+        fundingItem newOne = new fundingItem();
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if (name.equals("fundingid")) {
+                newOne.id = reader.nextInt();
+            } else if (name.equals("title")) {
+                newOne.title = reader.nextString();
+            } else if (name.equals("content")) {
+                newOne.description = reader.nextString();
+            } else if (name.equals("startdate")) {
+                newOne.regDate = reader.nextString();
+            } else if (name.equals("enddate")) {
+                newOne.closeDate = reader.nextString();
+            } else if (name.equals("targetpoint")) {
+                newOne.targetpoint = reader.nextInt();
+            } else if (name.equals("description")) {
+                newOne.descriptionClick = reader.nextString();
+            } else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return newOne;
     }
 
     // 해당 엑티비티 내에서 프레그먼트 바꿀때 사용
