@@ -40,26 +40,6 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.funding_list, container,false);
 
-//        buttonFunding.setOnClickListener(new Button.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                builder.setTitle("펀딩이 완료되었습니다!");
-//                builder.setMessage("펀딩 완료 메시지");
-//                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        //토스트 메시지
-//                        Toast.makeText(getActivity().getApplicationContext(), "펀딩 완료", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//                //builder.setNeutralButton("취소", null);
-//                builder.show();
-//            }
-//        });
-
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
@@ -87,34 +67,13 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
 
         TextView funding = viewList.findViewById(R.id.funding);
-        TextView textfunding = viewList.findViewById(R.id.textView13);
-        TextView textNowPoint = viewList.findViewById(R.id.textNowPoint);
-        TextView textPoint = viewList.findViewById(R.id.textPoint);
-        TextView textRestPoint = viewList.findViewById(R.id.textRestPoint);
-        TextView fundingTitle = viewList.findViewById(R.id.fundingTitle);
-        TextView fundingSpecific = viewList.findViewById(R.id.fundingSpecific);
-        Button fundingbutton = viewList.findViewById(R.id.funding_button);
-        SeekBar seekBar = viewList.findViewById(R.id.seekBar);
-        TextView seek_min = viewList.findViewById(R.id.seek_min);
-        TextView seek_max = viewList.findViewById(R.id.seek_max);
+
+        TextView desc = viewList.findViewById(R.id.desc);
+        TextView spec_desc = viewList.findViewById(R.id.spec_desc);
 
 
-//        TextView textSpecificDescription = viewList.findViewById(R.id.textSpecificDescription);
-//        Button fundingbutton = viewList.findViewById(R.id.funding_button);
-//        TextView textTitleClick = viewList.findViewById(R.id.textTitleClick);
-//        TextView textDescriptionClick = viewList.findViewById(R.id.textDescriptionClick);
-
-//        textfunding.setVisibility(View.VISIBLE);
-//        textNowPoint.setVisibility(View.VISIBLE);
-//        textPoint.setVisibility(View.VISIBLE);
-//        textRestPoint.setVisibility(View.VISIBLE);
-//        fundingbutton.setVisibility(View.VISIBLE);
-//        seekBar.setVisibility(View.VISIBLE);
-//        seek_min.setVisibility(View.VISIBLE);
-//        seek_max.setVisibility(View.VISIBLE);
-
-        fundingTitle.setVisibility(View.GONE);
-        fundingSpecific.setVisibility(View.GONE);
+        desc.setVisibility(View.GONE);
+        spec_desc.setVisibility(View.GONE);
         funding.setVisibility(View.GONE);
         funding_list.setVisibility(View.VISIBLE);
 

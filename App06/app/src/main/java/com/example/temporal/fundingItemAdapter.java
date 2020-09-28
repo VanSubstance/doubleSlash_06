@@ -29,8 +29,10 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView funding;
-        TextView fundingName;
-        TextView fundingTitle;
+        TextView title;
+        TextView desc;
+        TextView spec_desc;
+
         TextView fundingSpecific;
         TextView nowPoint;
         TextView seekmin;
@@ -47,9 +49,10 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
 
             // 뷰 객체에 대한 참조. (hold strong reference)
             funding = itemView.findViewById(R.id.funding);
-            fundingName = itemView.findViewById(R.id.fundingName);
-            fundingTitle = itemView.findViewById(R.id.fundingTitle);
-            fundingSpecific = itemView.findViewById(R.id.fundingSpecific);
+            title = itemView.findViewById(R.id.title);
+            desc = itemView.findViewById(R.id.desc);
+            spec_desc = itemView.findViewById(R.id.spec_desc);
+
             nowPoint = itemView.findViewById(R.id.textNowPoint);
             seekmin = itemView.findViewById(R.id.seek_min);
             seekmax = itemView.findViewById(R.id.seek_max);
@@ -84,25 +87,6 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
                     mCallback.onFundingClick(mData.get(position));
                 }
             });
-
-//            button_left.setOnClickListener( new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View view) {
-//                    int position = getAdapterPosition();
-//                    mCallback.onLeftCLick(mData.get(position));
-//                }
-//            });
-//
-//            button_right.setOnClickListener( new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View view) {
-//                    int position = getAdapterPosition();
-//                    mCallback.onRightCLick(mData.get(position));
-//                }
-//            });
-
 
             }
     }
