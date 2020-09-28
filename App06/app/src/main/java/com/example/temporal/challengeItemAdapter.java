@@ -60,7 +60,7 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
     @Override
     public void onBindViewHolder(challengeItemAdapter.ViewHolder holder, int position) {
         String title = mData.get(position).title;
-        String description = mData.get(position).description;
+        String description = mData.get(position).desc;
         holder.textTitle.setText(title) ;
         holder.textDescription.setText(description);
     }
