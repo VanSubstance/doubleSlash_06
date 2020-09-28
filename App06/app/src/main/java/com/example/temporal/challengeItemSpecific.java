@@ -27,7 +27,7 @@ public class challengeItemSpecific extends Fragment {
         TextView textDescription = view.findViewById(R.id.textDescription);
 
         textTitle.setText(item.title);
-        textDescription.setText(item.description);
+        textDescription.setText(item.desc);
 
         return view;
     }}

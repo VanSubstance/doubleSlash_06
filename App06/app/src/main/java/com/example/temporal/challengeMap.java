@@ -43,28 +43,28 @@ public class challengeMap extends Fragment {
     // 지도 구현
     private MapView mapView;
 
-    public double longitude; //경도
-    public double latitude; //위도
+    public double lon; //경도
+    public double lat; //위도
     private gpsTracker gpsTracker;
-    public String address;
+    public String addr;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_map, container,false);
-/*
+
         // test
-        gpsTracker = new gpsTracker(getContext());
-        latitude=gpsTracker.getLatitude();
-        longitude=gpsTracker.getLongitude();
-        address=getCurrentAddress(latitude,longitude);
+     /*   gpsTracker = new gpsTracker(getContext());
+        lat=gpsTracker.getLatitude();
+        lon=gpsTracker.getLongitude();
+        addr=getCurrentAddress(lat,lon);
         initView(view);
         final Button lc = view.findViewById(R.id.current_button);
         lc.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-                mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true);
+                mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat, lon), true);
             }
         });
-        */
+*/
         return view;
     }
 /*
@@ -147,17 +147,17 @@ public class challengeMap extends Fragment {
         mapView= new MapView(getContext());
         ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude, longitude), 3, true);
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lat, lon), 3, true);
         mapView.zoomIn(true);
         mapView.zoomOut(true);
         MapPOIItem mapPOIItem = new MapPOIItem();
-        mapPOIItem.setItemName(address);
+        mapPOIItem.setItemName(addr);
         mapPOIItem.setTag(0);
-        mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude));
+        mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(lat, lon));
         mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
         mapView.addPOIItem(mapPOIItem);
 
 
-    }
-    */
+    }*/
+
  }
