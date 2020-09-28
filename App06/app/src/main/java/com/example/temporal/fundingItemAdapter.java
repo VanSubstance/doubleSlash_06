@@ -112,25 +112,26 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(fundingItemAdapter.ViewHolder holder, int position) {
-        /**
-        String name = mData.get(position).fundingName;
-        String title = mData.get(position).fundingTitle;
-        String specific = mData.get(position).fundingSpecific;
-        String nowPoint = mData.get(position).nowPoint;
-        String seekmin = mData.get(position).seekmin;
-        String seekmax = mData.get(position).seekmax;
-        String point = mData.get(position).point;
-        String restPoint = mData.get(position).restPoint;
 
-        holder.fundingName.setText(name) ;
-        holder.fundingTitle.setText(title);
-        holder.fundingSpecific.setText(specific);
-        holder.nowPoint.setText(nowPoint);
-        holder.seekmin.setText(seekmin);
-        holder.seekmax.setText(seekmax);
-        holder.point.setText(point);
-        holder.restPoint.setText(restPoint);
-         */
+        String title = mData.get(position).title;
+        String desc = mData.get(position).desc;
+        String spec_desc = mData.get(position).spec_desc;
+
+//        String nowPoint = mData.get(position).nowPoint;
+//        String seekmin = mData.get(position).seekmin;
+//        String seekmax = mData.get(position).seekmax;
+//        String point = mData.get(position).point;
+//        String restPoint = mData.get(position).restPoint;
+
+        holder.title.setText(title) ;
+        holder.desc.setText(desc);
+        holder.spec_desc.setText(spec_desc);
+
+//        holder.nowPoint.setText(nowPoint);
+//        holder.seekmin.setText(seekmin);
+//        holder.seekmax.setText(seekmax);
+//        holder.point.setText(point);
+//        holder.restPoint.setText(restPoint);
 
     }
 
