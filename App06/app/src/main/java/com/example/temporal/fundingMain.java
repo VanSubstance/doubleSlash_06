@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +16,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 public class fundingMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.funding_main, container, false);
         ((interfaceMain) getActivity()).changeFragment(400);
+
+        aCurrentData.listFunding.clear();
+        for (int i = 0; i < 10; i++) {
+            fundingItem newOne = new fundingItem();
+            newOne.init(i);
+            aCurrentData.listFunding.add(newOne);
+        }
         ((interfaceMain) getActivity()).changeFragmentFundingList();
 
 //        Button buttonFunding = view.findViewById(R.id.funding_button);
