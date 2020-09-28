@@ -61,7 +61,7 @@ public class wasteItemAdapter extends RecyclerView.Adapter<wasteItemAdapter.View
     @Override
     public void onBindViewHolder(wasteItemAdapter.ViewHolder holder, int position) {
         holder.textTitle.setText(aCurrentData.listWaste.get(position).title) ;
-        holder.textDescription.setText(aCurrentData.listWaste.get(position).description);
+        holder.textDescription.setText(aCurrentData.listWaste.get(position).desc);
         holder.textCtgr.setText(aCurrentData.listWaste.get(position).ctgr);
     }
 

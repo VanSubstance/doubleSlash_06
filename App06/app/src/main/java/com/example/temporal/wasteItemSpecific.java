@@ -25,7 +25,7 @@ public class wasteItemSpecific extends Fragment {
         textCtgr.setText(item.ctgr);
         textTitle.setText(item.title);
         textPicture.setText(item.url);
-        textDescription.setText(item.description);
+        textDescription.setText(item.desc);
 
 
         return view;
