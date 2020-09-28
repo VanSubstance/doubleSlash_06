@@ -127,14 +127,14 @@ public class interfaceMain extends AppCompatActivity {
     public fundingItem readFunding(JsonReader reader) throws IOException {
         fundingItem newOne = new fundingItem();
         reader.beginObject();
+
         while (reader.hasNext()) {
+            /**
             String name = reader.nextName();
-            if (name.equals("fundingid")) {
+            if (name.equals("id")) {
                 newOne.id = reader.nextInt();
             } else if (name.equals("title")) {
                 newOne.title = reader.nextString();
-            } else if (name.equals("content")) {
-                newOne.description = reader.nextString();
             } else if (name.equals("startdate")) {
                 newOne.regDate = reader.nextString();
             } else if (name.equals("enddate")) {
@@ -146,6 +146,7 @@ public class interfaceMain extends AppCompatActivity {
             } else {
                 reader.skipValue();
             }
+             */
         }
         reader.endObject();
         return newOne;
@@ -187,6 +188,7 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameChallengeList, newPage);
         fragmentTransaction.commit();
     }
+
     // 홈의 분리배출법 리스트 불러오기
     // parameter : 스피너 값
     public void changeFragmentWasteList() {

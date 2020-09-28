@@ -1,22 +1,13 @@
 package com.example.temporal;
 
-import android.app.AlertDialog;
-import android.app.Fragment;
-
-
-public class fundingItem{
+public class fundingItem {
     String id;
-    String fundingName;
-    String fundingTitle;
-    String fundingSpecific;
-    String specific_title;
-    String specific_description;
-    String descriptionClick;
-    String nowPoint;
-    String seekmin;
-    String seekmax;
-    String point;
-    String restPoint;
+    String title; // 기관 이름
+    String desc; // 간략 설명
+    String spec_desc; // 세부 설명
+    String accu_point; // 펀딩 전체에서 누적 포인트
+    String targ_point; // 펀딩 목표 포인트
+    String left_point; // 펀딩 전체에서 달성까지 남은 포인트
 
     public void init(int i) {
         fundingName = "그린피스" + i;
