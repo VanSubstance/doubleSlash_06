@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 public class challengeList extends Fragment implements OnItemClickForChallenge {
     RecyclerView viewList;
     challengeItemAdapter adapter;
+    // 최초 위치 좌표
+    float oldXvalue;
     // Possesion: 0 -> 내꺼 | 1 -> 남의 것
     private int possesion = 0;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,13 +25,23 @@ public class challengeList extends Fragment implements OnItemClickForChallenge {
 
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        adapter = new challengeItemAdapter(aCurrentData.listChallenge, this);
+        viewList.setAdapter(adapter);
 
         // 부드럽게 넘기기
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
 
-        adapter = new challengeItemAdapter(aCurrentData.listChallenge, this);
-        viewList.setAdapter(adapter);
+        // 내꺼하고 남의 것 삭제 기능 구분
+        switch (possesion) {
+            case 0:
+                // 좌우 넘기기
+                ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
+                itemTouchhelper.attachToRecyclerView(viewList);
+                break;
+            case 1:
+                break;
+        }
         return view;
     }
 
@@ -47,6 +60,7 @@ public class challengeList extends Fragment implements OnItemClickForChallenge {
                 break;
         }
     }
+
 
     public void setPossesion(int possesion) {
         this.possesion = possesion;

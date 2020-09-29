@@ -2,40 +2,34 @@ package com.example.temporal;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdapter.ViewHolder> {
+public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdapter.ViewHolder> implements challengeItemSwipeListener {
 
     private ArrayList<challengeItem> mData = null ;
     private OnItemClickForChallenge mCallback;
 
-    // 아이템 뷰를 저장하는 뷰홀더 클래스.
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textTitle;
-        TextView textDescription;
+    @Override
+    public boolean onItemMove(int from_position, int to_position) {
+        return false;
+    }
 
-        ViewHolder(View itemView) {
-            super(itemView) ;
+    @Override
+    public void onItemSwipe(int position) {
 
-            // 뷰 객체에 대한 참조. (hold strong reference)
-            textTitle = itemView.findViewById(R.id.textTitle);
-            textDescription = itemView.findViewById(R.id.textDescription);
+    }
 
-            itemView.setOnClickListener( new View.OnClickListener() {
+    @Override
+    public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
 
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    mCallback.onClick(mData.get(position));
-                }
-            });
-        }
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
@@ -69,5 +63,26 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
     @Override
     public int getItemCount() {
         return mData.size() ;
+    }
+
+    // 아이템 뷰를 저장하는 뷰홀더 클래스.
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView textTitle;
+        TextView textDescription;
+
+        ViewHolder(View itemView) {
+            super(itemView) ;
+
+            // 뷰 객체에 대한 참조. (hold strong reference)
+            textTitle = itemView.findViewById(R.id.textTitle);
+            textDescription = itemView.findViewById(R.id.textDescription);
+
+            itemView.setOnClickListener( new View.OnClickListener() {
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    mCallback.onClick(mData.get(position));
+                }
+            });
+        }
     }
 }
