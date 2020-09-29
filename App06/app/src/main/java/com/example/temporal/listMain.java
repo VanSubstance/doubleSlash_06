@@ -18,7 +18,7 @@ public class listMain extends Fragment {
             newOne.init(i, "목록");
             aCurrentData.listChallenge.add(newOne);
         }
-        ((interfaceMain)getActivity()).changeFragmentChallengeList();
+        ((interfaceMain)getActivity()).changeFragmentChallengeList(0);
 
         return view;
     }

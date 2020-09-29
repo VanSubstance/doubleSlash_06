@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class challengeList extends Fragment implements OnItemClickForChallenge {
     RecyclerView viewList;
     challengeItemAdapter adapter;
+    // Possesion: 0 -> 내꺼 | 1 -> 남의 것
+    private int possesion = 0;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_list, container,false);
 
@@ -32,6 +34,21 @@ public class challengeList extends Fragment implements OnItemClickForChallenge {
 
     @Override
     public void onClick(challengeItem newOne) {
-        ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecific(newOne);
+        switch (possesion) {
+            // 0 -> 내꺼 눌렀을 때
+            case 0:
+                ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecific(newOne);
+                break;
+            // 1 -> 남의 것 눌렀을 때
+            case 1:
+                ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void setPossesion(int possesion) {
+        this.possesion = possesion;
     }
 }

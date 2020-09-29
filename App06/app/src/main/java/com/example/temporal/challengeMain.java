@@ -22,22 +22,7 @@ public class challengeMain extends Fragment {
             newOne.init(i, "챌린지");
             aCurrentData.listChallenge.add(newOne);
         }
-        ((interfaceMain)getActivity()).changeFragmentChallengeList();
-
-        final Switch sw = (Switch)view.findViewById(R.id.switch1);
-        sw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView tv = (TextView)view.findViewById(R.id.textView17);
-                if(sw.isChecked()) {
-                    tv.setText("참여 가능");
-                }
-                else{
-                    tv.setText("챌린지 전체");
-                }
-            }
-        });
-
+        ((interfaceMain)getActivity()).changeFragmentChallengeList(1);
         return view;
     }
 

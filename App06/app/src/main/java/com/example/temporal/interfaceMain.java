@@ -195,10 +195,11 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void changeFragmentChallengeList() {
+    public void changeFragmentChallengeList(int possesion) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeList newPage = new challengeList();
+        newPage.setPossesion(possesion);
         fragmentTransaction.replace(R.id.frameChallengeList, newPage);
         fragmentTransaction.commit();
     }
@@ -240,11 +241,21 @@ public class interfaceMain extends AppCompatActivity {
 //        fragmentTransaction.addToBackStack(null).commit();
 //    }
 
-    // 챌린지 세부페이지
+    // 챌린지 세부페이지 내꺼
     public void changeFragmentChallengeItemSpecific(challengeItem newOne) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeItemSpecific newPage = new challengeItemSpecific();
+        newPage.setItem(newOne);
+        fragmentTransaction.replace(R.id.frameMain, newPage);
+        fragmentTransaction.addToBackStack(null).commit();
+    }
+
+    // 챌린지 세부페이지 남의 것
+    public void changeFragmentChallengeItemSpecificOther(challengeItem newOne) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        challengeItemSpecificOther newPage = new challengeItemSpecificOther();
         newPage.setItem(newOne);
         fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();
