@@ -83,7 +83,7 @@ public class interfaceMain extends AppCompatActivity {
                         fragmentTransaction.replace(R.id.frameMain, new challengeMain());
                         break;
                     case R.id.menuList:
-                        fragmentTransaction.replace(R.id.frameMain, new listMain());
+                        fragmentTransaction.replace(R.id.frameMain, new listEnroll());
                         break;
                     case R.id.menuFunding:
                         fragmentTransaction.replace(R.id.frameMain, new fundingMain());
@@ -159,17 +159,13 @@ public class interfaceMain extends AppCompatActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (usage) {
+            case 110: // 메인 챌린지 더보기 버튼 클릭시
+                fragmentTransaction.replace(R.id.frameMain, new listMain());
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
             case 200: // 챌린지 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameChallengeMap, new challengeMap());
                 fragmentTransaction.commit();
-                break;
-            case 310: // 챌린지 목록 -> 추가 버튼 클릭 -> 챌린지 등록 열기
-                fragmentTransaction.replace(R.id.frameMain, new listEnroll());
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            case 320: // 챌린지 등록 -> 추가 버튼 클릭 -> 챌린지 생성 열기
-                fragmentTransaction.replace(R.id.frameMain, new listCustomize());
-                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 400: // 펀딩 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameFundingList, new fundingList());

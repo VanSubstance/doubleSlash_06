@@ -19,14 +19,6 @@ public class listEnroll extends Fragment {
         }
         ((interfaceMain)getActivity()).changeFragmentChallengeEnrollList();
 
-        Button buttonCustomize = view.findViewById(R.id.buttonCustomize);
-        buttonCustomize.setOnClickListener( new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((interfaceMain)getActivity()).changeFragment(320);
-            }
-        });
-
         return view;
     }
 }

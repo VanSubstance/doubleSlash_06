@@ -20,14 +20,6 @@ public class listMain extends Fragment {
         }
         ((interfaceMain)getActivity()).changeFragmentChallengeList();
 
-        Button buttonAdd = view.findViewById(R.id.buttonAdd);
-        buttonAdd.setOnClickListener( new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((interfaceMain) getActivity()).changeFragment(310);
-            }
-        });
-
         return view;
     }
 }

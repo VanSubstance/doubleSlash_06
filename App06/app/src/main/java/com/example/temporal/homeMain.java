@@ -89,6 +89,7 @@ public class homeMain extends Fragment {
         ConstraintLayout buttonCan = view.findViewById(R.id.buttonCan);
         ConstraintLayout buttonVinyl = view.findViewById(R.id.buttonVinyl);
         ConstraintLayout buttonEtc = view.findViewById(R.id.buttonEtc);
+        Button buttonList = view.findViewById(R.id.buttonList);
 
         View.OnClickListener btnListener = new View.OnClickListener() {
             @Override
@@ -98,25 +99,32 @@ public class homeMain extends Fragment {
                     switch (view.getId()) {
                         case R.id.buttonMask:
                             item.setCtgr("마스크");
+                            ((interfaceMain)getActivity()).changeFragmentWasteList();
                             break;
                         case R.id.buttonPlastic:
                             item.setCtgr("플라스틱");
+                            ((interfaceMain)getActivity()).changeFragmentWasteList();
                             break;
                         case R.id.buttonPaper:
                             item.setCtgr("종이");
+                            ((interfaceMain)getActivity()).changeFragmentWasteList();
                             break;
                         case R.id.buttonCan:
                             item.setCtgr("캔/유리");
+                            ((interfaceMain)getActivity()).changeFragmentWasteList();
                             break;
                         case R.id.buttonVinyl:
                             item.setCtgr("비닐");
+                            ((interfaceMain)getActivity()).changeFragmentWasteList();
                             break;
                         case R.id.buttonEtc:
                             item.setCtgr("기타");
+                            ((interfaceMain)getActivity()).changeFragmentWasteList();
+                            break;
+                        case R.id.buttonList:((interfaceMain)getActivity()).changeFragment(110);
                             break;
                     }
                 }
-                ((interfaceMain)getActivity()).changeFragmentWasteList();
             }
         };
 
@@ -126,7 +134,7 @@ public class homeMain extends Fragment {
         buttonCan.setOnClickListener(btnListener);
         buttonVinyl.setOnClickListener(btnListener);
         buttonEtc.setOnClickListener(btnListener);
-
+        buttonList.setOnClickListener(btnListener);
         return view;
     }
 
