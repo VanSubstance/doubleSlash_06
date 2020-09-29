@@ -250,6 +250,14 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null).commit();
     }
 
+    public void callCalander() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        calander newPage = new calander();
+        fragmentTransaction.replace(R.id.frameCalander, newPage);
+        fragmentTransaction.commit();
+    }
+
     /** 사용 안함
      // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수
      // parameter: 아직 생각 안해봄

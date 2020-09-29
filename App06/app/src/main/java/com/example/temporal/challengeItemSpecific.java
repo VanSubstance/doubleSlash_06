@@ -25,7 +25,7 @@ public class challengeItemSpecific extends Fragment {
         View view = inflater.inflate(R.layout.challenge_item_specific, container,false);
         TextView textTitle = view.findViewById(R.id.textTitle);
         TextView textDescription = view.findViewById(R.id.textDescription);
-
+        ((interfaceMain)getActivity()).callCalander();
         textTitle.setText(item.title);
         textDescription.setText(item.desc);
 
