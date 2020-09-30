@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.SlidingDrawer;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,14 +51,6 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         adapter = new fundingItemAdapter(aCurrentData.listFunding, this);
         viewList.setAdapter(adapter);
 
-//        textSpecificTitle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
-//                viewList.startAnimation(anim);
-//            }
-//        });
-
         return view;
 
     }
@@ -67,20 +60,25 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
 
         TextView funding = viewList.findViewById(R.id.funding);
-
         TextView desc = viewList.findViewById(R.id.desc);
         TextView spec_desc = viewList.findViewById(R.id.spec_desc);
+        SeekBar seekBar = viewList.findViewById(R.id.seekBar);
+        TextView start_point = viewList.findViewById(R.id.start_point);
+        TextView targ_point = viewList.findViewById(R.id.targ_point);
 
+        Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
+        funding_list.startAnimation(anim);
 
         desc.setVisibility(View.GONE);
         spec_desc.setVisibility(View.GONE);
         funding.setVisibility(View.GONE);
+        seekBar.setVisibility(View.GONE);
+        start_point.setVisibility(View.GONE);
+        targ_point.setVisibility(View.GONE);
+
         funding_list.setVisibility(View.VISIBLE);
 
         funding_list.setBackgroundColor(Color.parseColor("#79C3A0"));
-
-        Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
-        funding_list.startAnimation(anim);
     }
 
     @Override
@@ -114,16 +112,6 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         funding_list.setVisibility(View.GONE);
         funding_click.setVisibility(View.VISIBLE);
         funding_click.setBackgroundColor(Color.parseColor("#79C3A0"));
-
-    }
-
-    @Override
-    public void onLeftCLick(fundingItem newOne) {
-
-    }
-
-    @Override
-    public void onRightCLick(fundingItem newOne) {
 
     }
 

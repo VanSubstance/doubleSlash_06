@@ -32,8 +32,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         TextView title;
         TextView desc;
         TextView spec_desc;
+        TextView targ_point;
 
-        TextView fundingSpecific;
         TextView nowPoint;
         TextView seekmin;
         TextView seekmax;
@@ -52,6 +52,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             title = itemView.findViewById(R.id.title);
             desc = itemView.findViewById(R.id.desc);
             spec_desc = itemView.findViewById(R.id.spec_desc);
+            targ_point = itemView.findViewById(R.id.targ_point);
 
             nowPoint = itemView.findViewById(R.id.textNowPoint);
             seekmin = itemView.findViewById(R.id.seek_min);
@@ -116,6 +117,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         String title = mData.get(position).title;
         String desc = mData.get(position).desc;
         String spec_desc = mData.get(position).spec_desc;
+        Integer targ_point = mData.get(position).targ_point;
 
 //        String nowPoint = mData.get(position).nowPoint;
 //        String seekmin = mData.get(position).seekmin;
@@ -126,6 +128,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         holder.title.setText(title) ;
         holder.desc.setText(desc);
         holder.spec_desc.setText(spec_desc);
+        holder.targ_point.setInputType(targ_point);
 
 //        holder.nowPoint.setText(nowPoint);
 //        holder.seekmin.setText(seekmin);
