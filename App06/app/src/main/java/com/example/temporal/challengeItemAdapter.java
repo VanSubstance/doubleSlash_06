@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdapter.ViewHolder> implements challengeItemSwipeListener {
 
-    private ArrayList<challengeItem> mData = null ;
+    private ArrayList<challengeItem> mData = new ArrayList<challengeItem>();
     private OnItemClickForChallenge mCallback;
 
     @Override
@@ -29,12 +29,17 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
 
     @Override
     public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
-
+        // 서버에서도 삭제
+        aCurrentData.listMyChallenge.remove(mData.get(position));
+        mData.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mData.size());
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
     challengeItemAdapter(ArrayList<challengeItem> item, OnItemClickForChallenge listener) {
-        mData = item ;
+        mData.clear();
+        mData.addAll(item);
         this.mCallback = listener;
     }
 

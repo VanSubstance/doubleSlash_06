@@ -6,20 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 
-public class wasteList extends Fragment implements OnItemClickForWaste {
+public class wasteItemBannerList extends Fragment {
     RecyclerView viewList;
-    wasteItemAdapter adapter;
+    wasteItemBannerAdapter adapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.waste_list, container,false);
-
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
@@ -27,13 +24,8 @@ public class wasteList extends Fragment implements OnItemClickForWaste {
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
 
-        adapter = new wasteItemAdapter(aCurrentData.listWaste, this);
+        adapter = new wasteItemBannerAdapter(aCurrentData.listWasteBanner);
         viewList.setAdapter(adapter);
         return view;
-    }
-
-    @Override
-    public void onClick(wasteItem newOne) {
-        ((interfaceMain)getActivity()).changeFragmentWasteItemSpecific(newOne);
     }
 }
