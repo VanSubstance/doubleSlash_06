@@ -89,6 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
@@ -97,6 +98,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
@@ -104,6 +106,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
                     </TableRow>
 
@@ -118,6 +121,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
@@ -126,6 +130,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
@@ -133,6 +138,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
                     </TableRow>
 
@@ -147,6 +153,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
@@ -155,6 +162,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
@@ -162,6 +170,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
+                            android:scaleType="fitXY"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
                     </TableRow>
 
