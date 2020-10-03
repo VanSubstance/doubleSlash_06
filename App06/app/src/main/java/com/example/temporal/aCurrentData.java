@@ -9,4 +9,5 @@ public class aCurrentData {
     public static ArrayList<challengeEnrollItem> listChallengeEnroll = new ArrayList<challengeEnrollItem>();
     public static ArrayList<fundingItem> listFunding = new ArrayList<fundingItem>();
     public static ArrayList<wasteItemBanner> listWasteBanner = new ArrayList<wasteItemBanner>();
+    public static ArrayList<userItem> listInfo = new ArrayList<userItem>();
 }
