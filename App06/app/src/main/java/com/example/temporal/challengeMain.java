@@ -7,25 +7,26 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ScrollView;
-import android.widget.Switch;
-import android.widget.TextView;
 
-public class challengeMain extends Fragment {
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class challengeMain extends Fragment implements OnItemClickForChallenge {
+    RecyclerView viewList;
+    challengeItemAdapter adapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.challenge_main, container, false);
+        viewList = view.findViewById(R.id.recyclerView);
+        viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        adapter = new challengeItemAdapter(aCurrentData.listChallenge, this);
+        viewList.setAdapter(adapter);
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(viewList);
         ((interfaceMain) getActivity()).changeFragment(200);
-        // 맞는 챌린지 불러오기
-        aCurrentData.listChallenge.clear();
-        for (int i = 0; i < 4; i++) {
-            challengeItem newOne = new challengeItem();
-            newOne.init(i, "챌린지");
-            aCurrentData.listChallenge.add(newOne);
-        }
-        ((interfaceMain)getActivity()).changeFragmentChallengeList(1);
 
-        final ScrollView scrollView = view.findViewById(R.id.viewScroll);
+        final NestedScrollView scrollView = view.findViewById(R.id.viewScroll);
         final Button buttonDownward = view.findViewById(R.id.buttonDownward);
         final Button buttonUpward = view.findViewById(R.id.buttonUpward);
         buttonUpward.setVisibility(View.GONE);
@@ -46,7 +47,7 @@ public class challengeMain extends Fragment {
                 buttonDownward.setVisibility(View.VISIBLE);
             }
         });
-        scrollView.setOnTouchListener(new ScrollView.OnTouchListener() {
+        scrollView.setOnTouchListener(new NestedScrollView.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (scrollView.getScrollY() >= 0 && scrollView.getScrollY() < 400) {
@@ -73,4 +74,8 @@ public class challengeMain extends Fragment {
         return view;
     }
 
+    @Override
+    public void onClick(challengeItem newOne) {
+        ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
+    }
 }

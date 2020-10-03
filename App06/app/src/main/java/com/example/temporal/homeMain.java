@@ -12,30 +12,33 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class homeMain extends Fragment {
+public class homeMain extends Fragment implements OnItemClickForChallenge {
+    RecyclerView viewList;
+    challengeItemAdapter adapter;
+    ArrayList<challengeItem> items = new ArrayList<challengeItem>();
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_main, container, false);
-        // 맞는 챌린지 불러오기
-        aCurrentData.listChallenge.clear();
+        viewList = view.findViewById(R.id.recyclerView);
+        viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(viewList);
         for (int i = 0; i < 3; i++) {
-            challengeItem newOne = new challengeItem();
-            newOne.init(i, "메인");
-            aCurrentData.listChallenge.add(newOne);
+            items.add(aCurrentData.listMyChallenge.get(i));
         }
-        ((interfaceMain)getActivity()).changeFragmentChallengeList(0);
-
-        // 데이터베이스에서 ctgr 맞는거 불러오기
-        aCurrentData.listWaste.clear();
-        for (int i = 0; i < 10; i++) {
-            wasteItem newOne = new wasteItem();
-            newOne.init(i);
-            newOne.setCtgr("마스크");
-            aCurrentData.listWaste.add(newOne);
-        }
-        ((interfaceMain)getActivity()).changeFragmentWasteList();
+        // 좌우 넘기기
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
+        itemTouchhelper.attachToRecyclerView(viewList);
+        adapter = new challengeItemAdapter(items, this);
+        viewList.setAdapter(adapter);
+        ((interfaceMain) getActivity()).changeFragmentWasteBannerList();
 
         final ScrollView scrollView = view.findViewById(R.id.viewScroll);
         final Button buttonDownward = view.findViewById(R.id.buttonDownward);
@@ -71,17 +74,6 @@ public class homeMain extends Fragment {
                 return false;
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    // 스크롤 위치 파악해서 버튼 보여주거나 안보여주거나 선언
-                }
-            }
-        }).start();
 
         ConstraintLayout buttonMask = view.findViewById(R.id.buttonMask);
         ConstraintLayout buttonPlastic = view.findViewById(R.id.buttonPlastic);
@@ -95,35 +87,28 @@ public class homeMain extends Fragment {
             @Override
             public void onClick(View view) {
                 // 데이터베이스에서 ctgr 맞는거 불러오기
-                for (wasteItem item : aCurrentData.listWaste) {
-                    switch (view.getId()) {
-                        case R.id.buttonMask:
-                            item.setCtgr("마스크");
-                            ((interfaceMain)getActivity()).changeFragmentWasteList();
-                            break;
-                        case R.id.buttonPlastic:
-                            item.setCtgr("플라스틱");
-                            ((interfaceMain)getActivity()).changeFragmentWasteList();
-                            break;
-                        case R.id.buttonPaper:
-                            item.setCtgr("종이");
-                            ((interfaceMain)getActivity()).changeFragmentWasteList();
-                            break;
-                        case R.id.buttonCan:
-                            item.setCtgr("캔/유리");
-                            ((interfaceMain)getActivity()).changeFragmentWasteList();
-                            break;
-                        case R.id.buttonVinyl:
-                            item.setCtgr("비닐");
-                            ((interfaceMain)getActivity()).changeFragmentWasteList();
-                            break;
-                        case R.id.buttonEtc:
-                            item.setCtgr("기타");
-                            ((interfaceMain)getActivity()).changeFragmentWasteList();
-                            break;
-                        case R.id.buttonList:((interfaceMain)getActivity()).changeFragment(110);
-                            break;
-                    }
+                switch (view.getId()) {
+                    case R.id.buttonMask:
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("마스크");
+                        break;
+                    case R.id.buttonPlastic:
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("플라스틱");
+                        break;
+                    case R.id.buttonPaper:
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("종이");
+                        break;
+                    case R.id.buttonCan:
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("캔/유리");
+                        break;
+                    case R.id.buttonVinyl:
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("비닐");
+                        break;
+                    case R.id.buttonEtc:
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("기타");
+                        break;
+                    case R.id.buttonList:
+                        ((interfaceMain) getActivity()).changeFragment(110);
+                        break;
                 }
             }
         };
@@ -138,4 +123,8 @@ public class homeMain extends Fragment {
         return view;
     }
 
+    @Override
+    public void onClick(challengeItem newOne) {
+        ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecific(newOne);
+    }
 }

@@ -24,6 +24,35 @@ public class interfaceMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interface_main);
 
+        // 데이터베이스에서 ctgr 맞는거 불러오기
+        aCurrentData.listWasteBanner.clear();
+        for (int i = 0; i < 3; i++) {
+            wasteItemBanner newOne = new wasteItemBanner();
+            newOne.init(i);
+            aCurrentData.listWasteBanner.add(newOne);
+        }
+        // 맞는 내 챌린지 불러오기
+        aCurrentData.listMyChallenge.clear();
+        for (int i = 0; i < 10; i++) {
+            challengeItem newOne = new challengeItem();
+            newOne.init(i, "나의 ");
+            aCurrentData.listMyChallenge.add(newOne);
+        }
+        // 맞는 챌린지 불러오기
+        aCurrentData.listChallenge.clear();
+        for (int i = 0; i < 10; i++) {
+            challengeItem newOne = new challengeItem();
+            newOne.init(i, "남의 ");
+            aCurrentData.listChallenge.add(newOne);
+        }
+        // 챌린지 등록 목록 불러오기
+        aCurrentData.listChallengeEnroll.clear();
+        for (int i = 0; i < 10; i++) {
+            challengeEnrollItem newOne = new challengeEnrollItem();
+            newOne.init(i);
+            aCurrentData.listChallengeEnroll.add(newOne);
+        }
+
         // 인터넷 연결 스레드
         //      펀딩 연결 -> 1초마다 새로고침
         AsyncTask.execute(new Runnable() {
@@ -184,20 +213,20 @@ public class interfaceMain extends AppCompatActivity {
 
     // 홈의 분리배출법 리스트 불러오기
     // parameter : 스피너 값
-    public void changeFragmentWasteList() {
+    public void changeFragmentWasteBannerList() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        wasteList newPage = new wasteList();
+        wasteItemBannerList newPage = new wasteItemBannerList();
         fragmentTransaction.replace(R.id.frameHomeWasteList, newPage);
         fragmentTransaction.commit();
     }
 
-    public void changeFragmentChallengeList(int possesion) {
+    public void changeFragmentWasteCtgr(String ctgr) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        challengeList newPage = new challengeList();
-        newPage.setPossesion(possesion);
-        fragmentTransaction.replace(R.id.frameChallengeList, newPage);
+        wasteMain newPage = new wasteMain();
+        newPage.setData(ctgr);
+        fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.commit();
     }
 

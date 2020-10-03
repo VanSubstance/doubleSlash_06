@@ -39,7 +39,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
                 <TextView
                     android:id="@+id/textFILLIT"
@@ -66,19 +67,27 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <FrameLayout
-                android:id="@+id/frameHomeWasteList"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="20dp"
-                android:layout_weight="5">
-
-            </FrameLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <FrameLayout
+                    android:id="@+id/frameHomeWasteList"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight="5">
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -175,9 +184,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -274,7 +283,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -299,13 +309,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <FrameLayout
-                android:id="@+id/frameChallengeList"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="5">
-
-            </FrameLayout>
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </ScrollView>
