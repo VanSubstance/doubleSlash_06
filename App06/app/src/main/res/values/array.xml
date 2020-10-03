@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="마이페이지">
+        <item>전체</item>
+        <item>챌린지</item>
+        <item>펀딩</item>
+    </string-array>
+
+</resources>

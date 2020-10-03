@@ -4,9 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.JsonReader;
-import android.util.JsonToken;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,7 +17,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class interfaceMain extends AppCompatActivity {
 
@@ -266,6 +263,15 @@ public class interfaceMain extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         calander newPage = new calander();
         fragmentTransaction.replace(R.id.frameCalander, newPage);
+        fragmentTransaction.commit();
+    }
+
+    // 마이페이지
+    public void changeFragmentInfoList() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        infoList newPage = new infoList();
+        fragmentTransaction.replace(R.id.frameInfoList, newPage);
         fragmentTransaction.commit();
     }
 
