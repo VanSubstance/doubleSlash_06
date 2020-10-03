@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -77,5 +78,9 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge {
     @Override
     public void onClick(challengeItem newOne) {
         ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
+    }
+
+    @Override
+    public void onClickLike(challengeItem newOne, ImageView imageLike) {
     }
 }

@@ -203,14 +203,6 @@ public class interfaceMain extends AppCompatActivity {
         }
     }
 
-    public void changeFragmentChallengeEnrollList() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        challengeEnrollList newPage = new challengeEnrollList();
-        fragmentTransaction.replace(R.id.frameChallengeList, newPage);
-        fragmentTransaction.commit();
-    }
-
     // 홈의 분리배출법 리스트 불러오기
     // parameter : 스피너 값
     public void changeFragmentWasteBannerList() {
@@ -272,6 +264,16 @@ public class interfaceMain extends AppCompatActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeItemSpecific newPage = new challengeItemSpecific();
+        newPage.setItem(newOne);
+        fragmentTransaction.replace(R.id.frameMain, newPage);
+        fragmentTransaction.addToBackStack(null).commit();
+    }
+
+    // 챌린지 등록 세부페이지 내꺼
+    public void changeFragmentChallengeEnrollItemSpecific(challengeEnrollItem newOne) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        challengeEnrollItemSpecific newPage = new challengeEnrollItemSpecific();
         newPage.setItem(newOne);
         fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();

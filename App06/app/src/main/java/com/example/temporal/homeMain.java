@@ -2,14 +2,13 @@ package com.example.temporal;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -30,8 +29,10 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
-        for (int i = 0; i < 3; i++) {
-            items.add(aCurrentData.listMyChallenge.get(i));
+        for (int i = 0; i < aCurrentData.listMyChallenge.size(); i++) {
+            if (aCurrentData.listMyChallenge.get(i).like) {
+                items.add(aCurrentData.listMyChallenge.get(i));
+            }
         }
         // 좌우 넘기기
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
@@ -126,5 +127,9 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
     @Override
     public void onClick(challengeItem newOne) {
         ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecific(newOne);
+    }
+
+    @Override
+    public void onClickLike(challengeItem newOne, ImageView imageLike) {
     }
 }
