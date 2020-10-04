@@ -198,6 +198,10 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.commit();
                 changeFragmentFundingList();
                 break;
+            case 500: // 마이페이지 화면 최초 클릭시
+                fragmentTransaction.replace(R.id.frameInfoList, new infoList());
+                fragmentTransaction.commit();
+                break;
             default:
                 break;
         }
@@ -298,13 +302,13 @@ public class interfaceMain extends AppCompatActivity {
     }
 
     // 마이페이지
-    public void changeFragmentInfoList() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        infoList newPage = new infoList();
-        fragmentTransaction.replace(R.id.frameInfoList, newPage);
-        fragmentTransaction.commit();
-    }
+//    public void changeFragmentInfoList() {
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        infoList newPage = new infoList();
+//        fragmentTransaction.replace(R.id.frameInfoList, newPage);
+//        fragmentTransaction.commit();
+//    }
 
     /** 사용 안함
      // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수

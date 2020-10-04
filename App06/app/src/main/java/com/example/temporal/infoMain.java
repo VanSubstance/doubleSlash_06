@@ -9,18 +9,35 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class infoMain extends Fragment {
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
+public class infoMain extends Fragment implements OnItemClickForInfo{
+    RecyclerView viewList;
+    userItemAdapter adapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.info_main, container, false);
 
+        ((interfaceMain) getActivity()).changeFragment(500);
+//        viewList = view.findViewById(R.id.recyclerView);
+//        viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+//        adapter = new userItemAdapter(aCurrentData.listInfo, this);
+//        viewList.setAdapter(adapter);
+//        PagerSnapHelper snapHelper = new PagerSnapHelper();
+//        snapHelper.attachToRecyclerView(viewList);
+
+//        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
+//        itemTouchhelper.attachToRecyclerView(viewList);
+
         aCurrentData.listInfo.clear();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 6; i++) {
             userItem newOne = new userItem();
             newOne.init(i, "마이페이지");
             aCurrentData.listInfo.add(newOne);
         }
-        ((interfaceMain)getActivity()).changeFragmentInfoList();
+
 
         final Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
 
@@ -37,6 +54,8 @@ public class infoMain extends Fragment {
 
         return inflater.inflate(R.layout.info_main, container, false);
     }
-
+    @Override
+    public void onClick(userItem newOne) {
+    }
 
 }
