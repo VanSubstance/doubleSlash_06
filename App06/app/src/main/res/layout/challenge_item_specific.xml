@@ -76,37 +76,39 @@
 
                 <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="0,1,2">
 
                     <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:layout_weight = "1" >
 
                         <ImageView
                             android:id="@+id/image1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="100sp"
+                            android:layout_height="100sp"
+                            android:layout_marginLeft="20sp"
+                            android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
                             android:id="@+id/image2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="100sp"
+                            android:layout_height="100sp"
+                            android:layout_marginLeft="20sp"
+                            android:layout_marginRight="20sp"
+                            android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
                             android:id="@+id/image3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="100sp"
+                            android:layout_height="100sp"
+                            android:layout_marginRight="20sp"
+                            android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
                     </TableRow>
 
@@ -114,31 +116,32 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="20dp"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:layout_weight = "1" >
 
                         <ImageView
                             android:id="@+id/image4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="100sp"
+                            android:layout_height="100sp"
+                            android:layout_marginLeft="20sp"
+                            android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
                             android:id="@+id/image5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="100sp"
+                            android:layout_height="100sp"
+                            android:layout_marginLeft="20sp"
+                            android:layout_marginRight="20sp"
+                            android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
                             android:id="@+id/image6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="100sp"
+                            android:layout_height="100sp"
+                            android:layout_marginRight="20sp"
+                            android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
                     </TableRow>
 
@@ -146,31 +149,32 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="20dp"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:layout_weight = "1" >
 
                         <ImageView
                             android:id="@+id/image7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="100sp"
+                            android:layout_height="100sp"
+                            android:layout_marginLeft="20sp"
+                            android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
                             android:id="@+id/image8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="100sp"
+                            android:layout_height="100sp"
+                            android:layout_marginLeft="20sp"
+                            android:layout_marginRight="20sp"
+                            android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
 
                         <ImageView
                             android:id="@+id/image9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="100sp"
+                            android:layout_height="100sp"
+                            android:layout_marginRight="20sp"
+                            android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_launcher_foreground" />
                     </TableRow>
 

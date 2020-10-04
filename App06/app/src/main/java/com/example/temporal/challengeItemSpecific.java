@@ -155,5 +155,4 @@ public class challengeItemSpecific extends Fragment {
         }
     }
 
-
 }
