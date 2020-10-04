@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class challengeMap extends Fragment {
+public class challengeMap extends Fragment implements MapView.MapViewEventListener{
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2000;
     private static final String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -52,7 +53,7 @@ public class challengeMap extends Fragment {
         View view = inflater.inflate(R.layout.challenge_map, container,false);
 
         // test
-     /*   gpsTracker = new gpsTracker(getContext());
+        gpsTracker = new gpsTracker(getContext());
         lat=gpsTracker.getLatitude();
         lon=gpsTracker.getLongitude();
         addr=getCurrentAddress(lat,lon);
@@ -64,10 +65,10 @@ public class challengeMap extends Fragment {
                 mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat, lon), true);
             }
         });
-*/
+
         return view;
     }
-/*
+
     public String getCurrentAddress( double latitude, double longitude){
         //지오코더 ..GPS를 주소로 변환
         Geocoder geocoder=new Geocoder(getContext(), Locale.getDefault());
@@ -147,6 +148,7 @@ public class challengeMap extends Fragment {
         mapView= new MapView(getContext());
         ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
+        mapView.setMapViewEventListener(this);
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lat, lon), 3, true);
         mapView.zoomIn(true);
         mapView.zoomOut(true);
@@ -158,6 +160,49 @@ public class challengeMap extends Fragment {
         mapView.addPOIItem(mapPOIItem);
 
 
-    }*/
+    }
 
- }
+    @Override
+    public void onMapViewInitialized(MapView mapView) {
+
+    }
+
+    @Override
+    public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
+    }
+
+    @Override
+    public void onMapViewZoomLevelChanged(MapView mapView, int i) {
+
+    }
+
+    @Override
+    public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewLongPressed(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onMapViewMoveFinished(MapView mapView, MapPoint mapPoint) {
+
+    }
+}
