@@ -202,6 +202,9 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameInfoList, new infoList());
                 fragmentTransaction.commit();
                 break;
+            case 510: // 마이페이지 즐겨찾기 챌린지 목록
+                fragmentTransaction.replace(R.id.frameMain, new infoChallengeEnrollList());
+                fragmentTransaction.addToBackStack(null).commit();
             default:
                 break;
         }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -19,7 +20,6 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
     userItemAdapter adapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.info_main, container, false);
-
         ((interfaceMain) getActivity()).changeFragment(500);
 //        viewList = view.findViewById(R.id.recyclerView);
 //        viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -30,6 +30,20 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
 
 //        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
 //        itemTouchhelper.attachToRecyclerView(viewList);
+        Button buttonList = view.findViewById(R.id.buttonList);
+        View.OnClickListener btnListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.buttonList:
+                        ((interfaceMain) getActivity()).changeFragment(510);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+        buttonList.setOnClickListener(btnListener);
 
         aCurrentData.listInfo.clear();
         for (int i = 0; i < 6; i++) {
@@ -52,7 +66,7 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
             }
         });
 
-        return inflater.inflate(R.layout.info_main, container, false);
+        return view;
     }
     @Override
     public void onClick(userItem newOne) {

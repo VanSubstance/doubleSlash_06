@@ -8,6 +8,7 @@ public class challengeEnrollItem {
     String due_date;
     Double lat;
     Double lon;
+    boolean like;
     // 내용은 string? 아님 Array<String>?
 
     // 테스트를 위한 함수
@@ -18,6 +19,6 @@ public class challengeEnrollItem {
         due_date = "마감일 " + i;
         lat = 0.0 + i;
         lon = 0.0 + i;
-
+        like = false;
     }
 }

@@ -1,9 +1,11 @@
 package com.example.temporal;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,7 @@ public class challengeEnrollItemAdapter extends RecyclerView.Adapter<challengeEn
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textTitle;
         TextView textDescription;
+        ImageView imageLike;
 
         ViewHolder(View itemView) {
             super(itemView) ;
@@ -26,13 +29,20 @@ public class challengeEnrollItemAdapter extends RecyclerView.Adapter<challengeEn
             // 뷰 객체에 대한 참조. (hold strong reference)
             textTitle = itemView.findViewById(R.id.textTitle);
             textDescription = itemView.findViewById(R.id.textDescription);
+            imageLike = itemView.findViewById(R.id.imageLike);
 
             itemView.setOnClickListener( new View.OnClickListener() {
-
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     mCallback.onClick(mData.get(position));
+                }
+            });
+            imageLike.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    mCallback.onClickLike(mData.get(position), imageLike);
                 }
             });
         }
@@ -61,6 +71,11 @@ public class challengeEnrollItemAdapter extends RecyclerView.Adapter<challengeEn
     public void onBindViewHolder(challengeEnrollItemAdapter.ViewHolder holder, int position) {
         String title = mData.get(position).title;
         String description = mData.get(position).desc;
+        if (mData.get(position).like) { // 즐겨찾기일 경우
+            holder.imageLike.setColorFilter(Color.GREEN);
+        } else { // 아닐 경우
+            holder.imageLike.setColorFilter(Color.BLACK);
+        }
         holder.textTitle.setText(title) ;
         holder.textDescription.setText(description);
     }
