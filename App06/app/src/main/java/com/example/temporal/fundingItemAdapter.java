@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         TextView title;
         TextView desc;
         TextView spec_desc;
+        SeekBar seekbar;
 
         TextView nowPoint;
         TextView seekmin;
@@ -51,6 +53,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             title = itemView.findViewById(R.id.title);
             desc = itemView.findViewById(R.id.desc);
             spec_desc = itemView.findViewById(R.id.spec_desc);
+            seekbar = itemView.findViewById(R.id.user_seekBar);
 
             nowPoint = itemView.findViewById(R.id.textNowPoint);
             seekmin = itemView.findViewById(R.id.seek_min);
@@ -59,6 +62,22 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             restPoint = itemView.findViewById(R.id.textRestPoint);
 
             Button funding_button = itemView.findViewById(R.id.funding_button);
+
+            seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    point.setText("제대로 돌아감");
+                }
+            });
 
             funding.setOnClickListener( new View.OnClickListener() {
 
