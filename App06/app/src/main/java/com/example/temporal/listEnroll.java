@@ -28,6 +28,42 @@ public class listEnroll extends Fragment implements OnItemClickForChallengeEnrol
         adapter = new challengeEnrollItemAdapter(aCurrentData.listChallengeEnroll, this);
         viewList.setAdapter(adapter);
 
+        final Button buttonDownward = view.findViewById(R.id.buttonDownward);
+        final Button buttonUpward = view.findViewById(R.id.buttonUpward);
+        buttonUpward.setVisibility(View.GONE);
+        buttonDownward.setVisibility(View.VISIBLE);
+        buttonDownward.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewList.scrollToPosition(aCurrentData.listMyChallenge.size() - 1);
+                buttonDownward.setVisibility(View.GONE);
+                buttonUpward.setVisibility(View.VISIBLE);
+            }
+        });
+        buttonUpward.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewList.scrollToPosition(0);
+                buttonUpward.setVisibility(View.GONE);
+                buttonDownward.setVisibility(View.VISIBLE);
+            }
+        });
+        viewList.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+                if (viewList.canScrollVertically(1)) {
+                    buttonUpward.setVisibility(View.GONE);
+                    buttonDownward.setVisibility(View.VISIBLE);
+                } else if (viewList.canScrollVertically(-1)) {
+                    buttonDownward.setVisibility(View.GONE);
+                    buttonUpward.setVisibility(View.VISIBLE);
+                } else {
+                    buttonDownward.setVisibility(View.VISIBLE);
+                    buttonUpward.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         return view;
     }
 

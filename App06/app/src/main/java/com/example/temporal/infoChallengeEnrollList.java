@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +35,10 @@ public class infoChallengeEnrollList extends Fragment implements OnItemClickForC
 
         adapter = new challengeEnrollItemAdapter(items, this);
         viewList.setAdapter(adapter);
+        final Button buttonDownward = view.findViewById(R.id.buttonDownward);
+        final Button buttonUpward = view.findViewById(R.id.buttonUpward);
+        buttonUpward.setVisibility(View.GONE);
+        buttonDownward.setVisibility(View.GONE);
 
         return view;
     }
