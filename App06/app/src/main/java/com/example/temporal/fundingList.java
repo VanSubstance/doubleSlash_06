@@ -62,9 +62,6 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         TextView funding = viewList.findViewById(R.id.funding);
         TextView desc = viewList.findViewById(R.id.desc);
         TextView spec_desc = viewList.findViewById(R.id.spec_desc);
-        SeekBar seekBar = viewList.findViewById(R.id.seekBar);
-        TextView start_point = viewList.findViewById(R.id.start_point);
-        TextView targ_point = viewList.findViewById(R.id.targ_point);
 
         Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
         funding_list.startAnimation(anim);
@@ -72,9 +69,6 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         desc.setVisibility(View.GONE);
         spec_desc.setVisibility(View.GONE);
         funding.setVisibility(View.GONE);
-        seekBar.setVisibility(View.GONE);
-        start_point.setVisibility(View.GONE);
-        targ_point.setVisibility(View.GONE);
 
         funding_list.setVisibility(View.VISIBLE);
 

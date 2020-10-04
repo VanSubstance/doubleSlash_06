@@ -25,7 +25,7 @@ public class infoList extends Fragment implements OnItemClickForInfo{
         adapter = new userItemAdapter(aCurrentData.listInfo, this);
         viewList.setAdapter(adapter);
 
-//        // 부드럽게 넘기기
+        // 부드럽게 넘기기
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
 
@@ -34,11 +34,6 @@ public class infoList extends Fragment implements OnItemClickForInfo{
 
     @Override
     public void onClick(userItem newOne) {
-    }
-
-    @Override
-    public void onScroll(userItem newOne) {
-
     }
 
 }

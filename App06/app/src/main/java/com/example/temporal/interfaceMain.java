@@ -198,17 +198,16 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.commit();
                 changeFragmentFundingList();
                 break;
+            case 500: // 마이페이지 화면 최초 클릭시
+                fragmentTransaction.replace(R.id.frameInfoList, new infoList());
+                fragmentTransaction.commit();
+                break;
+            case 510: // 마이페이지 즐겨찾기 챌린지 목록
+                fragmentTransaction.replace(R.id.frameMain, new infoChallengeEnrollList());
+                fragmentTransaction.addToBackStack(null).commit();
             default:
                 break;
         }
-    }
-
-    public void changeFragmentChallengeEnrollList() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        challengeEnrollList newPage = new challengeEnrollList();
-        fragmentTransaction.replace(R.id.frameChallengeList, newPage);
-        fragmentTransaction.commit();
     }
 
     // 홈의 분리배출법 리스트 불러오기
@@ -277,6 +276,16 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null).commit();
     }
 
+    // 챌린지 등록 세부페이지 내꺼
+    public void changeFragmentChallengeEnrollItemSpecific(challengeEnrollItem newOne) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        challengeEnrollItemSpecific newPage = new challengeEnrollItemSpecific();
+        newPage.setItem(newOne);
+        fragmentTransaction.replace(R.id.frameMain, newPage);
+        fragmentTransaction.addToBackStack(null).commit();
+    }
+
     // 챌린지 세부페이지 남의 것
     public void changeFragmentChallengeItemSpecificOther(challengeItem newOne) {
         FragmentManager fragmentManager = getFragmentManager();
@@ -296,13 +305,13 @@ public class interfaceMain extends AppCompatActivity {
     }
 
     // 마이페이지
-    public void changeFragmentInfoList() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        infoList newPage = new infoList();
-        fragmentTransaction.replace(R.id.frameInfoList, newPage);
-        fragmentTransaction.commit();
-    }
+//    public void changeFragmentInfoList() {
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        infoList newPage = new infoList();
+//        fragmentTransaction.replace(R.id.frameInfoList, newPage);
+//        fragmentTransaction.commit();
+//    }
 
     /** 사용 안함
      // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수

@@ -6,8 +6,7 @@ public class challengeItem {
     String desc;
     String enr_date;
     String due_date;
-    Double lat;
-    Double lon;
+    boolean like;
 
     // 테스트를 위한 함수
     public void init(int i, String page) {
@@ -15,8 +14,6 @@ public class challengeItem {
         desc = "챌린지 설명" + i;
         enr_date = "시작일" + i;
         due_date = "마감일" + i;
-        lat = 0.0 + i;
-        lon = 0.0 + i;
-
+        like = false;
     }
 }

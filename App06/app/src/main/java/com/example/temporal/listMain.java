@@ -1,12 +1,13 @@
 package com.example.temporal;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -70,6 +71,17 @@ public class listMain extends Fragment implements OnItemClickForChallenge {
     @Override
     public void onClick(challengeItem newOne) {
         ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecific(newOne);
+    }
+
+    @Override
+    public void onClickLike(challengeItem newOne, ImageView imageLike) {
+        if (newOne.like) { // 이미 즐겨찾기일 경우
+            imageLike.setColorFilter(Color.BLACK);
+            newOne.like = false;
+        } else { // 즐겨찾기 아닐 경우
+            imageLike.setColorFilter(Color.GREEN);
+            newOne.like = true;
+        }
     }
 }
 
