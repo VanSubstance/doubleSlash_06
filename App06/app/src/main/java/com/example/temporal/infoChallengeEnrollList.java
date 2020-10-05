@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class infoChallengeEnrollList extends Fragment implements OnItemClickForChallengeEnroll {
+public class infoChallengeEnrollList extends Fragment implements OnItemClickForChallenge {
     RecyclerView viewList;
     challengeEnrollItemAdapter adapter;
-    ArrayList<challengeEnrollItem> items = new ArrayList<challengeEnrollItem>();
+    ArrayList<challengeItem> items = new ArrayList<challengeItem>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_enroll, container, false);
@@ -44,11 +44,11 @@ public class infoChallengeEnrollList extends Fragment implements OnItemClickForC
     }
 
     @Override
-    public void onClick(challengeEnrollItem newOne) {
+    public void onClick(challengeItem newOne) {
         ((interfaceMain)getActivity()).changeFragmentChallengeEnrollItemSpecific(newOne);
     }
 
     @Override
-    public void onClickLike(challengeEnrollItem newOne, ImageView imageLike) {
+    public void onClickLike(challengeItem newOne, ImageView imageLike) {
     }
 }

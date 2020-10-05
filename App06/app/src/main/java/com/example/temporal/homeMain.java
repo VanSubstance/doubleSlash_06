@@ -93,19 +93,19 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
                         ((interfaceMain) getActivity()).changeFragmentWasteCtgr("마스크");
                         break;
                     case R.id.buttonPlastic:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("플라스틱");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("plastic");
                         break;
                     case R.id.buttonPaper:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("종이");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("paper");
                         break;
                     case R.id.buttonCan:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("캔/유리");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("glass");
                         break;
                     case R.id.buttonVinyl:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("비닐");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("vinyl");
                         break;
                     case R.id.buttonEtc:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("기타");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("etc");
                         break;
                     case R.id.buttonList:
                         ((interfaceMain) getActivity()).changeFragment(110);
