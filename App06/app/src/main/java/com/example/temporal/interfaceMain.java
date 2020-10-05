@@ -189,10 +189,6 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameMain, new listMain());
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
-            case 200: // 챌린지 화면 최초 클릭시
-                fragmentTransaction.replace(R.id.frameChallengeMap, new challengeMap());
-                fragmentTransaction.commit();
-                break;
             case 400: // 펀딩 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
                 fragmentTransaction.commit();
