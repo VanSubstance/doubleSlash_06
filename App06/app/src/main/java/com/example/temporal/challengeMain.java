@@ -31,6 +31,7 @@ import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -226,6 +227,8 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge ,
 
         //for 구문을 사용할 예정 !!
 
+
+        
         // 현재 위치
         mapPOIItem.setItemName("1");
         mapPOIItem.setTag(0);
