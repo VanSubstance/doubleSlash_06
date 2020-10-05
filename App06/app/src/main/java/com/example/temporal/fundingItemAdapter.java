@@ -1,21 +1,12 @@
 package com.example.temporal;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,13 +24,14 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         TextView title;
         TextView desc;
         TextView spec_desc;
-        SeekBar seekbar;
+        SeekBar seekBar;
 
         TextView nowPoint;
         TextView seekmin;
         TextView seekmax;
-        TextView point;
-        TextView restPoint;
+        TextView targ_point;
+        TextView accu_point;
+        TextView left_point;
 
 //        TextView textDescriptionClick;
 //        TextView textSpecificTitle;
@@ -53,20 +45,29 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             title = itemView.findViewById(R.id.title);
             desc = itemView.findViewById(R.id.desc);
             spec_desc = itemView.findViewById(R.id.spec_desc);
-            seekbar = itemView.findViewById(R.id.user_seekBar);
+            seekBar = itemView.findViewById(R.id.seekBar);
 
             nowPoint = itemView.findViewById(R.id.textNowPoint);
             seekmin = itemView.findViewById(R.id.seek_min);
             seekmax = itemView.findViewById(R.id.seek_max);
-            point = itemView.findViewById(R.id.textPoint);
-            restPoint = itemView.findViewById(R.id.textRestPoint);
-
+            targ_point = itemView.findViewById(R.id.textPoint);
+            accu_point = itemView.findViewById(R.id.accu_point);
+            left_point = itemView.findViewById(R.id.left_point);
+            //final int targ = Integer.valueOf(targ_point.getText().toString());
             Button funding_button = itemView.findViewById(R.id.funding_button);
 
-            seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
-                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+                    accu_point.setText(String.valueOf(seekBar.getProgress()));
+
+                    //int targ = Integer.valueOf(targ_point.getText().toString());
+//                    int targ;
+//                    targ = Integer.parseInt(targ_point.getText().toString());
+//                    int targ = Integer.parseInt(String.valueOf(targ_point));
+                    int left = 5000 - progress;
+                    left_point.setText(String.valueOf(left));
                 }
 
                 @Override
@@ -75,7 +76,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
-                    point.setText("제대로 돌아감");
+                    //point.setText("제대로 돌아감");
+
                 }
             });
 
@@ -135,21 +137,9 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         String desc = mData.get(position).desc;
         String spec_desc = mData.get(position).spec_desc;
 
-//        String nowPoint = mData.get(position).nowPoint;
-//        String seekmin = mData.get(position).seekmin;
-//        String seekmax = mData.get(position).seekmax;
-//        String point = mData.get(position).point;
-//        String restPoint = mData.get(position).restPoint;
-
         holder.title.setText(title) ;
         holder.desc.setText(desc);
         holder.spec_desc.setText(spec_desc);
-
-//        holder.nowPoint.setText(nowPoint);
-//        holder.seekmin.setText(seekmin);
-//        holder.seekmax.setText(seekmax);
-//        holder.point.setText(point);
-//        holder.restPoint.setText(restPoint);
 
     }
 

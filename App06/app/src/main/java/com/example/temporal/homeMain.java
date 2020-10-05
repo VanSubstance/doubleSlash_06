@@ -19,27 +19,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class homeMain extends Fragment implements OnItemClickForChallenge {
+    RecyclerView viewList2;
+    wasteItemBannerAdapter adapter2;
     RecyclerView viewList;
     challengeItemAdapter adapter;
     ArrayList<challengeItem> items = new ArrayList<challengeItem>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_main, container, false);
-        viewList = view.findViewById(R.id.recyclerView);
-        viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        PagerSnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(viewList);
         for (int i = 0; i < aCurrentData.listMyChallenge.size(); i++) {
             if (aCurrentData.listMyChallenge.get(i).like) {
                 items.add(aCurrentData.listMyChallenge.get(i));
             }
         }
+        viewList = view.findViewById(R.id.recyclerView);
+        viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(viewList);
         // 좌우 넘기기
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
         itemTouchhelper.attachToRecyclerView(viewList);
         adapter = new challengeItemAdapter(items, this);
         viewList.setAdapter(adapter);
-        ((interfaceMain) getActivity()).changeFragmentWasteBannerList();
+
+        viewList2 = view.findViewById(R.id.recyclerView2);
+        viewList2.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        // 부드럽게 넘기기
+        snapHelper.attachToRecyclerView(viewList2);
+        adapter2 = new wasteItemBannerAdapter(aCurrentData.listWasteBanner);
+        viewList2.setAdapter(adapter2);
 
         final ScrollView scrollView = view.findViewById(R.id.viewScroll);
         final Button buttonDownward = view.findViewById(R.id.buttonDownward);
@@ -93,19 +101,19 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
                         ((interfaceMain) getActivity()).changeFragmentWasteCtgr("마스크");
                         break;
                     case R.id.buttonPlastic:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("플라스틱");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("plastic");
                         break;
                     case R.id.buttonPaper:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("종이");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("paper");
                         break;
                     case R.id.buttonCan:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("캔/유리");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("glass");
                         break;
                     case R.id.buttonVinyl:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("비닐");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("vinyl");
                         break;
                     case R.id.buttonEtc:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("기타");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("etc");
                         break;
                     case R.id.buttonList:
                         ((interfaceMain) getActivity()).changeFragment(110);

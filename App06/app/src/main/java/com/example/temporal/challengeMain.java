@@ -114,17 +114,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge ,
                 return false;
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    // 스크롤 위치 파악해서 버튼 보여주거나 안보여주거나 선언
-                }
-            }
-        }).start();
+
         return view;
     }
 

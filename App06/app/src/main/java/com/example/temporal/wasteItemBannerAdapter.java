@@ -43,7 +43,7 @@ public class wasteItemBannerAdapter extends RecyclerView.Adapter<wasteItemBanner
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.waste_item, parent, false) ;
+        View view = inflater.inflate(R.layout.waste_banner_item, parent, false) ;
         wasteItemBannerAdapter.ViewHolder vh = new wasteItemBannerAdapter.ViewHolder(view) ;
 
         return vh ;

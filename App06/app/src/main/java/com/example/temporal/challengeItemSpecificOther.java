@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,10 +18,13 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.applikeysolutions.cosmocalendar.utils.SelectionType;
+import com.applikeysolutions.cosmocalendar.view.CalendarView;
+
 import static android.app.Activity.RESULT_OK;
 
 public class challengeItemSpecificOther extends Fragment {
-    challengeItem item;
+    challengeItem item = new challengeItem();
 
     private final int GET_GALLERY_IMAGE1=1;
     private final int GET_GALLERY_IMAGE2=2;
@@ -44,16 +48,18 @@ public class challengeItemSpecificOther extends Fragment {
     private ImageView image9;
 
     public void setItem(challengeItem newOne) {
-        item = newOne;
+        item.clone(newOne);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_item_specific, container,false);
         TextView textTitle = view.findViewById(R.id.textTitle);
         TextView textDescription = view.findViewById(R.id.textDescription);
-        ((interfaceMain)getActivity()).callCalander();
         textTitle.setText("남의 것: " + item.title);
         textDescription.setText("남의 것: " + item.desc);
+        CalendarView calendarView = view.findViewById(R.id.calendarView);
+        calendarView.setSelectionType(SelectionType.NONE);
+        calendarView.setWeekendDayTextColor(Color.RED);
 
         image1 = (ImageView)view.findViewById(R.id.image1);
         image2 = (ImageView)view.findViewById(R.id.image2);
@@ -71,7 +77,6 @@ public class challengeItemSpecificOther extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                // 데이터베이스에서 ctgr 맞는거 불러오기
                 switch (view.getId()) {
                     case R.id.image1:
                         startActivityForResult(intent, GET_GALLERY_IMAGE1);

@@ -11,9 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class wasteMain extends Fragment implements OnItemClickForWaste {
     RecyclerView viewList;
     wasteItemAdapter adapter;
+    ArrayList<wasteItem> items;
+
+    public void setItems(ArrayList<wasteItem> newOne) {
+        items = newOne;
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.waste_main, container, false);
@@ -38,27 +45,15 @@ public class wasteMain extends Fragment implements OnItemClickForWaste {
 
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        viewList.scrollToPosition(aCurrentData.listWaste.size() / 2);
 
         // 부드럽게 넘기기
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
 
-        adapter = new wasteItemAdapter(aCurrentData.listWaste, this);
+        adapter = new wasteItemAdapter(items, this);
         viewList.setAdapter(adapter);
 
         return view;
-    }
-
-    // 데이터 설정
-    public void setData(String ctgr) {
-        aCurrentData.listWaste.clear();
-        for (int i = 0; i < 10; i++) {
-            wasteItem newOne = new wasteItem();
-            newOne.init(i);
-            newOne.setCtgr(ctgr);
-            aCurrentData.listWaste.add(newOne);
-        }
     }
 
     @Override

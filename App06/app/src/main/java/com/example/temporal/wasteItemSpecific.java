@@ -16,7 +16,7 @@ public class wasteItemSpecific extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.waste_item_specific, container,false);
+        View view = inflater.inflate(R.layout.waste_item, container,false);
         TextView textCtgr = view.findViewById(R.id.textCtgr);
         TextView textSpecCtgr = view.findViewById(R.id.textSpecCtgr);
         TextView textTitle = view.findViewById(R.id.textTitle);

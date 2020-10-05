@@ -12,20 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class wasteItemBannerList extends Fragment {
-    RecyclerView viewList;
-    wasteItemBannerAdapter adapter;
+    RecyclerView viewList2;
+    wasteItemBannerAdapter adapter2;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.waste_list, container,false);
-        viewList = view.findViewById(R.id.recyclerView);
-        viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        viewList2 = view.findViewById(R.id.recyclerView2);
+        viewList2.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         // 부드럽게 넘기기
         PagerSnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(viewList);
+        snapHelper.attachToRecyclerView(viewList2);
 
-        adapter = new wasteItemBannerAdapter(aCurrentData.listWasteBanner);
-        viewList.setAdapter(adapter);
+        adapter2 = new wasteItemBannerAdapter(aCurrentData.listWasteBanner);
+        viewList2.setAdapter(adapter2);
         return view;
     }
 }

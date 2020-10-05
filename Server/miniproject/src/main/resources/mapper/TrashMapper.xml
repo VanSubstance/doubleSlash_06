@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="server06.miniproject.mapper.TrashMapper">
+
+	<resultMap id="TrashMap" type="server06.miniproject.model.Trash">
+		<result column="trash_id" property="id" />
+		<result column="title" property="title" />
+		<result column="img" property="img" />
+		<result column="des" property="des" />
+		<result column="ctgr" property="ctgr" />
+	</resultMap>
+	
+	<!-- 분리배출법 전체 조회 -->
+	<select id="selectTrashList" resultMap="TrashMap">
+		SELECT *
+		FROM trash
+	</select>
+
+	<!-- 카테고리별 분리배출법 조회 -->
+	<!-- mybatis 쿼리문 실행결과 컬럼(열) 순서를 고정시키기-> parameterType="dto" resultType="java.util.LinkedHashMap" -->
+	<select id="selectCtgrTrashList" parameterType="server06.miniproject.model.Trash" resultType="java.util.LinkedHashMap">
+		SELECT title, img, des
+		FROM trash
+		WHERE ctgr = #{ctgr}
+	</select>
+
+</mapper>

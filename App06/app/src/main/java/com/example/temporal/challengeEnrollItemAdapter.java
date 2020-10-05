@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class challengeEnrollItemAdapter extends RecyclerView.Adapter<challengeEnrollItemAdapter.ViewHolder> {
 
-    private ArrayList<challengeEnrollItem> mData = null ;
-    private OnItemClickForChallengeEnroll mCallback;
+    private ArrayList<challengeItem> mData = null ;
+    private OnItemClickForChallenge mCallback;
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,7 +49,7 @@ public class challengeEnrollItemAdapter extends RecyclerView.Adapter<challengeEn
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    challengeEnrollItemAdapter(ArrayList<challengeEnrollItem> item, OnItemClickForChallengeEnroll listener) {
+    challengeEnrollItemAdapter(ArrayList<challengeItem> item, OnItemClickForChallenge listener) {
         mData = item ;
         this.mCallback = listener;
     }

@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class interfaceMain extends AppCompatActivity {
+    FragmentManager fragmentManager = getFragmentManager();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,25 +32,27 @@ public class interfaceMain extends AppCompatActivity {
             newOne.init(i);
             aCurrentData.listWasteBanner.add(newOne);
         }
+        /**
         // 맞는 내 챌린지 불러오기
         aCurrentData.listMyChallenge.clear();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 4; i++) {
             challengeItem newOne = new challengeItem();
             newOne.init(i, "나의 ");
             aCurrentData.listMyChallenge.add(newOne);
         }
         // 맞는 챌린지 불러오기
         aCurrentData.listChallenge.clear();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 4; i++) {
             challengeItem newOne = new challengeItem();
             newOne.init(i, "남의 ");
             aCurrentData.listChallenge.add(newOne);
         }
+         */
         // 챌린지 등록 목록 불러오기
         aCurrentData.listChallengeEnroll.clear();
-        for (int i = 0; i < 10; i++) {
-            challengeEnrollItem newOne = new challengeEnrollItem();
-            newOne.init(i);
+        for (int i = 0; i < 4; i++) {
+            challengeItem newOne = new challengeItem();
+            newOne.init_enroll(i);
             aCurrentData.listChallengeEnroll.add(newOne);
         }
 
@@ -59,20 +62,36 @@ public class interfaceMain extends AppCompatActivity {
             @Override
             public void run() {
                 URL serverURL;
+                String baseIP = "http://101.101.218.146:8080/";
                 while (true) {
                     try {
                         Thread.sleep(1000);
-                        serverURL = new URL("http://101.101.218.146:8080/funding");
+                        String linkFunding = baseIP + "funding";
+                        serverURL = new URL(linkFunding);
                         System.out.println(serverURL);
                         HttpURLConnection myConnection = (HttpURLConnection) serverURL.openConnection();
                         myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
                         if (myConnection.getResponseCode() == 200) {
-                            System.out.println("펀딩 새로고침");
+                            System.out.println("펀딩 연결");
                         } else {
                             System.out.println("연결 실패!");
                         }
                         InputStream responseBody = myConnection.getInputStream();
                         aCurrentData.listFunding = readJsonStreamFunding(responseBody);
+
+                        String linkTrash = baseIP + "trash";
+                        serverURL = new URL(linkTrash);
+                        System.out.println(serverURL);
+                        myConnection = (HttpURLConnection) serverURL.openConnection();
+                        myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
+                        if (myConnection.getResponseCode() == 200) {
+                            System.out.println("분리배출법 연결");
+                        } else {
+                            System.out.println("연결 실패!");
+                        }
+                        responseBody = myConnection.getInputStream();
+                        aCurrentData.listWaste = readJsonStreamWaste(responseBody);
+
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -94,31 +113,12 @@ public class interfaceMain extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         homeMain next = new homeMain();
         fragmentTransaction.replace(R.id.frameMain, next);
-        fragmentTransaction.commit();
+        fragmentTransaction.addToBackStack(null).commit();
 
         View.OnClickListener btnListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                switch (view.getId()) {
-                    case R.id.menuHome:
-                        fragmentTransaction.replace(R.id.frameMain, new homeMain());
-                        break;
-                    case R.id.menuChallenge:
-                        fragmentTransaction.replace(R.id.frameMain, new challengeMain());
-                        break;
-                    case R.id.menuList:
-                        fragmentTransaction.replace(R.id.frameMain, new listEnroll());
-                        break;
-                    case R.id.menuFunding:
-                        fragmentTransaction.replace(R.id.frameMain, new fundingMain());
-                        break;
-                    case R.id.menuInfo:
-                        fragmentTransaction.replace(R.id.frameMain, new infoMain());
-                        break;
-                }
-                fragmentTransaction.addToBackStack(null).commit();
+                callMenu(view.getId());
             }
         };
         buttonHome.setOnClickListener(btnListener);
@@ -155,34 +155,98 @@ public class interfaceMain extends AppCompatActivity {
         reader.beginObject();
 
         while (reader.hasNext()) {
-            /**
             String name = reader.nextName();
-            if (name.equals("id")) {
-                newOne.id = reader.nextInt();
+            if (name.equals("fundingid")) {
+                newOne.id = reader.nextString();
             } else if (name.equals("title")) {
                 newOne.title = reader.nextString();
-            } else if (name.equals("startdate")) {
-                newOne.regDate = reader.nextString();
-            } else if (name.equals("enddate")) {
-                newOne.closeDate = reader.nextString();
-            } else if (name.equals("targetpoint")) {
-                newOne.targetpoint = reader.nextInt();
+            } else if (name.equals("content")) {
+                newOne.desc = reader.nextString();
             } else if (name.equals("description")) {
-                newOne.descriptionClick = reader.nextString();
+                newOne.spec_desc = reader.nextString();
+            } else if (name.equals("targetpoint")) {
+                newOne.targ_point = reader.nextInt();
             } else {
                 reader.skipValue();
             }
-             */
         }
         reader.endObject();
         return newOne;
+    }
+
+    // 펀딩 리스트 서버에서 가져오기
+    public ArrayList<wasteItem> readJsonStreamWaste(InputStream in) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+        try {
+            return readWasteArray(reader);
+        } finally {
+            reader.close();
+        }
+    }
+
+    // 펀딩 리스트 서버에서 가져오기
+    public ArrayList<wasteItem> readWasteArray(JsonReader reader) throws IOException {
+        ArrayList<wasteItem> wasteItems = new ArrayList<wasteItem>();
+        reader.beginArray();
+        while (reader.hasNext()) {
+            wasteItems.add(readWaste(reader));
+        }
+        reader.endArray();
+        return wasteItems;
+    }
+
+    // 펀딩 리스트 서버에서 가져오기
+    public wasteItem readWaste(JsonReader reader) throws IOException {
+        wasteItem newOne = new wasteItem();
+        reader.beginObject();
+
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if (name.equals("id")) {
+                newOne.id = reader.nextString();
+            } else if (name.equals("title")) {
+                newOne.title = reader.nextString();
+            } else if (name.equals("img")) {
+                newOne.url = reader.nextString();
+            } else if (name.equals("des")) {
+                newOne.desc = reader.nextString();
+            } else if (name.equals("ctgr")) {
+                newOne.ctgr = reader.nextString();
+            } else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return newOne;
+    }
+
+    public void callMenu(int id) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        switch (id) {
+            case R.id.menuHome:
+                fragmentTransaction.replace(R.id.frameMain, new homeMain());
+                break;
+            case R.id.menuChallenge:
+                fragmentTransaction.replace(R.id.frameMain, new challengeMain());
+                break;
+            case R.id.menuList:
+                fragmentTransaction.replace(R.id.frameMain, new listEnroll());
+                break;
+            case R.id.menuFunding:
+                fragmentTransaction.replace(R.id.frameMain, new fundingMain());
+                break;
+            case R.id.menuInfo:
+                fragmentTransaction.replace(R.id.frameMain, new infoMain());
+                break;
+        }
+        fragmentTransaction.addToBackStack(null).commit();
+
     }
 
     // 해당 엑티비티 내에서 프레그먼트 바꿀때 사용
     // 백의 자리: 하단 메뉴바 좌측에서부터 1, 2, 3, 4
     // 십 + 일의 자리: 각 메뉴 내부의 프레그먼트
     public void changeFragment(int usage) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (usage) {
             case 110: // 메인 챌린지 더보기 버튼 클릭시
@@ -191,12 +255,12 @@ public class interfaceMain extends AppCompatActivity {
                 break;
             case 400: // 펀딩 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
-                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null).commit();
                 changeFragmentFundingList();
                 break;
             case 500: // 마이페이지 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameInfoList, new infoList());
-                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 510: // 마이페이지 즐겨찾기 챌린지 목록
                 fragmentTransaction.replace(R.id.frameMain, new infoChallengeEnrollList());
@@ -206,42 +270,26 @@ public class interfaceMain extends AppCompatActivity {
         }
     }
 
-    // 홈의 분리배출법 리스트 불러오기
-    // parameter : 스피너 값
-    public void changeFragmentWasteBannerList() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        wasteItemBannerList newPage = new wasteItemBannerList();
-        fragmentTransaction.replace(R.id.frameHomeWasteList, newPage);
-        fragmentTransaction.commit();
-    }
-
     public void changeFragmentWasteCtgr(String ctgr) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         wasteMain newPage = new wasteMain();
-        newPage.setData(ctgr);
+        ArrayList<wasteItem> newOne = new ArrayList<wasteItem>();
+        for (int i = 0; i < aCurrentData.listWaste.size(); i++) {
+            if( aCurrentData.listWaste.get(i).ctgr.equals(ctgr)) {
+                newOne.add(aCurrentData.listWaste.get(i));
+            }
+        }
+        newPage.setItems(newOne);
         fragmentTransaction.replace(R.id.frameMain, newPage);
-        fragmentTransaction.commit();
+        fragmentTransaction.addToBackStack(null).commit();
     }
 
     // 펀딩 리스트 불러오기
     // parameter : 스피너 값
     public void changeFragmentFundingList() {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fundingList newPage = new fundingList();
         fragmentTransaction.replace(R.id.frameFundingList, newPage);
-        fragmentTransaction.commit();
-    }
-
-    // 분리배출법 세부페이지
-    public void changeFragmentWasteItemSpecific(wasteItem newOne) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        wasteItemSpecific newPage = new wasteItemSpecific();
-        newPage.setItem(newOne);
-        fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();
     }
 
@@ -264,7 +312,6 @@ public class interfaceMain extends AppCompatActivity {
 
     // 챌린지 세부페이지 내꺼
     public void changeFragmentChallengeItemSpecific(challengeItem newOne) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeItemSpecific newPage = new challengeItemSpecific();
         newPage.setItem(newOne);
@@ -273,8 +320,7 @@ public class interfaceMain extends AppCompatActivity {
     }
 
     // 챌린지 등록 세부페이지 내꺼
-    public void changeFragmentChallengeEnrollItemSpecific(challengeEnrollItem newOne) {
-        FragmentManager fragmentManager = getFragmentManager();
+    public void changeFragmentChallengeEnrollItemSpecific(challengeItem newOne) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeEnrollItemSpecific newPage = new challengeEnrollItemSpecific();
         newPage.setItem(newOne);
@@ -284,20 +330,11 @@ public class interfaceMain extends AppCompatActivity {
 
     // 챌린지 세부페이지 남의 것
     public void changeFragmentChallengeItemSpecificOther(challengeItem newOne) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeItemSpecificOther newPage = new challengeItemSpecificOther();
         newPage.setItem(newOne);
         fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();
-    }
-
-    public void callCalander() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        calander newPage = new calander();
-        fragmentTransaction.replace(R.id.frameCalander, newPage);
-        fragmentTransaction.commit();
     }
 
     // 마이페이지
@@ -306,7 +343,7 @@ public class interfaceMain extends AppCompatActivity {
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //        infoList newPage = new infoList();
 //        fragmentTransaction.replace(R.id.frameInfoList, newPage);
-//        fragmentTransaction.commit();
+//        fragmentTransaction.addToBackStack(null).commit();
 //    }
 
     /** 사용 안함
@@ -322,7 +359,7 @@ public class interfaceMain extends AppCompatActivity {
      newPage.setArguments(bd);
      // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
      fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
-     fragmentTransaction.commit();
+     fragmentTransaction.addToBackStack(null).commit();
      }
      */
 

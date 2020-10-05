@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class listEnroll extends Fragment implements OnItemClickForChallengeEnroll {
+public class listEnroll extends Fragment implements OnItemClickForChallenge {
     RecyclerView viewList;
     challengeEnrollItemAdapter adapter;
 
@@ -68,12 +68,12 @@ public class listEnroll extends Fragment implements OnItemClickForChallengeEnrol
     }
 
     @Override
-    public void onClick(challengeEnrollItem newOne) {
+    public void onClick(challengeItem newOne) {
         ((interfaceMain)getActivity()).changeFragmentChallengeEnrollItemSpecific(newOne);
     }
 
     @Override
-    public void onClickLike(challengeEnrollItem newOne, ImageView imageLike) {
+    public void onClickLike(challengeItem newOne, ImageView imageLike) {
         if (newOne.like) { // 이미 즐겨찾기일 경우
             imageLike.setColorFilter(Color.BLACK);
             newOne.like = false;

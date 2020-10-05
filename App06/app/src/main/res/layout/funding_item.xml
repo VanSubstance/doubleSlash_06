@@ -45,39 +45,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/desc" />
 
-<!--        <SeekBar-->
-<!--            android:id="@+id/seekBar"-->
-<!--            android:layout_width="305dp"-->
-<!--            android:layout_height="45dp"-->
-<!--            android:layout_marginStart="30dp"-->
-<!--            android:layout_marginTop="270dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/start_point"-->
-<!--            android:layout_width="33dp"-->
-<!--            android:layout_height="27dp"-->
-<!--            android:layout_marginStart="70dp"-->
-<!--            android:layout_marginTop="300dp"-->
-<!--            android:layout_marginEnd="300dp"-->
-<!--            android:text="0"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/targ_point"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="300dp"-->
-<!--            android:layout_marginTop="300dp"-->
-<!--            android:text="5000"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/funding_list"
             android:layout_width="398dp"
@@ -105,18 +72,42 @@
                 android:id="@+id/textNowPoint"
                 android:layout_width="162dp"
                 android:layout_height="34dp"
+                android:layout_marginStart="50dp"
                 android:layout_marginTop="44dp"
                 android:text="나의 현재 포인트"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/targ_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="44dp"
+                android:text="5000"
+                app:layout_constraintStart_toEndOf="@+id/textNowPoint"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="41dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="16dp"
+                android:text="포인트"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/targ_point"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <SeekBar
-                android:id="@+id/user_seekBar"
+                android:id="@+id/seekBar"
                 android:layout_width="341dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="24dp"
+                android:max="5000"
+                android:progress="0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -126,11 +117,11 @@
                 android:id="@+id/seek_min"
                 android:layout_width="40dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="57dp"
+                android:layout_marginStart="70dp"
                 android:layout_marginBottom="525dp"
                 android:text="0"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/user_seekBar"
+                app:layout_constraintEnd_toStartOf="@+id/seekBar"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
@@ -138,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="27dp"
-                android:layout_marginBottom="525dp"
+                android:layout_marginBottom="535dp"
                 android:text="5000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -150,12 +141,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="153dp"
                 android:layout_marginTop="39dp"
-                android:layout_marginEnd="153dp"
+                android:layout_marginEnd="300dp"
                 android:text="펀딩 포인트"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.666"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_seekBar" />
+                app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+            <TextView
+                android:id="@+id/accu_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="39dp"
+                android:text="0000"
+                app:layout_constraintStart_toEndOf="@+id/textPoint"
+                app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="61dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="27dp"
+                android:text="포인트"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/accu_point"
+                app:layout_constraintTop_toBottomOf="@+id/seek_max" />
 
             <TextView
                 android:id="@+id/textRestPoint"
@@ -163,11 +176,35 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="138dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="139dp"
+                android:layout_marginEnd="300dp"
                 android:text="잔여 포인트"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPoint" />
+
+            <TextView
+                android:id="@+id/left_point"
+                android:layout_width="46dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="84dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginEnd="40dp"
+                android:text="0000"
+                app:layout_constraintEnd_toStartOf="@+id/textView16"
+                app:layout_constraintStart_toEndOf="@+id/textRestPoint"
+                app:layout_constraintTop_toBottomOf="@+id/accu_point" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:text="포인트"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/left_point"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
             <Button
                 android:id="@+id/funding_button"
@@ -270,11 +307,11 @@
 
 
     <!--    <Button-->
-<!--        android:id="@+id/funding_button"-->
-<!--        android:layout_width="271dp"-->
-<!--        android:layout_height="52dp"-->
-<!--        android:layout_marginTop="300dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:text="펀딩하기"-->
-<!--        android:textSize="20dp" />-->
+    <!--        android:id="@+id/funding_button"-->
+    <!--        android:layout_width="271dp"-->
+    <!--        android:layout_height="52dp"-->
+    <!--        android:layout_marginTop="300dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:text="펀딩하기"-->
+    <!--        android:textSize="20dp" />-->
 </FrameLayout>
