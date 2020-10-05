@@ -7,6 +7,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -86,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(MeV2Response result) {
                     Intent intent = new Intent(getApplicationContext(), interfaceMain.class);
+                    // 토큰 고유 ID
+                    Log.i("KAKAO_API", "사용자 아이디: " + result.getId());
                     /*
                     intent.putExtra("name", result.getNickname());
                     intent.putExtra("profile", result.getProfileImagePath());
