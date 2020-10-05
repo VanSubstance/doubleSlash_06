@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="server06.miniproject.mapper.MemberMapper">
+	
+	<resultMap id="AllMember" type="server06.miniproject.model.Member">
+		<result column="mem_id" property="id" />
+		<result column="mem_nick" property="nick" />
+		<result column="mem_point" property="point" />
+		<result column="lat" property="lat" />
+		<result column="lon" property="lon" />
+	</resultMap>
+	
+	<!-- 회원 전체 조회 -->
+	<select id="selectMemberList" resultMap="AllMember">
+		SELECT mem_id, mem_nick, mem_point, lat, lon
+		FROM member
+	</select>
+	
+	<!-- 회원 등록 -->
+	<insert id="insertMember" parameterType="server06.miniproject.model.Member">
+		INSERT INTO member (mem_id, mem_nick, mem_point, lat, lon)
+		VALUES (#{item.id}, #{item.nick}, #{item.point}, #{item.lat}, #{item.lon})
+	</insert>
+
+</mapper>
