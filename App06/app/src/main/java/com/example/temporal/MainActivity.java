@@ -2,8 +2,6 @@ package com.example.temporal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import android.content.Context;
 import android.content.Intent;
 
 import android.content.pm.PackageInfo;
@@ -13,9 +11,6 @@ import android.os.Bundle;
 
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.kakao.auth.ISessionCallback;
@@ -26,7 +21,6 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
-import com.kakao.util.helper.Utility;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -46,14 +40,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(splash);
 
         final Intent intentSignin = new Intent(this, interfaceMain.class);
-        Button buttonSignin = findViewById(R.id.buttonSignin);
 
-        buttonSignin.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(intentSignin);
-            }
-        });
         sessionCallback = new SessionCallback();
         Session.getCurrentSession().addCallback(sessionCallback);
         Session.getCurrentSession().checkAndImplicitOpen();

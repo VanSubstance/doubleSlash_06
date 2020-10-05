@@ -17,7 +17,7 @@ import java.util.Calendar;
 
 public class challengeEnrollItemSpecific extends Fragment {
     challengeItem item = new challengeItem();
-
+    CalendarView calendarView;
     public void setItem(challengeItem newOne) {
         item.clone(newOne);
     }
@@ -28,7 +28,7 @@ public class challengeEnrollItemSpecific extends Fragment {
         TextView textDescription = view.findViewById(R.id.textDescription);
         textTitle.setText(item.title);
         textDescription.setText(item.desc);
-        final CalendarView calendarView = view.findViewById(R.id.calendarView);
+        calendarView = view.findViewById(R.id.calendarView);
         calendarView.setSelectionType(SelectionType.RANGE);
         calendarView.setWeekendDayTextColor(Color.RED);
         Button buttonEnroll = view.findViewById(R.id.buttonEnroll);

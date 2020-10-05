@@ -45,6 +45,7 @@ public class challengeItemSpecific extends Fragment {
     private ImageView image9;
 
     challengeItem item = new challengeItem();
+    CalendarView calendarView;
 
     public void setItem(challengeItem newOne) {
         item.clone(newOne);
@@ -56,9 +57,10 @@ public class challengeItemSpecific extends Fragment {
         TextView textDescription = view.findViewById(R.id.textDescription);
         textTitle.setText(item.title);
         textDescription.setText(item.desc);
-        CalendarView calendarView = view.findViewById(R.id.calendarView);
+        calendarView = view.findViewById(R.id.calendarView);
         calendarView.setSelectionType(SelectionType.NONE);
         int colorChosen = Color.parseColor("#1835D0");
+        calendarView.clearSelections();
         calendarView.addConnectedDays(new ConnectedDays(item.days, colorChosen, Color.YELLOW, Color.WHITE));
         calendarView.setWeekendDayTextColor(Color.RED);
 

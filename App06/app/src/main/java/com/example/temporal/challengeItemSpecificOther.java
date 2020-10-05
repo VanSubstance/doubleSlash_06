@@ -25,6 +25,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class challengeItemSpecificOther extends Fragment {
     challengeItem item = new challengeItem();
+    CalendarView calendarView;
 
     private final int GET_GALLERY_IMAGE1=1;
     private final int GET_GALLERY_IMAGE2=2;
@@ -57,7 +58,7 @@ public class challengeItemSpecificOther extends Fragment {
         TextView textDescription = view.findViewById(R.id.textDescription);
         textTitle.setText("남의 것: " + item.title);
         textDescription.setText("남의 것: " + item.desc);
-        CalendarView calendarView = view.findViewById(R.id.calendarView);
+        calendarView = view.findViewById(R.id.calendarView);
         calendarView.setSelectionType(SelectionType.NONE);
         calendarView.setWeekendDayTextColor(Color.RED);
 
