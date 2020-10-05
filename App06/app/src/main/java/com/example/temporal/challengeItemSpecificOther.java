@@ -24,7 +24,7 @@ import com.applikeysolutions.cosmocalendar.view.CalendarView;
 import static android.app.Activity.RESULT_OK;
 
 public class challengeItemSpecificOther extends Fragment {
-    challengeItem item;
+    challengeItem item = new challengeItem();
 
     private final int GET_GALLERY_IMAGE1=1;
     private final int GET_GALLERY_IMAGE2=2;
@@ -48,7 +48,7 @@ public class challengeItemSpecificOther extends Fragment {
     private ImageView image9;
 
     public void setItem(challengeItem newOne) {
-        item = newOne;
+        item.clone(newOne);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,7 +77,6 @@ public class challengeItemSpecificOther extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                // 데이터베이스에서 ctgr 맞는거 불러오기
                 switch (view.getId()) {
                     case R.id.image1:
                         startActivityForResult(intent, GET_GALLERY_IMAGE1);

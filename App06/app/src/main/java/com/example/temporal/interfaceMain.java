@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class interfaceMain extends AppCompatActivity {
+    FragmentManager fragmentManager = getFragmentManager();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +113,7 @@ public class interfaceMain extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         homeMain next = new homeMain();
         fragmentTransaction.replace(R.id.frameMain, next);
-        fragmentTransaction.commit();
+        fragmentTransaction.addToBackStack(null).commit();
 
         View.OnClickListener btnListener = new View.OnClickListener() {
             @Override
@@ -220,7 +221,6 @@ public class interfaceMain extends AppCompatActivity {
     }
 
     public void callMenu(int id) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (id) {
             case R.id.menuHome:
@@ -247,7 +247,6 @@ public class interfaceMain extends AppCompatActivity {
     // 백의 자리: 하단 메뉴바 좌측에서부터 1, 2, 3, 4
     // 십 + 일의 자리: 각 메뉴 내부의 프레그먼트
     public void changeFragment(int usage) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (usage) {
             case 110: // 메인 챌린지 더보기 버튼 클릭시
@@ -256,12 +255,12 @@ public class interfaceMain extends AppCompatActivity {
                 break;
             case 400: // 펀딩 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameFundingList, new fundingList());
-                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null).commit();
                 changeFragmentFundingList();
                 break;
             case 500: // 마이페이지 화면 최초 클릭시
                 fragmentTransaction.replace(R.id.frameInfoList, new infoList());
-                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 510: // 마이페이지 즐겨찾기 챌린지 목록
                 fragmentTransaction.replace(R.id.frameMain, new infoChallengeEnrollList());
@@ -271,18 +270,7 @@ public class interfaceMain extends AppCompatActivity {
         }
     }
 
-    // 홈의 분리배출법 리스트 불러오기
-    // parameter : 스피너 값
-    public void changeFragmentWasteBannerList() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        wasteItemBannerList newPage = new wasteItemBannerList();
-        fragmentTransaction.replace(R.id.frameHomeWasteList, newPage);
-        fragmentTransaction.commit();
-    }
-
     public void changeFragmentWasteCtgr(String ctgr) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         wasteMain newPage = new wasteMain();
         ArrayList<wasteItem> newOne = new ArrayList<wasteItem>();
@@ -293,26 +281,15 @@ public class interfaceMain extends AppCompatActivity {
         }
         newPage.setItems(newOne);
         fragmentTransaction.replace(R.id.frameMain, newPage);
-        fragmentTransaction.commit();
+        fragmentTransaction.addToBackStack(null).commit();
     }
 
     // 펀딩 리스트 불러오기
     // parameter : 스피너 값
     public void changeFragmentFundingList() {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fundingList newPage = new fundingList();
         fragmentTransaction.replace(R.id.frameFundingList, newPage);
-        fragmentTransaction.commit();
-    }
-
-    // 분리배출법 세부페이지
-    public void changeFragmentWasteItemSpecific(wasteItem newOne) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        wasteItemSpecific newPage = new wasteItemSpecific();
-        newPage.setItem(newOne);
-        fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();
     }
 
@@ -335,7 +312,6 @@ public class interfaceMain extends AppCompatActivity {
 
     // 챌린지 세부페이지 내꺼
     public void changeFragmentChallengeItemSpecific(challengeItem newOne) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeItemSpecific newPage = new challengeItemSpecific();
         newPage.setItem(newOne);
@@ -345,7 +321,6 @@ public class interfaceMain extends AppCompatActivity {
 
     // 챌린지 등록 세부페이지 내꺼
     public void changeFragmentChallengeEnrollItemSpecific(challengeItem newOne) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeEnrollItemSpecific newPage = new challengeEnrollItemSpecific();
         newPage.setItem(newOne);
@@ -355,7 +330,6 @@ public class interfaceMain extends AppCompatActivity {
 
     // 챌린지 세부페이지 남의 것
     public void changeFragmentChallengeItemSpecificOther(challengeItem newOne) {
-        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeItemSpecificOther newPage = new challengeItemSpecificOther();
         newPage.setItem(newOne);
@@ -369,7 +343,7 @@ public class interfaceMain extends AppCompatActivity {
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //        infoList newPage = new infoList();
 //        fragmentTransaction.replace(R.id.frameInfoList, newPage);
-//        fragmentTransaction.commit();
+//        fragmentTransaction.addToBackStack(null).commit();
 //    }
 
     /** 사용 안함
@@ -385,7 +359,7 @@ public class interfaceMain extends AppCompatActivity {
      newPage.setArguments(bd);
      // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
      fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
-     fragmentTransaction.commit();
+     fragmentTransaction.addToBackStack(null).commit();
      }
      */
 

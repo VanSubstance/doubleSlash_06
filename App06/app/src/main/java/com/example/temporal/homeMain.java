@@ -19,27 +19,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class homeMain extends Fragment implements OnItemClickForChallenge {
+    RecyclerView viewList2;
+    wasteItemBannerAdapter adapter2;
     RecyclerView viewList;
     challengeItemAdapter adapter;
     ArrayList<challengeItem> items = new ArrayList<challengeItem>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_main, container, false);
-        viewList = view.findViewById(R.id.recyclerView);
-        viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        PagerSnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(viewList);
         for (int i = 0; i < aCurrentData.listMyChallenge.size(); i++) {
             if (aCurrentData.listMyChallenge.get(i).like) {
                 items.add(aCurrentData.listMyChallenge.get(i));
             }
         }
+        viewList = view.findViewById(R.id.recyclerView);
+        viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(viewList);
         // 좌우 넘기기
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
         itemTouchhelper.attachToRecyclerView(viewList);
         adapter = new challengeItemAdapter(items, this);
         viewList.setAdapter(adapter);
-        ((interfaceMain) getActivity()).changeFragmentWasteBannerList();
+
+        viewList2 = view.findViewById(R.id.recyclerView2);
+        viewList2.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        // 부드럽게 넘기기
+        snapHelper.attachToRecyclerView(viewList2);
+        adapter2 = new wasteItemBannerAdapter(aCurrentData.listWasteBanner);
+        viewList2.setAdapter(adapter2);
 
         final ScrollView scrollView = view.findViewById(R.id.viewScroll);
         final Button buttonDownward = view.findViewById(R.id.buttonDownward);

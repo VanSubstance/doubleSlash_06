@@ -16,10 +16,10 @@ import com.applikeysolutions.cosmocalendar.view.CalendarView;
 import java.util.Calendar;
 
 public class challengeEnrollItemSpecific extends Fragment {
-    challengeItem item;
+    challengeItem item = new challengeItem();
 
     public void setItem(challengeItem newOne) {
-        item = newOne;
+        item.clone(newOne);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

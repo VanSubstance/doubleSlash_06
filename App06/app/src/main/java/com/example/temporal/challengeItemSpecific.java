@@ -44,10 +44,10 @@ public class challengeItemSpecific extends Fragment {
     private ImageView image8;
     private ImageView image9;
 
-    challengeItem item;
+    challengeItem item = new challengeItem();
 
     public void setItem(challengeItem newOne) {
-        item = newOne;
+        item.clone(newOne);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

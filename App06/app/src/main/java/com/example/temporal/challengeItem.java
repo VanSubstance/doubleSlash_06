@@ -34,4 +34,14 @@ public class challengeItem {
             days.add(selectedDates.get(i).getTimeInMillis());
         }
     }
+
+    public void clone(challengeItem original) {
+        id = original.id;
+        title = original.title;
+        desc = original.desc;
+        enr_date = original.enr_date;
+        due_date = original.due_date;
+        days = original.days;
+        like = original.like;
+    }
 }
