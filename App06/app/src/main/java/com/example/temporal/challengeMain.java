@@ -31,6 +31,7 @@ import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -208,13 +209,45 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge ,
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lat, lon), 3, true);
         mapView.zoomIn(true);
         mapView.zoomOut(true);
+
         MapPOIItem mapPOIItem = new MapPOIItem();
-        mapPOIItem.setItemName(addr);
+        MapPOIItem mapPOIItem1= new MapPOIItem();
+        MapPOIItem mapPOIItem2= new MapPOIItem();
+        MapPOIItem mapPOIItem3= new MapPOIItem();
+
+        //for 구문을 사용할 예정 !!
+
+
+        
+        // 현재 위치
+        mapPOIItem.setItemName("1");
         mapPOIItem.setTag(0);
         mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(lat, lon));
         mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
         mapView.addPOIItem(mapPOIItem);
 
+        mapPOIItem1.setItemName("2");
+        mapPOIItem1.setTag(0);
+        mapPOIItem1.setMapPoint(MapPoint.mapPointWithGeoCoord(lat+0.003, lon+0.001));
+        mapPOIItem1.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        mapPOIItem1.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        mapView.addPOIItem(mapPOIItem1);
+
+        mapPOIItem2.setItemName("3");
+        mapPOIItem2.setTag(0);
+        mapPOIItem2.setMapPoint(MapPoint.mapPointWithGeoCoord(lat+0.004, lon+0.002));
+        mapPOIItem2.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        mapPOIItem2.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        mapView.addPOIItem(mapPOIItem2);
+
+        mapPOIItem3.setItemName("4");
+        mapPOIItem3.setTag(0);
+        mapPOIItem3.setMapPoint(MapPoint.mapPointWithGeoCoord(lat+0.005, lon));
+        mapPOIItem3.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        mapPOIItem3.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        mapView.addPOIItem(mapPOIItem3);
 
     }
 

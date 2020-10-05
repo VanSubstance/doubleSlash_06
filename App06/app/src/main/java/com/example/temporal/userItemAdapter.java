@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,7 +66,7 @@ public class userItemAdapter extends RecyclerView.Adapter<userItemAdapter.ViewHo
             // 뷰 객체에 대한 참조. (hold strong reference)
             title = itemView.findViewById(R.id.title);
             enr_date = itemView.findViewById(R.id.enr_date);
-            point = itemView.findViewById(R.id.point);
+            point = itemView.findViewById(R.id.targ_point);
             left_point = itemView.findViewById(R.id.left_point);
 
             itemView.setOnClickListener( new View.OnClickListener() {

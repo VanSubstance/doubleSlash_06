@@ -1,33 +1,33 @@
 package com.example.temporal;
 
-import android.app.Fragment;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.SeekBar;
-import android.widget.SlidingDrawer;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.app.Fragment;
+        import android.content.Context;
+        import android.content.DialogInterface;
+        import android.content.Intent;
+        import android.graphics.Color;
+        import android.os.Bundle;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.view.animation.Animation;
+        import android.view.animation.AnimationUtils;
+        import android.widget.Button;
+        import android.widget.SeekBar;
+        import android.widget.SlidingDrawer;
+        import android.widget.Switch;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
-import androidx.recyclerview.widget.RecyclerView;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+        import androidx.constraintlayout.widget.ConstraintLayout;
+        import androidx.core.content.ContextCompat;
+        import androidx.recyclerview.widget.LinearLayoutManager;
+        import androidx.recyclerview.widget.PagerSnapHelper;
+        import androidx.recyclerview.widget.RecyclerView;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.net.HttpURLConnection;
+        import java.net.MalformedURLException;
+        import java.net.URL;
 public class fundingList extends Fragment implements OnItemClickForFunding {
     RecyclerView viewList;
     fundingItemAdapter adapter;
@@ -56,7 +56,7 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     }
 
     @Override
-        public void onClick(fundingItem newOne) {
+    public void onClick(fundingItem newOne) {
         ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
 
         TextView funding = viewList.findViewById(R.id.funding);

@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/enr_date" />
 
         <TextView
-            android:id="@+id/point"
+            android:id="@+id/targ_point"
             android:layout_width="118dp"
             android:layout_height="29dp"
             android:layout_marginStart="90dp"

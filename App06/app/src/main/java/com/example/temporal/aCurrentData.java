@@ -1,5 +1,7 @@
 package com.example.temporal;
 
+import net.daum.mf.map.api.MapPOIItem;
+
 import java.util.ArrayList;
 
 public class aCurrentData {
@@ -11,4 +13,7 @@ public class aCurrentData {
     public static ArrayList<wasteItemBanner> listWasteBanner = new ArrayList<wasteItemBanner>();
     public static ArrayList<userItem> listInfo = new ArrayList<userItem>();
     public static userItem myInfo = new userItem();
+    // 다중 마커를 위해 만들었습니다.
+    public static ArrayList<MapPOIItem> markerList=new ArrayList<>();
+
 }
