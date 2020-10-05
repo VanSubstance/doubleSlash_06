@@ -17,8 +17,8 @@ public class challengeEnrollItem {
         desc = "챌린지 설명 " + i;
         enr_date = "시작일 " + i;
         due_date = "마감일 " + i;
-        lat = 0.0 + i;
-        lon = 0.0 + i;
+        lat = 260.3 + i;
+        lon = 30.3 + i;
         like = false;
     }
 }
