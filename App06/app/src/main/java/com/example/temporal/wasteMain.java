@@ -24,24 +24,8 @@ public class wasteMain extends Fragment implements OnItemClickForWaste {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.waste_main, container, false);
-
-        TextView textCtgr1 = view.findViewById(R.id.textCtgr1);
-        TextView textCtgr2 = view.findViewById(R.id.textCtgr2);
-        TextView textCtgr3 = view.findViewById(R.id.textCtgr3);
-
-        View.OnClickListener btnListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.textCtgr1:
-                        break;
-                    case R.id.textCtgr2:
-                        break;
-                    case R.id.textCtgr3:
-                        break;
-                }
-            }
-        };
+        TextView textCtgr = view.findViewById(R.id.textCtgr);
+        textCtgr.setText(items.get(0).ctgr);
 
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));

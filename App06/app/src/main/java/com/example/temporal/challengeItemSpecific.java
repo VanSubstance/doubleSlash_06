@@ -59,11 +59,11 @@ public class challengeItemSpecific extends Fragment {
         textDescription.setText(item.desc);
         calendarView = view.findViewById(R.id.calendarView);
         calendarView.setSelectionType(SelectionType.NONE);
-        int colorChosen = Color.parseColor("#1835D0");
-        calendarView.clearSelections();
-        calendarView.addConnectedDays(new ConnectedDays(item.days, colorChosen, Color.YELLOW, Color.WHITE));
         calendarView.setWeekendDayTextColor(Color.RED);
-
+        int colorChosen = Color.parseColor("#1835D0");
+        calendarView.getConnectedDaysManager().setConnectedDaysList(null);
+        calendarView.addConnectedDays(new ConnectedDays(item.days, colorChosen, Color.YELLOW, Color.WHITE));
+        calendarView.getConnectedDaysManager().setConnectedDaysList(null);
 
         image1 = (ImageView)view.findViewById(R.id.image1);
         image2 = (ImageView)view.findViewById(R.id.image2);

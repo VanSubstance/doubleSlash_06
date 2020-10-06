@@ -1,9 +1,6 @@
 package com.example.temporal;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -11,13 +8,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.fragment.app.FragmentActivity;
-
+import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays;
 import com.applikeysolutions.cosmocalendar.utils.SelectionType;
 import com.applikeysolutions.cosmocalendar.view.CalendarView;
 
@@ -61,6 +55,10 @@ public class challengeItemSpecificOther extends Fragment {
         calendarView = view.findViewById(R.id.calendarView);
         calendarView.setSelectionType(SelectionType.NONE);
         calendarView.setWeekendDayTextColor(Color.RED);
+        int colorChosen = Color.parseColor("#1835D0");
+        calendarView.getConnectedDaysManager().setConnectedDaysList(null);
+        calendarView.addConnectedDays(new ConnectedDays(item.days, colorChosen, Color.YELLOW, Color.WHITE));
+        calendarView.getConnectedDaysManager().setConnectedDaysList(null);
 
         image1 = (ImageView)view.findViewById(R.id.image1);
         image2 = (ImageView)view.findViewById(R.id.image2);

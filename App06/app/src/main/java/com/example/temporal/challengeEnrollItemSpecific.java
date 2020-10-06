@@ -13,8 +13,6 @@ import android.widget.TextView;
 import com.applikeysolutions.cosmocalendar.utils.SelectionType;
 import com.applikeysolutions.cosmocalendar.view.CalendarView;
 
-import java.util.Calendar;
-
 public class challengeEnrollItemSpecific extends Fragment {
     challengeItem item = new challengeItem();
     CalendarView calendarView;
@@ -30,6 +28,7 @@ public class challengeEnrollItemSpecific extends Fragment {
         textDescription.setText(item.desc);
         calendarView = view.findViewById(R.id.calendarView);
         calendarView.setSelectionType(SelectionType.RANGE);
+        calendarView.getConnectedDaysManager().setConnectedDaysList(null);
         calendarView.setWeekendDayTextColor(Color.RED);
         Button buttonEnroll = view.findViewById(R.id.buttonEnroll);
         buttonEnroll.setOnClickListener( new View.OnClickListener() {

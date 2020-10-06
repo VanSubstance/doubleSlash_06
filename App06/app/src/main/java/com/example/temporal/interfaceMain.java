@@ -33,52 +33,32 @@ public class interfaceMain extends AppCompatActivity {
             aCurrentData.listWasteBanner.add(newOne);
         }
         /**
-        // 맞는 내 챌린지 불러오기
-        aCurrentData.listMyChallenge.clear();
-        for (int i = 0; i < 4; i++) {
-            challengeItem newOne = new challengeItem();
-            newOne.init(i, "나의 ");
-            aCurrentData.listMyChallenge.add(newOne);
-        }
-        // 맞는 챌린지 불러오기
-        aCurrentData.listChallenge.clear();
-        for (int i = 0; i < 4; i++) {
-            challengeItem newOne = new challengeItem();
-            newOne.init(i, "남의 ");
-            aCurrentData.listChallenge.add(newOne);
-        }
+         // 맞는 내 챌린지 불러오기
+         aCurrentData.listMyChallenge.clear();
+         for (int i = 0; i < 4; i++) {
+         challengeItem newOne = new challengeItem();
+         newOne.init(i, "나의 ");
+         aCurrentData.listMyChallenge.add(newOne);
+         }
+         // 맞는 챌린지 불러오기
+         aCurrentData.listChallenge.clear();
+         for (int i = 0; i < 4; i++) {
+         challengeItem newOne = new challengeItem();
+         newOne.init(i, "남의 ");
+         aCurrentData.listChallenge.add(newOne);
+         }
          */
-        // 챌린지 등록 목록 불러오기
-        aCurrentData.listChallengeEnroll.clear();
-        for (int i = 0; i < 4; i++) {
-            challengeItem newOne = new challengeItem();
-            newOne.init_enroll(i);
-            aCurrentData.listChallengeEnroll.add(newOne);
-        }
-
-        // 인터넷 연결 스레드
-        //      펀딩 연결 -> 1초마다 새로고침
+        // 분리배출법 서버 연결
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 URL serverURL;
                 String baseIP = "http://101.101.218.146:8080/";
-                while (true) {
+                HttpURLConnection myConnection;
+                InputStream responseBody;
+                boolean conFailWaste = true;
+                while (conFailWaste) {
                     try {
-                        Thread.sleep(1000);
-                        String linkFunding = baseIP + "funding";
-                        serverURL = new URL(linkFunding);
-                        System.out.println(serverURL);
-                        HttpURLConnection myConnection = (HttpURLConnection) serverURL.openConnection();
-                        myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
-                        if (myConnection.getResponseCode() == 200) {
-                            System.out.println("펀딩 연결");
-                        } else {
-                            System.out.println("연결 실패!");
-                        }
-                        InputStream responseBody = myConnection.getInputStream();
-                        aCurrentData.listFunding = readJsonStreamFunding(responseBody);
-
                         String linkTrash = baseIP + "trash";
                         serverURL = new URL(linkTrash);
                         System.out.println(serverURL);
@@ -86,17 +66,80 @@ public class interfaceMain extends AppCompatActivity {
                         myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
                         if (myConnection.getResponseCode() == 200) {
                             System.out.println("분리배출법 연결");
+                            conFailWaste = false;
+                            responseBody = myConnection.getInputStream();
+                            aCurrentData.listWaste = readJsonStreamWaste(responseBody);
                         } else {
-                            System.out.println("연결 실패!");
+                            System.out.println("분리배출법 연결 실패!");
                         }
-                        responseBody = myConnection.getInputStream();
-                        aCurrentData.listWaste = readJsonStreamWaste(responseBody);
-
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
-                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        });
+        // 챌린지 틀 서버 연결
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                URL serverURL;
+                String baseIP = "http://101.101.218.146:8080/";
+                HttpURLConnection myConnection;
+                InputStream responseBody;
+                boolean conFailChallEnroll = true;
+                while (conFailChallEnroll) {
+                    try {
+                        String linkChallengeEnroll = baseIP + "challengeframe";
+                        serverURL = new URL(linkChallengeEnroll);
+                        System.out.println(serverURL);
+                        myConnection = (HttpURLConnection) serverURL.openConnection();
+                        myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
+                        if (myConnection.getResponseCode() == 200) {
+                            System.out.println("챌린지 틀 연결");
+                            conFailChallEnroll = false;
+                            responseBody = myConnection.getInputStream();
+                            aCurrentData.listChallengeEnroll = readJsonStreamChallenge(responseBody);
+                        } else {
+                            System.out.println("챌린지 틀 연결 실패!");
+                        }
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        // 펀딩 서버 연결
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                URL serverURL;
+                String baseIP = "http://101.101.218.146:8080/";
+                HttpURLConnection myConnection;
+                InputStream responseBody;
+                boolean conFailFunding = true;
+                while (conFailFunding) {
+                    try {
+                        String linkFunding = baseIP + "funding";
+                        serverURL = new URL(linkFunding);
+                        System.out.println(serverURL);
+                        myConnection = (HttpURLConnection) serverURL.openConnection();
+                        myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
+                        if (myConnection.getResponseCode() == 200) {
+                            System.out.println("펀딩 연결");
+                            conFailFunding = false;
+                            responseBody = myConnection.getInputStream();
+                            aCurrentData.listFunding = readJsonStreamFunding(responseBody);
+                        } else {
+                            System.out.println("펀딩 연결 실패!");
+                        }
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
@@ -138,7 +181,6 @@ public class interfaceMain extends AppCompatActivity {
         }
     }
 
-    // 펀딩 리스트 서버에서 가져오기
     public ArrayList<fundingItem> readFundingArray(JsonReader reader) throws IOException {
         ArrayList<fundingItem> fundingItems = new ArrayList<fundingItem>();
         reader.beginArray();
@@ -149,7 +191,6 @@ public class interfaceMain extends AppCompatActivity {
         return fundingItems;
     }
 
-    // 펀딩 리스트 서버에서 가져오기
     public fundingItem readFunding(JsonReader reader) throws IOException {
         fundingItem newOne = new fundingItem();
         reader.beginObject();
@@ -174,7 +215,7 @@ public class interfaceMain extends AppCompatActivity {
         return newOne;
     }
 
-    // 펀딩 리스트 서버에서 가져오기
+    // 분리배출법 리스트 서버에서 가져오기
     public ArrayList<wasteItem> readJsonStreamWaste(InputStream in) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
         try {
@@ -184,7 +225,6 @@ public class interfaceMain extends AppCompatActivity {
         }
     }
 
-    // 펀딩 리스트 서버에서 가져오기
     public ArrayList<wasteItem> readWasteArray(JsonReader reader) throws IOException {
         ArrayList<wasteItem> wasteItems = new ArrayList<wasteItem>();
         reader.beginArray();
@@ -195,7 +235,6 @@ public class interfaceMain extends AppCompatActivity {
         return wasteItems;
     }
 
-    // 펀딩 리스트 서버에서 가져오기
     public wasteItem readWaste(JsonReader reader) throws IOException {
         wasteItem newOne = new wasteItem();
         reader.beginObject();
@@ -212,6 +251,44 @@ public class interfaceMain extends AppCompatActivity {
                 newOne.desc = reader.nextString();
             } else if (name.equals("ctgr")) {
                 newOne.ctgr = reader.nextString();
+            } else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return newOne;
+    }
+
+    // 챌린지 틀 리스트 서버에서 가져오기
+    public ArrayList<challengeItem> readJsonStreamChallenge(InputStream in) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+        try {
+            return readChallengeArray(reader);
+        } finally {
+            reader.close();
+        }
+    }
+
+    public ArrayList<challengeItem> readChallengeArray(JsonReader reader) throws IOException {
+        ArrayList<challengeItem> challengeItems = new ArrayList<challengeItem>();
+        reader.beginArray();
+        while (reader.hasNext()) {
+            challengeItems.add(readChallenge(reader));
+        }
+        reader.endArray();
+        return challengeItems;
+    }
+
+    public challengeItem readChallenge(JsonReader reader) throws IOException {
+        challengeItem newOne = new challengeItem();
+        reader.beginObject();
+
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if (name.equals("TITLE")) {
+                newOne.title = reader.nextString();
+            } else if (name.equals("DES")) {
+                newOne.desc = reader.nextString();
             } else {
                 reader.skipValue();
             }
@@ -275,7 +352,7 @@ public class interfaceMain extends AppCompatActivity {
         wasteMain newPage = new wasteMain();
         ArrayList<wasteItem> newOne = new ArrayList<wasteItem>();
         for (int i = 0; i < aCurrentData.listWaste.size(); i++) {
-            if( aCurrentData.listWaste.get(i).ctgr.equals(ctgr)) {
+            if (aCurrentData.listWaste.get(i).ctgr.equals(ctgr)) {
                 newOne.add(aCurrentData.listWaste.get(i));
             }
         }
