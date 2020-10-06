@@ -21,15 +21,7 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.info_main, container, false);
         ((interfaceMain) getActivity()).changeFragment(500);
-//        viewList = view.findViewById(R.id.recyclerView);
-//        viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
-//        adapter = new userItemAdapter(aCurrentData.listInfo, this);
-//        viewList.setAdapter(adapter);
-//        PagerSnapHelper snapHelper = new PagerSnapHelper();
-//        snapHelper.attachToRecyclerView(viewList);
 
-//        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
-//        itemTouchhelper.attachToRecyclerView(viewList);
         Button buttonList = view.findViewById(R.id.buttonList);
         View.OnClickListener btnListener = new View.OnClickListener() {
             @Override
@@ -46,7 +38,7 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
         buttonList.setOnClickListener(btnListener);
 
         aCurrentData.listInfo.clear();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 10; i++) {
             userItem newOne = new userItem();
             newOne.init(i, "마이페이지");
             aCurrentData.listInfo.add(newOne);
@@ -58,7 +50,7 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                parent.getItemAtPosition(position);
             }
 
             @Override
