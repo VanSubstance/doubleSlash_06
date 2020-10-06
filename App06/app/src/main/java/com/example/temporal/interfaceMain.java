@@ -369,27 +369,18 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null).commit();
     }
 
-//    // 펀딩 세부
-//    public void changeFragmentFundingItemSpecific(fundingItem newOne) {
-//        TextView txt = (TextView) findViewById(R.id.textDescription);
-//        txt.setText(btn.getText());
-//
-//    }
-
-//    // 펀딩 세부페이지
-//    public void changeFragmentFundingItemSpecific(fundingItem newOne) {
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fundingItemSpecific newPage = new fundingItemSpecific();
-//        newPage.setItem(newOne);
-//        fragmentTransaction.replace(R.id.frameMain, newPage);
-//        fragmentTransaction.addToBackStack(null).commit();
-//    }
-
     // 챌린지 세부페이지 내꺼
     public void changeFragmentChallengeItemSpecific(challengeItem newOne) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         challengeItemSpecific newPage = new challengeItemSpecific();
+        newPage.setItem(newOne);
+        fragmentTransaction.replace(R.id.frameMain, newPage);
+        fragmentTransaction.addToBackStack(null).commit();
+    }
+
+    public void changeFragmentChallengeComplete(challengeItem newOne) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        challengeComplete newPage = new challengeComplete();
         newPage.setItem(newOne);
         fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();
