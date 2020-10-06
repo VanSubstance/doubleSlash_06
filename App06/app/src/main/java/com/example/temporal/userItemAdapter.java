@@ -38,16 +38,13 @@ public class userItemAdapter extends RecyclerView.Adapter<userItemAdapter.ViewHo
     public void onBindViewHolder(userItemAdapter.ViewHolder holder, int position) {
         String title = mData.get(position).title;
         String enr_date = mData.get(position).enr_date;
-        String ctr =  mData.get(position).ctr;
-        int targ_point = mData.get(position).targ_point;
-        int left_point = mData.get(position).left_point;
+        String point = mData.get(position).point;
+        String left_point = mData.get(position).left_point;
 
         holder.title.setText(title) ;
         holder.enr_date.setText(enr_date) ;
-        holder.ctr.setText(ctr) ;
-        holder.targ_point.setText(String.valueOf(targ_point)) ;
-        holder.left_point.setText(String.valueOf(left_point)) ;
-
+        holder.point.setText(point) ;
+        holder.left_point.setText(left_point) ;
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
@@ -60,19 +57,17 @@ public class userItemAdapter extends RecyclerView.Adapter<userItemAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView enr_date;
-        TextView targ_point;
+        TextView point;
         TextView left_point;
-        TextView ctr;
 
         ViewHolder(View itemView) {
             super(itemView) ;
-            int position = getAdapterPosition();
+
             // 뷰 객체에 대한 참조. (hold strong reference)
             title = itemView.findViewById(R.id.title);
             enr_date = itemView.findViewById(R.id.enr_date);
-            targ_point = itemView.findViewById(R.id.targ_point);
+            point = itemView.findViewById(R.id.targ_point);
             left_point = itemView.findViewById(R.id.left_point);
-            ctr = itemView.findViewById(R.id.ctr);
 
             itemView.setOnClickListener( new View.OnClickListener() {
                 public void onClick(View view) {

@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="120sp"
         android:layout_marginLeft="10sp"
         android:layout_marginTop="5sp"
         android:layout_marginRight="10sp"
@@ -16,24 +16,23 @@
 
 
         <TextView
-            android:id="@+id/ctr"
+            android:id="@+id/enr_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5sp"
-            android:layout_marginTop="10sp"
-            android:layout_marginEnd="14sp"
-            android:text="챌린지"
-            app:layout_constraintEnd_toStartOf="@+id/enr_date"
-            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="325sp"
+            android:text="23일 수요일"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="163sp"
-            android:layout_height="31sp"
+            android:layout_width="164sp"
+            android:layout_height="43sp"
             android:layout_marginStart="10sp"
-            android:layout_marginTop="10sp"
+            android:layout_marginTop="20sp"
             android:layout_marginEnd="190sp"
             android:text="플라스틱 없는 일주일"
             android:textSize="18sp"
@@ -44,70 +43,27 @@
 
         <TextView
             android:id="@+id/targ_point"
-            android:layout_width="63sp"
-            android:layout_height="22sp"
-            android:layout_marginStart="80sp"
-            android:layout_marginTop="35sp"
-            android:text="+500"
+            android:layout_width="118sp"
+            android:layout_height="29sp"
+            android:layout_marginStart="90sp"
+            android:layout_marginTop="45sp"
+            android:layout_marginEnd="5sp"
+            android:text="+500포인트"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/title"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textPoint1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9sp"
-            android:layout_marginTop="35sp"
-            android:layout_marginEnd="22sp"
-            android:text="포인트"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/targ_point"
+            app:layout_constraintStart_toEndOf="@+id/title"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/left_point"
-            android:layout_width="38sp"
-            android:layout_height="24sp"
-            android:layout_marginStart="5sp"
-            android:layout_marginTop="4sp"
-            android:layout_marginEnd="5sp"
-            android:text="3500"
-            app:layout_constraintEnd_toStartOf="@+id/textPoint2"
-            app:layout_constraintStart_toEndOf="@+id/textLeft"
-            app:layout_constraintTop_toBottomOf="@+id/targ_point" />
-
-        <TextView
-            android:id="@+id/textLeft"
-            android:layout_width="26sp"
-            android:layout_height="21sp"
-            android:layout_marginStart="55sp"
-            android:layout_marginTop="62sp"
-            android:text="잔액"
-            app:layout_constraintEnd_toStartOf="@+id/left_point"
-            app:layout_constraintHorizontal_bias="0.56"
-            app:layout_constraintStart_toEndOf="@+id/title"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textPoint2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8sp"
-            android:layout_marginEnd="22sp"
-            android:text="포인트"
+            android:layout_width="128sp"
+            android:layout_height="33sp"
+            android:layout_marginStart="76sp"
+            android:layout_marginEnd="9sp"
+            android:text="잔액 포인트"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textPoint1" />
-
-        <TextView
-            android:id="@+id/enr_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
-            android:layout_marginEnd="250sp"
-            android:text="23일 수요일"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
