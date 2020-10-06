@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import server06.miniproject.mapper.ChallengeMapper;
+import server06.miniproject.mapper.ChallengeFrameMapper;
 
 @Service
 @Transactional
-public class ChallengeService {
+public class ChallengeFrameService {
 	
 	@Autowired
-	private ChallengeMapper challengeMapper;
+	private ChallengeFrameMapper challengeframeMapper;
 	
-	public List<Map<String, String>> selectChallengeList() {
-		return challengeMapper.selectChallengeList();
+	public List<Map<String, String>> selectChallengeFrameList() {
+		return challengeframeMapper.selectChallengeFrameList();
 	}
 }

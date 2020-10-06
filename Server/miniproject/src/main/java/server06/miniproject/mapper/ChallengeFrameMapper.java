@@ -6,6 +6,6 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ChallengeMapper {
-	List<Map<String, String>> selectChallengeList();
+public interface ChallengeFrameMapper {
+	List<Map<String, String>> selectChallengeFrameList();
 }

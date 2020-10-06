@@ -1,12 +1,12 @@
 package server06.miniproject.model;
 
-public class Challenge {
+public class ChallengeFrame {
 	private int id;
 	private int point;
 	private String title;
 	private String des;
 	
-	public Challenge(int id, int point, String title, String des) {
+	public ChallengeFrame(int id, int point, String title, String des) {
 		super();
 		this.id = id;
 		this.point = point;

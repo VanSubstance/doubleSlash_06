@@ -8,16 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import server06.miniproject.service.ChallengeService;
+import server06.miniproject.service.ChallengeFrameService;
+
+
 
 @RestController
-public class ChallengeController {
+public class ChallengeFrameController {
 	
 	@Autowired
-	private ChallengeService challengeService;
+	private ChallengeFrameService challengeframeService;
 	
-	@RequestMapping(value="/challenge", method = RequestMethod.GET)
-	public List<Map<String, String>> selectChallengList(){
-		return challengeService.selectChallengeList();
+	@RequestMapping(value="/challengeframe", method = RequestMethod.GET)
+	public List<Map<String, String>> selectChallengFrameList(){
+		return challengeframeService.selectChallengeFrameList();
 	}
 }
