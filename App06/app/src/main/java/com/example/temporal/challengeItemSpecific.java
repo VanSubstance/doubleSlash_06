@@ -89,6 +89,7 @@ public class challengeItemSpecific extends Fragment {
             slotActivity.setOrientation(LinearLayout.HORIZONTAL);
             final int GET_GALLERY_IMAGE = i;
             // 아래 함수에 사진 찍는거 연결하면 됨
+            // 연결하고 나서 프레그먼트바 계산 해줘야되니까 양승혁한테 말하고
             newActivity.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -112,6 +113,7 @@ public class challengeItemSpecific extends Fragment {
                 layoutImages.addView(rowImages);
             }
         }
+
         return view;
     }
 

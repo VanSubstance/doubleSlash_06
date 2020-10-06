@@ -68,12 +68,13 @@
                 <com.applikeysolutions.cosmocalendar.view.CalendarView
                     android:id="@+id/calendarView"
                     android:layout_width="match_parent"
-                    android:layout_height="400sp"
+                    android:layout_height="400dp"
                     app:disabledDayTextColor="#999999"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:weekendDayTextColor="#ff0000">
+                    app:weekendDayTextColor="#ff0000"
+                    android:layout_marginTop="20sp">
 
                 </com.applikeysolutions.cosmocalendar.view.CalendarView>
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,6 +68,7 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
         }
         holder.textTitle.setText(title) ;
         holder.textDescription.setText(description);
+        holder.progressBar.setProgress(mData.get(position).progress);
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
@@ -80,6 +82,7 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
         TextView textTitle;
         TextView textDescription;
         ImageView imageLike;
+        ProgressBar progressBar;
 
         ViewHolder(View itemView) {
             super(itemView) ;
@@ -88,6 +91,7 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
             textTitle = itemView.findViewById(R.id.textTitle);
             textDescription = itemView.findViewById(R.id.textDescription);
             imageLike = itemView.findViewById(R.id.imageLike);
+            progressBar = itemView.findViewById(R.id.progressBar);
             itemView.setOnClickListener( new View.OnClickListener() {
                 public void onClick(View view) {
                     int position = getAdapterPosition();

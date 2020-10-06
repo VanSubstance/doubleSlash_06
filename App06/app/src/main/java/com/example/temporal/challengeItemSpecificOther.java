@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays;
@@ -69,49 +67,45 @@ public class challengeItemSpecificOther extends Fragment {
         calendarView.addConnectedDays(new ConnectedDays(item.days, colorChosen, Color.YELLOW, Color.WHITE));
         calendarView.getConnectedDaysManager().setConnectedDaysList(null);
 
-        TableLayout layoutImages = view.findViewById(R.id.layoutImages);
-        TableRow.LayoutParams settingRow = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams settingImage;
-        settingRow.setMargins(0, 20, 0 ,0);
-        settingRow.gravity = Gravity.CENTER | Gravity.LEFT;
-        TableRow rowImages = null;
+        LinearLayout layoutImages = view.findViewById(R.id.layoutImages);
+        LinearLayout rowImages = null;
+        LinearLayout.LayoutParams settingRow = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        settingRow.setMargins(0, 40, 0 ,0);
+
+
         // 이미지 동적 생성
         for (int i = 0; i < item.acvts.size(); i++) {
+            if ( i % 3 == 0) {
+                rowImages = new LinearLayout(this.getContext());
+                rowImages.setOrientation(LinearLayout.HORIZONTAL);
+                rowImages.setLayoutParams(settingRow);
+            }
             ImageView newActivity = new ImageView(this.getContext());
+            LinearLayout slotActivity = new LinearLayout(this.getContext());
+            slotActivity.setOrientation(LinearLayout.HORIZONTAL);
             final int GET_GALLERY_IMAGE = i;
+            // 아래 함수에 사진 찍는거 연결하면 됨
             newActivity.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(Intent.ACTION_PICK);
-                    intent. setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                    intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                     startActivityForResult(intent, GET_GALLERY_IMAGE);
                 }
             });
-            newActivity.setScaleX(110);
-            newActivity.setScaleY(110);
-            settingImage = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            switch (i % 3) {
-                case 0: // Row 생성 + 사진 생성: 좌 20
-                    rowImages = new TableRow(this.getContext());
-                    rowImages.setLayoutParams(settingRow);
-                    settingImage.setMargins(20, 0, 0, 0);
-                    newActivity.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    newActivity.setLayoutParams(settingImage);
-                    rowImages.addView(newActivity);
-                    break;
-                case 1: // 사진 생성: 좌 20 우 20
-                    settingImage.setMargins(20, 0, 20, 0);
-                    newActivity.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    newActivity.setLayoutParams(settingImage);
-                    rowImages.addView(newActivity);
-                    break;
-                case 2: // 사진 생성: 우 20
-                    settingImage.setMargins(0, 0, 20, 0);
-                    newActivity.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    newActivity.setLayoutParams(settingImage);
-                    rowImages.addView(newActivity);
-                    layoutImages.addView(rowImages);
-                    break;
+            newActivity.setImageResource(R.drawable.border_square_black_edge_1dp);
+            LinearLayout.LayoutParams settingImage = new LinearLayout.LayoutParams(400, 400);
+            settingImage.setMargins(20, 0, 20, 0);
+            newActivity.setLayoutParams(settingImage);
+            newActivity.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            LinearLayout.LayoutParams settingSlot = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            settingSlot.weight = 1;
+            settingSlot.gravity = Gravity.CENTER;
+            slotActivity.setLayoutParams(settingSlot);
+            slotActivity.addView(newActivity);
+            rowImages.addView(slotActivity);
+            if (i % 3 == 2 || i + 1 == item.acvts.size()) {
+                layoutImages.addView(rowImages);
             }
         }
 

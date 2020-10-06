@@ -15,6 +15,7 @@ public class challengeItem {
     int point = 100;
     Set<Long> days = new TreeSet<>();
     boolean like;
+    int progress = 0;
     ArrayList<challengeItemActivity> acvts = new ArrayList<challengeItemActivity>();
 
     // 테스트를 위한 함수
@@ -49,6 +50,9 @@ public class challengeItem {
         point = original.point;
         for (int i = 0; i < days.size(); i++) {
             acvts.add(new challengeItemActivity());
+        }
+        if (days.size() != 0) {
+            progress = acvts.size() / days.size() * 100;
         }
     }
 }
