@@ -1,94 +1,84 @@
 package server06.miniproject.model;
 
-import java.sql.Date;
-
 public class Funding {
-	private String fundingid;
-	private String title;
-	private String content;
-	private Date startdate;
-	private Date enddate;
-	private int targetpoint;
-	private String description;
-
-
-
-
-	public Funding(String fundingid, String title, String content, Date startdate, Date enddate, int targetpoint,
-			String description) {
+	private String fund_id;
+	private String fund_inst;
+	private String inst_icon;
+	private String inst_des;
+	private String fund_img;
+	private int tar_point;
+	private int acu_point;
+	
+	public Funding(String fund_id, String fund_inst, String inst_icon, String inst_des, String fund_img, int tar_point,
+			int acu_point) {
 		super();
-		this.fundingid = fundingid;
-		this.title = title;
-		this.content = content;
-		this.startdate = startdate;
-		this.enddate = enddate;
-		this.targetpoint = targetpoint;
-		this.description = description;
+		this.fund_id = fund_id;
+		this.fund_inst = fund_inst;
+		this.inst_icon = inst_icon;
+		this.inst_des = inst_des;
+		this.fund_img = fund_img;
+		this.tar_point = tar_point;
+		this.acu_point = acu_point;
 	}
 
-	public String getFundingid() {
-		return fundingid;
+	public Funding() {
+		super();
 	}
 
-	public void setFundingid(String fundingid) {
-		this.fundingid = fundingid;
+	public String getFund_id() {
+		return fund_id;
 	}
 
-	public String getTitle() {
-		return title;
+	public void setFund_id(String fund_id) {
+		this.fund_id = fund_id;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public String getFund_inst() {
+		return fund_inst;
 	}
 
-	public String getContent() {
-		return content;
+	public void setFund_inst(String fund_inst) {
+		this.fund_inst = fund_inst;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public String getInst_icon() {
+		return inst_icon;
 	}
 
-	public Date getStartdate() {
-		return startdate;
+	public void setInst_icon(String inst_icon) {
+		this.inst_icon = inst_icon;
 	}
 
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
+	public String getInst_des() {
+		return inst_des;
 	}
 
-	public Date getEnddate() {
-		return enddate;
+	public void setInst_des(String inst_des) {
+		this.inst_des = inst_des;
 	}
 
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
+	public String getFund_img() {
+		return fund_img;
 	}
 
-	public int getTargetpoint() {
-		return targetpoint;
+	public void setFund_img(String fund_img) {
+		this.fund_img = fund_img;
 	}
 
-	public void setTargetpoint(int targetpoint) {
-		this.targetpoint = targetpoint;
+	public int getTar_point() {
+		return tar_point;
 	}
 
-	public String getDescription() {
-		return description;
+	public void setTar_point(int tar_point) {
+		this.tar_point = tar_point;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public int getAcu_point() {
+		return acu_point;
 	}
 
-	@Override
-	public String toString() {
-		return "Funding [fundingid=" + fundingid + ", title=" + title + ", content=" + content + ", startdate="
-				+ startdate + ", enddate=" + enddate + ", targetpoint=" + targetpoint + ", description=" + description
-				+ "]";
+	public void setAcu_point(int acu_point) {
+		this.acu_point = acu_point;
 	}
-
-
-
+	
 }
