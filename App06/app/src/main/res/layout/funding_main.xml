@@ -19,9 +19,9 @@
                 android:id="@+id/textFILLIT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="10sp"
                 android:text="FILLIT"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -29,9 +29,9 @@
 
             <ImageView
                 android:id="@+id/imageBell"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_margin="10sp"
                 android:background="@drawable/border_square_black_1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -44,7 +44,7 @@
             android:id="@+id/frameFundingList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="10sp"
             android:layout_weight="5"
             android:background="@drawable/background_picture">
 
@@ -68,22 +68,22 @@
 
 <!--        <Button-->
 <!--            android:id="@+id/button_left"-->
-<!--            android:layout_width="65dp"-->
-<!--            android:layout_height="574dp"-->
+<!--            android:layout_width="65sp"-->
+<!--            android:layout_height="574sp"-->
 <!--            android:background="#00ff0000"-->
 <!--            android:text="&lt;"-->
-<!--            android:textSize="50dp"-->
+<!--            android:textSize="50sp"-->
 <!--            app:layout_constraintStart_toStartOf="parent"-->
 <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 <!--        <Button-->
 <!--            android:id="@+id/button_right"-->
-<!--            android:layout_width="65dp"-->
-<!--            android:layout_height="574dp"-->
+<!--            android:layout_width="65sp"-->
+<!--            android:layout_height="574sp"-->
 <!--            android:background="#00ff0000"-->
-<!--            android:layout_marginLeft="250dp"-->
+<!--            android:layout_marginLeft="250sp"-->
 <!--            android:text="&gt;"-->
-<!--            android:textSize="50dp"-->
+<!--            android:textSize="50sp"-->
 <!--            app:layout_constraintEnd_toEndOf="parent"-->
 <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
@@ -91,12 +91,12 @@
 
     <!--    <Button-->
 <!--        android:id="@+id/funding_button"-->
-<!--        android:layout_width="280dp"-->
-<!--        android:layout_height="79dp"-->
+<!--        android:layout_width="280sp"-->
+<!--        android:layout_height="79sp"-->
 <!--        android:layout_gravity="center"-->
-<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_marginBottom="10sp"-->
 <!--        android:text="펀딩하기"-->
-<!--        android:textSize="20dp"-->
+<!--        android:textSize="20sp"-->
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintRight_toRightOf="parent"-->

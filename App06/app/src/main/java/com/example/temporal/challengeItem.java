@@ -1,5 +1,6 @@
 package com.example.temporal;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -11,8 +12,10 @@ public class challengeItem {
     String desc;
     Calendar enr_date;
     Calendar due_date;
+    int point = 100;
     Set<Long> days = new TreeSet<>();
     boolean like;
+    ArrayList<challengeItemActivity> acvts = new ArrayList<challengeItemActivity>();
 
     // 테스트를 위한 함수
     public void init(int i, String page) {
@@ -41,7 +44,11 @@ public class challengeItem {
         desc = original.desc;
         enr_date = original.enr_date;
         due_date = original.due_date;
-        days = original.days;
+        days.addAll(original.days);
         like = original.like;
+        point = original.point;
+        for (int i = 0; i < days.size(); i++) {
+            acvts.add(new challengeItemActivity());
+        }
     }
 }

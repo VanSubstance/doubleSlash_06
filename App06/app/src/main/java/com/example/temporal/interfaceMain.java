@@ -113,7 +113,6 @@ public class interfaceMain extends AppCompatActivity {
             }
         });
 
-        // 펀딩 서버 연결
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {

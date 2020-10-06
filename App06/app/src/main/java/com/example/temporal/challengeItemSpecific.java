@@ -6,9 +6,9 @@ import android.app.Fragment;
 import android.content.Intent;
 
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +16,18 @@ import android.view.ViewGroup;
 import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays;
 import com.applikeysolutions.cosmocalendar.utils.SelectionType;
 import com.applikeysolutions.cosmocalendar.view.CalendarView;
+
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import static android.app.Activity.RESULT_OK;
 
 public class challengeItemSpecific extends Fragment {
+
+    challengeItem item = new challengeItem();
+    CalendarView calendarView;
+    TextView textPointTotal;
 
     private final int GET_GALLERY_IMAGE1=1;
     private final int GET_GALLERY_IMAGE2=2;
@@ -44,9 +50,6 @@ public class challengeItemSpecific extends Fragment {
     private ImageView image8;
     private ImageView image9;
 
-    challengeItem item = new challengeItem();
-    CalendarView calendarView;
-
     public void setItem(challengeItem newOne) {
         item.clone(newOne);
     }
@@ -57,77 +60,65 @@ public class challengeItemSpecific extends Fragment {
         TextView textDescription = view.findViewById(R.id.textDescription);
         textTitle.setText(item.title);
         textDescription.setText(item.desc);
+        textPointTotal = view.findViewById(R.id.textPointTotal);
+        textPointTotal.setText(String.valueOf(item.point));
+
         calendarView = view.findViewById(R.id.calendarView);
         calendarView.setSelectionType(SelectionType.NONE);
         calendarView.setWeekendDayTextColor(Color.RED);
-        int colorChosen = Color.parseColor("#1835D0");
+        int colorChosen = Color.parseColor("#0096c6");
         calendarView.getConnectedDaysManager().setConnectedDaysList(null);
         calendarView.addConnectedDays(new ConnectedDays(item.days, colorChosen, Color.YELLOW, Color.WHITE));
         calendarView.getConnectedDaysManager().setConnectedDaysList(null);
 
-        image1 = (ImageView)view.findViewById(R.id.image1);
-        image2 = (ImageView)view.findViewById(R.id.image2);
-        image3 = (ImageView)view.findViewById(R.id.image3);
-        image4 = (ImageView)view.findViewById(R.id.image4);
-        image5 = (ImageView)view.findViewById(R.id.image5);
-        image6 = (ImageView)view.findViewById(R.id.image6);
-        image7 = (ImageView)view.findViewById(R.id.image7);
-        image8 = (ImageView)view.findViewById(R.id.image8);
-        image9 = (ImageView)view.findViewById(R.id.image9);
+        LinearLayout layoutImages = view.findViewById(R.id.layoutImages);
+        LinearLayout rowImages = null;
+        LinearLayout.LayoutParams settingRow = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        settingRow.setMargins(0, 40, 0 ,0);
 
-        View.OnClickListener btnListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent. setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                // 데이터베이스에서 ctgr 맞는거 불러오기
-                switch (view.getId()) {
-                    case R.id.image1:
-                        startActivityForResult(intent, GET_GALLERY_IMAGE1);
-                        break;
-                    case R.id.image2:
-                        startActivityForResult(intent, GET_GALLERY_IMAGE2);
-                        break;
-                    case R.id.image3:
-                        startActivityForResult(intent, GET_GALLERY_IMAGE3);
-                        break;
-                    case R.id.image4:
-                        startActivityForResult(intent, GET_GALLERY_IMAGE4);
-                        break;
-                    case R.id.image5:
-                        startActivityForResult(intent, GET_GALLERY_IMAGE5);
-                        break;
-                    case R.id.image6:
-                        startActivityForResult(intent, GET_GALLERY_IMAGE6);
-                        break;
-                    case R.id.image7:
-                        startActivityForResult(intent, GET_GALLERY_IMAGE7);
-                        break;
-                    case R.id.image8:
-                        startActivityForResult(intent, GET_GALLERY_IMAGE8);
-                        break;
-                    case R.id.image9:
-                        startActivityForResult(intent, GET_GALLERY_IMAGE9);
-                        break;
-                }
+
+        // 이미지 동적 생성
+        for (int i = 0; i < item.acvts.size(); i++) {
+            if ( i % 3 == 0) {
+                rowImages = new LinearLayout(this.getContext());
+                rowImages.setOrientation(LinearLayout.HORIZONTAL);
+                rowImages.setLayoutParams(settingRow);
             }
-        };
-
-        image1.setOnClickListener(btnListener);
-        image2.setOnClickListener(btnListener);
-        image3.setOnClickListener(btnListener);
-        image4.setOnClickListener(btnListener);
-        image5.setOnClickListener(btnListener);
-        image6.setOnClickListener(btnListener);
-        image7.setOnClickListener(btnListener);
-        image8.setOnClickListener(btnListener);
-        image9.setOnClickListener(btnListener);
-
+            ImageView newActivity = new ImageView(this.getContext());
+            LinearLayout slotActivity = new LinearLayout(this.getContext());
+            slotActivity.setOrientation(LinearLayout.HORIZONTAL);
+            final int GET_GALLERY_IMAGE = i;
+            // 아래 함수에 사진 찍는거 연결하면 됨
+            newActivity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                    startActivityForResult(intent, GET_GALLERY_IMAGE);
+                }
+            });
+            newActivity.setImageResource(R.drawable.border_square_black_edge_1dp);
+            LinearLayout.LayoutParams settingImage = new LinearLayout.LayoutParams(400, 400);
+            settingImage.setMargins(20, 0, 20, 0);
+            newActivity.setLayoutParams(settingImage);
+            newActivity.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            LinearLayout.LayoutParams settingSlot = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            settingSlot.weight = 1;
+            settingSlot.gravity = Gravity.CENTER;
+            slotActivity.setLayoutParams(settingSlot);
+            slotActivity.addView(newActivity);
+            rowImages.addView(slotActivity);
+            if (i % 3 == 2 || i + 1 == item.acvts.size()) {
+                layoutImages.addView(rowImages);
+            }
+        }
         return view;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        /*
         if (requestCode == GET_GALLERY_IMAGE1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
             image1.setImageURI(selectedImageUri);
@@ -165,6 +156,8 @@ public class challengeItemSpecific extends Fragment {
             Uri selectedImageUri = data.getData();
             image9.setImageURI(selectedImageUri);
         }
+
+         */
     }
 
 }

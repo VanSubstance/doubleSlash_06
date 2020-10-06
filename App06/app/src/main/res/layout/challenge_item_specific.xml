@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -23,9 +22,9 @@
                     android:id="@+id/textFILLIT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:text="FILLIT"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -33,9 +32,9 @@
 
                 <ImageView
                     android:id="@+id/imageBell"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:layout_margin="10sp"
                     android:background="@drawable/border_square_black_1dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -54,131 +53,66 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="20sp"
                     android:text="챌린지 제목"
-                    android:textSize="25dp" />
+                    android:textSize="25sp" />
 
                 <TextView
                     android:id="@+id/textDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="10sp"
                     android:text="챌린지 세부내용" />
 
                 <com.applikeysolutions.cosmocalendar.view.CalendarView
                     android:id="@+id/calendarView"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="400sp"
+                    app:disabledDayTextColor="#999999"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:weekendDayTextColor="#ff0000">
 
-                <TableLayout
+                </com.applikeysolutions.cosmocalendar.view.CalendarView>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="0,1,2">
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal">
 
-                    <TableRow
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:gravity="center"
-                        android:layout_weight = "1" >
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/image1"
-                            android:layout_width="100sp"
-                            android:layout_height="100sp"
-                            android:layout_marginLeft="20sp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
+                        <TextView
+                            android:id="@+id/staticPointTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="달성시 획득 포인트" />
 
-                        <ImageView
-                            android:id="@+id/image2"
-                            android:layout_width="100sp"
-                            android:layout_height="100sp"
-                            android:layout_marginLeft="20sp"
-                            android:layout_marginRight="20sp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
+                        <TextView
+                            android:id="@+id/textPointTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="0" />
+                    </LinearLayout>
+                </LinearLayout>
 
-                        <ImageView
-                            android:id="@+id/image3"
-                            android:layout_width="100sp"
-                            android:layout_height="100sp"
-                            android:layout_marginRight="20sp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="20dp"
-                        android:gravity="center"
-                        android:layout_weight = "1" >
-
-                        <ImageView
-                            android:id="@+id/image4"
-                            android:layout_width="100sp"
-                            android:layout_height="100sp"
-                            android:layout_marginLeft="20sp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
-
-                        <ImageView
-                            android:id="@+id/image5"
-                            android:layout_width="100sp"
-                            android:layout_height="100sp"
-                            android:layout_marginLeft="20sp"
-                            android:layout_marginRight="20sp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
-
-                        <ImageView
-                            android:id="@+id/image6"
-                            android:layout_width="100sp"
-                            android:layout_height="100sp"
-                            android:layout_marginRight="20sp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="20dp"
-                        android:gravity="center"
-                        android:layout_weight = "1" >
-
-                        <ImageView
-                            android:id="@+id/image7"
-                            android:layout_width="100sp"
-                            android:layout_height="100sp"
-                            android:layout_marginLeft="20sp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
-
-                        <ImageView
-                            android:id="@+id/image8"
-                            android:layout_width="100sp"
-                            android:layout_height="100sp"
-                            android:layout_marginLeft="20sp"
-                            android:layout_marginRight="20sp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
-
-                        <ImageView
-                            android:id="@+id/image9"
-                            android:layout_width="100sp"
-                            android:layout_height="100sp"
-                            android:layout_marginRight="20sp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
-                    </TableRow>
-
-                </TableLayout>
+                <LinearLayout
+                    android:id="@+id/layoutImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:orientation="vertical"/>
 
             </LinearLayout>
 

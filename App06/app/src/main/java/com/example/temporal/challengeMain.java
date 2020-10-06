@@ -224,7 +224,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge ,
         mapPOIItem.setTag(0);
         mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(lat, lon));
         mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 Respin 마커 모양.
 
         mapView.addPOIItem(mapPOIItem);
 
@@ -232,21 +232,21 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge ,
         mapPOIItem1.setTag(0);
         mapPOIItem1.setMapPoint(MapPoint.mapPointWithGeoCoord(lat+0.003, lon+0.001));
         mapPOIItem1.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        mapPOIItem1.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        mapPOIItem1.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 Respin 마커 모양.
         mapView.addPOIItem(mapPOIItem1);
 
         mapPOIItem2.setItemName("3");
         mapPOIItem2.setTag(0);
         mapPOIItem2.setMapPoint(MapPoint.mapPointWithGeoCoord(lat+0.004, lon+0.002));
         mapPOIItem2.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        mapPOIItem2.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        mapPOIItem2.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 Respin 마커 모양.
         mapView.addPOIItem(mapPOIItem2);
 
         mapPOIItem3.setItemName("4");
         mapPOIItem3.setTag(0);
         mapPOIItem3.setMapPoint(MapPoint.mapPointWithGeoCoord(lat+0.005, lon));
         mapPOIItem3.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        mapPOIItem3.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        mapPOIItem3.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 Respin 마커 모양.
         mapView.addPOIItem(mapPOIItem3);
 
     }

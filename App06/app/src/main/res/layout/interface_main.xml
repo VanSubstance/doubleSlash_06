@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/menuHome"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="40sp"
             android:layout_weight="1"
             android:background="@drawable/border_square_black_1dp"
             android:gravity="center"
@@ -42,7 +42,7 @@
         <TextView
             android:id="@+id/menuChallenge"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="40sp"
             android:layout_weight="1"
             android:background="@drawable/border_square_black_1dp"
             android:gravity="center"
@@ -51,7 +51,7 @@
         <TextView
             android:id="@+id/menuList"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="40sp"
             android:layout_weight="1"
             android:background="@drawable/border_square_black_1dp"
             android:gravity="center"
@@ -60,7 +60,7 @@
         <TextView
             android:id="@+id/menuFunding"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="40sp"
             android:layout_weight="1"
             android:background="@drawable/border_square_black_1dp"
             android:gravity="center"
@@ -69,7 +69,7 @@
         <TextView
             android:id="@+id/menuInfo"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="40sp"
             android:layout_weight="1"
             android:background="@drawable/border_square_black_1dp"
             android:gravity="center"

@@ -10,7 +10,7 @@
         android:id="@+id/buttonUpward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="20sp"
         android:text="위로 이동"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -24,7 +24,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20sp"/>
 
     <ScrollView
         android:id="@+id/viewScroll"
@@ -46,9 +46,9 @@
                     android:id="@+id/textFILLIT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:text="FILLIT"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -56,9 +56,9 @@
 
                 <ImageView
                     android:id="@+id/imageBell"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:layout_margin="10sp"
                     android:background="@drawable/border_square_black_1dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -76,29 +76,29 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView2"
                     android:layout_width="match_parent"
-                    android:layout_height="240dp"/>
+                    android:layout_height="240sp"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="10sp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/buttonMask"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:layout_weight="1"
                     android:background="@drawable/border_square_black_1dp">
 
                     <ImageView
                         android:id="@+id/imageMask"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
                         android:src="@drawable/ic_launcher_foreground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -109,7 +109,7 @@
                         android:id="@+id/textMask"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="10sp"
                         android:text="마스크"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/imageMask"
@@ -119,16 +119,16 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/buttonPlastic"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:layout_weight="1"
                     android:background="@drawable/border_square_black_1dp">
 
                     <ImageView
                         android:id="@+id/imagePlastic"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
                         android:src="@drawable/ic_launcher_foreground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -139,7 +139,7 @@
                         android:id="@+id/textPlastic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="10sp"
                         android:text="플라스틱"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/imagePlastic"
@@ -149,16 +149,16 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/buttonPaper"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:layout_weight="1"
                     android:background="@drawable/border_square_black_1dp">
 
                     <ImageView
                         android:id="@+id/imagePaper"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
                         android:src="@drawable/ic_launcher_foreground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -169,7 +169,7 @@
                         android:id="@+id/textPaper"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="10sp"
                         android:text="종이"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/imagePaper"
@@ -182,22 +182,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="10sp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/buttonCan"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:layout_weight="1"
                     android:background="@drawable/border_square_black_1dp">
 
                     <ImageView
                         android:id="@+id/imageCan"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
                         android:src="@drawable/ic_launcher_foreground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -208,7 +208,7 @@
                         android:id="@+id/textCan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="10sp"
                         android:text="캔/유리"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/imageCan"
@@ -218,16 +218,16 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/buttonVinyl"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:layout_weight="1"
                     android:background="@drawable/border_square_black_1dp">
 
                     <ImageView
                         android:id="@+id/imageVinyl"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
                         android:src="@drawable/ic_launcher_foreground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -238,7 +238,7 @@
                         android:id="@+id/textVinyl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="10sp"
                         android:text="비닐"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/imageVinyl"
@@ -248,16 +248,16 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/buttonEtc"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:layout_weight="1"
                     android:background="@drawable/border_square_black_1dp">
 
                     <ImageView
                         android:id="@+id/imageEtc"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
                         android:src="@drawable/ic_launcher_foreground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -268,7 +268,7 @@
                         android:id="@+id/textEtc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="10sp"
                         android:text="기타"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/imageEtc"
@@ -288,9 +288,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:text="도전중인 챌린지"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -299,7 +299,7 @@
                     android:id="@+id/buttonList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="20sp"
                     android:text="더보기"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
