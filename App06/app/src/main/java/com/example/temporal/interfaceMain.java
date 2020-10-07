@@ -123,7 +123,7 @@ public class interfaceMain extends AppCompatActivity {
                 boolean conFailFunding = true;
                 while (conFailFunding) {
                     try {
-                        String linkFunding = baseIP + "funding";
+                        String linkFunding = baseIP + "funding/all";
                         serverURL = new URL(linkFunding);
                         System.out.println(serverURL);
                         myConnection = (HttpURLConnection) serverURL.openConnection();
@@ -196,13 +196,13 @@ public class interfaceMain extends AppCompatActivity {
 
         while (reader.hasNext()) {
             String name = reader.nextName();
-            if (name.equals("fundingid")) {
+            if (name.equals("fund_id")) {
                 newOne.id = reader.nextString();
-            } else if (name.equals("title")) {
+            } else if (name.equals("fund_inst")) {
                 newOne.title = reader.nextString();
-            } else if (name.equals("content")) {
+            } else if (name.equals("inst_des")) {
                 newOne.desc = reader.nextString();
-            } else if (name.equals("description")) {
+            } else if (name.equals("fund_img")) {
                 newOne.spec_desc = reader.nextString();
             } else if (name.equals("targetpoint")) {
                 newOne.targ_point = reader.nextInt();

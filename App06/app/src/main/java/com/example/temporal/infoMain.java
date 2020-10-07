@@ -50,6 +50,11 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                for (int i = 0; i < aCurrentData.listInfo.size(); i++) {
+//                    userItem newOne = new userItem();
+//                    newOne.init(i, "마이페이지");
+//                    aCurrentData.listInfo.add(newOne);
+//                }
                 parent.getItemAtPosition(position);
             }
 

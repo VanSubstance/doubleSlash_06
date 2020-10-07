@@ -21,11 +21,11 @@ public class userItem {
         targ_point = 500;
         //targ_point = -500;
         left_point = left_point + targ_point;
+
         // targ_point이 양수이면 챌린지
         if(targ_point > 0)
         {
             ctr = "챌린지";
-
         }
         // targ_point이 음수이면 펀딩
         else if(targ_point < 0)
