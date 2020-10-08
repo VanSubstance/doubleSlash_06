@@ -5,18 +5,15 @@ public class Funding {
 	private String fund_inst;
 	private String inst_icon;
 	private String inst_des;
-	private String fund_img;
 	private int tar_point;
 	private int acu_point;
 	
-	public Funding(String fund_id, String fund_inst, String inst_icon, String inst_des, String fund_img, int tar_point,
-			int acu_point) {
+	public Funding(String fund_id, String fund_inst, String inst_icon, String inst_des, int tar_point,int acu_point) {
 		super();
 		this.fund_id = fund_id;
 		this.fund_inst = fund_inst;
 		this.inst_icon = inst_icon;
 		this.inst_des = inst_des;
-		this.fund_img = fund_img;
 		this.tar_point = tar_point;
 		this.acu_point = acu_point;
 	}
@@ -55,14 +52,6 @@ public class Funding {
 
 	public void setInst_des(String inst_des) {
 		this.inst_des = inst_des;
-	}
-
-	public String getFund_img() {
-		return fund_img;
-	}
-
-	public void setFund_img(String fund_img) {
-		this.fund_img = fund_img;
 	}
 
 	public int getTar_point() {
