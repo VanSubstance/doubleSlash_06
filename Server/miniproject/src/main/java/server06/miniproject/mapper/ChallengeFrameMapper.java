@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import server06.miniproject.model.ChallengeFrameList;
+
 @Repository
 public interface ChallengeFrameMapper {
-	List<Map<String, String>> selectChallengeFrameList();
+	List<ChallengeFrameList> selectChallengeFrameList();
 }

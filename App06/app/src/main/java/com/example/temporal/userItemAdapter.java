@@ -70,7 +70,7 @@ public class userItemAdapter extends RecyclerView.Adapter<userItemAdapter.ViewHo
             // 뷰 객체에 대한 참조. (hold strong reference)
             title = itemView.findViewById(R.id.inst);
             enr_date = itemView.findViewById(R.id.enr_date);
-            targ_point = itemView.findViewById(R.id.targ_point);
+            targ_point = itemView.findViewById(R.id.point);
             left_point = itemView.findViewById(R.id.left_point);
             ctr = itemView.findViewById(R.id.ctr);
 

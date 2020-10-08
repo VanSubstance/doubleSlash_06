@@ -7,6 +7,8 @@ public class userItem {
     String nic;
     String title;
     String enr_date;
+    int point;
+
     String ctr = "0";
     int targ_point;
     int left_point;
@@ -16,7 +18,7 @@ public class userItem {
     // 테스트를 위한 함수
     public void init(int i, String page) {
         title = page + "제목" + i;
-        enr_date = "시작일" + i;
+        nic = "사람이름";
 
         targ_point = 500;
         //targ_point = -500;
