@@ -30,50 +30,115 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/menuHome"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:layout_weight="1"
-            android:background="@drawable/border_square_black_1dp"
-            android:gravity="center"
-            android:text="홈" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/menuChallenge"
-            android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:layout_weight="1"
-            android:background="@drawable/border_square_black_1dp"
-            android:gravity="center"
-            android:text="챌린지" />
+            <ImageView
+                android:id="@+id/imageHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/home_default" />
 
-        <TextView
-            android:id="@+id/menuList"
-            android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:layout_weight="1"
-            android:background="@drawable/border_square_black_1dp"
-            android:gravity="center"
-            android:text="등록" />
+            <TextView
+                android:id="@+id/menuHome"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_weight="1"
+                android:background="@drawable/border_square_black_1dp"
+                android:gravity="center"
+                android:text="홈"
+                tools:layout_editor_absoluteX="69dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/menuFunding"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:layout_weight="1"
-            android:background="@drawable/border_square_black_1dp"
-            android:gravity="center"
-            android:text="펀딩" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/menuInfo"
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/map_default" />
+
+            <TextView
+                android:id="@+id/menuChallenge"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_weight="1"
+                android:background="@drawable/border_square_black_1dp"
+                android:gravity="center"
+                android:text="챌린지"
+                tools:layout_editor_absoluteX="183dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:layout_weight="1"
-            android:background="@drawable/border_square_black_1dp"
-            android:gravity="center"
-            android:text="마이페이지" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/enroll_default" />
+
+            <TextView
+                android:id="@+id/menuList"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_weight="1"
+                android:background="@drawable/border_square_black_1dp"
+                android:gravity="center"
+                android:text="등록"
+                tools:layout_editor_absoluteX="154dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/funding_default" />
+
+            <TextView
+                android:id="@+id/menuFunding"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_weight="1"
+                android:background="@drawable/border_square_black_1dp"
+                android:gravity="center"
+                android:text="펀딩"
+                tools:layout_editor_absoluteX="117dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/my_default" />
+
+            <TextView
+                android:id="@+id/menuInfo"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_weight="1"
+                android:background="@drawable/border_square_black_1dp"
+                android:gravity="center"
+                android:text="마이페이지"
+                tools:layout_editor_absoluteX="69dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
