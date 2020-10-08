@@ -19,6 +19,7 @@ public class userItem {
     public void init(int i, String page) {
         title = page + "제목" + i;
         nic = "사람이름";
+        point = 5000;
 
         targ_point = 500;
         //targ_point = -500;

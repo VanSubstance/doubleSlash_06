@@ -204,6 +204,8 @@ public class interfaceMain extends AppCompatActivity {
                 newOne.inst_desc = reader.nextString();
             } else if (name.equals("tar_point")) {
                 newOne.tar_point = reader.nextInt();
+            } else if (name.equals("acu_point")) {
+                newOne.acu_point = reader.nextInt();
             } else {
                 reader.skipValue();
             }

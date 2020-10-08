@@ -25,12 +25,15 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         TextView inst_desc;
         SeekBar seekBar;
 
-        TextView nowPoint;
         TextView seekmin;
         TextView seekmax;
         TextView tar_point;
         TextView acu_point;
         TextView left_point;
+
+        TextView point;
+        TextView fund_point;
+        TextView rest_point;
 
 //        TextView textDescriptionClick;
 //        TextView textSpecificTitle;
@@ -45,12 +48,15 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             inst_desc = itemView.findViewById(R.id.inst_desc);
             seekBar = itemView.findViewById(R.id.seekBar);
 
-            nowPoint = itemView.findViewById(R.id.textNowPoint);
+            point = itemView.findViewById(aCurrentData.myInfo.point);
             seekmin = itemView.findViewById(R.id.seek_min);
             seekmax = itemView.findViewById(R.id.seek_max);
             tar_point = itemView.findViewById(R.id.tar_point);
             acu_point = itemView.findViewById(R.id.acu_point);
             left_point = itemView.findViewById(R.id.left_point);
+            fund_point = itemView.findViewById(R.id.fund_point);
+            rest_point = itemView.findViewById(R.id.rest_point);
+
             //final int targ = Integer.valueOf(targ_point.getText().toString());
             Button funding_button = itemView.findViewById(R.id.funding_button);
 
@@ -58,14 +64,14 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                    acu_point.setText(String.valueOf(seekBar.getProgress()));
+                    fund_point.setText(String.valueOf(seekBar.getProgress()));
 
                     //int targ = Integer.valueOf(targ_point.getText().toString());
 //                    int targ;
 //                    targ = Integer.parseInt(targ_point.getText().toString());
 //                    int targ = Integer.parseInt(String.valueOf(targ_point));
                     int left = 5000 - progress;
-                    left_point.setText(String.valueOf(left));
+                    rest_point.setText(String.valueOf(left));
                 }
 
                 @Override
