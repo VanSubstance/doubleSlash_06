@@ -1,13 +1,13 @@
 package server06.miniproject.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import server06.miniproject.model.ChallengeFrameList;
 import server06.miniproject.service.ChallengeFrameService;
 
 
@@ -19,7 +19,7 @@ public class ChallengeFrameController {
 	private ChallengeFrameService challengeframeService;
 	
 	@RequestMapping(value="/challengeframe", method = RequestMethod.GET)
-	public List<Map<String, String>> selectChallengFrameList(){
+	public List<ChallengeFrameList> selectChallengFrameList(){
 		return challengeframeService.selectChallengeFrameList();
 	}
 }

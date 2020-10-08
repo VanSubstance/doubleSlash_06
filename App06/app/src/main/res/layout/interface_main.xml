@@ -31,113 +31,161 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menuHome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/imageHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/home_default" />
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                app:srcCompat="@drawable/home_default"
+                app:layout_constraintBottom_toTopOf="@id/textHome"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
 
             <TextView
-                android:id="@+id/menuHome"
+                android:id="@+id/textHome"
                 android:layout_width="match_parent"
-                android:layout_height="40sp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border_square_black_1dp"
                 android:gravity="center"
                 android:text="홈"
-                tools:layout_editor_absoluteX="69dp" />
+                android:textColor="#D5D5D5"
+                app:layout_constraintTop_toBottomOf="@id/imageHome"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menuChallenge"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/map_default" />
+                android:id="@+id/imageChallenge"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                app:srcCompat="@drawable/map_default"
+                app:layout_constraintBottom_toTopOf="@id/textChallenge"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
 
             <TextView
-                android:id="@+id/menuChallenge"
+                android:id="@+id/textChallenge"
                 android:layout_width="match_parent"
-                android:layout_height="40sp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border_square_black_1dp"
                 android:gravity="center"
                 android:text="챌린지"
-                tools:layout_editor_absoluteX="183dp" />
+                android:textColor="#D5D5D5"
+                app:layout_constraintTop_toBottomOf="@id/imageChallenge"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menuEnroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/enroll_default" />
+                android:id="@+id/imageEnroll"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                app:srcCompat="@drawable/enroll_default"
+                app:layout_constraintBottom_toTopOf="@id/textEnroll"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
 
             <TextView
-                android:id="@+id/menuList"
+                android:id="@+id/textEnroll"
                 android:layout_width="match_parent"
-                android:layout_height="40sp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border_square_black_1dp"
                 android:gravity="center"
                 android:text="등록"
-                tools:layout_editor_absoluteX="154dp" />
+                android:textColor="#D5D5D5"
+                app:layout_constraintTop_toBottomOf="@id/imageEnroll"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menuFunding"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/funding_default" />
+                android:id="@+id/imageFunding"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                app:srcCompat="@drawable/funding_default"
+                app:layout_constraintBottom_toTopOf="@id/textFunding"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
 
             <TextView
-                android:id="@+id/menuFunding"
+                android:id="@+id/textFunding"
                 android:layout_width="match_parent"
-                android:layout_height="40sp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border_square_black_1dp"
                 android:gravity="center"
                 android:text="펀딩"
-                tools:layout_editor_absoluteX="117dp" />
+                android:textColor="#D5D5D5"
+                app:layout_constraintTop_toBottomOf="@id/imageFunding"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menuInfo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/my_default" />
+                android:id="@+id/imageInfo"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                app:srcCompat="@drawable/my_default"
+                app:layout_constraintBottom_toTopOf="@id/textInfo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
 
             <TextView
-                android:id="@+id/menuInfo"
+                android:id="@+id/textInfo"
                 android:layout_width="match_parent"
-                android:layout_height="40sp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border_square_black_1dp"
                 android:gravity="center"
                 android:text="마이페이지"
-                tools:layout_editor_absoluteX="69dp" />
+                android:textColor="#D5D5D5"
+                app:layout_constraintTop_toBottomOf="@id/imageInfo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

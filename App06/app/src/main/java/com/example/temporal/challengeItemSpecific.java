@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Intent;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Gravity;
@@ -21,34 +22,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static android.app.Activity.RESULT_OK;
 
 public class challengeItemSpecific extends Fragment {
 
+    challengeItemActivity image= new challengeItemActivity();
     challengeItem item = new challengeItem();
     CalendarView calendarView;
     TextView textPointTotal;
+    private long now ;
 
-    private final int GET_GALLERY_IMAGE1=1;
-    private final int GET_GALLERY_IMAGE2=2;
-    private final int GET_GALLERY_IMAGE3=3;
-    private final int GET_GALLERY_IMAGE4=4;
-    private final int GET_GALLERY_IMAGE5=5;
-    private final int GET_GALLERY_IMAGE6=6;
-    private final int GET_GALLERY_IMAGE7=7;
-    private final int GET_GALLERY_IMAGE8=8;
-    private final int GET_GALLERY_IMAGE9=9;
+    private int GET_GALLERY_IMAGE;
 
 
-    private ImageView image1;
-    private ImageView image2;
-    private ImageView image3;
-    private ImageView image4;
-    private ImageView image5;
-    private ImageView image6;
-    private ImageView image7;
-    private ImageView image8;
-    private ImageView image9;
+    private ImageView newActivity;
+
 
     public void setItem(challengeItem newOne) {
         item.clone(newOne);
@@ -84,10 +75,10 @@ public class challengeItemSpecific extends Fragment {
                 rowImages.setOrientation(LinearLayout.HORIZONTAL);
                 rowImages.setLayoutParams(settingRow);
             }
-            ImageView newActivity = new ImageView(this.getContext());
+            newActivity = new ImageView(this.getContext());
             LinearLayout slotActivity = new LinearLayout(this.getContext());
             slotActivity.setOrientation(LinearLayout.HORIZONTAL);
-            final int GET_GALLERY_IMAGE = i;
+            GET_GALLERY_IMAGE = i;
             // 아래 함수에 사진 찍는거 연결하면 됨
             // 연결하고 나서 프레그먼트바 계산 해줘야되니까 양승혁한테 말하고
             newActivity.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +87,12 @@ public class challengeItemSpecific extends Fragment {
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                     startActivityForResult(intent, GET_GALLERY_IMAGE);
+                    // 시간
+                    now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    String time = mFormat.format(date);
+                    image.reg_date=time;
                 }
             });
             newActivity.setImageResource(R.drawable.border_square_black_edge_1dp);
@@ -118,48 +115,11 @@ public class challengeItemSpecific extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        /*
-        if (requestCode == GET_GALLERY_IMAGE1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
-            image1.setImageURI(selectedImageUri);
+            newActivity.setImageURI(selectedImageUri);
+            image.url=selectedImageUri.toString();
         }
-
-        else if (requestCode == GET_GALLERY_IMAGE2 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            image2.setImageURI(selectedImageUri);
-        }
-        else if (requestCode == GET_GALLERY_IMAGE3 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            image3.setImageURI(selectedImageUri);
-        }
-        else if (requestCode == GET_GALLERY_IMAGE4 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            image4.setImageURI(selectedImageUri);
-        }
-        else if (requestCode == GET_GALLERY_IMAGE5 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            image5.setImageURI(selectedImageUri);
-        }
-        else if (requestCode == GET_GALLERY_IMAGE6 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            image6.setImageURI(selectedImageUri);
-        }
-        else if (requestCode == GET_GALLERY_IMAGE7 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            image7.setImageURI(selectedImageUri);
-        }
-        else if (requestCode == GET_GALLERY_IMAGE8 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            image8.setImageURI(selectedImageUri);
-        }
-        else if (requestCode == GET_GALLERY_IMAGE9 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            image9.setImageURI(selectedImageUri);
-        }
-
-         */
     }
-
 }

@@ -15,5 +15,4 @@ public class aCurrentData {
     public static userItem myInfo = new userItem();
     // 다중 마커를 위해 만들었습니다.
     public static ArrayList<MapPOIItem> markerList=new ArrayList<>();
-
 }

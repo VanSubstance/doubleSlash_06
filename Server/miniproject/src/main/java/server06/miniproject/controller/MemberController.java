@@ -3,6 +3,7 @@ package server06.miniproject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,5 +29,10 @@ public class MemberController {
 	public Boolean insertMember(@RequestBody Member member){
 		return memberService.insertMember(member);
 		
+	}
+	
+	@RequestMapping(value="/member/{memId}", method=RequestMethod.PUT)
+	public Boolean updateMemberLocation(@PathVariable int memId, @RequestBody Member member) {
+		return memberService.updateMemberLocation(memId, member);
 	}
 }
