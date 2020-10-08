@@ -22,4 +22,10 @@
 		VALUES (#{item.id}, #{item.nick}, #{item.point}, #{item.lat}, #{item.lon})
 	</insert>
 
+	<update id="updateMemberLocation" parameterType="server06.miniproject.model.Member">
+		UPDATE member
+		SET lat = #{item.lat},
+			lon = #{item.lon}
+		WHERE mem_id = #{memId}
+	</update>
 </mapper>

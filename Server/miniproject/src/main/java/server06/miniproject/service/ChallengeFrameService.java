@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import server06.miniproject.mapper.ChallengeFrameMapper;
+import server06.miniproject.model.ChallengeFrameList;
 
 @Service
 @Transactional
@@ -16,7 +17,7 @@ public class ChallengeFrameService {
 	@Autowired
 	private ChallengeFrameMapper challengeframeMapper;
 	
-	public List<Map<String, String>> selectChallengeFrameList() {
+	public List<ChallengeFrameList> selectChallengeFrameList() {
 		return challengeframeMapper.selectChallengeFrameList();
 	}
 }

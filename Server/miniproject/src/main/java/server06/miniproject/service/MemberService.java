@@ -23,4 +23,9 @@ public class MemberService {
 	public boolean insertMember(Member member) {
 		return memberMapper.insertMember(member) > 0 ? true : false;
 	}
+	
+	public boolean updateMemberLocation(int memId, Member member) {
+
+		return memberMapper.updateMemberLocation(memId, member) > 0 ? true : false;
+	}
 }
