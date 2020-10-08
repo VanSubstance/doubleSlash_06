@@ -34,7 +34,7 @@ public class ChallengeController {
 		return challengeService.deleteChallenge(chalId);
 	}
 	
-	@RequestMapping(value="/challenge/{memId}", method = RequestMethod.GET)
+	@RequestMapping(value="/challenge/list/{memId}", method = RequestMethod.GET)
 	public List<ChallengeList> selectChallengeList(@PathVariable int memId){
 		return challengeService.selectChallengeList(memId);
 	}
