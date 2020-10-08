@@ -200,10 +200,10 @@ public class interfaceMain extends AppCompatActivity {
                 newOne.id = reader.nextString();
             } else if (name.equals("fund_inst")) {
                 newOne.inst = reader.nextString();
-            } else if (name.equals("fund_img")) {
+            } else if (name.equals("inst_des")) {
                 newOne.inst_desc = reader.nextString();
-            } else if (name.equals("targetpoint")) {
-                newOne.targ_point = reader.nextInt();
+            } else if (name.equals("tar_point")) {
+                newOne.tar_point = reader.nextInt();
             } else {
                 reader.skipValue();
             }

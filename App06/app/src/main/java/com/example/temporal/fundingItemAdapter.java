@@ -28,8 +28,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         TextView nowPoint;
         TextView seekmin;
         TextView seekmax;
-        TextView targ_point;
-        TextView accu_point;
+        TextView tar_point;
+        TextView acu_point;
         TextView left_point;
 
 //        TextView textDescriptionClick;
@@ -48,8 +48,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             nowPoint = itemView.findViewById(R.id.textNowPoint);
             seekmin = itemView.findViewById(R.id.seek_min);
             seekmax = itemView.findViewById(R.id.seek_max);
-            targ_point = itemView.findViewById(R.id.textPoint);
-            accu_point = itemView.findViewById(R.id.accu_point);
+            tar_point = itemView.findViewById(R.id.tar_point);
+            acu_point = itemView.findViewById(R.id.acu_point);
             left_point = itemView.findViewById(R.id.left_point);
             //final int targ = Integer.valueOf(targ_point.getText().toString());
             Button funding_button = itemView.findViewById(R.id.funding_button);
@@ -58,7 +58,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                    accu_point.setText(String.valueOf(seekBar.getProgress()));
+                    acu_point.setText(String.valueOf(seekBar.getProgress()));
 
                     //int targ = Integer.valueOf(targ_point.getText().toString());
 //                    int targ;
