@@ -18,6 +18,6 @@ public class splashMain extends Activity {
             public void run() {
                 finish();
             }
-        }, 700);
+        }, 1500);
     }
 }

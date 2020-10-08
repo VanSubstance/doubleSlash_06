@@ -2,13 +2,16 @@ package com.example.temporal;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.JsonReader;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +23,18 @@ import java.util.ArrayList;
 
 public class interfaceMain extends AppCompatActivity {
     FragmentManager fragmentManager = getFragmentManager();
+
+    ImageView imageHome;
+    ImageView imageChallenge;
+    ImageView imageFunding;
+    ImageView imageEnroll;
+    ImageView imageInfo;
+
+    TextView textHome;
+    TextView textChallenge;
+    TextView textFunding;
+    TextView textEnroll;
+    TextView textInfo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +127,6 @@ public class interfaceMain extends AppCompatActivity {
                 }
             }
         });
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -145,11 +159,23 @@ public class interfaceMain extends AppCompatActivity {
             }
         });
 
-        TextView buttonHome = findViewById(R.id.menuHome);
-        TextView buttonChallenge = findViewById(R.id.menuChallenge);
-        TextView buttonFunding = findViewById(R.id.menuFunding);
-        TextView buttonList = findViewById(R.id.menuList);
-        TextView buttonInfo = findViewById(R.id.menuInfo);
+        ConstraintLayout buttonHome = findViewById(R.id.menuHome);
+        ConstraintLayout buttonChallenge = findViewById(R.id.menuChallenge);
+        ConstraintLayout buttonFunding = findViewById(R.id.menuFunding);
+        ConstraintLayout buttonEnroll = findViewById(R.id.menuEnroll);
+        ConstraintLayout buttonInfo = findViewById(R.id.menuInfo);
+
+        imageHome = findViewById(R.id.imageHome);
+        imageChallenge = findViewById(R.id.imageChallenge);
+        imageFunding = findViewById(R.id.imageFunding);
+        imageEnroll = findViewById(R.id.imageEnroll);
+        imageInfo = findViewById(R.id.imageInfo);
+
+        textHome = findViewById(R.id.textHome);
+        textChallenge = findViewById(R.id.textChallenge);
+        textFunding = findViewById(R.id.textFunding);
+        textEnroll = findViewById(R.id.textEnroll);
+        textInfo = findViewById(R.id.textInfo);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -165,7 +191,7 @@ public class interfaceMain extends AppCompatActivity {
         };
         buttonHome.setOnClickListener(btnListener);
         buttonChallenge.setOnClickListener(btnListener);
-        buttonList.setOnClickListener(btnListener);
+        buttonEnroll.setOnClickListener(btnListener);
         buttonFunding.setOnClickListener(btnListener);
         buttonInfo.setOnClickListener(btnListener);
     }
@@ -294,22 +320,50 @@ public class interfaceMain extends AppCompatActivity {
         return newOne;
     }
 
+    public void clearMenu() {
+        imageHome.setImageResource(R.drawable.home_default);
+        textHome.setTextColor(Color.parseColor("#EEEEEE"));
+        imageChallenge.setImageResource(R.drawable.map_default);
+        textChallenge.setTextColor(Color.parseColor("#EEEEEE"));
+        imageEnroll.setImageResource(R.drawable.enroll_default);
+        textEnroll.setTextColor(Color.parseColor("#EEEEEE"));
+        imageFunding.setImageResource(R.drawable.funding_default);
+        textFunding.setTextColor(Color.parseColor("#EEEEEE"));
+        imageInfo.setImageResource(R.drawable.my_default);
+        textInfo.setTextColor(Color.parseColor("#EEEEEE"));
+    }
+
     public void callMenu(int id) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (id) {
             case R.id.menuHome:
+                clearMenu();
+                imageHome.setImageResource(R.drawable.home_on);
+                textHome.setTextColor(Color.parseColor("#6A6A6A"));
                 fragmentTransaction.replace(R.id.frameMain, new homeMain());
                 break;
             case R.id.menuChallenge:
+                clearMenu();
+                imageChallenge.setImageResource(R.drawable.map_on);
+                textChallenge.setTextColor(Color.parseColor("#6A6A6A"));
                 fragmentTransaction.replace(R.id.frameMain, new challengeMain());
                 break;
-            case R.id.menuList:
+            case R.id.menuEnroll:
+                clearMenu();
+                imageEnroll.setImageResource(R.drawable.enroll_on);
+                textEnroll.setTextColor(Color.parseColor("#6A6A6A"));
                 fragmentTransaction.replace(R.id.frameMain, new listEnroll());
                 break;
             case R.id.menuFunding:
+                clearMenu();
+                imageFunding.setImageResource(R.drawable.funding_on);
+                textFunding.setTextColor(Color.parseColor("#6A6A6A"));
                 fragmentTransaction.replace(R.id.frameMain, new fundingMain());
                 break;
             case R.id.menuInfo:
+                clearMenu();
+                imageInfo.setImageResource(R.drawable.my_on);
+                textInfo.setTextColor(Color.parseColor("#6A6A6A"));
                 fragmentTransaction.replace(R.id.frameMain, new infoMain());
                 break;
         }
