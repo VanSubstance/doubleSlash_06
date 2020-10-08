@@ -21,9 +21,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView funding;
-        TextView title;
-        TextView desc;
-        TextView spec_desc;
+        TextView inst;
+        TextView inst_desc;
         SeekBar seekBar;
 
         TextView nowPoint;
@@ -42,9 +41,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
 
             // 뷰 객체에 대한 참조. (hold strong reference)
             funding = itemView.findViewById(R.id.funding);
-            title = itemView.findViewById(R.id.title);
-            desc = itemView.findViewById(R.id.desc);
-            spec_desc = itemView.findViewById(R.id.spec_desc);
+            inst = itemView.findViewById(R.id.inst);
+            inst_desc = itemView.findViewById(R.id.inst_desc);
             seekBar = itemView.findViewById(R.id.seekBar);
 
             nowPoint = itemView.findViewById(R.id.textNowPoint);
@@ -133,13 +131,11 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     @Override
     public void onBindViewHolder(fundingItemAdapter.ViewHolder holder, int position) {
 
-        String title = mData.get(position).title;
-        String desc = mData.get(position).desc;
-        String spec_desc = mData.get(position).spec_desc;
+        String inst = mData.get(position).inst;
+        String inst_desc = mData.get(position).inst_desc;
 
-        holder.title.setText(title) ;
-        holder.desc.setText(desc);
-        holder.spec_desc.setText(spec_desc);
+        holder.inst.setText(inst) ;
+        holder.inst_desc.setText(inst_desc);
 
     }
 

@@ -13,37 +13,116 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/inst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25sp"
+            android:layout_marginTop="15dp"
             android:text="그린피스"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100sp"
-            android:text="펀딩제목"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="332dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="28dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
+            app:layout_constraintTop_toBottomOf="@+id/inst"
+            app:srcCompat="@drawable/greenpeace" />
 
         <TextView
-            android:id="@+id/spec_desc"
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22sp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="200dp"
+            android:text="목표 포인트"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="240dp"
+            android:layout_marginEnd="200dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="280dp"
+            android:layout_marginEnd="200dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="200dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="240dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="280dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/inst_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
             android:text="펀딩 세부 문구"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/desc" />
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="358dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="330dp"
+            android:layout_marginEnd="17dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/funding_list"
@@ -102,6 +181,8 @@
 
             <SeekBar
                 android:id="@+id/seekBar"
+                android:thumb="@drawable/seekbar"
+                android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="341sp"
                 android:layout_height="35sp"
                 android:layout_marginStart="30sp"
@@ -154,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100sp"
                 android:layout_marginTop="39sp"
-                android:text="0000"
+                android:text="0"
                 app:layout_constraintStart_toEndOf="@+id/textPoint"
                 app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
@@ -189,7 +270,7 @@
                 android:layout_marginStart="84sp"
                 android:layout_marginTop="21sp"
                 android:layout_marginEnd="40sp"
-                android:text="0000"
+                android:text="0"
                 app:layout_constraintEnd_toStartOf="@+id/textView16"
                 app:layout_constraintStart_toEndOf="@+id/textRestPoint"
                 app:layout_constraintTop_toBottomOf="@+id/accu_point" />
@@ -290,6 +371,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="267dp"
+                android:layout_height="134dp"
+                android:layout_marginStart="93dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="93dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView23"
+                app:srcCompat="@drawable/fillit" />
 
             <TextView
                 android:id="@+id/textView24"

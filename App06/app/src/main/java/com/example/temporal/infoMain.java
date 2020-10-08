@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,18 +45,21 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
             aCurrentData.listInfo.add(newOne);
         }
 
-
         final Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                for (int i = 0; i < aCurrentData.listInfo.size(); i++) {
-//                    userItem newOne = new userItem();
-//                    newOne.init(i, "마이페이지");
-//                    aCurrentData.listInfo.add(newOne);
+//                if(parent.getItemAtPosition(position) == "챌린지")
+//                {
+//                    for (int i = 0; i < aCurrentData.listInfo.size(); i++) {
+//                        userItem newOne = new userItem();
+//                        newOne.init(i, "마이페이지");
+//                        aCurrentData.listInfo.add(newOne);
+//                    }
+//                    ;
 //                }
-                parent.getItemAtPosition(position);
+
             }
 
             @Override

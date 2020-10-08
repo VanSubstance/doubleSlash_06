@@ -1,9 +1,6 @@
 package com.example.temporal;
 
         import android.app.Fragment;
-        import android.content.Context;
-        import android.content.DialogInterface;
-        import android.content.Intent;
         import android.graphics.Color;
         import android.os.Bundle;
         import android.view.LayoutInflater;
@@ -11,23 +8,13 @@ package com.example.temporal;
         import android.view.ViewGroup;
         import android.view.animation.Animation;
         import android.view.animation.AnimationUtils;
-        import android.widget.Button;
-        import android.widget.SeekBar;
-        import android.widget.SlidingDrawer;
-        import android.widget.Switch;
         import android.widget.TextView;
-        import android.widget.Toast;
 
         import androidx.constraintlayout.widget.ConstraintLayout;
-        import androidx.core.content.ContextCompat;
         import androidx.recyclerview.widget.LinearLayoutManager;
         import androidx.recyclerview.widget.PagerSnapHelper;
         import androidx.recyclerview.widget.RecyclerView;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import java.net.HttpURLConnection;
-        import java.net.MalformedURLException;
-        import java.net.URL;
+
 public class fundingList extends Fragment implements OnItemClickForFunding {
     RecyclerView viewList;
     fundingItemAdapter adapter;
@@ -60,14 +47,12 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
 
         TextView funding = viewList.findViewById(R.id.funding);
-        TextView desc = viewList.findViewById(R.id.desc);
-        TextView spec_desc = viewList.findViewById(R.id.spec_desc);
+        TextView inst_desc = viewList.findViewById(R.id.inst_desc);
 
         Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
         funding_list.startAnimation(anim);
 
-        desc.setVisibility(View.GONE);
-        spec_desc.setVisibility(View.GONE);
+        inst_desc.setVisibility(View.GONE);
         funding.setVisibility(View.GONE);
 
         funding_list.setVisibility(View.VISIBLE);
@@ -106,6 +91,8 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         funding_list.setVisibility(View.GONE);
         funding_click.setVisibility(View.VISIBLE);
         funding_click.setBackgroundColor(Color.parseColor("#79C3A0"));
+
+
 
     }
 
