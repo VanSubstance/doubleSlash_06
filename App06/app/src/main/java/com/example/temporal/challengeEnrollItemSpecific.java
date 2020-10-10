@@ -43,6 +43,8 @@ public class challengeEnrollItemSpecific extends Fragment {
         @Override
         public void onResponse(Call<challengeItemForPost> call, Response<challengeItemForPost> response) {
             System.out.println("전송 성공");
+            System.out.println(response);
+            System.out.println(call);
         }
         @Override
         public void onFailure(Call<challengeItemForPost> call, Throwable t) {
