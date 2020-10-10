@@ -137,8 +137,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     @Override
     public void onBindViewHolder(fundingItemAdapter.ViewHolder holder, int position) {
 
-        String inst = mData.get(position).inst;
-        String inst_desc = mData.get(position).inst_desc;
+        String inst = mData.get(position).fund_inst;
+        String inst_desc = mData.get(position).inst_des;
 
         holder.inst.setText(inst) ;
         holder.inst_desc.setText(inst_desc);

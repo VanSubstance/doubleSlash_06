@@ -25,9 +25,10 @@ public class challengeItem {
         like = false;
     }
 
-    public void init_enroll(int i) {
-        title = "챌린지 등록 테스트 " + i;
-        desc = "챌린지 설명 " + i;
+    public void setFromFrame(challengeFrameItem item) {
+        title = item.title;
+        desc = item.des;
+        point = item.point;
         like = false;
     }
 

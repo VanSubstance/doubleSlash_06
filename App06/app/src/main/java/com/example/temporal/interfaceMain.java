@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,6 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +34,58 @@ public class interfaceMain extends AppCompatActivity {
     FragmentManager fragmentManager = getFragmentManager();
     private Retrofit mRetrofit;
     private retrofitAPI mRetrofitAPI;
-    private Call<String> mCallChallengeframeList;
+    private Call<List<challengeFrameItem>> mCallChallengeframeList;
+    private Call<List<fundingItem>> mFundingItemList;
+    private Call<List<wasteItem>> mWasteItemList;
+    private Gson mGson;
+
+    private Callback<List<challengeFrameItem>> mFrameCallback = new Callback<List<challengeFrameItem>>() {
+        @Override
+        public void onResponse(Call<List<challengeFrameItem>> call, Response<List<challengeFrameItem>> response) {
+            for (challengeFrameItem item :
+                    response.body()) {
+                challengeItem newOne = new challengeItem();
+                newOne.setFromFrame(item);
+                aCurrentData.listChallengeEnroll.add(newOne);
+            }
+
+        }
+
+        @Override
+        public void onFailure(Call<List<challengeFrameItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+
+    private Callback<List<fundingItem>> mFundingCallback = new Callback<List<fundingItem>>() {
+        @Override
+        public void onResponse(Call<List<fundingItem>> call, Response<List<fundingItem>> response) {
+            for (fundingItem item :
+                    response.body()) {
+                aCurrentData.listFunding.add(item);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<fundingItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+
+    private Callback<List<wasteItem>> mWasteCallback = new Callback<List<wasteItem>>() {
+        @Override
+        public void onResponse(Call<List<wasteItem>> call, Response<List<wasteItem>> response) {
+            for (wasteItem item :
+                    response.body()) {
+                aCurrentData.listWaste.add(item);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<wasteItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
 
     ImageView imageHome;
     ImageView imageChallenge;
@@ -59,101 +113,6 @@ public class interfaceMain extends AppCompatActivity {
             newOne.init(i);
             aCurrentData.listWasteBanner.add(newOne);
         }
-        // 분리배출법 서버 연결
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                URL serverURL;
-                String baseIP = "http://101.101.218.146:8080/";
-                HttpURLConnection myConnection;
-                InputStream responseBody;
-                boolean conFailWaste = true;
-                while (conFailWaste) {
-                    try {
-                        String linkTrash = baseIP + "trash";
-                        serverURL = new URL(linkTrash);
-                        System.out.println(serverURL);
-                        myConnection = (HttpURLConnection) serverURL.openConnection();
-                        myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
-                        if (myConnection.getResponseCode() == 200) {
-                            System.out.println("분리배출법 연결");
-                            conFailWaste = false;
-                            responseBody = myConnection.getInputStream();
-                            aCurrentData.listWaste = readJsonStreamWaste(responseBody);
-                        } else {
-                            System.out.println("분리배출법 연결 실패!");
-                        }
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        // 챌린지 틀 서버 연결
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                URL serverURL;
-                String baseIP = "http://101.101.218.146:8080/";
-                HttpURLConnection myConnection;
-                InputStream responseBody;
-                boolean conFailChallEnroll = true;
-                while (conFailChallEnroll) {
-                    try {
-                        String linkChallengeEnroll = baseIP + "challengeframe";
-                        serverURL = new URL(linkChallengeEnroll);
-                        System.out.println(serverURL);
-                        myConnection = (HttpURLConnection) serverURL.openConnection();
-                        myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
-                        if (myConnection.getResponseCode() == 200) {
-                            System.out.println("챌린지 틀 연결");
-                            conFailChallEnroll = false;
-                            responseBody = myConnection.getInputStream();
-                            aCurrentData.listChallengeEnroll = readJsonStreamChallenge(responseBody);
-                        } else {
-                            System.out.println("챌린지 틀 연결 실패!");
-                        }
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                URL serverURL;
-                String baseIP = "http://101.101.218.146:8080/";
-                HttpURLConnection myConnection;
-                InputStream responseBody;
-                boolean conFailFunding = true;
-                while (conFailFunding) {
-                    try {
-                        String linkFunding = baseIP + "funding/all";
-                        serverURL = new URL(linkFunding);
-                        System.out.println(serverURL);
-                        myConnection = (HttpURLConnection) serverURL.openConnection();
-                        myConnection.setRequestProperty("User-Agent", "my-rest-app-v0.1");
-                        if (myConnection.getResponseCode() == 200) {
-                            System.out.println("펀딩 연결");
-                            conFailFunding = false;
-                            responseBody = myConnection.getInputStream();
-                            aCurrentData.listFunding = readJsonStreamFunding(responseBody);
-                        } else {
-                            System.out.println("펀딩 연결 실패!");
-                        }
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
 
         ConstraintLayout buttonHome = findViewById(R.id.menuHome);
         ConstraintLayout buttonChallenge = findViewById(R.id.menuChallenge);
@@ -194,7 +153,7 @@ public class interfaceMain extends AppCompatActivity {
 
     private void setRetrofitInit() {
         mRetrofit = new Retrofit.Builder()
-                .baseUrl("101.101.218.146:8080/")
+                .baseUrl("http://101.101.218.146:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
@@ -203,145 +162,13 @@ public class interfaceMain extends AppCompatActivity {
     private void callChallengeframeList() {
 
         mCallChallengeframeList = mRetrofitAPI.getChallengeframeList();
+        mFundingItemList = mRetrofitAPI.getFundingList();
+        mWasteItemList = mRetrofitAPI.getWasteList();
 
-        mCallChallengeframeList.enqueue(mRetrofitCallback);
-
-    }
-    private Callback<String> mRetrofitCallback = new Callback<String>() {
-        @Override
-        public void onResponse(Call<String> call, Response<String> response) {
-            String result = response.body();
-            System.out.println(result);
-        }
-        @Override
-        public void onFailure(Call<String> call, Throwable t) {
-            t.printStackTrace();
-        }
-    };
-    // 펀딩 리스트 서버에서 가져오기
-    public ArrayList<fundingItem> readJsonStreamFunding(InputStream in) throws IOException {
-        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-        try {
-            return readFundingArray(reader);
-        } finally {
-            reader.close();
-        }
-    }
-
-    public ArrayList<fundingItem> readFundingArray(JsonReader reader) throws IOException {
-        ArrayList<fundingItem> fundingItems = new ArrayList<fundingItem>();
-        reader.beginArray();
-        while (reader.hasNext()) {
-            fundingItems.add(readFunding(reader));
-        }
-        reader.endArray();
-        return fundingItems;
-    }
-
-    public fundingItem readFunding(JsonReader reader) throws IOException {
-        fundingItem newOne = new fundingItem();
-        reader.beginObject();
-
-        while (reader.hasNext()) {
-            String name = reader.nextName();
-            if (name.equals("fund_id")) {
-                newOne.id = reader.nextString();
-            } else if (name.equals("fund_inst")) {
-                newOne.inst = reader.nextString();
-            } else if (name.equals("inst_des")) {
-                newOne.inst_desc = reader.nextString();
-            } else if (name.equals("tar_point")) {
-                newOne.tar_point = reader.nextInt();
-            } else if (name.equals("acu_point")) {
-                newOne.acu_point = reader.nextInt();
-            } else {
-                reader.skipValue();
-            }
-        }
-        reader.endObject();
-        return newOne;
-    }
-
-    // 분리배출법 리스트 서버에서 가져오기
-    public ArrayList<wasteItem> readJsonStreamWaste(InputStream in) throws IOException {
-        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-        try {
-            return readWasteArray(reader);
-        } finally {
-            reader.close();
-        }
-    }
-
-    public ArrayList<wasteItem> readWasteArray(JsonReader reader) throws IOException {
-        ArrayList<wasteItem> wasteItems = new ArrayList<wasteItem>();
-        reader.beginArray();
-        while (reader.hasNext()) {
-            wasteItems.add(readWaste(reader));
-        }
-        reader.endArray();
-        return wasteItems;
-    }
-
-    public wasteItem readWaste(JsonReader reader) throws IOException {
-        wasteItem newOne = new wasteItem();
-        reader.beginObject();
-
-        while (reader.hasNext()) {
-            String name = reader.nextName();
-            if (name.equals("id")) {
-                newOne.id = reader.nextString();
-            } else if (name.equals("title")) {
-                newOne.title = reader.nextString();
-            } else if (name.equals("img")) {
-                newOne.url = reader.nextString();
-            } else if (name.equals("des")) {
-                newOne.desc = reader.nextString();
-            } else if (name.equals("ctgr")) {
-                newOne.ctgr = reader.nextString();
-            } else {
-                reader.skipValue();
-            }
-        }
-        reader.endObject();
-        return newOne;
-    }
-
-    // 챌린지 틀 리스트 서버에서 가져오기
-    public ArrayList<challengeItem> readJsonStreamChallenge(InputStream in) throws IOException {
-        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-        try {
-            return readChallengeArray(reader);
-        } finally {
-            reader.close();
-        }
-    }
-
-    public ArrayList<challengeItem> readChallengeArray(JsonReader reader) throws IOException {
-        ArrayList<challengeItem> challengeItems = new ArrayList<challengeItem>();
-        reader.beginArray();
-        while (reader.hasNext()) {
-            challengeItems.add(readChallenge(reader));
-        }
-        reader.endArray();
-        return challengeItems;
-    }
-
-    public challengeItem readChallenge(JsonReader reader) throws IOException {
-        challengeItem newOne = new challengeItem();
-        reader.beginObject();
-
-        while (reader.hasNext()) {
-            String name = reader.nextName();
-            if (name.equals("TITLE")) {
-                newOne.title = reader.nextString();
-            } else if (name.equals("DES")) {
-                newOne.desc = reader.nextString();
-            } else {
-                reader.skipValue();
-            }
-        }
-        reader.endObject();
-        return newOne;
+        mCallChallengeframeList.enqueue(mFrameCallback);
+        mFundingItemList.enqueue(mFundingCallback);
+        mWasteItemList.enqueue(mWasteCallback);
+        
     }
 
     public void clearMenu() {
