@@ -50,9 +50,9 @@ public class challengeItemSpecific extends Fragment {
         TextView textTitle = view.findViewById(R.id.textTitle);
         TextView textDescription = view.findViewById(R.id.textDescription);
         textTitle.setText(item.title);
-        textDescription.setText(item.desc);
+        textDescription.setText(item.des);
         textPointTotal = view.findViewById(R.id.textPointTotal);
-        textPointTotal.setText(String.valueOf(item.point));
+        textPointTotal.setText(String.valueOf(item.chalPoint));
 
         calendarView = view.findViewById(R.id.calendarView);
         calendarView.setSelectionType(SelectionType.NONE);
@@ -95,7 +95,7 @@ public class challengeItemSpecific extends Fragment {
                     image.reg_date=time;
                 }
             });
-            newActivity.setImageResource(R.drawable.border_square_black_edge_1dp);
+            newActivity.setImageResource(R.drawable.image_default);
             LinearLayout.LayoutParams settingImage = new LinearLayout.LayoutParams(400, 400);
             settingImage.setMargins(20, 0, 20, 0);
             newActivity.setLayoutParams(settingImage);

@@ -75,12 +75,12 @@ public class listMain extends Fragment implements OnItemClickForChallenge {
 
     @Override
     public void onClickLike(challengeItem newOne, ImageView imageLike) {
-        if (newOne.like) { // 이미 즐겨찾기일 경우
+        if (newOne.favorite) { // 이미 즐겨찾기일 경우
             imageLike.setColorFilter(Color.BLACK);
-            newOne.like = false;
+            newOne.favorite = false;
         } else { // 즐겨찾기 아닐 경우
             imageLike.setColorFilter(Color.GREEN);
-            newOne.like = true;
+            newOne.favorite = true;
         }
     }
 }

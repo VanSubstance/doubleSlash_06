@@ -25,7 +25,7 @@ public class infoChallengeEnrollList extends Fragment implements OnItemClickForC
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
         for (int i = 0; i < aCurrentData.listChallengeEnroll.size(); i++) {
-            if (aCurrentData.listChallengeEnroll.get(i).like) {
+            if (aCurrentData.listChallengeEnroll.get(i).favorite) {
                 items.add(aCurrentData.listChallengeEnroll.get(i));
             }
         }

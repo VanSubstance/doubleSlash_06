@@ -67,7 +67,7 @@ public class wasteItemAdapter extends RecyclerView.Adapter<wasteItemAdapter.View
     @Override
     public void onBindViewHolder(final wasteItemAdapter.ViewHolder holder, int position) {
         holder.textTitle.setText(items.get(position).title);
-        holder.textDescription.setText(items.get(position).desc);
+        holder.textDescription.setText(items.get(position).des);
         Thread callImage = new Thread(new Runnable() {
             @Override
             public void run() {

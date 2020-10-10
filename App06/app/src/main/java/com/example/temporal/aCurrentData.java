@@ -11,9 +11,8 @@ public class aCurrentData {
     public static ArrayList<challengeItem> listChallengeEnroll = new ArrayList<challengeItem>();
     public static ArrayList<fundingItem> listFunding = new ArrayList<fundingItem>();
     public static ArrayList<wasteItemBanner> listWasteBanner = new ArrayList<wasteItemBanner>();
-    public static ArrayList<userItem> listInfo = new ArrayList<userItem>();
+    public static ArrayList<userItem> listUser = new ArrayList<userItem>();
     public static userItem myInfo = new userItem();
     // 다중 마커를 위해 만들었습니다.
     public static ArrayList<MapPOIItem> markerList=new ArrayList<>();
-
 }

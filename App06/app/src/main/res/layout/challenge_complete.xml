@@ -16,13 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <ImageView
                 android:id="@+id/textFILLIT"
-                android:layout_width="wrap_content"
+                android:layout_width="120sp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 android:text="FILLIT"
-                android:textSize="30sp"
+                android:src="@drawable/logo_small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -30,14 +30,13 @@
 
             <ImageView
                 android:id="@+id/imageBell"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:layout_margin="10sp"
-                android:background="@drawable/border_square_black_1dp"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_margin="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+                app:srcCompat="@drawable/alert_default" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
