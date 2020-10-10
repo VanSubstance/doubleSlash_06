@@ -36,6 +36,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    private gpsTracker gpsTracker;
+    public double lon; //경도
+    public double lat; //위도
     private SessionCallback sessionCallback;
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private Call<List<fundingItem>> mFundingItemList;
     private Call<List<wasteItem>> mWasteItemList;
     private Call<List<userItem>> mUserItemList;
+    private Call<List<challengeItem>> mChallengeItemList;
     private Callback<List<challengeFrameItem>> mFrameCallback = new Callback<List<challengeFrameItem>>() {
         @Override
         public void onResponse(Call<List<challengeFrameItem>> call, Response<List<challengeFrameItem>> response) {
@@ -103,6 +107,21 @@ public class MainActivity extends AppCompatActivity {
             t.printStackTrace();
         }
     };
+    private Callback<List<challengeItem>> mChallengeItemCallback = new Callback<List<challengeItem>>() {
+        @Override
+        public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
+            for (challengeItem item :
+                    response.body()) {
+                aCurrentData.listMyChallenge.add(item);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<challengeItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+
     private Callback<userItem> mUserPostCallback = new Callback<userItem>() {
         @Override
         public void onResponse(Call<userItem> call, Response<userItem> response) {
@@ -122,8 +141,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getHashKey();
 
+        gpsTracker = new gpsTracker(this);
+
+        lat=gpsTracker.getLatitude();
+        lon=gpsTracker.getLongitude();
+
         setRetrofitInit();
-        callChallengeframeList();
+        callServer();
 
         Intent splash = new Intent(this, splashMain.class);
         startActivity(splash);
@@ -144,20 +168,19 @@ public class MainActivity extends AppCompatActivity {
         mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
     }
 
-    private void callChallengeframeList() {
-
+    private void callServer() {
         mCallChallengeframeList = mRetrofitAPI.getChallengeframeList();
         mFundingItemList = mRetrofitAPI.getFundingList();
         mWasteItemList = mRetrofitAPI.getWasteList();
         mUserItemList = mRetrofitAPI.getUserList();
-
+        int id = aCurrentData.myInfo.id;
+        mChallengeItemList = mRetrofitAPI.getChallengeList(id);
         mCallChallengeframeList.enqueue(mFrameCallback);
         mFundingItemList.enqueue(mFundingCallback);
         mWasteItemList.enqueue(mWasteCallback);
         mUserItemList.enqueue(mUserCallback);
-
+        mChallengeItemList.enqueue(mChallengeItemCallback);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
@@ -165,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -173,6 +195,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class SessionCallback implements ISessionCallback {
+        public double lon; //경도
+        public double lat; //위도
+        public void getLocation(double lat, double lon) {
+            this.lat = lat;
+            this.lon = lon;
+        }
         @Override
         public void onSessionOpened() {
             UserManagement.getInstance().me(new MeV2ResponseCallback() {
@@ -212,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
                         newOne.id = (int) result.getId();
                         newOne.nick = result.getNickname();
                         newOne.point = 0;
+                        newOne.lon = lon;
+                        newOne.lat = lat;
                         Call<userItem> userInfo = mRetrofitAPI.setUser(newOne);
                         userInfo.enqueue(mUserPostCallback);
                         startActivity(intent);

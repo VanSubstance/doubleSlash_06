@@ -70,8 +70,8 @@ public class challengeEnrollItemAdapter extends RecyclerView.Adapter<challengeEn
     @Override
     public void onBindViewHolder(challengeEnrollItemAdapter.ViewHolder holder, int position) {
         String title = mData.get(position).title;
-        String description = mData.get(position).desc;
-        if (mData.get(position).like) { // 즐겨찾기일 경우
+        String description = mData.get(position).des;
+        if (mData.get(position).favorite) { // 즐겨찾기일 경우
             holder.imageLike.setColorFilter(Color.GREEN);
         } else { // 아닐 경우
             holder.imageLike.setColorFilter(Color.BLACK);

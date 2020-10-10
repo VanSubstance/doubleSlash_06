@@ -28,7 +28,7 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_main, container, false);
         for (int i = 0; i < aCurrentData.listMyChallenge.size(); i++) {
-            if (aCurrentData.listMyChallenge.get(i).like) {
+            if (aCurrentData.listMyChallenge.get(i).favorite) {
                 items.add(aCurrentData.listMyChallenge.get(i));
             }
         }

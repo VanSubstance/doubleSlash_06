@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 interface retrofitAPI {
     @GET("/challengeframe")
@@ -18,4 +19,8 @@ interface retrofitAPI {
     Call<List<userItem>> getUserList();
     @POST("/member")
     Call<userItem> setUser(@Body userItem post);
+    @POST("/challenge")
+    Call<challengeItemForPost> setChallenge(@Body challengeItemForPost post);
+    @GET("/challenge/{id}")
+    Call<List<challengeItem>> getChallengeList(@Path("id") int id);
 }

@@ -24,7 +24,7 @@ public class challengeComplete extends Fragment {
         textTitle.setText(item.title);
 
         TextView textDesc = view.findViewById(R.id.textDescription);
-        textDesc.setText(item.desc);
+        textDesc.setText(item.des);
 
         TextView dateStart = view.findViewById(R.id.textStartDate);
 
