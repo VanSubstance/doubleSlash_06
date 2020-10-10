@@ -18,7 +18,7 @@ public class challengeComplete extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_complete, container, false);
         TextView textCongrat = view.findViewById(R.id.textCongrat);
-        textCongrat.setText("축하드려요\\n" + aCurrentData.myInfo.nic + " 님\\n챌린지를 성공했어요!");
+        textCongrat.setText("축하드려요\\n" + aCurrentData.myInfo.nick + " 님\\n챌린지를 성공했어요!");
 
         TextView textTitle = view.findViewById(R.id.textTitle);
         textTitle.setText(item.title);

@@ -22,7 +22,7 @@ public class infoList extends Fragment implements OnItemClickForInfo{
         viewList = view.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         viewList.setLayoutManager(linearLayoutManager);
-        adapter = new userItemAdapter(aCurrentData.listInfo, this);
+        adapter = new userItemAdapter(aCurrentData.listUser, this);
         viewList.setAdapter(adapter);
 
         // 부드럽게 넘기기

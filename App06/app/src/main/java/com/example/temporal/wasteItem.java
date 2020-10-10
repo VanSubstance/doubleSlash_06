@@ -9,8 +9,4 @@ public class wasteItem {
     // 컨텐츠는 String? 아니면 Array<String>?
     String spec_ctgr;
     String content;
-    public void setCtgr(String ctgr) {
-        this.ctgr = ctgr;
-        this.ctgr = ctgr + " 세부 카테고리";
-    }
 }

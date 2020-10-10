@@ -19,9 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class infoMain extends Fragment implements OnItemClickForInfo{
     RecyclerView viewList;
     userItemAdapter adapter;
+    TextView textNick;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.info_main, container, false);
         ((interfaceMain) getActivity()).changeFragment(500);
+
+        textNick = view.findViewById(R.id.user);
+        textNick.setText(aCurrentData.myInfo.nick);
 
         Button buttonList = view.findViewById(R.id.buttonList);
         View.OnClickListener btnListener = new View.OnClickListener() {
@@ -38,13 +42,6 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
         };
         buttonList.setOnClickListener(btnListener);
 
-        aCurrentData.listInfo.clear();
-        for (int i = 0; i < 10; i++) {
-            userItem newOne = new userItem();
-            newOne.init(i, "마이페이지");
-            aCurrentData.listInfo.add(newOne);
-        }
-
         final Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -52,10 +49,10 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //                if(parent.getItemAtPosition(position) == "챌린지")
 //                {
-//                    for (int i = 0; i < aCurrentData.listInfo.size(); i++) {
+//                    for (int i = 0; i < aCurrentData.listUser.size(); i++) {
 //                        userItem newOne = new userItem();
 //                        newOne.init(i, "마이페이지");
-//                        aCurrentData.listInfo.add(newOne);
+//                        aCurrentData.listUser.add(newOne);
 //                    }
 //                    ;
 //                }

@@ -32,67 +32,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class interfaceMain extends AppCompatActivity {
     FragmentManager fragmentManager = getFragmentManager();
-    private Retrofit mRetrofit;
-    private retrofitAPI mRetrofitAPI;
-    private Call<List<challengeFrameItem>> mCallChallengeframeList;
-    private Call<List<fundingItem>> mFundingItemList;
-    private Call<List<wasteItem>> mWasteItemList;
-    private Gson mGson;
-
-    private Callback<List<challengeFrameItem>> mFrameCallback = new Callback<List<challengeFrameItem>>() {
-        @Override
-        public void onResponse(Call<List<challengeFrameItem>> call, Response<List<challengeFrameItem>> response) {
-            for (challengeFrameItem item :
-                    response.body()) {
-                challengeItem newOne = new challengeItem();
-                newOne.setFromFrame(item);
-                aCurrentData.listChallengeEnroll.add(newOne);
-            }
-
-        }
-
-        @Override
-        public void onFailure(Call<List<challengeFrameItem>> call, Throwable t) {
-            t.printStackTrace();
-        }
-    };
-
-    private Callback<List<fundingItem>> mFundingCallback = new Callback<List<fundingItem>>() {
-        @Override
-        public void onResponse(Call<List<fundingItem>> call, Response<List<fundingItem>> response) {
-            for (fundingItem item :
-                    response.body()) {
-                aCurrentData.listFunding.add(item);
-            }
-        }
-
-        @Override
-        public void onFailure(Call<List<fundingItem>> call, Throwable t) {
-            t.printStackTrace();
-        }
-    };
-
-    private Callback<List<wasteItem>> mWasteCallback = new Callback<List<wasteItem>>() {
-        @Override
-        public void onResponse(Call<List<wasteItem>> call, Response<List<wasteItem>> response) {
-            for (wasteItem item :
-                    response.body()) {
-                aCurrentData.listWaste.add(item);
-            }
-        }
-
-        @Override
-        public void onFailure(Call<List<wasteItem>> call, Throwable t) {
-            t.printStackTrace();
-        }
-    };
 
     ImageView imageHome;
     ImageView imageChallenge;
     ImageView imageFunding;
     ImageView imageEnroll;
     ImageView imageInfo;
-
     TextView textHome;
     TextView textChallenge;
     TextView textFunding;
@@ -102,9 +47,6 @@ public class interfaceMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interface_main);
-
-        setRetrofitInit();
-        callChallengeframeList();
 
         // 데이터베이스에서 ctgr 맞는거 불러오기
         aCurrentData.listWasteBanner.clear();
@@ -149,26 +91,6 @@ public class interfaceMain extends AppCompatActivity {
         buttonEnroll.setOnClickListener(btnListener);
         buttonFunding.setOnClickListener(btnListener);
         buttonInfo.setOnClickListener(btnListener);
-    }
-
-    private void setRetrofitInit() {
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl("http://101.101.218.146:8080")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
-    }
-
-    private void callChallengeframeList() {
-
-        mCallChallengeframeList = mRetrofitAPI.getChallengeframeList();
-        mFundingItemList = mRetrofitAPI.getFundingList();
-        mWasteItemList = mRetrofitAPI.getWasteList();
-
-        mCallChallengeframeList.enqueue(mFrameCallback);
-        mFundingItemList.enqueue(mFundingCallback);
-        mWasteItemList.enqueue(mWasteCallback);
-        
     }
 
     public void clearMenu() {
@@ -218,7 +140,7 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameMain, new infoMain());
                 break;
         }
-        fragmentTransaction.addToBackStack(null).commit();
+        fragmentTransaction.commit();
 
     }
 

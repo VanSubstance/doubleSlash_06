@@ -13,6 +13,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ApiErrorCode;
@@ -24,17 +25,105 @@ import com.kakao.util.exception.KakaoException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private SessionCallback sessionCallback;
+    private retrofitAPI mRetrofitAPI;
+    private Retrofit mRetrofit;
+    private Call<List<challengeFrameItem>> mCallChallengeframeList;
+    private Call<List<fundingItem>> mFundingItemList;
+    private Call<List<wasteItem>> mWasteItemList;
+    private Call<List<userItem>> mUserItemList;
+    private Callback<List<challengeFrameItem>> mFrameCallback = new Callback<List<challengeFrameItem>>() {
+        @Override
+        public void onResponse(Call<List<challengeFrameItem>> call, Response<List<challengeFrameItem>> response) {
+            for (challengeFrameItem item :
+                    response.body()) {
+                challengeItem newOne = new challengeItem();
+                newOne.setFromFrame(item);
+                aCurrentData.listChallengeEnroll.add(newOne);
+            }
+
+        }
+
+        @Override
+        public void onFailure(Call<List<challengeFrameItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+    private Callback<List<userItem>> mUserCallback = new Callback<List<userItem>>() {
+        @Override
+        public void onResponse(Call<List<userItem>> call, Response<List<userItem>> response) {
+            for (userItem item :
+                    response.body()) {
+                aCurrentData.listUser.add(item);
+            }
+
+        }
+
+        @Override
+        public void onFailure(Call<List<userItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+    private Callback<List<fundingItem>> mFundingCallback = new Callback<List<fundingItem>>() {
+        @Override
+        public void onResponse(Call<List<fundingItem>> call, Response<List<fundingItem>> response) {
+            for (fundingItem item :
+                    response.body()) {
+                aCurrentData.listFunding.add(item);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<fundingItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+    private Callback<List<wasteItem>> mWasteCallback = new Callback<List<wasteItem>>() {
+        @Override
+        public void onResponse(Call<List<wasteItem>> call, Response<List<wasteItem>> response) {
+            for (wasteItem item :
+                    response.body()) {
+                aCurrentData.listWaste.add(item);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<wasteItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+    private Callback<userItem> mUserPostCallback = new Callback<userItem>() {
+        @Override
+        public void onResponse(Call<userItem> call, Response<userItem> response) {
+            System.out.println("성공");
+            System.out.println(response);
+            System.out.println(call);
+        }
+        @Override
+        public void onFailure(Call<userItem> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getHashKey();
+
+        setRetrofitInit();
+        callChallengeframeList();
 
         Intent splash = new Intent(this, splashMain.class);
         startActivity(splash);
@@ -46,6 +135,29 @@ public class MainActivity extends AppCompatActivity {
         Session.getCurrentSession().checkAndImplicitOpen();
 
     }
+
+    private void setRetrofitInit() {
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("http://101.101.218.146:8080")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
+    }
+
+    private void callChallengeframeList() {
+
+        mCallChallengeframeList = mRetrofitAPI.getChallengeframeList();
+        mFundingItemList = mRetrofitAPI.getFundingList();
+        mWasteItemList = mRetrofitAPI.getWasteList();
+        mUserItemList = mRetrofitAPI.getUserList();
+
+        mCallChallengeframeList.enqueue(mFrameCallback);
+        mFundingItemList.enqueue(mFundingCallback);
+        mWasteItemList.enqueue(mWasteCallback);
+        mUserItemList.enqueue(mUserCallback);
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
@@ -83,23 +195,28 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onSuccess(MeV2Response result) {
+                    boolean exist = false;
                     Intent intent = new Intent(getApplicationContext(), interfaceMain.class);
-                    // 토큰 고유 ID
-                    Log.i("KAKAO_API", "사용자 아이디: " + result.getId());
-                    /*
-                    intent.putExtra("name", result.getNickname());
-                    intent.putExtra("profile", result.getProfileImagePath());
-                    if(result.getKakaoAccount().hasEmail() == OptionalBoolean.TRUE)
-                        intent.putExtra("email", result.getKakaoAccount().getEmail());
-                    else
-                        intent.putExtra("email", "none");
-                    if(result.getKakaoAccount().hasGender() == OptionalBoolean.TRUE)
-                        intent.putExtra("gender", result.getKakaoAccount().getGender().getValue());
-                    else
-                        intent.putExtra("gender", "none");
-                    */
-                    startActivity(intent);
-                    finish();
+                    for (userItem user :
+                            aCurrentData.listUser) {
+                        if (user.id == result.getId()) {
+                            aCurrentData.myInfo = user;
+                            startActivity(intent);
+                            finish();
+                            exist = true;
+                            break;
+                        }
+                    }
+                    if (!exist) {
+                        userItem newOne = new userItem();
+                        newOne.id = (int) result.getId();
+                        newOne.nick = result.getNickname();
+                        newOne.point = 0;
+                        Call<userItem> userInfo = mRetrofitAPI.setUser(newOne);
+                        userInfo.enqueue(mUserPostCallback);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             });
         }
