@@ -21,8 +21,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class interfaceMain extends AppCompatActivity {
     FragmentManager fragmentManager = getFragmentManager();
+    private Retrofit mRetrofit;
+    private retrofitAPI mRetrofitAPI;
+    private Call<String> mCallChallengeframeList;
 
     ImageView imageHome;
     ImageView imageChallenge;
@@ -40,6 +49,9 @@ public class interfaceMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interface_main);
 
+        setRetrofitInit();
+        callChallengeframeList();
+
         // 데이터베이스에서 ctgr 맞는거 불러오기
         aCurrentData.listWasteBanner.clear();
         for (int i = 0; i < 3; i++) {
@@ -47,22 +59,6 @@ public class interfaceMain extends AppCompatActivity {
             newOne.init(i);
             aCurrentData.listWasteBanner.add(newOne);
         }
-        /**
-         // 맞는 내 챌린지 불러오기
-         aCurrentData.listMyChallenge.clear();
-         for (int i = 0; i < 4; i++) {
-         challengeItem newOne = new challengeItem();
-         newOne.init(i, "나의 ");
-         aCurrentData.listMyChallenge.add(newOne);
-         }
-         // 맞는 챌린지 불러오기
-         aCurrentData.listChallenge.clear();
-         for (int i = 0; i < 4; i++) {
-         challengeItem newOne = new challengeItem();
-         newOne.init(i, "남의 ");
-         aCurrentData.listChallenge.add(newOne);
-         }
-         */
         // 분리배출법 서버 연결
         AsyncTask.execute(new Runnable() {
             @Override
@@ -196,6 +192,32 @@ public class interfaceMain extends AppCompatActivity {
         buttonInfo.setOnClickListener(btnListener);
     }
 
+    private void setRetrofitInit() {
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("101.101.218.146:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
+    }
+
+    private void callChallengeframeList() {
+
+        mCallChallengeframeList = mRetrofitAPI.getChallengeframeList();
+
+        mCallChallengeframeList.enqueue(mRetrofitCallback);
+
+    }
+    private Callback<String> mRetrofitCallback = new Callback<String>() {
+        @Override
+        public void onResponse(Call<String> call, Response<String> response) {
+            String result = response.body();
+            System.out.println(result);
+        }
+        @Override
+        public void onFailure(Call<String> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
     // 펀딩 리스트 서버에서 가져오기
     public ArrayList<fundingItem> readJsonStreamFunding(InputStream in) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
