@@ -27,9 +27,17 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_main, container, false);
-        for (int i = 0; i < aCurrentData.listMyChallenge.size(); i++) {
-            if (aCurrentData.listMyChallenge.get(i).favorite) {
-                items.add(aCurrentData.listMyChallenge.get(i));
+        for (challengeItem it : aCurrentData.listMyChallenge) {
+            if (items.size() < 3) {
+                items.add(it);
+            } else {
+                for (challengeItem currentOne : items) {
+                    if (currentOne.progress <= it.progress) {
+                        items.remove(currentOne);
+                        items.add(it);
+                        break;
+                    }
+                }
             }
         }
         viewList = view.findViewById(R.id.recyclerView);
@@ -135,9 +143,5 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
     @Override
     public void onClick(challengeItem newOne) {
         ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecific(newOne);
-    }
-
-    @Override
-    public void onClickLike(challengeItem newOne, ImageView imageLike) {
     }
 }

@@ -61,14 +61,10 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
     public void onBindViewHolder(challengeItemAdapter.ViewHolder holder, int position) {
         String title = mData.get(position).title;
         String description = mData.get(position).des;
-        if (mData.get(position).favorite) { // 즐겨찾기일 경우
-            holder.imageLike.setColorFilter(Color.GREEN);
-        } else { // 아닐 경우
-            holder.imageLike.setColorFilter(Color.BLACK);
-        }
         holder.textTitle.setText(title) ;
         holder.textDescription.setText(description);
         holder.progressBar.setProgress(mData.get(position).progress);
+        holder.textProgress.setText("등록일수 " + mData.get(position).progress +  "/" + mData.get(position).days.size());
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
@@ -81,7 +77,7 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textTitle;
         TextView textDescription;
-        ImageView imageLike;
+        TextView textProgress;
         ProgressBar progressBar;
 
         ViewHolder(View itemView) {
@@ -90,19 +86,12 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
             // 뷰 객체에 대한 참조. (hold strong reference)
             textTitle = itemView.findViewById(R.id.textTitle);
             textDescription = itemView.findViewById(R.id.textDescription);
-            imageLike = itemView.findViewById(R.id.imageLike);
             progressBar = itemView.findViewById(R.id.progressBar);
+            textProgress = itemView.findViewById(R.id.textProgress);
             itemView.setOnClickListener( new View.OnClickListener() {
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     mCallback.onClick(mData.get(position));
-                }
-            });
-            imageLike.setOnClickListener( new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    mCallback.onClickLike(mData.get(position), imageLike);
                 }
             });
         }

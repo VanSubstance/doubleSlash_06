@@ -25,19 +25,44 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 import static android.app.Activity.RESULT_OK;
 
 public class challengeItemSpecific extends Fragment {
+    private retrofitAPI mRetrofitAPI;
+    private Retrofit mRetrofit;
+    private Call<challengeItemActivity> mChallengeItemActivity;
+    private Callback<challengeItemActivity> challengeItemActivityCallback = new Callback<challengeItemActivity>() {
+        @Override
+        public void onResponse(Call<challengeItemActivity> call, Response<challengeItemActivity> response) {
+
+        }
+
+        @Override
+        public void onFailure(Call<challengeItemActivity> call, Throwable t) {
+
+        }
+    };
+    private void setRetrofitInit() {
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("http://101.101.218.146:8080")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
+    }
 
     challengeItemActivity image= new challengeItemActivity();
     challengeItem item = new challengeItem();
     CalendarView calendarView;
     TextView textPointTotal;
+
     private long now ;
-
     private int GET_GALLERY_IMAGE;
-
-
     private ImageView newActivity;
 
 
@@ -47,6 +72,7 @@ public class challengeItemSpecific extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_item_specific, container,false);
+        setRetrofitInit();
         TextView textTitle = view.findViewById(R.id.textTitle);
         TextView textDescription = view.findViewById(R.id.textDescription);
         textTitle.setText(item.title);
@@ -87,12 +113,8 @@ public class challengeItemSpecific extends Fragment {
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                     startActivityForResult(intent, GET_GALLERY_IMAGE);
-                    // 시간
-                    now = System.currentTimeMillis();
-                    Date date = new Date(now);
-                    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    String time = mFormat.format(date);
-                    image.reg_date=time;
+                    image.chalId = item.chalId;
+
                 }
             });
             newActivity.setImageResource(R.drawable.image_default);
@@ -119,7 +141,7 @@ public class challengeItemSpecific extends Fragment {
         if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
             newActivity.setImageURI(selectedImageUri);
-            image.url=selectedImageUri.toString();
+            // image.url=selectedImageUri.toString();
         }
     }
 }

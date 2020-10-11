@@ -71,15 +71,4 @@ public class listEnroll extends Fragment implements OnItemClickForChallenge {
     public void onClick(challengeItem newOne) {
         ((interfaceMain)getActivity()).changeFragmentChallengeEnrollItemSpecific(newOne);
     }
-
-    @Override
-    public void onClickLike(challengeItem newOne, ImageView imageLike) {
-        if (newOne.favorite) { // 이미 즐겨찾기일 경우
-            imageLike.setColorFilter(Color.BLACK);
-            newOne.favorite = false;
-        } else { // 즐겨찾기 아닐 경우
-            imageLike.setColorFilter(Color.GREEN);
-            newOne.favorite = true;
-        }
-    }
 }

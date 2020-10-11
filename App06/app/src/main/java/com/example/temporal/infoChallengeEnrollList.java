@@ -24,11 +24,6 @@ public class infoChallengeEnrollList extends Fragment implements OnItemClickForC
         View view = inflater.inflate(R.layout.list_enroll, container, false);
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        for (int i = 0; i < aCurrentData.listChallengeEnroll.size(); i++) {
-            if (aCurrentData.listChallengeEnroll.get(i).favorite) {
-                items.add(aCurrentData.listChallengeEnroll.get(i));
-            }
-        }
         // 부드럽게 넘기기
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
@@ -46,9 +41,5 @@ public class infoChallengeEnrollList extends Fragment implements OnItemClickForC
     @Override
     public void onClick(challengeItem newOne) {
         ((interfaceMain)getActivity()).changeFragmentChallengeEnrollItemSpecific(newOne);
-    }
-
-    @Override
-    public void onClickLike(challengeItem newOne, ImageView imageLike) {
     }
 }

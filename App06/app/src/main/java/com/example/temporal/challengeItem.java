@@ -18,7 +18,6 @@ public class challengeItem {
     String deadline;
     int chalPoint = 100;
     Set<Long> days = new TreeSet<>();
-    boolean favorite;
     int progress = 0;
     ArrayList<challengeItemActivity> acvts = new ArrayList<challengeItemActivity>();
 
@@ -27,7 +26,6 @@ public class challengeItem {
         title = item.title;
         des = item.des;
         chalPoint = item.point;
-        favorite = false;
     }
 
     public void setDates(List<Calendar> selectedDates) {
@@ -72,7 +70,6 @@ public class challengeItem {
         regdate = original.regdate;
         deadline = original.deadline;
         days.addAll(original.days);
-        favorite = original.favorite;
         chalPoint= original.chalPoint;
         for (int i = 0; i < days.size(); i++) {
             acvts.add(new challengeItemActivity());

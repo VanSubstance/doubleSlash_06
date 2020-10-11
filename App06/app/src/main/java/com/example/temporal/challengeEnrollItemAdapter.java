@@ -21,30 +21,12 @@ public class challengeEnrollItemAdapter extends RecyclerView.Adapter<challengeEn
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textTitle;
         TextView textDescription;
-        ImageView imageLike;
-
         ViewHolder(View itemView) {
             super(itemView) ;
 
             // 뷰 객체에 대한 참조. (hold strong reference)
             textTitle = itemView.findViewById(R.id.textTitle);
             textDescription = itemView.findViewById(R.id.textDescription);
-            imageLike = itemView.findViewById(R.id.imageLike);
-
-            itemView.setOnClickListener( new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    mCallback.onClick(mData.get(position));
-                }
-            });
-            imageLike.setOnClickListener( new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    mCallback.onClickLike(mData.get(position), imageLike);
-                }
-            });
         }
     }
 
@@ -71,11 +53,6 @@ public class challengeEnrollItemAdapter extends RecyclerView.Adapter<challengeEn
     public void onBindViewHolder(challengeEnrollItemAdapter.ViewHolder holder, int position) {
         String title = mData.get(position).title;
         String description = mData.get(position).des;
-        if (mData.get(position).favorite) { // 즐겨찾기일 경우
-            holder.imageLike.setColorFilter(Color.GREEN);
-        } else { // 아닐 경우
-            holder.imageLike.setColorFilter(Color.BLACK);
-        }
         holder.textTitle.setText(title) ;
         holder.textDescription.setText(description);
     }
