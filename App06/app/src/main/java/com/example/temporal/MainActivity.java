@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("챌린지 수신 성공");
             for (challengeItem item :
                     response.body()) {
+                item.setDatesFromServer();
                 aCurrentData.listMyChallenge.add(item);
             }
         }

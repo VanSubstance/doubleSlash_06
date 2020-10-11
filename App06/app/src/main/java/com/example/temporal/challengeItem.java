@@ -39,15 +39,27 @@ public class challengeItem {
         }
     }
 
-    public void setDatesFromServer() throws ParseException {
+    public void setDatesFromServer() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar start = Calendar.getInstance();
-        start.setTime(sdf.parse(regdate));
+        try {
+            start.setTime(sdf.parse(regdate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Calendar temp = Calendar.getInstance();
-        temp.setTime(sdf.parse(regdate));
+        try {
+            temp.setTime(sdf.parse(regdate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Calendar end = Calendar.getInstance();
-        end.setTime(sdf.parse(deadline));
-        for (int i = 0; i <= end.DATE - start.DATE; i++ ) {
+        try {
+            end.setTime(sdf.parse(deadline));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i <= end.get(Calendar.DATE) - start.get(Calendar.DATE); i++ ) {
             days.add(temp.getTimeInMillis());
             temp.add(temp.DATE, 1);
         }
