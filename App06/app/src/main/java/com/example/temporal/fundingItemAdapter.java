@@ -57,6 +57,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             fund_point = itemView.findViewById(R.id.fund_point);
             rest_point = itemView.findViewById(R.id.rest_point);
 
+
             //final int targ = Integer.valueOf(targ_point.getText().toString());
             Button funding_button = itemView.findViewById(R.id.funding_button);
 
@@ -64,14 +65,14 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                    fund_point.setText(String.valueOf(seekBar.getProgress()));
-
+                    fund_point.setText(String.valueOf(seekBar.getProgress() * 500));
+                    //(aCurrentData.myInfo.point/10)
                     //int targ = Integer.valueOf(targ_point.getText().toString());
 //                    int targ;
 //                    targ = Integer.parseInt(targ_point.getText().toString());
 //                    int targ = Integer.parseInt(String.valueOf(targ_point));
-                    int left = 5000 - progress;
-                    rest_point.setText(String.valueOf(left));
+                    int rest = aCurrentData.myInfo.point - progress * 500;
+                    rest_point.setText(String.valueOf(rest));
                 }
 
                 @Override
@@ -136,13 +137,18 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(fundingItemAdapter.ViewHolder holder, int position) {
-
+       
         String inst = mData.get(position).fund_inst;
         String inst_desc = mData.get(position).inst_des;
+        Integer tar_point = mData.get(position).tar_point;
+        Integer acu_point = mData.get(position).acu_point;
+        Integer left_point = mData.get(position).left_point;
 
         holder.inst.setText(inst) ;
         holder.inst_desc.setText(inst_desc);
-
+        holder.tar_point.setText(String.valueOf(tar_point));
+        holder.acu_point.setText(String.valueOf(acu_point));
+        holder.left_point.setText(String.valueOf(left_point));
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

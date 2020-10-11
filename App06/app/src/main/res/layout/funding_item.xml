@@ -181,13 +181,13 @@
 
             <SeekBar
                 android:id="@+id/seekBar"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:thumb="@drawable/seekbar"
-                android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="341sp"
                 android:layout_height="35sp"
                 android:layout_marginStart="30sp"
                 android:layout_marginTop="24sp"
-                android:max="5000"
+                android:max="10"
                 android:progress="0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

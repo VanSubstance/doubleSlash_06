@@ -1,5 +1,9 @@
 package com.example.temporal;
 
+import java.util.ArrayList;
+
+import static java.lang.Math.min;
+
 public class fundingItem {
     String fund_id;
     String fund_inst;
@@ -9,7 +13,7 @@ public class fundingItem {
     int tar_point; // 펀딩 목표 포인트
     int acu_point; // 펀딩 전체에서 누적 포인트
     int left_point; // 펀딩 전체에서 달성까지 남은 포인트
-    int fund_point;
+    ArrayList<fundingItemActivity> fund_point = new ArrayList<fundingItemActivity>();
     int rest_point;
 
     public void init(int i) {
@@ -20,8 +24,10 @@ public class fundingItem {
         acu_point = 9000000;
         left_point = tar_point - acu_point;
 
-        fund_point = 0;
-        rest_point = 0;
+        seek_max = min(aCurrentData.myInfo.point, left_point);
+        fund_point.add(new fundingItemActivity());
+//        fund_point = 0;
+        rest_point = aCurrentData.myInfo.point;
     }
 
 }
