@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 interface retrofitAPI {
@@ -23,4 +24,6 @@ interface retrofitAPI {
     Call<challengeItemForPost> setChallenge(@Body challengeItemForPost post);
     @GET("/challenge/{id}")
     Call<List<challengeItem>> getChallengeList(@Path("id") int id);
+    @PUT("/member/{mem_id}")
+    Call<location> putLocation(@Path("mem_id") int mem_id, @Body location newOne);
 }

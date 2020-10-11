@@ -5,24 +5,15 @@ import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-import com.applikeysolutions.cosmocalendar.dialog.CalendarDialog;
-import com.applikeysolutions.cosmocalendar.dialog.OnDaysSelectionListener;
-import com.applikeysolutions.cosmocalendar.model.Day;
-import com.applikeysolutions.cosmocalendar.selection.BaseSelectionManager;
 import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener;
 import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager;
 import com.applikeysolutions.cosmocalendar.utils.SelectionType;
 import com.applikeysolutions.cosmocalendar.view.CalendarView;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +40,7 @@ public class challengeEnrollItemSpecific extends Fragment {
         @Override
         public void onFailure(Call<challengeItemForPost> call, Throwable t) {
             System.out.println("전송 실패");
+            t.printStackTrace();
         }
     };
 
@@ -79,7 +71,6 @@ public class challengeEnrollItemSpecific extends Fragment {
                 challengeItemForPost itemPost = new challengeItemForPost();
                 item.setDates(calendarView.getSelectedDates());
                 itemPost.setDates(calendarView.getSelectedDates());
-                itemPost.favorite = false;
                 itemPost.memId = aCurrentData.myInfo.id;
                 itemPost.chalfrId = item.chalId;
                 item.favorite = false;

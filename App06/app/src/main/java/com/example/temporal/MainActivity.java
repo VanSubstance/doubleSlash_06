@@ -47,9 +47,11 @@ public class MainActivity extends AppCompatActivity {
     private Call<List<wasteItem>> mWasteItemList;
     private Call<List<userItem>> mUserItemList;
     private Call<List<challengeItem>> mChallengeItemList;
+    private Call<location> mLocation;
     private Callback<List<challengeFrameItem>> mFrameCallback = new Callback<List<challengeFrameItem>>() {
         @Override
         public void onResponse(Call<List<challengeFrameItem>> call, Response<List<challengeFrameItem>> response) {
+            System.out.println("틀 수신 성공");
             for (challengeFrameItem item :
                     response.body()) {
                 challengeItem newOne = new challengeItem();
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private Callback<List<userItem>> mUserCallback = new Callback<List<userItem>>() {
         @Override
         public void onResponse(Call<List<userItem>> call, Response<List<userItem>> response) {
+            System.out.println("사용자 수신 성공");
             for (userItem item :
                     response.body()) {
                 aCurrentData.listUser.add(item);
@@ -82,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private Callback<List<fundingItem>> mFundingCallback = new Callback<List<fundingItem>>() {
         @Override
         public void onResponse(Call<List<fundingItem>> call, Response<List<fundingItem>> response) {
+            System.out.println("펀딩 수신 성공");
             for (fundingItem item :
                     response.body()) {
                 aCurrentData.listFunding.add(item);
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private Callback<List<wasteItem>> mWasteCallback = new Callback<List<wasteItem>>() {
         @Override
         public void onResponse(Call<List<wasteItem>> call, Response<List<wasteItem>> response) {
+            System.out.println("분리배출법 수신 성공");
             for (wasteItem item :
                     response.body()) {
                 aCurrentData.listWaste.add(item);
@@ -110,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     private Callback<List<challengeItem>> mChallengeItemCallback = new Callback<List<challengeItem>>() {
         @Override
         public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
+            System.out.println("챌린지 수신 성공");
             for (challengeItem item :
                     response.body()) {
                 aCurrentData.listMyChallenge.add(item);
@@ -118,6 +124,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onFailure(Call<List<challengeItem>> call, Throwable t) {
+            System.out.println("챌린지 수신 실패");
+            t.printStackTrace();
+        }
+    };
+
+    private Callback<location> mLocationCallback = new Callback<location>() {
+        @Override
+        public void onResponse(Call<location> call, Response<location> response) {
+            System.out.println("사용자 위치 수정 성공");
+            System.out.println(response);
+            System.out.println(call);
+        }
+
+        @Override
+        public void onFailure(Call<location> call, Throwable t) {
+            System.out.println("사용자 위치 수정 실패");
+            System.out.println(call);
             t.printStackTrace();
         }
     };
@@ -125,12 +148,13 @@ public class MainActivity extends AppCompatActivity {
     private Callback<userItem> mUserPostCallback = new Callback<userItem>() {
         @Override
         public void onResponse(Call<userItem> call, Response<userItem> response) {
-            System.out.println("성공");
+            System.out.println("사용자 발신 성공");
             System.out.println(response);
             System.out.println(call);
         }
         @Override
         public void onFailure(Call<userItem> call, Throwable t) {
+            System.out.println("사용자 발신 실패");
             t.printStackTrace();
         }
     };
@@ -155,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         final Intent intentSignin = new Intent(this, interfaceMain.class);
 
         sessionCallback = new SessionCallback();
+        sessionCallback.getLocation(lat, lon);
         Session.getCurrentSession().addCallback(sessionCallback);
         Session.getCurrentSession().checkAndImplicitOpen();
 
@@ -173,13 +198,10 @@ public class MainActivity extends AppCompatActivity {
         mFundingItemList = mRetrofitAPI.getFundingList();
         mWasteItemList = mRetrofitAPI.getWasteList();
         mUserItemList = mRetrofitAPI.getUserList();
-        int id = aCurrentData.myInfo.id;
-        mChallengeItemList = mRetrofitAPI.getChallengeList(id);
         mCallChallengeframeList.enqueue(mFrameCallback);
         mFundingItemList.enqueue(mFundingCallback);
         mWasteItemList.enqueue(mWasteCallback);
         mUserItemList.enqueue(mUserCallback);
-        mChallengeItemList.enqueue(mChallengeItemCallback);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -229,6 +251,16 @@ public class MainActivity extends AppCompatActivity {
                             aCurrentData.listUser) {
                         if (user.id == result.getId()) {
                             aCurrentData.myInfo = user;
+                            location newOne =new location();
+                            aCurrentData.myInfo.lat = lat;
+                            aCurrentData.myInfo.lon = lon;
+                            newOne.lat = lat;
+                            newOne.lon = lon;
+                            int id = aCurrentData.myInfo.id;
+                            Call<location> newLocation = mRetrofitAPI.putLocation(id, newOne);
+                            newLocation.enqueue(mLocationCallback);
+                            mChallengeItemList = mRetrofitAPI.getChallengeList(id);
+                            mChallengeItemList.enqueue(mChallengeItemCallback);
                             startActivity(intent);
                             finish();
                             exist = true;
@@ -244,6 +276,9 @@ public class MainActivity extends AppCompatActivity {
                         newOne.lat = lat;
                         Call<userItem> userInfo = mRetrofitAPI.setUser(newOne);
                         userInfo.enqueue(mUserPostCallback);
+                        int id = aCurrentData.myInfo.id;
+                        mChallengeItemList = mRetrofitAPI.getChallengeList(id);
+                        mChallengeItemList.enqueue(mChallengeItemCallback);
                         startActivity(intent);
                         finish();
                     }

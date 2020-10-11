@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class challengeMain extends Fragment implements OnItemClickForChallenge , MapView.MapViewEventListener {
+    // 챌린지 목록 -> 등록순으로 보여주기
+
     //지도
     private static final int GPS_ENABLE_REQUEST_CODE = 2000;
     private static final String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
