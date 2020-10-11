@@ -7,9 +7,9 @@ public class FundingActivity {
 	private int fund_id;
 	private int mem_id;
 	private int point;
-	private Date funddate;
+	private String funddate;
 	
-	public FundingActivity(int fund_act_id, int fund_id, int mem_id, int point, Date funddate) {
+	public FundingActivity(int fund_act_id, int fund_id, int mem_id, int point, String funddate) {
 		super();
 		this.fund_act_id = fund_act_id;
 		this.fund_id = fund_id;
@@ -54,11 +54,11 @@ public class FundingActivity {
 		this.point = point;
 	}
 
-	public Date getFunddate() {
+	public String getFunddate() {
 		return funddate;
 	}
 
-	public void setFunddate(Date funddate) {
+	public void setFunddate(String funddate) {
 		this.funddate = funddate;
 	}
 	

@@ -3,6 +3,7 @@ package server06.miniproject.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,8 +38,8 @@ public class FundingActivityController {
 		return mapper.getFundingAvtivityList();
 	}
 	
-	@PostMapping("/funding_activity/{fund_act_id}") //펀딩 활동 추가
-	public void postFundingAvtivity(@PathVariable("fund_act_id") int fund_act_id, @RequestParam("fund_id") int fund_id, @RequestParam("mem_id") int mem_id, @RequestParam("point") int point, @RequestParam("funddate") Date funddate) {
+	@PostMapping("/funding_activity/{fund_id}") //펀딩 활동 추가
+	public void postFundingAvtivity(@RequestParam("fund_act_id") int fund_act_id,@RequestParam("fund_id") int fund_id, @RequestParam("mem_id") int mem_id, @RequestParam("point") int point, @RequestParam("funddate") String funddate) {
 		mapper.insertFundingAvtivity(fund_act_id,fund_id,mem_id,point,funddate);
 	}
 
