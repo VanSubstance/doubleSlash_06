@@ -15,9 +15,42 @@ package com.example.temporal;
         import androidx.recyclerview.widget.PagerSnapHelper;
         import androidx.recyclerview.widget.RecyclerView;
 
+        import java.text.SimpleDateFormat;
+        import java.util.Calendar;
+
+        import retrofit2.Call;
+        import retrofit2.Callback;
+        import retrofit2.Response;
+        import retrofit2.Retrofit;
+        import retrofit2.converter.gson.GsonConverterFactory;
+
 public class fundingList extends Fragment implements OnItemClickForFunding {
     RecyclerView viewList;
     fundingItemAdapter adapter;
+    private retrofitAPI mRetrofitAPI;
+    private Retrofit mRetrofit;
+    Call<fundingItemActivity> mPostFundingActivity;
+    private void setRetrofitInit() {
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("http://101.101.218.146:8080")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
+    }
+    Callback<fundingItemActivity> fundingItemCallback = new Callback<fundingItemActivity>() {
+        @Override
+        public void onResponse(Call<fundingItemActivity> call, Response<fundingItemActivity> response) {
+            System.out.println("전송 성공");
+            System.out.println(response);
+            System.out.println(call);
+        }
+
+        @Override
+        public void onFailure(Call<fundingItemActivity> call, Throwable t) {
+            System.out.println("전송 실패");
+            t.printStackTrace();
+        }
+    };
 
 //    ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
 //    TextView funding = viewList.findViewById(R.id.funding);
@@ -27,6 +60,8 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.funding_list, container,false);
+
+        setRetrofitInit();
 
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -87,6 +122,15 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     public void onFundingClick(fundingItem newOne) {
         ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
         ConstraintLayout funding_click = viewList.findViewById(R.id.funding_click);
+
+        fundingItemActivity newActivity = new fundingItemActivity();
+        newActivity.fund_id = newOne.fund_id;
+        newActivity.point = newOne.fund_point;
+        newActivity.mem_id = aCurrentData.myInfo.id;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        newActivity.funddate = sdf.format(Calendar.getInstance().getTime());
+        mPostFundingActivity = mRetrofitAPI.postFundingActivity(newOne.fund_id, newActivity);
+        mPostFundingActivity.enqueue(fundingItemCallback);
 
         funding_list.setVisibility(View.GONE);
         funding_click.setVisibility(View.VISIBLE);
