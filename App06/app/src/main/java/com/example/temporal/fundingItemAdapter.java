@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.min;
+
 
 public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.ViewHolder> {
 
@@ -26,7 +28,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         SeekBar seekBar;
 
         TextView seekmin;
-        TextView seekmax;
+        TextView seek_max;
         TextView tar_point;
         TextView acu_point;
         TextView left_point;
@@ -48,15 +50,16 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             inst_desc = itemView.findViewById(R.id.inst_desc);
             seekBar = itemView.findViewById(R.id.seekBar);
 
-            point = itemView.findViewById(aCurrentData.myInfo.point);
+            point = itemView.findViewById(R.id.point);
             seekmin = itemView.findViewById(R.id.seek_min);
-            seekmax = itemView.findViewById(R.id.seek_max);
+            seek_max = itemView.findViewById(R.id.seek_max);
             tar_point = itemView.findViewById(R.id.tar_point);
             acu_point = itemView.findViewById(R.id.acu_point);
             left_point = itemView.findViewById(R.id.left_point);
             fund_point = itemView.findViewById(R.id.fund_point);
             rest_point = itemView.findViewById(R.id.rest_point);
 
+            rest_point.setText(String.valueOf(aCurrentData.myInfo.point));
 
             //final int targ = Integer.valueOf(targ_point.getText().toString());
             Button funding_button = itemView.findViewById(R.id.funding_button);
@@ -65,14 +68,21 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                    fund_point.setText(String.valueOf(seekBar.getProgress() * 500));
+                    fund_point.setText(String.valueOf(seekBar.getProgress() * (aCurrentData.myInfo.point/10)));
                     //(aCurrentData.myInfo.point/10)
                     //int targ = Integer.valueOf(targ_point.getText().toString());
 //                    int targ;
 //                    targ = Integer.parseInt(targ_point.getText().toString());
 //                    int targ = Integer.parseInt(String.valueOf(targ_point));
-                    int rest = aCurrentData.myInfo.point - progress * 500;
-                    rest_point.setText(String.valueOf(rest));
+                    int rest = aCurrentData.myInfo.point - progress * (aCurrentData.myInfo.point/10);
+//                    rest_point.setText(String.valueOf(rest));
+                    if(rest >= 0)
+                        rest_point.setText(String.valueOf(rest));
+                    else
+                        rest_point.setText(String.valueOf(0));
+
+                    //fund_point.add(new fundingItemActivity());
+
                 }
 
                 @Override
@@ -137,18 +147,28 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(fundingItemAdapter.ViewHolder holder, int position) {
-       
+
         String inst = mData.get(position).fund_inst;
         String inst_desc = mData.get(position).inst_des;
-        Integer tar_point = mData.get(position).tar_point;
-        Integer acu_point = mData.get(position).acu_point;
-        Integer left_point = mData.get(position).left_point;
+        int point = aCurrentData.myInfo.point;
+        int tar_point = mData.get(position).tar_point;
+        int acu_point = mData.get(position).acu_point;
+        int left_point = mData.get(position).left_point;
+
+        left_point = tar_point - acu_point;
+        int seek_max = min(aCurrentData.myInfo.point, left_point);
 
         holder.inst.setText(inst) ;
         holder.inst_desc.setText(inst_desc);
+        holder.point.setText(String.valueOf(point));
+        holder.seek_max.setText(String.valueOf(seek_max));
         holder.tar_point.setText(String.valueOf(tar_point));
         holder.acu_point.setText(String.valueOf(acu_point));
         holder.left_point.setText(String.valueOf(left_point));
+
+        //holder.point.setText(String.valueOf(point));
+//        holder.fund_point.setText(String.valueOf(left_point));
+//        holder.rest_point.setText(String.valueOf(left_point));
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

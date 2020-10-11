@@ -22,6 +22,8 @@ public class fundingItem {
 
         tar_point = 10000000;
         acu_point = 9000000;
+
+
         left_point = tar_point - acu_point;
 
         seek_max = min(aCurrentData.myInfo.point, left_point);

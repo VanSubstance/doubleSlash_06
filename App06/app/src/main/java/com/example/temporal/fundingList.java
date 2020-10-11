@@ -136,8 +136,6 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         funding_click.setVisibility(View.VISIBLE);
         funding_click.setBackgroundColor(Color.parseColor("#79C3A0"));
 
-
-
     }
 
 }

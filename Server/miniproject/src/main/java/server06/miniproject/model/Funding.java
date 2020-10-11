@@ -1,14 +1,14 @@
 package server06.miniproject.model;
 
 public class Funding {
-	private String fund_id;
+	private int fund_id;
 	private String fund_inst;
 	private String inst_icon;
 	private String inst_des;
 	private int tar_point;
 	private int acu_point;
 	
-	public Funding(String fund_id, String fund_inst, String inst_icon, String inst_des, int tar_point,int acu_point) {
+	public Funding(int fund_id, String fund_inst, String inst_icon, String inst_des, int tar_point,int acu_point) {
 		super();
 		this.fund_id = fund_id;
 		this.fund_inst = fund_inst;
@@ -22,11 +22,11 @@ public class Funding {
 		super();
 	}
 
-	public String getFund_id() {
+	public int getFund_id() {
 		return fund_id;
 	}
 
-	public void setFund_id(String fund_id) {
+	public void setFund_id(int fund_id) {
 		this.fund_id = fund_id;
 	}
 

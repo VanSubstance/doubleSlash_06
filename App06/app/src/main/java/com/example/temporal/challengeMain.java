@@ -35,40 +35,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class challengeMain extends Fragment implements OnItemClickForChallenge , MapView.MapViewEventListener {
+public class challengeMain extends Fragment implements OnItemClickForChallenge, MapView.MapViewEventListener {
     // 챌린지 목록 -> 등록순으로 보여주기
 
     //지도
     private static final int GPS_ENABLE_REQUEST_CODE = 2000;
-    private static final String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    private static final String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     private static final int PERMISSIONS_REQUEST_CODE = 100;
 
     private MapView mapView;
-
+    private gpsTracker gpsTracker;
     public double lon; //경도
     public double lat; //위도
-    private gpsTracker gpsTracker;
-    public String addr;
     private NestedScrollView scrollView;
-    private aCurrentData user_list;
-
+    public MapPOIItem mapPOIItem;
 
     RecyclerView viewList;
     challengeItemAdapter adapter;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.challenge_main, container, false);
 
         //지도
         // test
+
         gpsTracker = new gpsTracker(getContext());
         lat=gpsTracker.getLatitude();
         lon=gpsTracker.getLongitude();
-        addr=getCurrentAddress(lat,lon);
         initView(view);
 
-
         final Button lc = view.findViewById(R.id.current_button);
-        lc.setOnClickListener(new Button.OnClickListener(){
+        lc.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat, lon), true);
@@ -123,7 +120,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge ,
 
     @Override
     public void onClick(challengeItem newOne) {
-        ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
+        ((interfaceMain) getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
     }
     public String getCurrentAddress( double latitude, double longitude){
         //지오코더 ..GPS를 주소로 변환
@@ -154,54 +151,9 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge ,
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-    private void showDialogForLocationServiceSetting() {
-        AlertDialog.Builder builder= new AlertDialog.Builder(getContext());
-        builder.setTitle("위치 서비스 비활성화");
-        builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n"+"위치 설정을 수정할래용?");
-        builder.setCancelable(true);
-        builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int id) {
-                Intent callGPSSettingIntent =
-                        new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
-            }
-        });
-        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-        builder.create().show();
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case GPS_ENABLE_REQUEST_CODE: //사용자가 GPS 활성 시켰는지 검사
-                if (checkLocationServicesStatus()) {
-                    if (checkLocationServicesStatus()) {
-                        Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
-                        checkGPSPermission();
-                        return;
-                    }
-                }
-                break;
-        }
-    }
-    public void checkGPSPermission(){
-        int locationPermissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
-        int coarsePermissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION);
-        if(locationPermissionCheck == PackageManager.PERMISSION_DENIED && coarsePermissionCheck == PackageManager.PERMISSION_DENIED){
-            Log.d("permissionCheck", "denied");
-            ActivityCompat.requestPermissions(getActivity(),  REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
-        }
-        else if(locationPermissionCheck == PackageManager.PERMISSION_GRANTED){
-            Log.d("permissionCheck", "granted");
-        }
-    }
 
     private void initView(View view) {
-        mapView= new MapView(getContext());
+        mapView = new MapView(getContext());
         ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
         mapView.setMapViewEventListener(this);
@@ -209,18 +161,16 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge ,
         mapView.zoomIn(true);
         mapView.zoomOut(true);
 
-        //for 구문을 사용할 예정 !!
-/*        for(int i = 0; i<user_list.listInfo.size(); i++) {
-            MapPOIItem mapPOIItem = new MapPOIItem();
-            mapPOIItem.setItemName("1");
+        //구문을 사용할 예정 !!
+        for (userItem item : aCurrentData.listUser) {
+            mapPOIItem = new MapPOIItem();
+            mapPOIItem.setItemName("");
             mapPOIItem.setTag(0);
-            // 위치 부분 데이터를 어떻게 불러오는지 알고 난 후 하겠습니다 ㅎㅎ
-            mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(lat, lon));
+            mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(item.lat, item.lon));
             mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
             mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 Respin 마커 모양.
             mapView.addPOIItem(mapPOIItem);
-
-        }*/
+        }
     }
 
 
