@@ -1,7 +1,6 @@
 package server06.miniproject.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,9 +28,9 @@ public class ChallengeActivityController {
 		return challengeactivityService.deleteChallengeActivity(chalactId);
 	}
 	
-	@RequestMapping(value="/challengeactivity/{chalId}", method=RequestMethod.GET)
-	public List<Map<String, String>> selectChallengeActivity(@PathVariable int chalId){
-		return challengeactivityService.selectChallengeActivityList(chalId);
+	@RequestMapping(value="/challengeactivity/{memId}", method=RequestMethod.GET)
+	public List<ChallengeActivity> selectChallengeActivity(@PathVariable int memId){
+		return challengeactivityService.selectChallengeActivityList(memId);
 	}
 	
 }

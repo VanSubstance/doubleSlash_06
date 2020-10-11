@@ -4,10 +4,10 @@ public class Member {
 	private int id;
 	private String nick;
 	private int point;
-	private int lat;
-	private int lon;
-	
-	public Member(int id, String nick, int point, int lat, int lon) {
+	private float lat;
+	private float lon;
+
+	public Member(int id, String nick, int point, float lat, float lon) {
 		super();
 		this.id = id;
 		this.nick = nick;
@@ -15,40 +15,50 @@ public class Member {
 		this.lat = lat;
 		this.lon = lon;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getNick() {
 		return nick;
 	}
+
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
+
 	public int getPoint() {
 		return point;
 	}
+
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	public int getLat() {
+
+	public float getLat() {
 		return lat;
 	}
-	public void setLat(int lat) {
+
+	public void setLat(float lat) {
 		this.lat = lat;
 	}
-	public int getLon() {
+
+	public float getLon() {
 		return lon;
 	}
-	public void setLon(int lon) {
+
+	public void setLon(float lon) {
 		this.lon = lon;
 	}
+
 	@Override
 	public String toString() {
-		return "member [id=" + id + ", nick=" + nick + ", point=" + point + ", lat=" + lat + ", lon=" + lon + "]";
+		return "Member [id=" + id + ", nick=" + nick + ", point=" + point + ", lat=" + lat + ", lon=" + lon + "]";
 	}
-	
-	
+
 }

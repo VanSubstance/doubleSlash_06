@@ -14,6 +14,8 @@ public interface MemberMapper {
 	
 	int insertMember(@Param("item") Member member);
 	
-	int updateMemberLocation(@Param("memId") int memID, @Param("item") Member member);
+	int updateMemberLocation(@Param("memId") int memId, @Param("item") Member member);
+	
+	int updateMemberPoint(@Param("memId") int memId, @Param("item") Member member);
 	
 }

@@ -4,7 +4,7 @@
 
 	<insert id="insertChallenge"
 		parameterType="server06.miniproject.model.Challenge">
-		INSERT INTO challenge (chal_id, mem_id, regdate, deadline, chal_fr_id, favorite, chal_point)
+		INSERT INTO challenge (chal_id, mem_id, regdate, deadline, chal_fr_id, chal_point)
 		VALUES(
 		(SELECT
 		NVL(MAX(chal_id)+1,0) FROM challenge),
@@ -12,16 +12,8 @@
 		#{item.regdate},
 		#{item.deadline},
 		#{item.chalfrId},
-		#{item.favorite},
 		0)
 	</insert>
-
-	<select id="selectChallengeCount"
-		parameterType="server06.miniproject.model.Challenge" resultType="int">
-		SELECT count(chal_id)
-		FROM challenge
-		WHERE mem_id = #{memId}
-	</select>
 	
 	<delete id="deleteChallenge" parameterType="server06.miniproject.model.Challenge">
 		DELETE 
@@ -30,12 +22,13 @@
 	</delete>
 
 	<select id="selectChallengeList" parameterType="int" resultType="server06.miniproject.model.ChallengeList">
-		SELECT c.chal_id, c.regdate, c.deadline, c.favorite, c.chal_point, f.title, f.des
+		SELECT c.chal_id, c.regdate, c.deadline, c.chal_point, f.title, f.des
 		FROM challenge c
 		JOIN challenge_frame f
 		ON c.chal_fr_id = f.chal_fr_id
 		WHERE mem_id = #{memId}
 	</select>
+	
 
 
 </mapper>

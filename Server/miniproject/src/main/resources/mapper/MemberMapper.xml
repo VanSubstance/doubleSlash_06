@@ -28,4 +28,10 @@
 			lon = #{item.lon}
 		WHERE mem_id = #{memId}
 	</update>
+	
+	<update id="updateMemberPoint" parameterType="server06.miniproject.model.Member">
+		UPDATE member
+		SET mem_point = #{item.point}
+		WHERE mem_id = #{memId}
+	</update>
 </mapper>

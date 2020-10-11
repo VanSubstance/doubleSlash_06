@@ -31,8 +31,14 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value="/member/{memId}", method=RequestMethod.PUT)
+	@RequestMapping(value="/member/location/{memId}", method=RequestMethod.PUT)
 	public Boolean updateMemberLocation(@PathVariable int memId, @RequestBody Member member) {
 		return memberService.updateMemberLocation(memId, member);
 	}
+	
+	@RequestMapping(value="/member/point/{memId}", method=RequestMethod.PUT)
+	public Boolean updateMemberPoint(@PathVariable int memId, @RequestBody Member member) {
+		return memberService.updateMemberPoint(memId, member);
+	}
 }
+

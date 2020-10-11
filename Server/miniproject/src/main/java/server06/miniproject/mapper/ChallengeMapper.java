@@ -14,12 +14,10 @@ public interface ChallengeMapper {
 	
 	// 챌린지 등록
 	int insertChallenge(@Param("item") Challenge challenge);
-	
-	// 회원번호로 챌린지 개수 조회
-	int selectChallengeCount(int memId);
-	
+		
 	// 챌린지 삭제
 	int deleteChallenge(int chalId);
 	
 	List<ChallengeList> selectChallengeList(int memId);
+	
 }

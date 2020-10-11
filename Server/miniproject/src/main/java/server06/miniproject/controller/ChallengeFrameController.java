@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import server06.miniproject.model.ChallengeFrameList;
+import server06.miniproject.model.ChallengeFrame;
 import server06.miniproject.service.ChallengeFrameService;
 
 
@@ -19,7 +19,7 @@ public class ChallengeFrameController {
 	private ChallengeFrameService challengeframeService;
 	
 	@RequestMapping(value="/challengeframe", method = RequestMethod.GET)
-	public List<ChallengeFrameList> selectChallengFrameList(){
+	public List<ChallengeFrame> selectChallengFrameList(){
 		return challengeframeService.selectChallengeFrameList();
 	}
 }

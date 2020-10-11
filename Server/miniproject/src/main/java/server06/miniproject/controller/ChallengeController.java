@@ -24,19 +24,15 @@ public class ChallengeController {
 		return challengeService.insertChallenge(challenge);
 	}
 
-	@RequestMapping(value = "/challenge/count/{memId}", method = RequestMethod.GET)
-	public int selectChallengeCount(@PathVariable int memId) {
-		return challengeService.selectChallengeCount(memId);
-	}
-	
 	@RequestMapping(value="/challenge/{chalId}", method = RequestMethod.DELETE)
 	public Boolean deleteChallenge(@PathVariable int chalId) {
 		return challengeService.deleteChallenge(chalId);
 	}
 	
-	@RequestMapping(value="/challenge/list/{memId}", method = RequestMethod.GET)
+	@RequestMapping(value="/challenge/{memId}", method = RequestMethod.GET)
 	public List<ChallengeList> selectChallengeList(@PathVariable int memId){
 		return challengeService.selectChallengeList(memId);
 	}
+	
 
 }

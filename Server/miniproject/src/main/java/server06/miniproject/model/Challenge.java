@@ -1,30 +1,21 @@
 package server06.miniproject.model;
 
-import java.sql.Date;
-import java.util.List;
-
 public class Challenge {
 	private int chalId;
 	private int memId;
-	private Date regdate;
-	private Date deadline;
+	private String regdate;
+	private String deadline;
 	private int chalfrId;
-	private char favorite;
 	private int chalPoint;
-	
-	private ChallengeFrame challengeFrames;
 
-	public Challenge(int chalId, int memId, Date regdate, Date deadline, int chalfrId, char favorite, int chalPoint,
-			ChallengeFrame challengeFrames) {
+	public Challenge(int chalId, int memId, String regdate, String deadline, int chalfrId, int chalPoint) {
 		super();
 		this.chalId = chalId;
 		this.memId = memId;
 		this.regdate = regdate;
 		this.deadline = deadline;
 		this.chalfrId = chalfrId;
-		this.favorite = favorite;
 		this.chalPoint = chalPoint;
-		this.challengeFrames = challengeFrames;
 	}
 
 	public int getChalId() {
@@ -43,19 +34,19 @@ public class Challenge {
 		this.memId = memId;
 	}
 
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
 
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 
-	public Date getDeadline() {
+	public String getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(Date deadline) {
+	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
 
@@ -67,14 +58,6 @@ public class Challenge {
 		this.chalfrId = chalfrId;
 	}
 
-	public char getFavorite() {
-		return favorite;
-	}
-
-	public void setFavorite(char favorite) {
-		this.favorite = favorite;
-	}
-
 	public int getChalPoint() {
 		return chalPoint;
 	}
@@ -83,22 +66,10 @@ public class Challenge {
 		this.chalPoint = chalPoint;
 	}
 
-	public ChallengeFrame getChallengeFrames() {
-		return challengeFrames;
-	}
-
-	public void setChallengeFrames(ChallengeFrame challengeFrames) {
-		this.challengeFrames = challengeFrames;
-	}
-
 	@Override
 	public String toString() {
 		return "Challenge [chalId=" + chalId + ", memId=" + memId + ", regdate=" + regdate + ", deadline=" + deadline
-				+ ", chalfrId=" + chalfrId + ", favorite=" + favorite + ", chalPoint=" + chalPoint
-				+ ", challengeFrames=" + challengeFrames + "]";
+				+ ", chalfrId=" + chalfrId + ", chalPoint=" + chalPoint + "]";
 	}
-
-
-
 
 }

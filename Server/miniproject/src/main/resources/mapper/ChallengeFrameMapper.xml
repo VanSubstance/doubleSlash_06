@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="server06.miniproject.mapper.ChallengeFrameMapper">
 
-	<select id="selectChallengeFrameList" resultType="server06.miniproject.model.ChallengeFrameList">
-		SELECT title, des, chal_fr_point
+	<select id="selectChallengeFrameList" resultType="server06.miniproject.model.ChallengeFrame">
+		SELECT chal_fr_id, chal_fr_point, title, des
 		FROM challenge_frame
 	</select>
 	

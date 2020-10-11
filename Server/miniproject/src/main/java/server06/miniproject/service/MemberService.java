@@ -28,4 +28,8 @@ public class MemberService {
 
 		return memberMapper.updateMemberLocation(memId, member) > 0 ? true : false;
 	}
+	
+	public boolean updateMemberPoint(int memId, Member member) {
+		return memberMapper.updateMemberPoint(memId, member) > 0 ? true : false;
+	}
 }

@@ -21,10 +21,6 @@ public class ChallengeService {
 		return challengeMapper.insertChallenge(challenge) > 0 ? true : false;
 	}
 
-	public int selectChallengeCount(int memId) {
-		return challengeMapper.selectChallengeCount(memId);
-	}
-	
 	public boolean deleteChallenge(int chalId) {
 		return challengeMapper.deleteChallenge(chalId) > 0 ? true : false;
 	}
@@ -33,5 +29,6 @@ public class ChallengeService {
 		
 		return challengeMapper.selectChallengeList(memId);
 	}
+	
 
 }

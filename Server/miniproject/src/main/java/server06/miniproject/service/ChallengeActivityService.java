@@ -1,7 +1,6 @@
 package server06.miniproject.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class ChallengeActivityService {
 		return challengeactivityMapper.deleteChallengeActivity(chalactId) > 0 ? true : false;
 	}
 	
-	public List<Map<String, String>> selectChallengeActivityList(int chalId){
-		return challengeactivityMapper.selectChallengeActivityList(chalId);
+	public List<ChallengeActivity> selectChallengeActivityList(int memId){
+		return challengeactivityMapper.selectChallengeActivityList(memId);
 	}
 }

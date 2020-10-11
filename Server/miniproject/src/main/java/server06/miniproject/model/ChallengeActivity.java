@@ -6,10 +6,10 @@ public class ChallengeActivity {
 
 	private int chalactId;
 	private int chalId;
-	private Date regdate;
+	private String regdate;
 	private String img;
 
-	public ChallengeActivity(int chalactId, int chalId, Date regdate, String img) {
+	public ChallengeActivity(int chalactId, int chalId, String regdate, String img) {
 		super();
 		this.chalactId = chalactId;
 		this.chalId = chalId;
@@ -33,11 +33,11 @@ public class ChallengeActivity {
 		this.chalId = chalId;
 	}
 
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
 
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 

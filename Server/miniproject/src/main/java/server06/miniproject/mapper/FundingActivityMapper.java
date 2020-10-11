@@ -26,7 +26,7 @@ public interface FundingActivityMapper {
 	List<FundingActivity> getFundingAvtivityList();
 
 	// 펀딩 활동 등록
-	@Insert("INSERT INTO FUNDING_ACTIVITY VALUES(#{fund_act_id}, #{fund_id}, #{mem_id}, #{point}, #{funddate})")
+	@Insert("INSERT INTO FUNDING_ACTIVITY VALUES((SELECT NVL(MAX(fund_act_id)+1,0) FROM FUNDING_ACTIVITY), #{fund_id}, #{mem_id}, #{point}, #{funddate})")
 	int insertFundingAvtivity(@Param("fund_act_id") int fund_act_id, @Param("fund_id") int fund_id, @Param("mem_id") int mem_id, @Param("point") int point, @Param("funddate") String funddate);
 	
 }
