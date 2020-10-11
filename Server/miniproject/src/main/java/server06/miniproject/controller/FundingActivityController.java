@@ -27,6 +27,11 @@ public class FundingActivityController {
 		return mapper.getFundingAvtivity(fund_act_id);
 	}
 	
+	@GetMapping("/funding_activity_mem/{mem_id}") //펀딩 활동 조회(mem_id를 통해)
+	public FundingActivity getFundingAvtivityMEM(@PathVariable("mem_id") int mem_id) {
+		return mapper.getFundingAvtivityMEM(mem_id);
+	}
+	
 	@GetMapping("/funding_activity/all") //펀딩 활동  전체 조회
 	public List<FundingActivity> getFundingAvtivityList(){
 		return mapper.getFundingAvtivityList();
