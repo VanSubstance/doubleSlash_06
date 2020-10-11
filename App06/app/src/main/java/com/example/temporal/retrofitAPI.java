@@ -24,7 +24,7 @@ interface retrofitAPI {
     Call<challengeItemForPost> setChallenge(@Body challengeItemForPost post);
     @GET("/challenge/{id}")
     Call<List<challengeItem>> getChallengeList(@Path("id") int id);
-    @PUT("/member/{mem_id}")
+    @PUT("/location/{mem_id}")
     Call<location> putLocation(@Path("mem_id") int mem_id, @Body location newOne);
     @POST("funding_activity/{fund_id}")
     Call<fundingItemActivity> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);

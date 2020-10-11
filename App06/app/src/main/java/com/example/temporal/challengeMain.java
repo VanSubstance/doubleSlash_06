@@ -122,6 +122,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
     public void onClick(challengeItem newOne) {
         ((interfaceMain) getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
     }
+    /*
     public String getCurrentAddress( double latitude, double longitude){
         //지오코더 ..GPS를 주소로 변환
         Geocoder geocoder=new Geocoder(getContext(), Locale.getDefault());
@@ -150,6 +151,8 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
+
+     */
 
 
     private void initView(View view) {

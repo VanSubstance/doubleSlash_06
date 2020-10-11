@@ -21,7 +21,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ApiErrorCode;
@@ -60,23 +59,6 @@ public class MainActivity extends AppCompatActivity {
     private Retrofit mRetrofit;
     private Call<List<challengeItem>> mChallengeItemList;
     private Call<location> mLocation;
-    private Callback<List<challengeItem>> mChallengeItemCallback = new Callback<List<challengeItem>>() {
-        @Override
-        public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
-            System.out.println("챌린지 수신 성공");
-            for (challengeItem item :
-                    response.body()) {
-                item.setDatesFromServer();
-                aCurrentData.listMyChallenge.add(item);
-            }
-        }
-
-        @Override
-        public void onFailure(Call<List<challengeItem>> call, Throwable t) {
-            System.out.println("챌린지 수신 실패");
-            t.printStackTrace();
-        }
-    };
     private Callback<location> mLocationCallback = new Callback<location>() {
         @Override
         public void onResponse(Call<location> call, Response<location> response) {
@@ -99,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(response);
             System.out.println(call);
         }
+
         @Override
         public void onFailure(Call<userItem> call, Throwable t) {
             System.out.println("사용자 발신 실패");
@@ -114,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
         gpsTracker = new gpsTracker(this);
 
-        lat=gpsTracker.getLatitude();
-        lon=gpsTracker.getLongitude();
-        addr=getCurrentAddress(lat,lon);
+        lat = gpsTracker.getLatitude();
+        lon = gpsTracker.getLongitude();
+        addr = getCurrentAddress(lat, lon);
 
         setRetrofitInit();
 
@@ -124,10 +107,9 @@ public class MainActivity extends AppCompatActivity {
         sessionCallback.getLocation(lat, lon);
         Session.getCurrentSession().addCallback(sessionCallback);
         Session.getCurrentSession().checkAndImplicitOpen();
-
     }
-    // map
 
+    // map
     public String getCurrentAddress(double latitude, double longitude) {
         //지오코더 ..GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -153,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean checkLocationServicesStatus() {
-        LocationManager locationManager = (LocationManager)getSystemService(this.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getSystemService(this.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
@@ -198,9 +180,10 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
             switch (requestCode) {
                 case GPS_ENABLE_REQUEST_CODE: //사용자가 GPS 활성 시켰는지 검사
@@ -216,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -225,10 +209,12 @@ public class MainActivity extends AppCompatActivity {
     private class SessionCallback implements ISessionCallback {
         public double lon; //경도
         public double lat; //위도
+
         public void getLocation(double lat, double lon) {
             this.lat = lat;
             this.lon = lon;
         }
+
         @Override
         public void onSessionOpened() {
             UserManagement.getInstance().me(new MeV2ResponseCallback() {
@@ -236,28 +222,27 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(ErrorResult errorResult) {
                     int result = errorResult.getErrorCode();
 
-                    if(result == ApiErrorCode.CLIENT_ERROR_CODE) {
+                    if (result == ApiErrorCode.CLIENT_ERROR_CODE) {
                         Toast.makeText(getApplicationContext(), "네트워크 연결이 불안정합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(),"로그인 도중 오류가 발생했습니다: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다: " + errorResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onSessionClosed(ErrorResult errorResult) {
-                    Toast.makeText(getApplicationContext(),"세션이 닫혔습니다. 다시 시도해 주세요: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "세션이 닫혔습니다. 다시 시도해 주세요: " + errorResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onSuccess(MeV2Response result) {
                     boolean exist = false;
-                    Intent intent = new Intent(getApplicationContext(), interfaceMain.class);
                     for (userItem user :
                             aCurrentData.listUser) {
                         if (user.id == result.getId()) {
                             aCurrentData.myInfo = user;
-                            location newOne =new location();
+                            location newOne = new location();
                             aCurrentData.myInfo.lat = lat;
                             aCurrentData.myInfo.lon = lon;
                             newOne.lat = lat;
@@ -265,8 +250,24 @@ public class MainActivity extends AppCompatActivity {
                             int id = aCurrentData.myInfo.id;
                             mLocation = mRetrofitAPI.putLocation(id, newOne);
                             mLocation.enqueue(mLocationCallback);
-                            startActivity(intent);
-                            finish();
+                            mChallengeItemList = mRetrofitAPI.getChallengeList(id);
+                            mChallengeItemList.enqueue(new Callback<List<challengeItem>>() {
+                                @Override
+                                public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
+                                    System.out.println("챌린지 수신 성공");
+                                    for (challengeItem item :
+                                            response.body()) {
+                                        item.setDatesFromServer();
+                                        aCurrentData.listMyChallenge.add(item);
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<challengeItem>> call, Throwable t) {
+                                    System.out.println("챌린지 수신 실패");
+                                    t.printStackTrace();
+                                }
+                            });
                             exist = true;
                             break;
                         }
@@ -280,19 +281,21 @@ public class MainActivity extends AppCompatActivity {
                         newOne.lat = lat;
                         Call<userItem> userInfo = mRetrofitAPI.setUser(newOne);
                         userInfo.enqueue(mUserPostCallback);
-                        startActivity(intent);
-                        finish();
                     }
+                    Intent intent = new Intent(getApplicationContext(), interfaceMain.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
         }
 
         @Override
         public void onSessionOpenFailed(KakaoException e) {
-            Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: "+e.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: " + e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
-    private void getHashKey(){
+
+    private void getHashKey() {
         PackageInfo packageInfo = null;
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);

@@ -55,42 +55,44 @@ public class interfaceMain extends AppCompatActivity {
             newOne.init(i);
             aCurrentData.listWasteBanner.add(newOne);
         }
+        // 잡다한 변수들
+        {
+            ConstraintLayout buttonHome = findViewById(R.id.menuHome);
+            ConstraintLayout buttonChallenge = findViewById(R.id.menuChallenge);
+            ConstraintLayout buttonFunding = findViewById(R.id.menuFunding);
+            ConstraintLayout buttonEnroll = findViewById(R.id.menuEnroll);
+            ConstraintLayout buttonInfo = findViewById(R.id.menuInfo);
 
-        ConstraintLayout buttonHome = findViewById(R.id.menuHome);
-        ConstraintLayout buttonChallenge = findViewById(R.id.menuChallenge);
-        ConstraintLayout buttonFunding = findViewById(R.id.menuFunding);
-        ConstraintLayout buttonEnroll = findViewById(R.id.menuEnroll);
-        ConstraintLayout buttonInfo = findViewById(R.id.menuInfo);
+            imageHome = findViewById(R.id.imageHome);
+            imageChallenge = findViewById(R.id.imageChallenge);
+            imageFunding = findViewById(R.id.imageFunding);
+            imageEnroll = findViewById(R.id.imageEnroll);
+            imageInfo = findViewById(R.id.imageInfo);
 
-        imageHome = findViewById(R.id.imageHome);
-        imageChallenge = findViewById(R.id.imageChallenge);
-        imageFunding = findViewById(R.id.imageFunding);
-        imageEnroll = findViewById(R.id.imageEnroll);
-        imageInfo = findViewById(R.id.imageInfo);
+            textHome = findViewById(R.id.textHome);
+            textChallenge = findViewById(R.id.textChallenge);
+            textFunding = findViewById(R.id.textFunding);
+            textEnroll = findViewById(R.id.textEnroll);
+            textInfo = findViewById(R.id.textInfo);
 
-        textHome = findViewById(R.id.textHome);
-        textChallenge = findViewById(R.id.textChallenge);
-        textFunding = findViewById(R.id.textFunding);
-        textEnroll = findViewById(R.id.textEnroll);
-        textInfo = findViewById(R.id.textInfo);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            homeMain next = new homeMain();
+            fragmentTransaction.replace(R.id.frameMain, next);
+            fragmentTransaction.addToBackStack(null).commit();
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        homeMain next = new homeMain();
-        fragmentTransaction.replace(R.id.frameMain, next);
-        fragmentTransaction.addToBackStack(null).commit();
-
-        View.OnClickListener btnListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callMenu(view.getId());
-            }
-        };
-        buttonHome.setOnClickListener(btnListener);
-        buttonChallenge.setOnClickListener(btnListener);
-        buttonEnroll.setOnClickListener(btnListener);
-        buttonFunding.setOnClickListener(btnListener);
-        buttonInfo.setOnClickListener(btnListener);
+            View.OnClickListener btnListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callMenu(view.getId());
+                }
+            };
+            buttonHome.setOnClickListener(btnListener);
+            buttonChallenge.setOnClickListener(btnListener);
+            buttonEnroll.setOnClickListener(btnListener);
+            buttonFunding.setOnClickListener(btnListener);
+            buttonInfo.setOnClickListener(btnListener);
+        }
     }
 
     public void clearMenu() {

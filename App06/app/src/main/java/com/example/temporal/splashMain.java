@@ -23,8 +23,6 @@ public class splashMain extends AppCompatActivity {
     private Call<List<fundingItem>> mFundingItemList;
     private Call<List<wasteItem>> mWasteItemList;
     private Call<List<userItem>> mUserItemList;
-    private Call<List<challengeItem>> mChallengeItemList;
-    private Call<location> mLocation;
     private Callback<List<challengeFrameItem>> mFrameCallback = new Callback<List<challengeFrameItem>>() {
         @Override
         public void onResponse(Call<List<challengeFrameItem>> call, Response<List<challengeFrameItem>> response) {
@@ -89,51 +87,6 @@ public class splashMain extends AppCompatActivity {
             t.printStackTrace();
         }
     };
-    private Callback<List<challengeItem>> mChallengeItemCallback = new Callback<List<challengeItem>>() {
-        @Override
-        public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
-            System.out.println("챌린지 수신 성공");
-            for (challengeItem item :
-                    response.body()) {
-                item.setDatesFromServer();
-                aCurrentData.listMyChallenge.add(item);
-            }
-        }
-
-        @Override
-        public void onFailure(Call<List<challengeItem>> call, Throwable t) {
-            System.out.println("챌린지 수신 실패");
-            t.printStackTrace();
-        }
-    };
-    private Callback<location> mLocationCallback = new Callback<location>() {
-        @Override
-        public void onResponse(Call<location> call, Response<location> response) {
-            System.out.println("사용자 위치 수정 성공");
-            System.out.println(response);
-            System.out.println(call);
-        }
-
-        @Override
-        public void onFailure(Call<location> call, Throwable t) {
-            System.out.println("사용자 위치 수정 실패");
-            System.out.println(call);
-            t.printStackTrace();
-        }
-    };
-    private Callback<userItem> mUserPostCallback = new Callback<userItem>() {
-        @Override
-        public void onResponse(Call<userItem> call, Response<userItem> response) {
-            System.out.println("사용자 발신 성공");
-            System.out.println(response);
-            System.out.println(call);
-        }
-        @Override
-        public void onFailure(Call<userItem> call, Throwable t) {
-            System.out.println("사용자 발신 실패");
-            t.printStackTrace();
-        }
-    };
 
     private void setRetrofitInit() {
         mRetrofit = new Retrofit.Builder()
@@ -152,9 +105,6 @@ public class splashMain extends AppCompatActivity {
         mFundingItemList.enqueue(mFundingCallback);
         mWasteItemList.enqueue(mWasteCallback);
         mUserItemList.enqueue(mUserCallback);
-        int id = aCurrentData.myInfo.id;
-        mChallengeItemList = mRetrofitAPI.getChallengeList(id);
-        mChallengeItemList.enqueue(mChallengeItemCallback);
     }
 
     @Override
