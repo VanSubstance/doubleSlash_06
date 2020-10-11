@@ -2,6 +2,7 @@ package server06.miniproject.controller;
 
 import java.sql.Timestamp;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class FundingController {
 	}
 	
 	@GetMapping("/funding/{fund_id}") //펀딩 조회
-	public Funding getFunding(@PathVariable("fund_id") String fund_id) {
+	public Funding getFunding(@PathVariable("fund_id") int fund_id) {
 		return mapper.getFunding(fund_id);
 	}
 
@@ -38,17 +39,17 @@ public class FundingController {
 	}
 	
 	@PostMapping("/funding/{fund_id}") //펀딩 추가
-	public void postFunding(@PathVariable("fund_id") String fund_id, @RequestParam("fund_inst") String fund_inst, @RequestParam("inst_icon") String inst_icon, @RequestParam("inst_des") String inst_des, @RequestParam("tar_point") int tar_point, @RequestParam("acu_point") int acu_point) {
+	public void postFunding(@PathVariable("fund_id") int fund_id, @RequestParam("fund_inst") String fund_inst, @RequestParam("inst_icon") String inst_icon, @RequestParam("inst_des") String inst_des, @RequestParam("tar_point") int tar_point, @RequestParam("acu_point") int acu_point) {
 		mapper.insertFunding(fund_id,fund_inst,inst_icon,inst_des,tar_point,acu_point);
 	}
 	
 	@PutMapping("/funding/{fund_id}") //펀딩 수정
-	public void putFunding(@PathVariable("fund_id") String fund_id, @RequestParam("fund_inst") String fund_inst, @RequestParam("inst_icon") String inst_icon, @RequestParam("inst_des") String inst_des, @RequestParam("tar_point") int tar_point, @RequestParam("acu_point") int acu_point) {
+	public void putFunding(@PathVariable("fund_id") int fund_id, @RequestParam("fund_inst") String fund_inst, @RequestParam("inst_icon") String inst_icon, @RequestParam("inst_des") String inst_des, @RequestParam("tar_point") int tar_point, @RequestParam("acu_point") int acu_point) {
 		mapper.updateFunding(fund_id,fund_inst,inst_icon,inst_des,tar_point,acu_point);
 	}
 	
 	@DeleteMapping("/funding/{fund_id}") //펀딩 삭제
-	public void deleteFunding(@PathVariable("fund_id") String fund_id) {
+	public void deleteFunding(@PathVariable("fund_id") int fund_id) {
 		mapper.deleteFunding(fund_id);
 	}
 }

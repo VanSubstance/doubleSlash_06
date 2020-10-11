@@ -27,6 +27,6 @@ public interface FundingActivityMapper {
 
 	// 펀딩 활동 등록
 	@Insert("INSERT INTO FUNDING_ACTIVITY VALUES(#{fund_act_id}, #{fund_id}, #{mem_id}, #{point}, #{funddate})")
-	int insertFundingAvtivity(@Param("fund_act_id") int fund_act_id, @Param("fund_id") int fund_id,
-			@Param("mem_id") int mem_id, @Param("point") int point, @Param("funddate") Date funddate);
+	int insertFundingAvtivity(@Param("fund_act_id") int fund_act_id, @Param("fund_id") int fund_id, @Param("mem_id") int mem_id, @Param("point") int point, @Param("funddate") String funddate);
+	
 }

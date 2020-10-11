@@ -120,6 +120,7 @@ public class challengeItemSpecific extends Fragment {
             Uri selectedImageUri = data.getData();
             newActivity.setImageURI(selectedImageUri);
             image.url=selectedImageUri.toString();
+
         }
     }
 }
