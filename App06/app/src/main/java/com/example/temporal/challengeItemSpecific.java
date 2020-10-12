@@ -40,12 +40,16 @@ public class challengeItemSpecific extends Fragment {
     private Callback<challengeItemActivity> challengeItemActivityCallback = new Callback<challengeItemActivity>() {
         @Override
         public void onResponse(Call<challengeItemActivity> call, Response<challengeItemActivity> response) {
-
+            System.out.println("챌린지 활동 등록 성공");
+            System.out.println(response);
+            System.out.println(call);
         }
 
         @Override
         public void onFailure(Call<challengeItemActivity> call, Throwable t) {
-
+            System.out.println("사용자 위치 수정 실패");
+            System.out.println(call);
+            t.printStackTrace();
         }
     };
     private void setRetrofitInit() {
@@ -56,7 +60,6 @@ public class challengeItemSpecific extends Fragment {
         mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
     }
 
-    challengeItemActivity image= new challengeItemActivity();
     challengeItem item = new challengeItem();
     CalendarView calendarView;
     TextView textPointTotal;
@@ -105,19 +108,31 @@ public class challengeItemSpecific extends Fragment {
             LinearLayout slotActivity = new LinearLayout(this.getContext());
             slotActivity.setOrientation(LinearLayout.HORIZONTAL);
             GET_GALLERY_IMAGE = i;
-            // 아래 함수에 사진 찍는거 연결하면 됨
-            // 연결하고 나서 프레그먼트바 계산 해줘야되니까 양승혁한테 말하고
-            newActivity.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            // 엑티비티 존재할 경우
+            if (item.acvts.get(i).img == "0") {
+                newActivity.setImageResource(R.drawable.image_enrolled);
+            } else {
+                newActivity.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    /*
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                     startActivityForResult(intent, GET_GALLERY_IMAGE);
                     image.chalId = item.chalId;
-
-                }
-            });
-            newActivity.setImageResource(R.drawable.image_default);
+                     */
+                        item.acvts.get(GET_GALLERY_IMAGE).img = "0";
+                        item.acvts.get(GET_GALLERY_IMAGE).chalId = item.chalId;
+                        newActivity.setImageResource(R.drawable.image_enrolled);
+                    /*
+                        mChallengeItemActivity = mRetrofitAPI.postChallengeActivity(item.acvts.get(GET_GALLERY_IMAGE));
+                        mChallengeItemActivity.enqueue(challengeItemActivityCallback);
+                        +
+                     */
+                    }
+                });
+                newActivity.setImageResource(R.drawable.image_default);
+            }
             LinearLayout.LayoutParams settingImage = new LinearLayout.LayoutParams(400, 400);
             settingImage.setMargins(20, 0, 20, 0);
             newActivity.setLayoutParams(settingImage);
@@ -132,7 +147,6 @@ public class challengeItemSpecific extends Fragment {
                 layoutImages.addView(rowImages);
             }
         }
-
         return view;
     }
 

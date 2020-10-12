@@ -27,6 +27,13 @@ public class challengeEnrollItemAdapter extends RecyclerView.Adapter<challengeEn
             // 뷰 객체에 대한 참조. (hold strong reference)
             textTitle = itemView.findViewById(R.id.textTitle);
             textDescription = itemView.findViewById(R.id.textDescription);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    mCallback.onClick(mData.get(position));
+                }
+            });
         }
     }
 

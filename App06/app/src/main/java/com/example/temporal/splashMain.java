@@ -121,6 +121,6 @@ public class splashMain extends AppCompatActivity {
                 startActivity(splash);
                 finish();
             }
-        }, 3000);
+        }, 1500);
     }
 }

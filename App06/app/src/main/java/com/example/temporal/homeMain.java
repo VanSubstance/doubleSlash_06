@@ -57,41 +57,6 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
         adapter2 = new wasteItemBannerAdapter(aCurrentData.listWasteBanner);
         viewList2.setAdapter(adapter2);
 
-        final ScrollView scrollView = view.findViewById(R.id.viewScroll);
-        final Button buttonDownward = view.findViewById(R.id.buttonDownward);
-        final Button buttonUpward = view.findViewById(R.id.buttonUpward);
-        buttonUpward.setVisibility(View.GONE);
-        buttonDownward.setVisibility(View.VISIBLE);
-        buttonDownward.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                scrollView.fullScroll(View.FOCUS_DOWN);
-                buttonDownward.setVisibility(View.GONE);
-                buttonUpward.setVisibility(View.VISIBLE);
-            }
-        });
-        buttonUpward.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                scrollView.fullScroll(View.FOCUS_UP);
-                buttonUpward.setVisibility(View.GONE);
-                buttonDownward.setVisibility(View.VISIBLE);
-            }
-        });
-        scrollView.setOnTouchListener(new ScrollView.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (scrollView.getScrollY() >= 0 && scrollView.getScrollY() < 400) {
-                    buttonDownward.setVisibility(View.VISIBLE);
-                    buttonUpward.setVisibility(View.GONE);
-                } else {
-                    buttonUpward.setVisibility(View.VISIBLE);
-                    buttonDownward.setVisibility(View.GONE);
-                }
-                return false;
-            }
-        });
-
         ConstraintLayout buttonMask = view.findViewById(R.id.buttonMask);
         ConstraintLayout buttonPlastic = view.findViewById(R.id.buttonPlastic);
         ConstraintLayout buttonPaper = view.findViewById(R.id.buttonPaper);

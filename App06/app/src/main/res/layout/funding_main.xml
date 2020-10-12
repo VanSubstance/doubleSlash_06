@@ -13,15 +13,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            style="@style/banner01">
 
             <ImageView
                 android:id="@+id/textFILLIT"
-                android:layout_width="120sp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10sp"
-                android:text="FILLIT"
-                android:src="@drawable/logo_small"
+                style="@style/bannerLogo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -44,8 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10sp"
-            android:layout_weight="5"
-            android:background="@drawable/background_picture">
+            android:layout_weight="5">
 
             <!--            <TextView-->
             <!--                android:id="@+id/textDescription2"-->
