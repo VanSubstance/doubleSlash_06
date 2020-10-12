@@ -29,6 +29,8 @@ interface retrofitAPI {
     Call<location> putLocation(@Path("mem_id") int mem_id, @Body location newOne);
     @POST("funding_activity/{fund_id}")
     Call<fundingItemActivity> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
+    @PUT("member/point/{memId}")
+    Call<Integer> putFundingActivity(@Path("memId") int memId, @Body int newOne);
     @POST("/challengeactivity")
     Call<challengeItemActivity> postChallengeActivity(@Body challengeItemActivity newOne);
     @DELETE("/challenge/{chalId}")
