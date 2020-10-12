@@ -45,8 +45,6 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
         // 좌우 넘기기
-        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
-        itemTouchhelper.attachToRecyclerView(viewList);
         adapter = new challengeItemAdapter(items, this);
         viewList.setAdapter(adapter);
 
