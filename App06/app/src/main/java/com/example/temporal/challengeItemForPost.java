@@ -9,6 +9,7 @@ public class challengeItemForPost {
     int chalfrId;
     String regdate;
     String deadline;
+    int chalPoint;
 
 
     public void setDates(List<Calendar> selectedDates) {

@@ -13,10 +13,41 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdapter.ViewHolder> implements challengeItemSwipeListener {
 
     private ArrayList<challengeItem> mData = new ArrayList<challengeItem>();
     private OnItemClickForChallenge mCallback;
+    private retrofitAPI mRetrofitAPI;
+    private Retrofit mRetrofit;
+    Call<Void> mChallengeItemCall;
+    Callback<Void> mChallengeItemCallback = new Callback<Void>() {
+        @Override
+        public void onResponse(Call<Void> call, Response<Void> response) {
+            System.out.println("사용자 위치 수정 성공");
+            System.out.println(response);
+            System.out.println(call);
+        }
+
+        @Override
+        public void onFailure(Call<Void> call, Throwable t) {
+            System.out.println("사용자 위치 수정 실패");
+            System.out.println(call);
+            t.printStackTrace();
+        }
+    };
+    private void setRetrofitInit() {
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("http://101.101.218.146:8080")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
+    }
 
     @Override
     public boolean onItemMove(int from_position, int to_position) {
@@ -30,7 +61,9 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
 
     @Override
     public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
-        // 서버에서도 삭제
+        setRetrofitInit();
+        mChallengeItemCall = mRetrofitAPI.deleteChallengeItem(mData.get(position).chalId);
+        mChallengeItemCall.enqueue(mChallengeItemCallback);
         aCurrentData.listMyChallenge.remove(mData.get(position));
         mData.remove(position);
         notifyItemRemoved(position);

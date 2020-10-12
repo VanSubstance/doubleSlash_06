@@ -4,6 +4,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -30,4 +31,6 @@ interface retrofitAPI {
     Call<fundingItemActivity> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
     @POST("/challengeactivity")
     Call<challengeItemActivity> postChallengeActivity(@Body challengeItemActivity newOne);
+    @DELETE("/challenge/{chalId}")
+    Call<Void> deleteChallengeItem(@Path("chalId") int chalId);
 }

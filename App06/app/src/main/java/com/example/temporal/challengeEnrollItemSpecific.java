@@ -74,6 +74,7 @@ public class challengeEnrollItemSpecific extends Fragment {
                 itemPost.memId = aCurrentData.myInfo.id;
                 itemPost.chalfrId = item.chalId;
                 item.chalPoint = item.chalPoint * calendarView.getSelectedDates().size();
+                itemPost.chalPoint = item.chalPoint;
                 aCurrentData.listMyChallenge.add(item);
                 Call<challengeItemForPost> newChallenge = mRetrofitAPI.setChallenge(itemPost);
                 newChallenge.enqueue(mChallengePostCallback);
