@@ -1,28 +1,28 @@
 package com.example.temporal;
 
-        import android.app.Fragment;
-        import android.graphics.Color;
-        import android.os.Bundle;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.animation.Animation;
-        import android.view.animation.AnimationUtils;
-        import android.widget.TextView;
+import android.app.Fragment;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
-        import androidx.constraintlayout.widget.ConstraintLayout;
-        import androidx.recyclerview.widget.LinearLayoutManager;
-        import androidx.recyclerview.widget.PagerSnapHelper;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import java.text.SimpleDateFormat;
-        import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-        import retrofit2.Call;
-        import retrofit2.Callback;
-        import retrofit2.Response;
-        import retrofit2.Retrofit;
-        import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class fundingList extends Fragment implements OnItemClickForFunding {
     RecyclerView viewList;
@@ -30,6 +30,7 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
     Call<fundingItemActivity> mPostFundingActivity;
+    Call<Integer> mPutFundingActivity;
     private void setRetrofitInit() {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("http://101.101.218.146:8080")
@@ -47,6 +48,20 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
 
         @Override
         public void onFailure(Call<fundingItemActivity> call, Throwable t) {
+            System.out.println("전송 실패");
+            t.printStackTrace();
+        }
+    };
+    Callback<Integer> fundingPointCallback = new Callback<Integer>() {
+        @Override
+        public void onResponse(Call<Integer> call, Response<Integer> response) {
+            System.out.println("전송 성공");
+            System.out.println(response);
+            System.out.println(call);
+        }
+
+        @Override
+        public void onFailure(Call<Integer> call, Throwable t) {
             System.out.println("전송 실패");
             t.printStackTrace();
         }
@@ -101,18 +116,10 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         TextView textNowPoint = viewList.findViewById(R.id.textNowPoint);
         TextView textPoint = viewList.findViewById(R.id.textPoint);
         TextView textRestPoint = viewList.findViewById(R.id.textRestPoint);
-//        TextView textSpecificDescription = viewList.findViewById(R.id.textSpecificDescription);
-//        Button fundingbutton = viewList.findViewById(R.id.funding_button);
-//        TextView textTitleClick = viewList.findViewById(R.id.textTitleClick);
-//        TextView textDescriptionClick = viewList.findViewById(R.id.textDescriptionClick);
 
         textNowPoint.setVisibility(View.VISIBLE);
         textPoint.setVisibility(View.VISIBLE);
         textRestPoint.setVisibility(View.VISIBLE);
-//            textSpecificDescription.setVisibility(View.VISIBLE);
-//            fundingbutton.setVisibility(View.VISIBLE);
-//            textTitle.setVisibility(View.GONE);
-//            textDescription.setVisibility(View.GONE);
 
         Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.funding_translate_top);   // 에니메이션 설정 파일
         viewList.startAnimation(anim);
@@ -131,6 +138,12 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         newActivity.funddate = sdf.format(Calendar.getInstance().getTime());
         mPostFundingActivity = mRetrofitAPI.postFundingActivity(newOne.fund_id, newActivity);
         mPostFundingActivity.enqueue(fundingItemCallback);
+
+        aCurrentData.myInfo.point = newOne.rest_point;
+        point newpointActivity = new point();
+        int point = newOne.rest_point;
+        mPutFundingActivity = mRetrofitAPI.putFundingActivity(aCurrentData.myInfo.id, point);
+        mPutFundingActivity.enqueue(fundingPointCallback);
 
         funding_list.setVisibility(View.GONE);
         funding_click.setVisibility(View.VISIBLE);

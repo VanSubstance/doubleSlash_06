@@ -46,7 +46,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
 
             // 뷰 객체에 대한 참조. (hold strong reference)
             funding = itemView.findViewById(R.id.funding);
-            inst = itemView.findViewById(R.id.inst);
+            inst = itemView.findViewById(R.id.textTitle);
             inst_desc = itemView.findViewById(R.id.inst_desc);
             seekBar = itemView.findViewById(R.id.seekBar);
 
