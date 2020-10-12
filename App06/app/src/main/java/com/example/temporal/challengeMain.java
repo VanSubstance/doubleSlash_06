@@ -122,37 +122,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
     public void onClick(challengeItem newOne) {
         ((interfaceMain) getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
     }
-    /*
-    public String getCurrentAddress( double latitude, double longitude){
-        //지오코더 ..GPS를 주소로 변환
-        Geocoder geocoder=new Geocoder(getContext(), Locale.getDefault());
-        List<Address> addresses;
-        try {
-            addresses = geocoder.getFromLocation(
-                    latitude,
-                    longitude,
-                    100);
-        } catch (IOException e) {
-            //네트워크 문제
-            Toast.makeText(getContext(),"지오코터 서비스 사용불가",Toast.LENGTH_LONG).show();
-            showDialogForLocationServiceSetting();
-            return "잘못된 GPS 좌표";
-        }
-        if(addresses==null||addresses.size()==0){
-            Toast.makeText(getContext(),"주소 미발견",Toast.LENGTH_LONG).show();
-            showDialogForLocationServiceSetting();
-            return "주소 미발견";
-        }
-        Address address=addresses.get(0);
-        return address.getAddressLine(0).toString();
-    }
-    public boolean checkLocationServicesStatus() {
-        LocationManager locationManager = (LocationManager)getActivity().getSystemService(getContext().LOCATION_SERVICE);
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
 
-     */
 
 
     private void initView(View view) {
@@ -173,9 +143,29 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
             mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
             mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 Respin 마커 모양.
             mapView.addPOIItem(mapPOIItem);
+            mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
+                @Override
+                public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+
+                }
+
+                @Override
+                public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+
+                }
+
+                @Override
+                public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+
+                }
+
+                @Override
+                public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
+                }
+            });
         }
     }
-
 
     @Override
     public void onMapViewInitialized(MapView mapView) {

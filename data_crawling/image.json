@@ -1,0 +1,49 @@
+{
+	"종이류": {
+        "category":"papaer",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfNDkg/MDAxNTIyODIwODk4MDM2.JE5JNhnRZuMM9y7xIlA-Zc4V_3M2aa9Kq9TWj9trYeog.FngURd5Fwk78GKKV2fwcXaPWzfRRhtfakXlgVSa5AS0g.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EC%A2%85%EC%9D%B41.jpg?type=w2"
+		
+	},
+	"종이컵,종이팩": {
+        "category":"papaer",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfODUg/MDAxNTIyODI0MTcyODY5.diZHg53c9HpVRq2tUTrmOISxxnEw6lBO2KAjRqCQT3sg.zpZmqScz1nEGfmjyNBGCzRvW35saWX8SHs3J_GrhLtUg.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EC%A2%85%EC%9D%B42.jpg?type=w2"
+		
+	},
+	"캔류,고철류": {
+        "category":"aluminum",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfMTE4/MDAxNTIyODI0NjA0MDUz.vcYc_mO682xMgGsWVP9rpbC8TsFQYl9RdAmW09Ogcgog.MhKHjvWaYgyjfRS64qLdCe5TmkQt1SBlyMeTtUotwukg.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EA%B3%A0%EC%B2%A0.jpg?type=w2"
+		
+	},
+	"유리병류": {
+        "category":"glass",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfNDcg/MDAxNTIyODI1NTkzMzMw.vpMymT1thXpU6Q8dmmtvgzK-R6EjG5zvrOOmRm3aCTsg.xkT36CGn8gybLFGPkiz-KjbTGgbBdB4GTg6MI2KbqhEg.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EC%9C%A0%EB%A6%AC.jpg?type=w2"
+	},
+	"플라스틱류": {
+        "category":"plastic",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfMjEz/MDAxNTIyODI2Mjc0ODI4.S8Vr7IP_reOOJSe_3No_tS7meNG8Lmmq1ZB2AX55aKEg.pvJSaTidUbVA7Ee8xdvtQcFgXS16nBYU-dpG6Z09w7og.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%8B%B1.jpg?type=w2"
+	},
+	"비닐류": {
+        "category":"vinyl",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfMTgz/MDAxNTIyODI3NTU5MDU2.bXtTWlTQBt7wnlKEyBZunFDQ0BFK9KXqPfBA-UUrgwAg.w5zKJXeKdiJsN5nyHdwd85VSkhLcExnXluI-Aej4xocg.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EB%B9%84%EB%8B%90.jpg?type=w2"
+	},
+	"형광등": {
+        "category":"fluorescent lamp",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfMjQx/MDAxNTIyODI4Mjc3MDY4.WbkklNQ-PaZVr7H4ow5O0qO1MrH8cyXaJ5cwASPneqIg.yTWObNgm52t3SFc1_MSo-Yn2iaC5sIdXF3PaUD5nK2og.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%ED%98%95%EA%B4%91%EB%93%B1.jpg?type=w2"
+	},
+	"전지류": {
+        "category":"battery",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfNSAg/MDAxNTIyODI4ODI4ODY4.pqhpGH1A8OiaHhlOWEPp6-fV5ICppRveCuMRf4y7Rdkg.9QjVzC4jx0i154ybQotgW5qbphbYp5lnS_0dWM7JJuwg.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EC%A0%84%EC%A7%80%EB%A5%98.jpg?type=w2"
+	},
+	"섬유류": {
+        "category":"textile",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfOSAg/MDAxNTIyODI5MDU4Mzk2.cVy-7O-FO1t-GUz2VlvvH2u2hLO3JiHpckHVfHb-YJsg.KnrXoB8cDiVTfMJgnudEQwky-nidCsdUm63Ot1mRJVMg.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EC%84%AC%EC%9C%A0%EB%A5%98.jpg?type=w2"
+	},
+	"전자제품": {
+        "category":"electronics",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDVfMjgg/MDAxNTIyOTE0NjI2Nzkz.rmGQdeNxAU3m0353cQyRwsFddRvXR01gnKolBK2rBxcg.zHzdB1JFekioaUuhy4yjfgDv-TSlhOtfcxIExhwnrsMg.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EC%A0%84%EC%9E%90%EC%A0%9C%ED%92%88.jpg?type=w2"
+	},
+	"폐식용유": {
+        "category":"edible oil",
+		"src": "https://mblogthumb-phinf.pstatic.net/MjAxODA0MDRfMjcx/MDAxNTIyODMwMTMzMTAw.8zG2hmBdDaM2wRaneaF104djlqHd6P8WAFdZOJIIWZ4g.KAbVaPkN60SN38Q5nUlwBnvZtUKVr8-zH8HhAZmFOAsg.JPEG.charm3007/%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%ED%8F%90%EC%8B%9D%EC%9A%A9%EC%9C%A0.jpg?type=w2"
+    }
+}
