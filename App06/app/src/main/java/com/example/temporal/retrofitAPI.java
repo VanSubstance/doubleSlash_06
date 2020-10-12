@@ -30,7 +30,7 @@ interface retrofitAPI {
     @POST("funding_activity/{fund_id}")
     Call<fundingItemActivity> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
     @PUT("member/point/{memId}")
-    Call<Integer> putFundingActivity(@Path("memId") int memId, @Body int newOne);
+    Call<point> putFundingActivity(@Path("memId") int memId, @Body point newOne);
     @POST("/challengeactivity")
     Call<challengeItemActivity> postChallengeActivity(@Body challengeItemActivity newOne);
     @DELETE("/challenge/{chalId}")

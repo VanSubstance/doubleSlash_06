@@ -30,7 +30,7 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
     Call<fundingItemActivity> mPostFundingActivity;
-    Call<Integer> mPutFundingActivity;
+    Call<point> mPutFundingActivity;
     private void setRetrofitInit() {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("http://101.101.218.146:8080")
@@ -52,16 +52,16 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
             t.printStackTrace();
         }
     };
-    Callback<Integer> fundingPointCallback = new Callback<Integer>() {
+    Callback<point> fundingPointCallback = new Callback<point>() {
         @Override
-        public void onResponse(Call<Integer> call, Response<Integer> response) {
+        public void onResponse(Call<point> call, Response<point> response) {
             System.out.println("전송 성공");
             System.out.println(response);
             System.out.println(call);
         }
 
         @Override
-        public void onFailure(Call<Integer> call, Throwable t) {
+        public void onFailure(Call<point> call, Throwable t) {
             System.out.println("전송 실패");
             t.printStackTrace();
         }
@@ -141,8 +141,8 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
 
         aCurrentData.myInfo.point = newOne.rest_point;
         point newpointActivity = new point();
-        int point = newOne.rest_point;
-        mPutFundingActivity = mRetrofitAPI.putFundingActivity(aCurrentData.myInfo.id, point);
+        newpointActivity.point = newOne.rest_point;
+        mPutFundingActivity = mRetrofitAPI.putFundingActivity(aCurrentData.myInfo.id, newpointActivity);
         mPutFundingActivity.enqueue(fundingPointCallback);
 
         funding_list.setVisibility(View.GONE);
