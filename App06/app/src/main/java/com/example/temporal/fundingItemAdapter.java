@@ -36,10 +36,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         TextView point;
         TextView fund_point;
         TextView rest_point;
-
-//        TextView textDescriptionClick;
-//        TextView textSpecificTitle;
-//        TextView textSpecificDescription;
+        TextView textNick;
 
         ViewHolder(View itemView) {
             super(itemView) ;
@@ -60,6 +57,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             rest_point = itemView.findViewById(R.id.rest_point);
 
             rest_point.setText(String.valueOf(aCurrentData.myInfo.point));
+            textNick = itemView.findViewById(R.id.user);
+            textNick.setText(aCurrentData.myInfo.nick);
 
             //final int targ = Integer.valueOf(targ_point.getText().toString());
             Button funding_button = itemView.findViewById(R.id.funding_button);
