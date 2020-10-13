@@ -276,7 +276,7 @@
                     android:layout_width="40px"
                     android:layout_height="56px"
                     android:layout_marginRight="40dp"
-                    android:background="@drawable/right"
+                    android:background="@drawable/arrow_right"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
