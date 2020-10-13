@@ -61,7 +61,6 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
     public double lon; //경도
     public double lat; //위도
     private NestedScrollView scrollView;
-    public MapPOIItem mapPOIItem;
 
     RecyclerView viewList;
     challengeItemAdapter adapter;
@@ -153,58 +152,57 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lat, lon), 3, true);
         mapView.zoomIn(true);
         mapView.zoomOut(true);
+        MapView.POIItemEventListener event = new MapView.POIItemEventListener() {
+            @Override
+            public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+                mChallengeItemList = mRetrofitAPI.getChallengeList(mapPOIItem.getTag());
+                mChallengeItemList.enqueue(new Callback<List<challengeItem>>() {
+                    @Override
+                    public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
+                        System.out.println("남의 챌린지 수신 성공");
+                        aCurrentData.listChallenge.clear();
+                        for (challengeItem item :
+                                response.body()) {
+                            item.setDatesFromServer();
+                            aCurrentData.listChallenge.add(item);
+                            System.out.println(item);
+                        }
+                        adapter.changeData(aCurrentData.listChallenge);
+                        viewList.removeAllViewsInLayout();
+                        viewList.setAdapter(adapter);
+                    }
+                    @Override
+                    public void onFailure(Call<List<challengeItem>> call, Throwable t) {
+                        System.out.println("챌린지 수신 실패");
+                        t.printStackTrace();
+                    }
+                });
+            }
+
+            @Override
+            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+            }
+
+            @Override
+            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+
+            }
+
+            @Override
+            public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
+            }
+        };
+        mapView.setPOIItemEventListener(event);
         //구문을 사용할 예정 !!
         for (userItem item : aCurrentData.listUser) {
-            mapPOIItem = new MapPOIItem();
+            MapPOIItem mapPOIItem = new MapPOIItem();
             mapPOIItem.setItemName(item.nick);
             mapPOIItem.setTag(item.id);
             mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(item.lat, item.lon));
             mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
             mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 Respin 마커 모양.
             mapView.addPOIItem(mapPOIItem);
-            mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
-                @Override
-                public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
-                    // 서버 연결해서 클릭한 마커 memId에 해당하는 리스트 get -> aCurrentData.listChallenge 보관
-                    mChallengeItemList = mRetrofitAPI.getChallengeList(mapPOIItem.getTag());
-                    mChallengeItemList.enqueue(new Callback<List<challengeItem>>() {
-                        @Override
-                        public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
-                            System.out.println("남의 챌린지 수신 성공");
-                            aCurrentData.listChallenge.clear();
-                            for (challengeItem item :
-                                    response.body()) {
-                                item.setDatesFromServer();
-                                aCurrentData.listChallenge.add(item);
-                                System.out.println(item);
-                            }
-                            adapter.changeData(aCurrentData.listChallenge);
-                            viewList.removeAllViewsInLayout();
-                            viewList.setAdapter(adapter);
-                        }
-                        @Override
-                        public void onFailure(Call<List<challengeItem>> call, Throwable t) {
-                            System.out.println("챌린지 수신 실패");
-                            t.printStackTrace();
-                        }
-                    });
-                }
-
-                @Override
-                public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
-
-                }
-
-                @Override
-                public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
-
-                }
-
-                @Override
-                public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
-
-                }
-            });
             listMarker.add(mapPOIItem);
         }
     }

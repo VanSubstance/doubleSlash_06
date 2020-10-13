@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Intent;
 
 import android.graphics.Color;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,7 +24,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +39,8 @@ import static android.app.Activity.RESULT_OK;
 public class challengeItemSpecific extends Fragment {
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
+    private int num;
+    private ImageView[] newActivity;
     private Call<challengeItemActivity> mChallengeItemActivity;
     private Callback<challengeItemActivity> challengeItemActivityCallback = new Callback<challengeItemActivity>() {
         @Override
@@ -66,7 +71,6 @@ public class challengeItemSpecific extends Fragment {
 
     private long now ;
     private int GET_GALLERY_IMAGE;
-    private ImageView newActivity;
 
 
     public void setItem(challengeItem newOne) {
@@ -97,65 +101,73 @@ public class challengeItemSpecific extends Fragment {
         settingRow.setMargins(0, 40, 0 ,0);
 
 
-        // 이미지 동적 생성
-        for (int i = 0; i < item.acvts.size(); i++) {
-            if ( i % 3 == 0) {
-                rowImages = new LinearLayout(this.getContext());
-                rowImages.setOrientation(LinearLayout.HORIZONTAL);
-                rowImages.setLayoutParams(settingRow);
-            }
-            newActivity = new ImageView(this.getContext());
-            LinearLayout slotActivity = new LinearLayout(this.getContext());
-            slotActivity.setOrientation(LinearLayout.HORIZONTAL);
-            GET_GALLERY_IMAGE = i;
-            // 엑티비티 존재할 경우
-            if (item.acvts.get(i).img == "0") {
-                newActivity.setImageResource(R.drawable.image_enrolled);
-            } else {
-                newActivity.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+
+        View.OnClickListener myListener=new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int tvKey=(Integer)view.getTag();
                     /*
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                     startActivityForResult(intent, GET_GALLERY_IMAGE);
                     image.chalId = item.chalId;
                      */
-                        item.acvts.get(GET_GALLERY_IMAGE).img = "0";
-                        item.acvts.get(GET_GALLERY_IMAGE).chalId = item.chalId;
-                        newActivity.setImageResource(R.drawable.image_enrolled);
+                item.acvts.get(tvKey).img = "0";
+                item.acvts.get(tvKey).chalId = item.chalId;
+                newActivity[tvKey].setImageResource(R.drawable.image_enrolled);
                     /*
                         mChallengeItemActivity = mRetrofitAPI.postChallengeActivity(item.acvts.get(GET_GALLERY_IMAGE));
                         mChallengeItemActivity.enqueue(challengeItemActivityCallback);
                         +
                      */
-                    }
-                });
-                newActivity.setImageResource(R.drawable.image_default);
+            }
+        };
+
+        newActivity= new ImageView[item.acvts.size()];
+        // 이미지 동적 생성
+        for (int i = 0; i < item.acvts.size(); i++) {
+            num=i;
+            if ( i % 3 == 0) {
+                rowImages = new LinearLayout(this.getContext());
+                rowImages.setOrientation(LinearLayout.HORIZONTAL);
+                rowImages.setLayoutParams(settingRow);
+            }
+            newActivity[num]=new ImageView(this.getContext());
+            newActivity[num].setTag(num);
+            LinearLayout slotActivity = new LinearLayout(this.getContext());
+            slotActivity.setOrientation(LinearLayout.HORIZONTAL);
+            GET_GALLERY_IMAGE = i;
+            // 엑티비티 존재할 경우
+            if (item.acvts.get(num).img == "0") {
+                newActivity[num].setImageResource(R.drawable.image_enrolled);
+            } else {
+                newActivity[num].setImageResource(R.drawable.image_default);
+                newActivity[num].setOnClickListener(myListener);
             }
             LinearLayout.LayoutParams settingImage = new LinearLayout.LayoutParams(400, 400);
-            settingImage.setMargins(20, 0, 20, 0);
-            newActivity.setLayoutParams(settingImage);
-            newActivity.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            settingImage.setMargins(10, 0, 10, 0);
+            newActivity[num].setLayoutParams(settingImage);
+            newActivity[num].setScaleType(ImageView.ScaleType.CENTER_CROP);
             LinearLayout.LayoutParams settingSlot = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             settingSlot.weight = 1;
             settingSlot.gravity = Gravity.CENTER;
             slotActivity.setLayoutParams(settingSlot);
-            slotActivity.addView(newActivity);
+            slotActivity.addView(newActivity[num]);
             rowImages.addView(slotActivity);
             if (i % 3 == 2 || i + 1 == item.acvts.size()) {
                 layoutImages.addView(rowImages);
             }
         }
+
         return view;
     }
 
-    @Override
+  /*  @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
             newActivity.setImageURI(selectedImageUri);
             // image.url=selectedImageUri.toString();
         }
-    }
+    }*/
 }
