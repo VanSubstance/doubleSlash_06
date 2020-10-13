@@ -3,8 +3,14 @@
 <mapper namespace="server06.miniproject.mapper.ChallengeFrameMapper">
 
 	<select id="selectChallengeFrameList" resultType="server06.miniproject.model.ChallengeFrame">
-		SELECT chal_fr_id, chal_fr_point, title, des
+		SELECT chal_fr_id, chal_fr_point, title, des, cnt
 		FROM challenge_frame
 	</select>
+	
+	<update id="updateChallengeFrameCount" parameterType="int">
+		UPDATE challenge_frame
+		SET cnt = #{item.cnt}
+		WHERE chal_fr_id = #{chalfrId}
+	</update>
 	
 </mapper>

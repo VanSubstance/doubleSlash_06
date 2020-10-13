@@ -19,4 +19,8 @@ public class ChallengeFrameService {
 	public List<ChallengeFrame> selectChallengeFrameList() {
 		return challengeframeMapper.selectChallengeFrameList();
 	}
+	
+	public Boolean updateChallengeFrameCount(int chalfrId, ChallengeFrame challengeframe) {
+		return challengeframeMapper.updateChallengeFrameCount(chalfrId, challengeframe) > 0 ? true : false;
+	}
 }
