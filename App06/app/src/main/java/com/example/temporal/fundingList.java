@@ -148,8 +148,8 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         aCurrentData.myInfo.point = Integer.parseInt((myPoint.getText().toString()));
         point newpointActivity = new point();
         newpointActivity.point = Integer.parseInt((pointRest.getText().toString()));
-        mPutFundingActivity = mRetrofitAPI.putFundingActivity(aCurrentData.myInfo.id, newpointActivity);
-        mPutFundingActivity.enqueue(fundingPointCallback);
+        mchangePoint = mRetrofitAPI.changePoint(aCurrentData.myInfo.id, newpointActivity);
+        mchangePoint.enqueue(fundingPointCallback);
 
         funding_list.setVisibility(View.GONE);
         funding_click.setVisibility(View.VISIBLE);
