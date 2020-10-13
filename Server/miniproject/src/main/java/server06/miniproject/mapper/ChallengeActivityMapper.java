@@ -16,4 +16,8 @@ public interface ChallengeActivityMapper {
 	int deleteChallengeActivity(int chalactId);
 	
 	List<ChallengeActivity> selectChallengeActivityList(int memId);
+	
+	int updateChallengeActivityCount(@Param("chalactId") int chalactId, @Param("item") ChallengeActivity challengeactivity);
+	
+	List<ChallengeActivity> selectChallengeActivityChalList(int chalId);
 }

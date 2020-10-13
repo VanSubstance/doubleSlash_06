@@ -1,25 +1,27 @@
 package server06.miniproject.model;
 
 public class ChallengeFrame {
-	private int ch_id;
+	private int chalfrId;
 	private int point;
 	private String title;
 	private String des;
+	private int cnt;
 
-	public ChallengeFrame(int ch_id, int point, String title, String des) {
+	public ChallengeFrame(int chalfrId, int point, String title, String des, int cnt) {
 		super();
-		this.ch_id = ch_id;
+		this.chalfrId = chalfrId;
 		this.point = point;
 		this.title = title;
 		this.des = des;
+		this.cnt = cnt;
 	}
 
-	public int getCh_id() {
-		return ch_id;
+	public int getChalfrId() {
+		return chalfrId;
 	}
 
-	public void setCh_id(int ch_id) {
-		this.ch_id = ch_id;
+	public void setChalfrId(int chalfrId) {
+		this.chalfrId = chalfrId;
 	}
 
 	public int getPoint() {
@@ -46,9 +48,18 @@ public class ChallengeFrame {
 		this.des = des;
 	}
 
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
 	@Override
 	public String toString() {
-		return "ChallengeFrame [ch_id=" + ch_id + ", point=" + point + ", title=" + title + ", des=" + des + "]";
+		return "ChallengeFrame [chalfrId=" + chalfrId + ", point=" + point + ", title=" + title + ", des=" + des
+				+ ", cnt=" + cnt + "]";
 	}
 
 }

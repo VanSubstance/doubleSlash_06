@@ -1,6 +1,5 @@
 package server06.miniproject.model;
 
-import java.sql.Date;
 
 public class ChallengeActivity {
 
@@ -8,13 +7,15 @@ public class ChallengeActivity {
 	private int chalId;
 	private String regdate;
 	private String img;
+	private int cnt;
 
-	public ChallengeActivity(int chalactId, int chalId, String regdate, String img) {
+	public ChallengeActivity(int chalactId, int chalId, String regdate, String img, int cnt) {
 		super();
 		this.chalactId = chalactId;
 		this.chalId = chalId;
 		this.regdate = regdate;
 		this.img = img;
+		this.cnt = cnt;
 	}
 
 	public int getChalactId() {
@@ -49,10 +50,18 @@ public class ChallengeActivity {
 		this.img = img;
 	}
 
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
 	@Override
 	public String toString() {
 		return "ChallengeActivity [chalactId=" + chalactId + ", chalId=" + chalId + ", regdate=" + regdate + ", img="
-				+ img + "]";
+				+ img + ", cnt=" + cnt + "]";
 	}
 
 }

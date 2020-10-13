@@ -18,11 +18,23 @@
 	</delete>
 	
 	<select id="selectChallengeActivityList" parameterType="int" resultType="server06.miniproject.model.ChallengeActivity">
-		SELECT a.chal_act_id, a.chal_id, a.regdate, a.img
+		SELECT a.chal_act_id, a.chal_id, a.regdate, a.img, a.cnt
 		FROM challenge_activity a
 		JOIN challenge c
 		ON c.chal_id = a.chal_id
 		WHERE mem_id = #{memId}
+	</select>
+	
+	<update id="updateChallengeActivityCount" parameterType="int">
+		UPDATE challenge_activity
+		SET cnt = #{item.cnt}
+		WHERE chal_act_id = #{chalactId}
+	</update>
+	
+	<select id="selectChallengeActivityChalList" parameterType="int" resultType="server06.miniproject.model.ChallengeActivity">
+		SELECT chal_act_id, chal_id, regdate, img, cnt
+		FROM challenge_activity
+		WHERE chal_id = #{chalId}
 	</select>
 
 </mapper>

@@ -33,4 +33,14 @@ public class ChallengeActivityController {
 		return challengeactivityService.selectChallengeActivityList(memId);
 	}
 	
+	@RequestMapping(value="/challengeactivity/cnt/{chalactId}", method=RequestMethod.PUT)
+	public boolean updateChallengeActivityCount(@PathVariable int chalactId, @RequestBody ChallengeActivity challengeactivity) {
+		return challengeactivityService.updateChallengeActivityCount(chalactId, challengeactivity);
+	}
+	
+	@RequestMapping(value="/challengeactivity/actlist/{chalId}", method=RequestMethod.GET)
+	public List<ChallengeActivity> selectChallengeActivityChalList(@PathVariable int chalId){
+		return challengeactivityService.selectChallengeActivityChalList(chalId);
+	}
+	
 }
