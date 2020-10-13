@@ -13,24 +13,32 @@ import retrofit2.http.Path;
 interface retrofitAPI {
     @GET("/challengeframe")
     Call<List<challengeFrameItem>> getChallengeframeList();
+
     @GET("/funding/all")
     Call<List<fundingItem>> getFundingList();
+
+    @POST("funding_activity/{fund_id}")
+    Call<fundingItemActivity> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
+
     @GET("/trash")
     Call<List<wasteItem>> getWasteList();
+
     @GET("/member")
     Call<List<userItem>> getUserList();
     @POST("/member")
     Call<userItem> setUser(@Body userItem post);
+    @PUT("member/location/{mem_id}")
+    Call<location> putLocation(@Path("mem_id") int mem_id, @Body location newOne);
+    @PUT("member/point/{memId}")
+    Call<point> changePoint(@Path("memId") int memId, @Body point newOne);
+
     @POST("/challenge")
     Call<challengeItemForPost> setChallenge(@Body challengeItemForPost post);
     @GET("/challenge/{id}")
     Call<List<challengeItem>> getChallengeList(@Path("id") int id);
-    @PUT("member/location/{mem_id}")
-    Call<location> putLocation(@Path("mem_id") int mem_id, @Body location newOne);
-    @POST("funding_activity/{fund_id}")
-    Call<fundingItemActivity> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
-    @PUT("member/point/{memId}")
-    Call<point> putFundingActivity(@Path("memId") int memId, @Body point newOne);
+
+
+
 
     @POST("/challengeactivity")
     Call<challengeItemActivity> postChallengeActivity(@Body challengeItemActivity newOne);

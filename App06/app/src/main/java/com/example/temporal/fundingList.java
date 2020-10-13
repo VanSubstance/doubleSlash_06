@@ -30,7 +30,7 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
     Call<fundingItemActivity> mPostFundingActivity;
-    Call<point> mPutFundingActivity;
+    Call<point> mchangePoint;
     private void setRetrofitInit() {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("http://101.101.218.146:8080")
@@ -142,8 +142,8 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         aCurrentData.myInfo.point = newOne.rest_point;
         point newpointActivity = new point();
         newpointActivity.point = newOne.rest_point;
-        mPutFundingActivity = mRetrofitAPI.putFundingActivity(aCurrentData.myInfo.id, newpointActivity);
-        mPutFundingActivity.enqueue(fundingPointCallback);
+        mchangePoint = mRetrofitAPI.changePoint(aCurrentData.myInfo.id, newpointActivity);
+        mchangePoint.enqueue(fundingPointCallback);
 
         funding_list.setVisibility(View.GONE);
         funding_click.setVisibility(View.VISIBLE);
