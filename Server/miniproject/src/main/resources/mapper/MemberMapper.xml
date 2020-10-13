@@ -34,4 +34,16 @@
 		SET mem_point = #{item.point}
 		WHERE mem_id = #{memId}
 	</update>
+	
+	<select id="selectCloseMember" parameterType="server06.miniproject.model.Member" resultType="java.util.LinkedHashMap">
+		SELECT mem_id as memId
+		FROM 
+			(SELECT mem_id, distance(lat, lon, (SELECT lat FROM member WHERE mem_id = #{memId}), (SELECT lon FROM member WHERE mem_id = #{memId})) as dis FROM member)
+		<where>
+		mem_id != #{memId}
+		and dis <![CDATA[ < ]]> 2 
+
+		</where>  
+	</select>
+
 </mapper>
