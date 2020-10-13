@@ -88,7 +88,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
 
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        adapter = new challengeItemAdapter(aCurrentData.listChallenge, this);
+        adapter = new challengeItemAdapter(aCurrentData.listMyChallenge, this);
         viewList.setAdapter(adapter);
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);

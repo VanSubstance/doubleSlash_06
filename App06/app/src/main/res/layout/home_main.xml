@@ -73,9 +73,9 @@
 
                     <ImageView
                         android:id="@+id/imageMask"
-                        android:layout_width="40sp"
-                        android:layout_height="40sp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_width="25dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/mask_ctg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/textMask"
@@ -103,9 +103,9 @@
 
                     <ImageView
                         android:id="@+id/imagePlastic"
-                        android:layout_width="40sp"
-                        android:layout_height="40sp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_width="24dp"
+                        android:layout_height="21dp"
+                        android:src="@drawable/plastic_ctg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/textPlastic"
@@ -133,9 +133,9 @@
 
                     <ImageView
                         android:id="@+id/imagePaper"
-                        android:layout_width="40sp"
-                        android:layout_height="40sp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_width="24dp"
+                        android:layout_height="21dp"
+                        android:src="@drawable/paper_ctg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/textPaper"
@@ -172,9 +172,9 @@
 
                     <ImageView
                         android:id="@+id/imageCan"
-                        android:layout_width="40sp"
-                        android:layout_height="40sp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_width="24dp"
+                        android:layout_height="21dp"
+                        android:src="@drawable/can_ctg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/textCan"
@@ -202,9 +202,9 @@
 
                     <ImageView
                         android:id="@+id/imageVinyl"
-                        android:layout_width="40sp"
-                        android:layout_height="40sp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_width="24dp"
+                        android:layout_height="21dp"
+                        android:src="@drawable/placticbag_ctg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/textVinyl"
@@ -232,9 +232,9 @@
 
                     <ImageView
                         android:id="@+id/imageEtc"
-                        android:layout_width="40sp"
-                        android:layout_height="40sp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_width="24dp"
+                        android:layout_height="21dp"
+                        android:src="@drawable/extra_ctg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/textEtc"
