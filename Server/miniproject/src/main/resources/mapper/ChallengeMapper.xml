@@ -12,7 +12,7 @@
 		#{item.regdate},
 		#{item.deadline},
 		#{item.chalfrId},
-		0)
+		#{item.chalPoint})
 	</insert>
 	
 	<delete id="deleteChallenge" parameterType="server06.miniproject.model.Challenge">

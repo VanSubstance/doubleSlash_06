@@ -32,17 +32,30 @@ import net.daum.mf.map.api.MapView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class challengeMain extends Fragment implements OnItemClickForChallenge, MapView.MapViewEventListener {
     // 챌린지 목록 -> 등록순으로 보여주기
+    private retrofitAPI mRetrofitAPI;
+    private Retrofit mRetrofit;
+    private Call<List<challengeItem>> mChallengeItemList;
+    private ArrayList<MapPOIItem> listMarker = new ArrayList<MapPOIItem>();
 
     //지도
     private static final int GPS_ENABLE_REQUEST_CODE = 2000;
     private static final String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     private static final int PERMISSIONS_REQUEST_CODE = 100;
 
+    final int idForMarker = 0x8800;
+    int numberOfMarker = 0;
     private MapView mapView;
     private gpsTracker gpsTracker;
     public double lon; //경도
@@ -58,6 +71,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
 
         //지도
         // test
+        setRetrofitInit();
 
         gpsTracker = new gpsTracker(getContext());
         lat=gpsTracker.getLatitude();
@@ -83,8 +97,6 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
         scrollView = view.findViewById(R.id.viewScroll);
         final Button buttonDownward = view.findViewById(R.id.buttonDownward);
         final Button buttonUpward = view.findViewById(R.id.buttonUpward);
-        buttonUpward.setVisibility(View.GONE);
-        buttonDownward.setVisibility(View.VISIBLE);
         buttonDownward.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +126,8 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
                 return false;
             }
         });
+        buttonUpward.setVisibility(View.GONE);
+        buttonDownward.setVisibility(View.VISIBLE);
 
         return view;
     }
@@ -123,9 +137,15 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
         ((interfaceMain) getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
     }
 
+    private void setRetrofitInit() {
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("http://101.101.218.146:8080")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
+    }
 
-
-    private void initView(View view) {
+    private void initView(final View view) {
         mapView = new MapView(getContext());
         ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
@@ -133,12 +153,11 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lat, lon), 3, true);
         mapView.zoomIn(true);
         mapView.zoomOut(true);
-
         //구문을 사용할 예정 !!
         for (userItem item : aCurrentData.listUser) {
             mapPOIItem = new MapPOIItem();
-            mapPOIItem.setItemName("");
-            mapPOIItem.setTag(0);
+            mapPOIItem.setItemName(item.nick);
+            mapPOIItem.setTag(item.id);
             mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(item.lat, item.lon));
             mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
             mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 Respin 마커 모양.
@@ -146,7 +165,29 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
             mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
                 @Override
                 public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
-
+                    // 서버 연결해서 클릭한 마커 memId에 해당하는 리스트 get -> aCurrentData.listChallenge 보관
+                    mChallengeItemList = mRetrofitAPI.getChallengeList(mapPOIItem.getTag());
+                    mChallengeItemList.enqueue(new Callback<List<challengeItem>>() {
+                        @Override
+                        public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
+                            System.out.println("남의 챌린지 수신 성공");
+                            aCurrentData.listChallenge.clear();
+                            for (challengeItem item :
+                                    response.body()) {
+                                item.setDatesFromServer();
+                                aCurrentData.listChallenge.add(item);
+                                System.out.println(item);
+                            }
+                            adapter.changeData(aCurrentData.listChallenge);
+                            viewList.removeAllViewsInLayout();
+                            viewList.setAdapter(adapter);
+                        }
+                        @Override
+                        public void onFailure(Call<List<challengeItem>> call, Throwable t) {
+                            System.out.println("챌린지 수신 실패");
+                            t.printStackTrace();
+                        }
+                    });
                 }
 
                 @Override
@@ -164,6 +205,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
 
                 }
             });
+            listMarker.add(mapPOIItem);
         }
     }
 

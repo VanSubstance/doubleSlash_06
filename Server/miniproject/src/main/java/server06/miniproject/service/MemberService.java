@@ -1,6 +1,8 @@
 package server06.miniproject.service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +33,9 @@ public class MemberService {
 	
 	public boolean updateMemberPoint(int memId, Member member) {
 		return memberMapper.updateMemberPoint(memId, member) > 0 ? true : false;
+	}
+	
+	public List<Map<String, BigDecimal>> selectCloseMember(int memId){
+		return memberMapper.selectCloseMember(memId);
 	}
 }

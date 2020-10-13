@@ -25,18 +25,22 @@ public class wasteMain extends Fragment implements OnItemClickForWaste {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.waste_main, container, false);
         TextView textCtgr = view.findViewById(R.id.textCtgr);
-        textCtgr.setText(items.get(0).ctgr);
+        if (items.size() == 0) {
+            textCtgr.setText("정보가 없습니다.");
+        } else {
 
-        viewList = view.findViewById(R.id.recyclerView);
-        viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
+            textCtgr.setText(items.get(0).ctgr);
 
-        // 부드럽게 넘기기
-        PagerSnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(viewList);
+            viewList = view.findViewById(R.id.recyclerView);
+            viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        adapter = new wasteItemAdapter(items, this);
-        viewList.setAdapter(adapter);
+            // 부드럽게 넘기기
+            PagerSnapHelper snapHelper = new PagerSnapHelper();
+            snapHelper.attachToRecyclerView(viewList);
 
+            adapter = new wasteItemAdapter(items, this);
+            viewList.setAdapter(adapter);
+        }
         return view;
     }
 

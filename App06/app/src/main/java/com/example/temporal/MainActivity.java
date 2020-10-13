@@ -17,6 +17,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
@@ -88,12 +89,101 @@ public class MainActivity extends AppCompatActivity {
             t.printStackTrace();
         }
     };
+    private Call<List<challengeFrameItem>> mCallChallengeframeList;
+    private Call<List<fundingItem>> mFundingItemList;
+    private Call<List<wasteItem>> mWasteItemList;
+    private Call<List<userItem>> mUserItemList;
+    private Callback<List<challengeFrameItem>> mFrameCallback = new Callback<List<challengeFrameItem>>() {
+        @Override
+        public void onResponse(Call<List<challengeFrameItem>> call, Response<List<challengeFrameItem>> response) {
+            System.out.println("틀 수신 성공");
+            System.out.println(call);
+            System.out.println(response);
+            for (challengeFrameItem item :
+                    response.body()) {
+                challengeItem newOne = new challengeItem();
+                newOne.setFromFrame(item);
+                aCurrentData.listChallengeEnroll.add(newOne);
+            }
+
+        }
+
+        @Override
+        public void onFailure(Call<List<challengeFrameItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+    private Callback<List<userItem>> mUserCallback = new Callback<List<userItem>>() {
+        @Override
+        public void onResponse(Call<List<userItem>> call, Response<List<userItem>> response) {
+            System.out.println("사용자 수신 성공");
+            System.out.println(call);
+            System.out.println(response);
+            for (userItem item :
+                    response.body()) {
+                aCurrentData.listUser.add(item);
+            }
+
+        }
+
+        @Override
+        public void onFailure(Call<List<userItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+    private Callback<List<fundingItem>> mFundingCallback = new Callback<List<fundingItem>>() {
+        @Override
+        public void onResponse(Call<List<fundingItem>> call, Response<List<fundingItem>> response) {
+            System.out.println("펀딩 수신 성공");
+            System.out.println(call);
+            System.out.println(response);
+            for (fundingItem item :
+                    response.body()) {
+                aCurrentData.listFunding.add(item);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<fundingItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+    private Callback<List<wasteItem>> mWasteCallback = new Callback<List<wasteItem>>() {
+        @Override
+        public void onResponse(Call<List<wasteItem>> call, Response<List<wasteItem>> response) {
+            System.out.println("분리배출법 수신 성공");
+            System.out.println(call);
+            System.out.println(response);
+            for (wasteItem item :
+                    response.body()) {
+                aCurrentData.listWaste.add(item);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<wasteItem>> call, Throwable t) {
+            t.printStackTrace();
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getHashKey();
+        /*
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent splash = new Intent(MainActivity.this, splashMain.class);
+                startActivity(splash);
+                finish();
+            }
+        }, 1500);
+
+         */
 
         gpsTracker = new gpsTracker(this);
 
@@ -102,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
         addr = getCurrentAddress(lat, lon);
 
         setRetrofitInit();
+        callServer();
 
         sessionCallback = new SessionCallback();
         sessionCallback.getLocation(lat, lon);
@@ -180,6 +271,17 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
     }
+    private void callServer() {
+        mCallChallengeframeList = mRetrofitAPI.getChallengeframeList();
+        mFundingItemList = mRetrofitAPI.getFundingList();
+        mWasteItemList = mRetrofitAPI.getWasteList();
+        mUserItemList = mRetrofitAPI.getUserList();
+        mCallChallengeframeList.enqueue(mFrameCallback);
+        mFundingItemList.enqueue(mFundingCallback);
+        mWasteItemList.enqueue(mWasteCallback);
+        mUserItemList.enqueue(mUserCallback);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

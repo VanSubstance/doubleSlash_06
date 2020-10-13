@@ -1,6 +1,8 @@
 package server06.miniproject.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +41,11 @@ public class MemberController {
 	@RequestMapping(value="/member/point/{memId}", method=RequestMethod.PUT)
 	public Boolean updateMemberPoint(@PathVariable int memId, @RequestBody Member member) {
 		return memberService.updateMemberPoint(memId, member);
+	}
+	
+	@RequestMapping(value="/member/close/{memId}", method=RequestMethod.GET)
+	public List<Map<String, BigDecimal>> selectCloseMember(@PathVariable int memId){
+		return memberService.selectCloseMember(memId);
 	}
 }
 

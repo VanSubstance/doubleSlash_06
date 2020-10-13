@@ -31,8 +31,6 @@ public class listMain extends Fragment implements OnItemClickForChallenge {
 
         final Button buttonDownward = view.findViewById(R.id.buttonDownward);
         final Button buttonUpward = view.findViewById(R.id.buttonUpward);
-        buttonUpward.setVisibility(View.GONE);
-        buttonDownward.setVisibility(View.VISIBLE);
         buttonDownward.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +62,8 @@ public class listMain extends Fragment implements OnItemClickForChallenge {
                 }
             }
         });
+        buttonUpward.setVisibility(View.GONE);
+        buttonDownward.setVisibility(View.VISIBLE);
 
         return view;
     }
