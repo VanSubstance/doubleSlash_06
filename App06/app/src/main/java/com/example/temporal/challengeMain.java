@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,15 +50,8 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
     private Call<List<challengeItem>> mChallengeItemList;
+    private Call<List<challengeItemActivityForGet>> mCallActivities;
 
-    //지도
-    private static final int GPS_ENABLE_REQUEST_CODE = 2000;
-    private static final String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-    private static final int PERMISSIONS_REQUEST_CODE = 100;
-
-    private int num=0;
-    final int idForMarker = 0x8800;
-    int numberOfMarker = 0;
     private MapView mapView;
     private gpsTracker gpsTracker;
     public double lon; //경도
@@ -67,9 +62,6 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.challenge_main, container, false);
-
-        //지도
-        // test
         setRetrofitInit();
 
         gpsTracker = new gpsTracker(getContext());
@@ -88,7 +80,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
 
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        adapter = new challengeItemAdapter(aCurrentData.listChallenge, this);
+        adapter = new challengeItemAdapter(aCurrentData.listMyChallenge, this);
         viewList.setAdapter(adapter);
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
@@ -133,7 +125,18 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
 
     @Override
     public void onClick(challengeItem newOne) {
-        ((interfaceMain) getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
+        boolean mychallenge = false;
+        for (challengeItem mine : aCurrentData.listMyChallenge) {
+            if (newOne.chalId == mine.chalId) {
+                mychallenge = true;
+                break;
+            }
+        }
+        if (mychallenge) {
+            ((interfaceMain)getActivity()).changeFragmentChallengeItemSpecific(newOne);
+        } else {
+            ((interfaceMain) getActivity()).changeFragmentChallengeItemSpecificOther(newOne);
+        }
     }
 
     private void setRetrofitInit() {
@@ -148,27 +151,94 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
         @Override
         public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
             mChallengeItemList = mRetrofitAPI.getChallengeList(mapPOIItem.getTag());
-            mChallengeItemList.enqueue(new Callback<List<challengeItem>>() {
-                @Override
-                public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
-                    System.out.println("남의 챌린지 수신 성공");
-                    aCurrentData.listChallenge.clear();
-                    for (challengeItem item :
-                            response.body()) {
-                        item.setDatesFromServer();
-                        aCurrentData.listChallenge.add(item);
-                        System.out.println(item);
+            if (mapPOIItem.getTag() == aCurrentData.myInfo.id) {
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        aCurrentData.listMyChallenge.clear();
+                        try {
+                            for (challengeItem item :
+                                    mChallengeItemList.execute().body()) {
+                                item.setDatesFromServer();
+                                aCurrentData.listMyChallenge.add(item);
+                            }
+                            for(challengeItem one : aCurrentData.listMyChallenge) {
+                                mCallActivities = mRetrofitAPI.getChallengeActivityList(one.chalId);
+                                List<challengeItemActivityForGet> original = null;
+                                try {
+                                    original = mCallActivities.execute().body();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                if (original == null || original.size() == 0) {
+                                } else {
+                                    one.progress = original.size();
+                                    int emptyLength = one.acvts.size() - original.size();
+                                    one.acvts.clear();
+                                    for (challengeItemActivityForGet items : original) {
+                                        challengeItemActivity newOne = new challengeItemActivity();
+                                        newOne.setFromDb(items);
+                                        one.acvts.add(newOne);
+                                    }
+                                    for (int i = 0; i < emptyLength; i++) {
+                                        challengeItemActivity newOne = new challengeItemActivity();
+                                        one.acvts.add(newOne);
+                                    }
+                                }
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    adapter.changeData(aCurrentData.listChallenge);
-                    viewList.removeAllViewsInLayout();
-                    viewList.setAdapter(adapter);
-                }
-                @Override
-                public void onFailure(Call<List<challengeItem>> call, Throwable t) {
-                    System.out.println("챌린지 수신 실패");
-                    t.printStackTrace();
-                }
-            });
+                });
+                adapter.changeData(aCurrentData.listMyChallenge);
+                viewList.removeAllViewsInLayout();
+                viewList.setAdapter(adapter);
+            }
+            else {
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        aCurrentData.listChallenge.clear();
+                        try {
+                            for (challengeItem item :
+                                    mChallengeItemList.execute().body()) {
+                                item.setDatesFromServer();
+                                aCurrentData.listChallenge.add(item);
+                            }
+                            for(challengeItem one : aCurrentData.listChallenge) {
+                                mCallActivities = mRetrofitAPI.getChallengeActivityList(one.chalId);
+                                List<challengeItemActivityForGet> original = null;
+                                try {
+                                    original = mCallActivities.execute().body();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                if (original == null || original.size() == 0) {
+                                } else {
+                                    one.progress = original.size();
+                                    int emptyLength = one.acvts.size() - original.size();
+                                    one.acvts.clear();
+                                    for (challengeItemActivityForGet items : original) {
+                                        challengeItemActivity newOne = new challengeItemActivity();
+                                        newOne.setFromDb(items);
+                                        one.acvts.add(newOne);
+                                    }
+                                    for (int i = 0; i < emptyLength; i++) {
+                                        challengeItemActivity newOne = new challengeItemActivity();
+                                        one.acvts.add(newOne);
+                                    }
+                                }
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                adapter.changeData(aCurrentData.listChallenge);
+                viewList.removeAllViewsInLayout();
+                viewList.setAdapter(adapter);
+            }
         }
 
         @Override

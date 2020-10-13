@@ -102,7 +102,7 @@ public class challengeItemAdapter extends RecyclerView.Adapter<challengeItemAdap
         String description = mData.get(position).des;
         holder.textTitle.setText(title) ;
         holder.textDescription.setText(description);
-        holder.progressBar.setProgress(mData.get(position).progress);
+        holder.progressBar.setProgress((int) ((double) mData.get(position).progress / mData.get(position).days.size() * 100));
         holder.textProgress.setText("등록일수 " + mData.get(position).progress +  "/" + mData.get(position).days.size());
     }
 

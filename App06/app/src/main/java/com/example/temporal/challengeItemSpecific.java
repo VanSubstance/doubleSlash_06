@@ -57,43 +57,12 @@ public class challengeItemSpecific extends Fragment {
             t.printStackTrace();
         }
     };
-    private Call<List<challengeItemActivityForGet>> mCallActivities;
-    private Callback<List<challengeItemActivityForGet>> activitiesCallback = new Callback<List<challengeItemActivityForGet>>() {
-        @Override
-        public void onResponse(Call<List<challengeItemActivityForGet>> call, Response<List<challengeItemActivityForGet>> response) {
-            System.out.println("챌린지 활동 GET 성공");
-            System.out.println(response.body());
-            System.out.println(call);
-            setItemFromDb(response.body());
-        }
-
-        @Override
-        public void onFailure(Call<List<challengeItemActivityForGet>> call, Throwable t) {
-
-        }
-    };
     private void setRetrofitInit() {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("http://101.101.218.146:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
-    }
-    public void setItemFromDb(List<challengeItemActivityForGet> original) {
-        if (original == null) {
-        } else {
-            int emptyLength = item.acvts.size() - original.size();
-            item.acvts.clear();
-            for (challengeItemActivityForGet items : original) {
-                challengeItemActivity newOne = new challengeItemActivity();
-                newOne.setFromDb(items);
-                item.acvts.add(newOne);
-            }
-            for (int i = 0; i < emptyLength; i++) {
-                challengeItemActivity newOne = new challengeItemActivity();
-                item.acvts.add(newOne);
-            }
-        }
     }
     public void setItem(challengeItem newOne) {
         item.clone(newOne);
@@ -106,8 +75,6 @@ public class challengeItemSpecific extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_item_specific, container,false);
         setRetrofitInit();
-        mCallActivities = mRetrofitAPI.getChallengeActivityList(item.chalId);
-        mCallActivities.enqueue(activitiesCallback);
 
         TextView textTitle = view.findViewById(R.id.textTitle);
         TextView textDescription = view.findViewById(R.id.textDescription);
@@ -134,6 +101,7 @@ public class challengeItemSpecific extends Fragment {
         View.OnClickListener myListener=new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                item.progress += 1;
                 int tvKey=(Integer)view.getTag();
                 challengeItemActivity postOne = new challengeItemActivity();
                 postOne.img = "0";
@@ -160,11 +128,11 @@ public class challengeItemSpecific extends Fragment {
             LinearLayout slotActivity = new LinearLayout(this.getContext());
             slotActivity.setOrientation(LinearLayout.HORIZONTAL);
             // 엑티비티 존재할 경우
-            if (item.acvts.get(num).img == "0") {
-                newActivity[num].setImageResource(R.drawable.image_enrolled);
-            } else {
+            if (item.acvts.get(num).img == null) {
                 newActivity[num].setImageResource(R.drawable.image_default);
                 newActivity[num].setOnClickListener(myListener);
+            } else {
+                newActivity[num].setImageResource(R.drawable.image_enrolled);
             }
             LinearLayout.LayoutParams settingImage = new LinearLayout.LayoutParams(400, 400);
             settingImage.setMargins(10, 0, 10, 0);
@@ -183,13 +151,4 @@ public class challengeItemSpecific extends Fragment {
 
         return view;
     }
-
-  /*  @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            newActivity.setImageURI(selectedImageUri);
-            // image.url=selectedImageUri.toString();
-        }
-    }*/
 }

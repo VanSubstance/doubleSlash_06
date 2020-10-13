@@ -1,6 +1,7 @@
 package com.example.temporal;
 
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class homeMain extends Fragment implements OnItemClickForChallenge {
     RecyclerView viewList2;
@@ -20,14 +29,73 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
     challengeItemAdapter adapter;
     ArrayList<challengeItem> items = new ArrayList<challengeItem>();
 
+    private retrofitAPI mRetrofitAPI;
+    private Retrofit mRetrofit;
+    private Call<List<challengeItemActivityForGet>> mCallActivities;
+    public void setAtvtsFromDb(final challengeItem one, final Call<List<challengeItemActivityForGet>> origin) {
+        origin.enqueue(new Callback<List<challengeItemActivityForGet>>() {
+            @Override
+            public void onResponse(Call<List<challengeItemActivityForGet>> call, Response<List<challengeItemActivityForGet>> response) {
+
+                System.out.println("챌린지 활동 GET 성공");
+                System.out.println(response.body());
+                System.out.println(call);
+            }
+
+            @Override
+            public void onFailure(Call<List<challengeItemActivityForGet>> call, Throwable t) {
+
+            }
+        });
+
+    }
+    private void setRetrofitInit() {
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("http://101.101.218.146:8080")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_main, container, false);
+        setRetrofitInit();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                for(challengeItem one : aCurrentData.listMyChallenge) {
+                    mCallActivities = mRetrofitAPI.getChallengeActivityList(one.chalId);
+                    List<challengeItemActivityForGet> original = null;
+                    try {
+                        original = mCallActivities.execute().body();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if (original == null || original.size() == 0) {
+                    } else {
+                        one.progress = original.size();
+                        int emptyLength = one.acvts.size() - original.size();
+                        one.acvts.clear();
+                        for (challengeItemActivityForGet items : original) {
+                            challengeItemActivity newOne = new challengeItemActivity();
+                            newOne.setFromDb(items);
+                            one.acvts.add(newOne);
+                        }
+                        for (int i = 0; i < emptyLength; i++) {
+                            challengeItemActivity newOne = new challengeItemActivity();
+                            one.acvts.add(newOne);
+                        }
+                    }
+                }
+            }
+        });
+
         for (challengeItem it : aCurrentData.listMyChallenge) {
             if (items.size() < 3) {
                 items.add(it);
             } else {
                 for (challengeItem currentOne : items) {
-                    if (currentOne.progress <= it.progress) {
+                    if (currentOne.progress < it.progress) {
                         items.remove(currentOne);
                         items.add(it);
                         break;

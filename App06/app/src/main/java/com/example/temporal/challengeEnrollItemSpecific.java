@@ -15,6 +15,8 @@ import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager;
 import com.applikeysolutions.cosmocalendar.utils.SelectionType;
 import com.applikeysolutions.cosmocalendar.view.CalendarView;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +32,8 @@ public class challengeEnrollItemSpecific extends Fragment {
     public void setItem(challengeItem newOne) {
         item.clone(newOne);
     }
+    private Call<List<challengeItem>> mChallengeItemList;
+    Call<challengeItemForPost> newChallenge;
     Callback<challengeItemForPost> mChallengePostCallback = new Callback<challengeItemForPost>() {
         @Override
         public void onResponse(Call<challengeItemForPost> call, Response<challengeItemForPost> response) {
@@ -76,8 +80,26 @@ public class challengeEnrollItemSpecific extends Fragment {
                 item.chalPoint = item.chalPoint * calendarView.getSelectedDates().size();
                 itemPost.chalPoint = item.chalPoint;
                 aCurrentData.listMyChallenge.add(item);
-                Call<challengeItemForPost> newChallenge = mRetrofitAPI.setChallenge(itemPost);
+                newChallenge = mRetrofitAPI.setChallenge(itemPost);
                 newChallenge.enqueue(mChallengePostCallback);
+                mChallengeItemList = mRetrofitAPI.getChallengeList(aCurrentData.myInfo.id);
+                mChallengeItemList.enqueue(new Callback<List<challengeItem>>() {
+                    @Override
+                    public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
+                        System.out.println("챌린지 수신 성공");
+                        for (challengeItem item :
+                                response.body()) {
+                            item.setDatesFromServer();
+                            aCurrentData.listMyChallenge.add(item);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<challengeItem>> call, Throwable t) {
+                        System.out.println("챌린지 수신 실패");
+                        t.printStackTrace();
+                    }
+                });
                 ((interfaceMain)getActivity()).callMenu(R.id.menuHome);
             }
         });

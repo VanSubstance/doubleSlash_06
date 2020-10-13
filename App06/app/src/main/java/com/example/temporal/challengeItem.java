@@ -21,7 +21,7 @@ public class challengeItem {
     ArrayList<challengeItemActivity> acvts = new ArrayList<challengeItemActivity>();
 
     public void setFromFrame(challengeFrameItem item) {
-        chalId = item.ch_id;
+        chalId = item.chalfrId;
         title = item.title;
         des = item.des;
         chalPoint = item.point;
@@ -59,6 +59,7 @@ public class challengeItem {
         for (int i = 0; i <= end.get(Calendar.DATE) - start.get(Calendar.DATE); i++ ) {
             days.add(temp.getTimeInMillis());
             temp.add(temp.DATE, 1);
+            acvts.add(new challengeItemActivity());
         }
     }
 
@@ -70,11 +71,6 @@ public class challengeItem {
         deadline = original.deadline;
         days.addAll(original.days);
         chalPoint= original.chalPoint;
-        for (int i = 0; i < days.size(); i++) {
-            acvts.add(new challengeItemActivity());
-        }
-        if (days.size() != 0) {
-            progress = acvts.size() / days.size() * 100;
-        }
+        acvts = original.acvts;
     }
 }

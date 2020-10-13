@@ -5,5 +5,4 @@ public class fundingItemActivity {
     int point;
     int mem_id;
     String funddate;
-
 }

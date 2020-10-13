@@ -27,16 +27,17 @@ interface retrofitAPI {
     Call<List<userItem>> getUserList();
     @POST("/member")
     Call<userItem> setUser(@Body userItem post);
-    @PUT("member/location/{mem_id}")
-    Call<location> putLocation(@Path("mem_id") int mem_id, @Body location newOne);
+    @PUT("member/location/{memId}")
+    Call<location> putLocation(@Path("memId") int memId, @Body location newOne);
     @PUT("member/point/{memId}")
     Call<point> changePoint(@Path("memId") int memId, @Body point newOne);
 
     @POST("/challenge")
     Call<challengeItemForPost> setChallenge(@Body challengeItemForPost post);
-    @GET("/challenge/{id}")
-    Call<List<challengeItem>> getChallengeList(@Path("id") int id);
-
+    @GET("/challenge/{memId}")
+    Call<List<challengeItem>> getChallengeList(@Path("memId") int memId);
+    @DELETE("/challenge/{chalId}")
+    Call<Void> deleteChallengeItem(@Path("chalId") int chalId);
 
 
 
@@ -45,6 +46,4 @@ interface retrofitAPI {
     @GET("/challengeactivity/actlist/{chalId}")
     Call<List<challengeItemActivityForGet>> getChallengeActivityList(@Path("chalId") int chalId);
 
-    @DELETE("/challenge/{chalId}")
-    Call<Void> deleteChallengeItem(@Path("chalId") int chalId);
 }

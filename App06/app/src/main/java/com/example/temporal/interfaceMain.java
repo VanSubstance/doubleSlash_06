@@ -77,9 +77,7 @@ public class interfaceMain extends AppCompatActivity {
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            homeMain next = new homeMain();
-            fragmentTransaction.replace(R.id.frameMain, next);
-            fragmentTransaction.addToBackStack(null).commit();
+            callMenu(R.id.menuHome);
 
             View.OnClickListener btnListener = new View.OnClickListener() {
                 @Override
@@ -165,9 +163,6 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frameInfoList, new infoList());
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
-            case 510: // 마이페이지 즐겨찾기 챌린지 목록
-                fragmentTransaction.replace(R.id.frameMain, new infoChallengeEnrollList());
-                fragmentTransaction.addToBackStack(null).commit();
             default:
                 break;
         }

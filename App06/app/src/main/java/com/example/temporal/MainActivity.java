@@ -15,6 +15,7 @@ import android.content.pm.Signature;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.os.Handler;
@@ -60,21 +61,6 @@ public class MainActivity extends AppCompatActivity {
     private Retrofit mRetrofit;
     private Call<List<challengeItem>> mChallengeItemList;
     private Call<location> mLocation;
-    private Callback<location> mLocationCallback = new Callback<location>() {
-        @Override
-        public void onResponse(Call<location> call, Response<location> response) {
-            System.out.println("사용자 위치 수정 성공");
-            System.out.println(response);
-            System.out.println(call);
-        }
-
-        @Override
-        public void onFailure(Call<location> call, Throwable t) {
-            System.out.println("사용자 위치 수정 실패");
-            System.out.println(call);
-            t.printStackTrace();
-        }
-    };
     private Callback<userItem> mUserPostCallback = new Callback<userItem>() {
         @Override
         public void onResponse(Call<userItem> call, Response<userItem> response) {
@@ -93,79 +79,6 @@ public class MainActivity extends AppCompatActivity {
     private Call<List<fundingItem>> mFundingItemList;
     private Call<List<wasteItem>> mWasteItemList;
     private Call<List<userItem>> mUserItemList;
-    private Callback<List<challengeFrameItem>> mFrameCallback = new Callback<List<challengeFrameItem>>() {
-        @Override
-        public void onResponse(Call<List<challengeFrameItem>> call, Response<List<challengeFrameItem>> response) {
-            System.out.println("틀 수신 성공");
-            System.out.println(call);
-            System.out.println(response);
-            for (challengeFrameItem item :
-                    response.body()) {
-                challengeItem newOne = new challengeItem();
-                newOne.setFromFrame(item);
-                aCurrentData.listChallengeEnroll.add(newOne);
-            }
-
-        }
-
-        @Override
-        public void onFailure(Call<List<challengeFrameItem>> call, Throwable t) {
-            t.printStackTrace();
-        }
-    };
-    private Callback<List<userItem>> mUserCallback = new Callback<List<userItem>>() {
-        @Override
-        public void onResponse(Call<List<userItem>> call, Response<List<userItem>> response) {
-            System.out.println("사용자 수신 성공");
-            System.out.println(call);
-            System.out.println(response);
-            for (userItem item :
-                    response.body()) {
-                aCurrentData.listUser.add(item);
-            }
-
-        }
-
-        @Override
-        public void onFailure(Call<List<userItem>> call, Throwable t) {
-            t.printStackTrace();
-        }
-    };
-    private Callback<List<fundingItem>> mFundingCallback = new Callback<List<fundingItem>>() {
-        @Override
-        public void onResponse(Call<List<fundingItem>> call, Response<List<fundingItem>> response) {
-            System.out.println("펀딩 수신 성공");
-            System.out.println(call);
-            System.out.println(response);
-            for (fundingItem item :
-                    response.body()) {
-                aCurrentData.listFunding.add(item);
-            }
-        }
-
-        @Override
-        public void onFailure(Call<List<fundingItem>> call, Throwable t) {
-            t.printStackTrace();
-        }
-    };
-    private Callback<List<wasteItem>> mWasteCallback = new Callback<List<wasteItem>>() {
-        @Override
-        public void onResponse(Call<List<wasteItem>> call, Response<List<wasteItem>> response) {
-            System.out.println("분리배출법 수신 성공");
-            System.out.println(call);
-            System.out.println(response);
-            for (wasteItem item :
-                    response.body()) {
-                aCurrentData.listWaste.add(item);
-            }
-        }
-
-        @Override
-        public void onFailure(Call<List<wasteItem>> call, Throwable t) {
-            t.printStackTrace();
-        }
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -276,10 +189,33 @@ public class MainActivity extends AppCompatActivity {
         mFundingItemList = mRetrofitAPI.getFundingList();
         mWasteItemList = mRetrofitAPI.getWasteList();
         mUserItemList = mRetrofitAPI.getUserList();
-        mCallChallengeframeList.enqueue(mFrameCallback);
-        mFundingItemList.enqueue(mFundingCallback);
-        mWasteItemList.enqueue(mWasteCallback);
-        mUserItemList.enqueue(mUserCallback);
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    for (challengeFrameItem item :
+                            mCallChallengeframeList.execute().body()) {
+                        challengeItem newOne = new challengeItem();
+                        newOne.setFromFrame(item);
+                        aCurrentData.listChallengeEnroll.add(newOne);
+                    }
+                    for (fundingItem item :
+                            mFundingItemList.execute().body()) {
+                        aCurrentData.listFunding.add(item);
+                    }
+                    for (wasteItem item :
+                            mWasteItemList.execute().body()) {
+                        aCurrentData.listWaste.add(item);
+                    }
+                    for (userItem item :
+                            mUserItemList.execute().body()) {
+                        aCurrentData.listUser.add(item);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 
@@ -351,23 +287,20 @@ public class MainActivity extends AppCompatActivity {
                             newOne.lon = lon;
                             int id = aCurrentData.myInfo.id;
                             mLocation = mRetrofitAPI.putLocation(id, newOne);
-                            mLocation.enqueue(mLocationCallback);
                             mChallengeItemList = mRetrofitAPI.getChallengeList(id);
-                            mChallengeItemList.enqueue(new Callback<List<challengeItem>>() {
+                            AsyncTask.execute(new Runnable() {
                                 @Override
-                                public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
-                                    System.out.println("챌린지 수신 성공");
-                                    for (challengeItem item :
-                                            response.body()) {
-                                        item.setDatesFromServer();
-                                        aCurrentData.listMyChallenge.add(item);
+                                public void run() {
+                                    try {
+                                        for (challengeItem item :
+                                                mChallengeItemList.execute().body()) {
+                                            item.setDatesFromServer();
+                                            aCurrentData.listMyChallenge.add(item);
+                                        }
+                                        //mLocation.execute();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
                                     }
-                                }
-
-                                @Override
-                                public void onFailure(Call<List<challengeItem>> call, Throwable t) {
-                                    System.out.println("챌린지 수신 실패");
-                                    t.printStackTrace();
                                 }
                             });
                             exist = true;
