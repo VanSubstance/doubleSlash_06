@@ -27,4 +27,12 @@ public class ChallengeActivityService {
 	public List<ChallengeActivity> selectChallengeActivityList(int memId){
 		return challengeactivityMapper.selectChallengeActivityList(memId);
 	}
+	
+	public boolean updateChallengeActivityCount(int chalactId, ChallengeActivity challengeactivity) {
+		return challengeactivityMapper.updateChallengeActivityCount(chalactId, challengeactivity) > 0 ? true : false;
+	}
+	
+	public List<ChallengeActivity> selectChallengeActivityChalList(int chalId){
+		return challengeactivityMapper.selectChallengeActivityChalList(chalId);
+	}
 }
