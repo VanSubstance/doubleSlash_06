@@ -6,4 +6,5 @@ public class fundingItemActivity {
     int mem_id;
     String funddate;
 
+
 }

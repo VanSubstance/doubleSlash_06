@@ -75,6 +75,8 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     TextView pointSpent;
     TextView pointRest;
     TextView myPoint;
+    TextView acu_point;
+    TextView fund_point;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.funding_list, container,false);
@@ -135,13 +137,19 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         pointSpent = viewList.findViewById(R.id.fund_point);
         pointRest = viewList.findViewById(R.id.rest_point);
         myPoint = viewList.findViewById(R.id.point);
+        acu_point = viewList.findViewById(R.id.acu_point);
+        fund_point = viewList.findViewById(R.id.fund_point);
 
+//        int accu = Integer.parseInt((acu_point.getText().toString())) + Integer.parseInt((pointSpent.getText().toString()));
+//        int acu_point = accu;
+        
         fundingItemActivity newActivity = new fundingItemActivity();
         newActivity.fund_id = newOne.fund_id;
         newActivity.point = Integer.parseInt((pointSpent.getText().toString()));
         newActivity.mem_id = aCurrentData.myInfo.id;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         newActivity.funddate = sdf.format(Calendar.getInstance().getTime());
+//        newActivity.acu_point = Integer.parseInt((acu_point.getText().toString())) + fund_point;
         mPostFundingActivity = mRetrofitAPI.postFundingActivity(newOne.fund_id, newActivity);
         mPostFundingActivity.enqueue(fundingItemCallback);
 
