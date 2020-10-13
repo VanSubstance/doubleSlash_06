@@ -8,5 +8,10 @@ public class challengeItemActivity {
         chalId = original.chalId;
         img = original.img;
     }
+
+    public void setFromDb(challengeItemActivityForGet original) {
+        chalId = original.chalId;
+        img = original.img;
+    }
 }
 
