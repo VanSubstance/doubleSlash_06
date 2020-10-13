@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+
 @SpringBootApplication
 @MapperScan(basePackages = "server06.miniproject")
 public class MiniprojectApplication extends SpringBootServletInitializer{

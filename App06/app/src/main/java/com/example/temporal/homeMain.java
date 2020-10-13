@@ -3,15 +3,10 @@ package com.example.temporal;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ScrollView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,7 +56,6 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
         ConstraintLayout buttonCan = view.findViewById(R.id.buttonCan);
         ConstraintLayout buttonVinyl = view.findViewById(R.id.buttonVinyl);
         ConstraintLayout buttonEtc = view.findViewById(R.id.buttonEtc);
-        Button buttonList = view.findViewById(R.id.buttonList);
 
         View.OnClickListener btnListener = new View.OnClickListener() {
             @Override
@@ -86,9 +80,6 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
                     case R.id.buttonEtc:
                         ((interfaceMain) getActivity()).changeFragmentWasteCtgr("etc");
                         break;
-                    case R.id.buttonList:
-                        ((interfaceMain) getActivity()).changeFragment(110);
-                        break;
                 }
             }
         };
@@ -99,7 +90,6 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
         buttonCan.setOnClickListener(btnListener);
         buttonVinyl.setOnClickListener(btnListener);
         buttonEtc.setOnClickListener(btnListener);
-        buttonList.setOnClickListener(btnListener);
         return view;
     }
 

@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Spinner;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
@@ -14,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class infoList extends Fragment implements OnItemClickForInfo{
     RecyclerView viewList;
-    userItemAdapter adapter;
+    userActivityAdapter adapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.info_list, container,false);
@@ -22,7 +20,7 @@ public class infoList extends Fragment implements OnItemClickForInfo{
         viewList = view.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         viewList.setLayoutManager(linearLayoutManager);
-        adapter = new userItemAdapter(aCurrentData.listUser, this);
+        adapter = new userActivityAdapter(aCurrentData.listActivity, this);
         viewList.setAdapter(adapter);
 
         // 부드럽게 넘기기
@@ -33,7 +31,7 @@ public class infoList extends Fragment implements OnItemClickForInfo{
     }
 
     @Override
-    public void onClick(userItem newOne) {
-    }
+    public void onClick(userActivity newOne) {
 
+    }
 }

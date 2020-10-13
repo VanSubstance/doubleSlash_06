@@ -6,19 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class infoMain extends Fragment implements OnItemClickForInfo{
+public class infoMain extends Fragment{
     RecyclerView viewList;
-    userItemAdapter adapter;
+    userActivityAdapter adapter;
     TextView textNick;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.info_main, container, false);
@@ -51,8 +47,4 @@ public class infoMain extends Fragment implements OnItemClickForInfo{
 
         return view;
     }
-    @Override
-    public void onClick(userItem newOne) {
-    }
-
 }
