@@ -27,14 +27,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.app.Activity.RESULT_OK;
 
 public class challengeItemSpecific extends Fragment {
     private retrofitAPI mRetrofitAPI;
@@ -57,6 +56,24 @@ public class challengeItemSpecific extends Fragment {
             t.printStackTrace();
         }
     };
+    private Call<List<challengeItemActivity>> mCallAvtivities;
+    private Callback<List<challengeItemActivity>> activitiesCallback = new Callback<List<challengeItemActivity>>() {
+        @Override
+        public void onResponse(Call<List<challengeItemActivity>> call, Response<List<challengeItemActivity>> response) {
+            item.acvts.clear();
+            for (challengeItemActivity items : response.body()) {
+                challengeItemActivity newOne = new challengeItemActivity();
+                newOne.clone(items);
+                item.acvts.add(newOne);
+            }
+
+        }
+
+        @Override
+        public void onFailure(Call<List<challengeItemActivity>> call, Throwable t) {
+
+        }
+    };
     private void setRetrofitInit() {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("http://101.101.218.146:8080")
@@ -69,17 +86,20 @@ public class challengeItemSpecific extends Fragment {
     CalendarView calendarView;
     TextView textPointTotal;
 
-    private long now ;
-    private int GET_GALLERY_IMAGE;
-
 
     public void setItem(challengeItem newOne) {
         item.clone(newOne);
+        /*
+        mCallAvtivities = mRetrofitAPI.getChallengeActivityList(aCurrentData.myInfo.id);
+        mCallAvtivities.enqueue(activitiesCallback);
+
+         */
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.challenge_item_specific, container,false);
         setRetrofitInit();
+
         TextView textTitle = view.findViewById(R.id.textTitle);
         TextView textDescription = view.findViewById(R.id.textDescription);
         textTitle.setText(item.title);
@@ -106,20 +126,14 @@ public class challengeItemSpecific extends Fragment {
             @Override
             public void onClick(View view) {
                 int tvKey=(Integer)view.getTag();
-                    /*
-                    Intent intent = new Intent(Intent.ACTION_PICK);
-                    intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                    startActivityForResult(intent, GET_GALLERY_IMAGE);
-                    image.chalId = item.chalId;
-                     */
+                challengeItemActivity postOne = new challengeItemActivity();
+                postOne.img = "0";
+                postOne.chalId = item.chalId;
+                mChallengeItemActivity = mRetrofitAPI.postChallengeActivity(postOne);
+                mChallengeItemActivity.enqueue(challengeItemActivityCallback);
                 item.acvts.get(tvKey).img = "0";
                 item.acvts.get(tvKey).chalId = item.chalId;
                 newActivity[tvKey].setImageResource(R.drawable.image_enrolled);
-                    /*
-                        mChallengeItemActivity = mRetrofitAPI.postChallengeActivity(item.acvts.get(GET_GALLERY_IMAGE));
-                        mChallengeItemActivity.enqueue(challengeItemActivityCallback);
-                        +
-                     */
             }
         };
 
@@ -136,7 +150,6 @@ public class challengeItemSpecific extends Fragment {
             newActivity[num].setTag(num);
             LinearLayout slotActivity = new LinearLayout(this.getContext());
             slotActivity.setOrientation(LinearLayout.HORIZONTAL);
-            GET_GALLERY_IMAGE = i;
             // 엑티비티 존재할 경우
             if (item.acvts.get(num).img == "0") {
                 newActivity[num].setImageResource(R.drawable.image_enrolled);

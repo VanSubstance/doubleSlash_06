@@ -38,8 +38,8 @@
 
             <ImageView
                 android:id="@+id/imageHome"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 app:srcCompat="@drawable/home_default"
                 app:layout_constraintBottom_toTopOf="@id/textHome"
                 app:layout_constraintTop_toTopOf="parent"
@@ -70,8 +70,8 @@
 
             <ImageView
                 android:id="@+id/imageChallenge"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 app:srcCompat="@drawable/map_default"
                 app:layout_constraintBottom_toTopOf="@id/textChallenge"
                 app:layout_constraintTop_toTopOf="parent"
@@ -101,8 +101,8 @@
 
             <ImageView
                 android:id="@+id/imageEnroll"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 app:srcCompat="@drawable/enroll_default"
                 app:layout_constraintBottom_toTopOf="@id/textEnroll"
                 app:layout_constraintTop_toTopOf="parent"
@@ -133,8 +133,8 @@
 
             <ImageView
                 android:id="@+id/imageFunding"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 app:srcCompat="@drawable/funding_default"
                 app:layout_constraintBottom_toTopOf="@id/textFunding"
                 app:layout_constraintTop_toTopOf="parent"
@@ -164,8 +164,8 @@
 
             <ImageView
                 android:id="@+id/imageInfo"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 app:srcCompat="@drawable/my_default"
                 app:layout_constraintBottom_toTopOf="@id/textInfo"
                 app:layout_constraintTop_toTopOf="parent"
