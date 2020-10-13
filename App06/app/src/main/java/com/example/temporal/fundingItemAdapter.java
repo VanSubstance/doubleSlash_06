@@ -56,7 +56,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
             fund_point = itemView.findViewById(R.id.fund_point);
             rest_point = itemView.findViewById(R.id.rest_point);
 
-            rest_point.setText(String.valueOf(seek_max));
+//            rest_point.setText(aCurrentData.myInfo.point);
             textNick = itemView.findViewById(R.id.user);
             textNick.setText(aCurrentData.myInfo.nick);
 
@@ -74,13 +74,8 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
                     final int left_point = tar_point - acu_point;
                     final int seek_max = min(aCurrentData.myInfo.point, left_point);
                     fund_point.setText(String.valueOf(seekBar.getProgress() * (seek_max/10)));
-                    //(aCurrentData.myInfo.point/10)
-                    //int targ = Integer.valueOf(targ_point.getText().toString());
-//                    int targ;
-//                    targ = Integer.parseInt(targ_point.getText().toString());
-//                    int targ = Integer.parseInt(String.valueOf(targ_point));
 
-                    int rest = seek_max - progress * (seek_max/10);
+                    int rest = aCurrentData.myInfo.point - progress * (seek_max/10);
 //                    rest_point.setText(String.valueOf(rest));
                     if(rest >= 0)
 
@@ -160,7 +155,6 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         int point = aCurrentData.myInfo.point;
         int tar_point = mData.get(position).tar_point;
         int acu_point = mData.get(position).acu_point;
-        int rest_point = mData.get(position).acu_point;
 
         int left_point = tar_point - acu_point;
         int seek_max = min(aCurrentData.myInfo.point, left_point);
@@ -172,7 +166,7 @@ public class fundingItemAdapter extends RecyclerView.Adapter<fundingItemAdapter.
         holder.tar_point.setText(String.valueOf(tar_point));
         holder.acu_point.setText(String.valueOf(acu_point));
         holder.left_point.setText(String.valueOf(left_point));
-        holder.rest_point.setText(String.valueOf(seek_max));
+        holder.rest_point.setText(String.valueOf(point));
 
         //holder.point.setText(String.valueOf(point));
 //        holder.fund_point.setText(String.valueOf(left_point));

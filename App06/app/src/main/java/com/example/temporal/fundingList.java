@@ -67,11 +67,14 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         }
     };
 
-//    ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
+    //    ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
 //    TextView funding = viewList.findViewById(R.id.funding);
 //    TextView fundingTitle = viewList.findViewById(R.id.fundingTitle);
 //    TextView fundingSpecific = viewList.findViewById(R.id.fundingSpecific);
 //    ConstraintLayout funding_click = viewList.findViewById(R.id.funding_click);
+    TextView pointSpent;
+    TextView pointRest;
+    TextView myPoint;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.funding_list, container,false);
@@ -129,21 +132,24 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     public void onFundingClick(fundingItem newOne) {
         ConstraintLayout funding_list = viewList.findViewById(R.id.funding_list);
         ConstraintLayout funding_click = viewList.findViewById(R.id.funding_click);
+        pointSpent = viewList.findViewById(R.id.fund_point);
+        pointRest = viewList.findViewById(R.id.rest_point);
+        myPoint = viewList.findViewById(R.id.point);
 
         fundingItemActivity newActivity = new fundingItemActivity();
         newActivity.fund_id = newOne.fund_id;
-        newActivity.point = newOne.fund_point;
+        newActivity.point = Integer.parseInt((pointSpent.getText().toString()));
         newActivity.mem_id = aCurrentData.myInfo.id;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         newActivity.funddate = sdf.format(Calendar.getInstance().getTime());
         mPostFundingActivity = mRetrofitAPI.postFundingActivity(newOne.fund_id, newActivity);
         mPostFundingActivity.enqueue(fundingItemCallback);
 
-        aCurrentData.myInfo.point = newOne.rest_point;
+        aCurrentData.myInfo.point = Integer.parseInt((myPoint.getText().toString()));
         point newpointActivity = new point();
-        newpointActivity.point = newOne.rest_point;
-        mchangePoint = mRetrofitAPI.changePoint(aCurrentData.myInfo.id, newpointActivity);
-        mchangePoint.enqueue(fundingPointCallback);
+        newpointActivity.point = Integer.parseInt((pointRest.getText().toString()));
+        mPutFundingActivity = mRetrofitAPI.putFundingActivity(aCurrentData.myInfo.id, newpointActivity);
+        mPutFundingActivity.enqueue(fundingPointCallback);
 
         funding_list.setVisibility(View.GONE);
         funding_click.setVisibility(View.VISIBLE);
