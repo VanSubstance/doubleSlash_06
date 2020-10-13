@@ -145,7 +145,7 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         mPostFundingActivity = mRetrofitAPI.postFundingActivity(newOne.fund_id, newActivity);
         mPostFundingActivity.enqueue(fundingItemCallback);
 
-        aCurrentData.myInfo.point = Integer.parseInt((myPoint.getText().toString()));
+        aCurrentData.myInfo.point = Integer.parseInt((pointRest.getText().toString()));
         point newpointActivity = new point();
         newpointActivity.point = Integer.parseInt((pointRest.getText().toString()));
         mPutFundingActivity = mRetrofitAPI.putFundingActivity(aCurrentData.myInfo.id, newpointActivity);
