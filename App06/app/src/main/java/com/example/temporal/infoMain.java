@@ -23,21 +23,6 @@ public class infoMain extends Fragment{
         textNick = view.findViewById(R.id.user);
         textNick.setText(aCurrentData.myInfo.nick);
 
-        Button buttonList = view.findViewById(R.id.buttonList);
-        View.OnClickListener btnListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.buttonList:
-                        ((interfaceMain) getActivity()).changeFragment(510);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-        buttonList.setOnClickListener(btnListener);
-
         final Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
