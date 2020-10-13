@@ -33,6 +33,8 @@ interface retrofitAPI {
     Call<point> putFundingActivity(@Path("memId") int memId, @Body point newOne);
     @POST("/challengeactivity")
     Call<challengeItemActivity> postChallengeActivity(@Body challengeItemActivity newOne);
+    @GET("/challengeactivity/{memId}")
+    Call<List<challengeItemActivity>> getChallengeActivityList(@Path("memId") int memId);
     @DELETE("/challenge/{chalId}")
     Call<Void> deleteChallengeItem(@Path("chalId") int chalId);
 }
