@@ -41,7 +41,7 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     Callback<fundingItemActivity> fundingItemCallback = new Callback<fundingItemActivity>() {
         @Override
         public void onResponse(Call<fundingItemActivity> call, Response<fundingItemActivity> response) {
-            System.out.println("전송 성공");
+            System.out.println("Post 전송 성공");
             System.out.println(response);
             System.out.println(call);
         }
@@ -55,7 +55,7 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     Callback<point> fundingPointCallback = new Callback<point>() {
         @Override
         public void onResponse(Call<point> call, Response<point> response) {
-            System.out.println("전송 성공");
+            System.out.println("Put 전송 성공");
             System.out.println(response);
             System.out.println(call);
         }
@@ -140,15 +140,17 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         acu_point = viewList.findViewById(R.id.acu_point);
         fund_point = viewList.findViewById(R.id.fund_point);
 
-//        int accu = Integer.parseInt((acu_point.getText().toString())) + Integer.parseInt((pointSpent.getText().toString()));
-//        int acu_point = accu;
-        
+        int accu = Integer.parseInt((acu_point.getText().toString())) + Integer.parseInt((pointSpent.getText().toString()));
+        newOne.acu_point = accu;
+
         fundingItemActivity newActivity = new fundingItemActivity();
+//        newActivity.fund_act_id = newOne.fund_id;
         newActivity.fund_id = newOne.fund_id;
-        newActivity.point = Integer.parseInt((pointSpent.getText().toString()));
         newActivity.mem_id = aCurrentData.myInfo.id;
+        newActivity.point = Integer.parseInt((pointSpent.getText().toString()));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         newActivity.funddate = sdf.format(Calendar.getInstance().getTime());
+        newActivity.acu_point = accu;
 //        newActivity.acu_point = Integer.parseInt((acu_point.getText().toString())) + fund_point;
         mPostFundingActivity = mRetrofitAPI.postFundingActivity(newOne.fund_id, newActivity);
         mPostFundingActivity.enqueue(fundingItemCallback);
