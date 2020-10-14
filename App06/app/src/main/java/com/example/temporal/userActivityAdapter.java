@@ -1,6 +1,7 @@
 package com.example.temporal;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,31 +29,30 @@ public class userActivityAdapter extends RecyclerView.Adapter<userActivityAdapte
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
         View view = inflater.inflate(R.layout.info_item, parent, false) ;
-//        userActivityAdapter.ViewHolder vh = new userActivityAdapter.ViewHolder(view) ;
 
         return new userActivityAdapter.ViewHolder(view) ;
     }
-
-    // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(userActivityAdapter.ViewHolder holder, int position) {
         userActivity item = mData.get(position);
         switch (item.type) {
             case 0:
                 holder.ctr.setText("챌린지 완료");
-                holder.targ_point.setText("+ " + item.point);
+                holder.targ_point.setText("+ " + item.point + " 포인트");
+                holder.targ_point.setTextColor(Color.parseColor("#79C3A0"));
                 break;
             case 1:
                 holder.ctr.setText("펀딩 활동");
-                holder.targ_point.setText("- " + item.point);
+                holder.targ_point.setText("- " + item.point + " 포인트");
                 break;
             case 2:
                 holder.ctr.setText("챌린지 활동");
-                holder.targ_point.setText("+ " + item.point);
+                holder.targ_point.setText("+ " + item.point + " 포인트");
+                holder.targ_point.setTextColor(Color.parseColor("#79C3A0"));
                 break;
             case 3:
                 holder.ctr.setText("완료된 펀딩");
-                holder.targ_point.setText("- " + item.point);
+                holder.targ_point.setText("- " + item.point + " 포인트");
                 break;
         }
         if (item.type == 0) {

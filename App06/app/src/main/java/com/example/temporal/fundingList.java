@@ -2,6 +2,7 @@ package com.example.temporal;
 
 import android.app.Fragment;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -29,8 +31,8 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
     fundingItemAdapter adapter;
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
-    Call<fundingItemActivity> mPostFundingActivity;
-    Call<point> mchangePoint;
+    Call<Boolean> mPostFundingActivity;
+    Call<Boolean> mchangePoint;
     private void setRetrofitInit() {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("http://101.101.218.146:8080")
@@ -152,14 +154,30 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         newActivity.funddate = sdf.format(Calendar.getInstance().getTime());
         newActivity.acu_point = accu;
 //        newActivity.acu_point = Integer.parseInt((acu_point.getText().toString())) + fund_point;
-        mPostFundingActivity = mRetrofitAPI.postFundingActivity(newOne.fund_id, newActivity);
-        mPostFundingActivity.enqueue(fundingItemCallback);
 
         aCurrentData.myInfo.point = Integer.parseInt((pointRest.getText().toString()));
         point newpointActivity = new point();
         newpointActivity.point = Integer.parseInt((pointRest.getText().toString()));
+
+        mPostFundingActivity = mRetrofitAPI.postFundingActivity(newOne.fund_id, newActivity);
         mchangePoint = mRetrofitAPI.changePoint(aCurrentData.myInfo.id, newpointActivity);
-        mchangePoint.enqueue(fundingPointCallback);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mPostFundingActivity.execute();
+                    mchangePoint.execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         funding_list.setVisibility(View.GONE);
         funding_click.setVisibility(View.VISIBLE);

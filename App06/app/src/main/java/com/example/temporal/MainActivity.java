@@ -60,24 +60,10 @@ public class MainActivity extends AppCompatActivity {
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
     private Call<List<challengeItem>> mChallengeItemList;
-    private Call<location> mLocation;
-    private Callback<userItem> mUserPostCallback = new Callback<userItem>() {
-        @Override
-        public void onResponse(Call<userItem> call, Response<userItem> response) {
-            System.out.println("사용자 발신 성공");
-            System.out.println(response);
-            System.out.println(call);
-        }
-
-        @Override
-        public void onFailure(Call<userItem> call, Throwable t) {
-            System.out.println("사용자 발신 실패");
-            t.printStackTrace();
-        }
-    };
+    private Call<Boolean> mLocation;
+    Call<Boolean> userInfo;
     private Call<List<challengeFrameItem>> mCallChallengeframeList;
     private Call<List<fundingItem>> mFundingItemList;
-    private Call<List<wasteItem>> mWasteItemList;
     private Call<List<userItem>> mUserItemList;
 
     @Override
@@ -187,9 +173,8 @@ public class MainActivity extends AppCompatActivity {
     private void callServer() {
         mCallChallengeframeList = mRetrofitAPI.getChallengeframeList();
         mFundingItemList = mRetrofitAPI.getFundingList();
-        mWasteItemList = mRetrofitAPI.getWasteList();
         mUserItemList = mRetrofitAPI.getUserList();
-        AsyncTask.execute(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -203,10 +188,6 @@ public class MainActivity extends AppCompatActivity {
                             mFundingItemList.execute().body()) {
                         aCurrentData.listFunding.add(item);
                     }
-                    for (wasteItem item :
-                            mWasteItemList.execute().body()) {
-                        aCurrentData.listWaste.add(item);
-                    }
                     for (userItem item :
                             mUserItemList.execute().body()) {
                         aCurrentData.listUser.add(item);
@@ -216,6 +197,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -288,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
                             int id = aCurrentData.myInfo.id;
                             mLocation = mRetrofitAPI.putLocation(id, newOne);
                             mChallengeItemList = mRetrofitAPI.getChallengeList(id);
-                            AsyncTask.execute(new Runnable() {
+                            Thread thread = new Thread(new Runnable() {
                                 @Override
                                 public void run() {
                                     try {
@@ -297,12 +284,18 @@ public class MainActivity extends AppCompatActivity {
                                             item.setDatesFromServer();
                                             aCurrentData.listMyChallenge.add(item);
                                         }
-                                        //mLocation.execute();
+                                        mLocation.execute();
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
                                 }
                             });
+                            thread.start();
+                            try {
+                                thread.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             exist = true;
                             break;
                         }
@@ -314,8 +307,23 @@ public class MainActivity extends AppCompatActivity {
                         newOne.point = 0;
                         newOne.lon = lon;
                         newOne.lat = lat;
-                        Call<userItem> userInfo = mRetrofitAPI.setUser(newOne);
-                        userInfo.enqueue(mUserPostCallback);
+                        userInfo = mRetrofitAPI.setUser(newOne);
+                        Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    userInfo.execute();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
+                        try {
+                            thread.join();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     Intent intent = new Intent(getApplicationContext(), interfaceMain.class);
                     startActivity(intent);

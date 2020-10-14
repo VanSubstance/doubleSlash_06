@@ -17,9 +17,13 @@ public class wasteMain extends Fragment implements OnItemClickForWaste {
     RecyclerView viewList;
     wasteItemAdapter adapter;
     ArrayList<wasteItem> items;
+    String ctgr;
 
     public void setItems(ArrayList<wasteItem> newOne) {
         items = newOne;
+    }
+    public void setCtgr(String ctgr) {
+        this.ctgr = ctgr;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,8 +32,7 @@ public class wasteMain extends Fragment implements OnItemClickForWaste {
         if (items.size() == 0) {
             textCtgr.setText("정보가 없습니다.");
         } else {
-
-            textCtgr.setText(items.get(0).ctgr);
+            textCtgr.setText(ctgr);
 
             viewList = view.findViewById(R.id.recyclerView);
             viewList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
