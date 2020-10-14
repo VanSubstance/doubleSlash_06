@@ -18,7 +18,7 @@ interface retrofitAPI {
     Call<List<fundingItem>> getFundingList();
 
     @POST("funding_activity/{fund_id}")
-    Call<fundingItemActivity> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
+    Call<Boolean> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
 
     @GET("/trash")
     Call<List<wasteItem>> getWasteList();
