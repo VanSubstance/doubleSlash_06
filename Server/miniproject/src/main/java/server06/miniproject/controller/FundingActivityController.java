@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,8 +44,8 @@ public class FundingActivityController {
 		mapper.insertFundingAvtivity(fund_id,mem_id,point,funddate,acu_point);
 	}
 	
-	@PostMapping("/funding_activity/point/{fund_id}")
-	public void postFundingAvtivitPoint(@RequestParam("fund_id") int fund_id, @RequestParam("acu_point") int acu_point) {
+	@PutMapping("/funding_activity/point/{fund_id}")
+	public void putFundingAvtivitPoint(@RequestParam("fund_id") int fund_id, @RequestParam("acu_point") int acu_point) {
 		mapper.updateFundingAvtivity(fund_id,acu_point);
 	}
 	

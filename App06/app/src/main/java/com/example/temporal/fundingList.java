@@ -40,16 +40,16 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
                 .build();
         mRetrofitAPI = mRetrofit.create(retrofitAPI.class);
     }
-    Callback<fundingItemActivity> fundingItemCallback = new Callback<fundingItemActivity>() {
+    Callback<Boolean> fundingItemCallback = new Callback<Boolean>() {
         @Override
-        public void onResponse(Call<fundingItemActivity> call, Response<fundingItemActivity> response) {
+        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
             System.out.println("Post 전송 성공");
             System.out.println(response);
             System.out.println(call);
         }
 
         @Override
-        public void onFailure(Call<fundingItemActivity> call, Throwable t) {
+        public void onFailure(Call<Boolean> call, Throwable t) {
             System.out.println("전송 실패");
             t.printStackTrace();
         }

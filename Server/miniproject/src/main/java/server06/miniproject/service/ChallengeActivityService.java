@@ -20,8 +20,8 @@ public class ChallengeActivityService {
 		return challengeactivityMapper.insertChallengeActivity(challengeactivity) > 0 ? true : false;
 	}
 	
-	public boolean deleteChallengeActivity(int chalactId) {
-		return challengeactivityMapper.deleteChallengeActivity(chalactId) > 0 ? true : false;
+	public boolean deleteChallengeActivity(int chalId) {
+		return challengeactivityMapper.deleteChallengeActivity(chalId) > 0 ? true : false;
 	}
 	
 	public List<ChallengeActivity> selectChallengeActivityList(int memId){
