@@ -13,7 +13,7 @@ public interface ChallengeActivityMapper {
 	
 	int insertChallengeActivity(@Param("item") ChallengeActivity challengeactivity);
 	
-	int deleteChallengeActivity(int chalactId);
+	int deleteChallengeActivity(int chalId);
 	
 	List<ChallengeActivity> selectChallengeActivityList(int memId);
 	

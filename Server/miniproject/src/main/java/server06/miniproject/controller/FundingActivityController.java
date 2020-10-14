@@ -39,7 +39,7 @@ public class FundingActivityController {
 		return mapper.getFundingAvtivityList();
 	}
 	
-	@PostMapping("/funding_activity") //펀딩 활동 추가
+	@PostMapping("/funding_activity/{fund_id}") //펀딩 활동 추가
 	public void postFundingAvtivit(@RequestParam("fund_id") int fund_id, @RequestParam("mem_id") int mem_id, @RequestParam("point") int point, @RequestParam("funddate") String funddate , @RequestParam("acu_point") int acu_point) {
 		mapper.insertFundingAvtivity(fund_id,mem_id,point,funddate,acu_point);
 	}

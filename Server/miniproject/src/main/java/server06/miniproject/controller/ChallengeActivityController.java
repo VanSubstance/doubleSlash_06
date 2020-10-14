@@ -23,9 +23,9 @@ public class ChallengeActivityController {
 		return challengeactivityService.insertChallengeActivity(challengeactivity);
 	}
 	
-	@RequestMapping(value="/challengeactivity/{chalactId}", method=RequestMethod.DELETE)
-	public boolean deleteChallengeActivity(@PathVariable int chalactId) {
-		return challengeactivityService.deleteChallengeActivity(chalactId);
+	@RequestMapping(value="/challengeactivity/{chalId}", method=RequestMethod.DELETE)
+	public boolean deleteChallengeActivity(@PathVariable int chalId) {
+		return challengeactivityService.deleteChallengeActivity(chalId);
 	}
 	
 	@RequestMapping(value="/challengeactivity/{memId}", method=RequestMethod.GET)

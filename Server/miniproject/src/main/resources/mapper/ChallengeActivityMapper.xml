@@ -14,7 +14,7 @@
 	<delete id="deleteChallengeActivity" parameterType="int">
 		DELETE
 		FROM challenge_activity
-		WHERE chal_act_id = #{chalactId}
+		WHERE chal_id = #{chalId}
 	</delete>
 	
 	<select id="selectChallengeActivityList" parameterType="int" resultType="server06.miniproject.model.ChallengeActivity">
