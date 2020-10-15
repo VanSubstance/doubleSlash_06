@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Gravity;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +43,7 @@ public class challengeItemSpecific extends Fragment {
 
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
-    private Call<challengeItemActivity> mChallengeItemActivity;
+    private Call<Boolean> mChallengeItemActivity;
     private Callback<challengeItemActivity> challengeItemActivityCallback = new Callback<challengeItemActivity>() {
         @Override
         public void onResponse(Call<challengeItemActivity> call, Response<challengeItemActivity> response) {
@@ -107,7 +109,22 @@ public class challengeItemSpecific extends Fragment {
                 postOne.img = "0";
                 postOne.chalId = item.chalId;
                 mChallengeItemActivity = mRetrofitAPI.postChallengeActivity(postOne);
-                mChallengeItemActivity.enqueue(challengeItemActivityCallback);
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            mChallengeItemActivity.execute();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 item.acvts.get(tvKey).img = "0";
                 item.acvts.get(tvKey).chalId = item.chalId;
                 newActivity[tvKey].setImageResource(R.drawable.image_enrolled);

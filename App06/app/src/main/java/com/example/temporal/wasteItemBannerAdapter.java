@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,13 +15,13 @@ public class wasteItemBannerAdapter extends RecyclerView.Adapter<wasteItemBanner
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textDescription;
+        ImageView imageBanner;
 
         ViewHolder(View itemView) {
             super(itemView) ;
 
             // 뷰 객체에 대한 참조. (hold strong reference)
-            textDescription = itemView.findViewById(R.id.textDescription);
+            imageBanner = itemView.findViewById(R.id.imageBanner);
 
             itemView.setOnClickListener( new View.OnClickListener() {
 
@@ -52,7 +53,7 @@ public class wasteItemBannerAdapter extends RecyclerView.Adapter<wasteItemBanner
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(wasteItemBannerAdapter.ViewHolder holder, int position) {
-        holder.textDescription.setText(aCurrentData.listWasteBanner.get(position).id);
+        holder.imageBanner.setImageResource(aCurrentData.listWasteBanner.get(position).img);
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -32,23 +30,6 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
     private Call<List<challengeItemActivityForGet>> mCallActivities;
-    public void setAtvtsFromDb(final challengeItem one, final Call<List<challengeItemActivityForGet>> origin) {
-        origin.enqueue(new Callback<List<challengeItemActivityForGet>>() {
-            @Override
-            public void onResponse(Call<List<challengeItemActivityForGet>> call, Response<List<challengeItemActivityForGet>> response) {
-
-                System.out.println("챌린지 활동 GET 성공");
-                System.out.println(response.body());
-                System.out.println(call);
-            }
-
-            @Override
-            public void onFailure(Call<List<challengeItemActivityForGet>> call, Throwable t) {
-
-            }
-        });
-
-    }
     private void setRetrofitInit() {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("http://101.101.218.146:8080")
@@ -60,7 +41,7 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_main, container, false);
         setRetrofitInit();
-        AsyncTask.execute(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 for(challengeItem one : aCurrentData.listMyChallenge) {
@@ -89,6 +70,12 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
                 }
             }
         });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         for (challengeItem it : aCurrentData.listMyChallenge) {
             if (items.size() < 3) {
@@ -134,19 +121,19 @@ public class homeMain extends Fragment implements OnItemClickForChallenge {
                         ((interfaceMain) getActivity()).changeFragmentWasteCtgr("마스크");
                         break;
                     case R.id.buttonPlastic:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("plastic");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("플라스틱");
                         break;
                     case R.id.buttonPaper:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("paper");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("종이");
                         break;
                     case R.id.buttonCan:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("glass");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("유리");
                         break;
                     case R.id.buttonVinyl:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("vinyl");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("비닐");
                         break;
                     case R.id.buttonEtc:
-                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("etc");
+                        ((interfaceMain) getActivity()).changeFragmentWasteCtgr("기타");
                         break;
                 }
             }

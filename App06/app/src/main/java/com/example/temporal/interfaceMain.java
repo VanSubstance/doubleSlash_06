@@ -3,9 +3,7 @@ package com.example.temporal;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,22 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class interfaceMain extends AppCompatActivity {
     FragmentManager fragmentManager = getFragmentManager();
@@ -52,7 +35,17 @@ public class interfaceMain extends AppCompatActivity {
         aCurrentData.listWasteBanner.clear();
         for (int i = 0; i < 3; i++) {
             wasteItemBanner newOne = new wasteItemBanner();
-            newOne.init(i);
+            switch (i) {
+                case 0:
+                    newOne.img = R.drawable.banner01;
+                    break;
+                case 1:
+                    newOne.img = R.drawable.banner02;
+                    break;
+                case 2:
+                    newOne.img = R.drawable.banner03;
+                    break;
+            }
             aCurrentData.listWasteBanner.add(newOne);
         }
         // 잡다한 변수들
@@ -74,9 +67,6 @@ public class interfaceMain extends AppCompatActivity {
             textFunding = findViewById(R.id.textFunding);
             textEnroll = findViewById(R.id.textEnroll);
             textInfo = findViewById(R.id.textInfo);
-
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             callMenu(R.id.menuHome);
 
             View.OnClickListener btnListener = new View.OnClickListener() {
@@ -137,7 +127,7 @@ public class interfaceMain extends AppCompatActivity {
                 clearMenu();
                 imageInfo.setImageResource(R.drawable.my_on);
                 textInfo.setTextColor(Color.parseColor("#6A6A6A"));
-                fragmentTransaction.replace(R.id.frameMain, new infoMain());
+                fragmentTransaction.replace(R.id.frameMain, new userMain());
                 break;
         }
         fragmentTransaction.commit();
@@ -159,10 +149,6 @@ public class interfaceMain extends AppCompatActivity {
                 fragmentTransaction.addToBackStack(null).commit();
                 changeFragmentFundingList();
                 break;
-            case 500: // 마이페이지 화면 최초 클릭시
-                fragmentTransaction.replace(R.id.frameInfoList, new infoList());
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
             default:
                 break;
         }
@@ -171,11 +157,14 @@ public class interfaceMain extends AppCompatActivity {
     public void changeFragmentWasteCtgr(String ctgr) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         wasteMain newPage = new wasteMain();
+        newPage.setCtgr(ctgr);
         ArrayList<wasteItem> newOne = new ArrayList<wasteItem>();
-        for (int i = 0; i < aCurrentData.listWaste.size(); i++) {
-            if (aCurrentData.listWaste.get(i).ctgr.equals(ctgr)) {
-                newOne.add(aCurrentData.listWaste.get(i));
-            }
+        switch (ctgr) {
+            case "유리":
+                wasteItem newWaste = new wasteItem();
+                newWaste.img = R.drawable.glass01;
+                newOne.add(newWaste);
+                break;
         }
         newPage.setItems(newOne);
         fragmentTransaction.replace(R.id.frameMain, newPage);
@@ -200,14 +189,6 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null).commit();
     }
 
-    public void changeFragmentChallengeComplete(challengeItem newOne) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        challengeComplete newPage = new challengeComplete();
-        newPage.setItem(newOne);
-        fragmentTransaction.replace(R.id.frameMain, newPage);
-        fragmentTransaction.addToBackStack(null).commit();
-    }
-
     // 챌린지 등록 세부페이지 내꺼
     public void changeFragmentChallengeEnrollItemSpecific(challengeItem newOne) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -225,31 +206,5 @@ public class interfaceMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameMain, newPage);
         fragmentTransaction.addToBackStack(null).commit();
     }
-
-    // 마이페이지
-//    public void changeFragmentInfoList() {
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        infoList newPage = new infoList();
-//        fragmentTransaction.replace(R.id.frameInfoList, newPage);
-//        fragmentTransaction.addToBackStack(null).commit();
-//    }
-
-    /** 사용 안함
-     // 등록 프레그먼트의 체크리스트를 불러오기 위한 함수
-     // parameter: 아직 생각 안해봄
-     public void changeFragmentEnroll(enrollChecklistItem item) {
-     FragmentManager fragmentManager = getFragmentManager();
-     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-     enrollChecklist newPage = new enrollChecklist();
-     Bundle bd = new Bundle(2);
-     bd.putString("ctgr", item.ctgr);
-     bd.putStringArrayList("seq", item.seq);
-     newPage.setArguments(bd);
-     // paremeter를 이용해서 해당 카테고리에 맞는 체크리스트 call
-     fragmentTransaction.replace(R.id.frameEnrollMain, newPage);
-     fragmentTransaction.addToBackStack(null).commit();
-     }
-     */
 
 }

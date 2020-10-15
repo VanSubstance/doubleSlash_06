@@ -22,16 +22,11 @@ public class wasteItemAdapter extends RecyclerView.Adapter<wasteItemAdapter.View
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textTitle;
-        TextView textDescription;
         ImageView imageWaste;
 
         ViewHolder(View itemView) {
             super(itemView) ;
 
-            // 뷰 객체에 대한 참조. (hold strong reference)
-            textTitle = itemView.findViewById(R.id.textTitle);
-            textDescription = itemView.findViewById(R.id.textDescription);
             imageWaste = itemView.findViewById(R.id.imageWaste);
 
             itemView.setOnClickListener( new View.OnClickListener() {
@@ -65,26 +60,8 @@ public class wasteItemAdapter extends RecyclerView.Adapter<wasteItemAdapter.View
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(final wasteItemAdapter.ViewHolder holder, int position) {
-        holder.textTitle.setText(items.get(position).title);
-        holder.textDescription.setText(items.get(position).des);
-        Thread callImage = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Bitmap imageBitmap = BitmapFactory.decodeStream(new URL("http://ecoseoul.or.kr/wp/wp-content/uploads/2020/09/%EC%A3%BC%EC%84%9D-2020-09-13-101829.png").openStream());
-                    holder.imageWaste.setImageBitmap(imageBitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        callImage.start();
-        try {
-            callImage.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void onBindViewHolder(wasteItemAdapter.ViewHolder holder, int position) {
+        holder.imageWaste.setImageResource(items.get(position).img);
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

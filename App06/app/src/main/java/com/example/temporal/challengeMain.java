@@ -1,28 +1,16 @@
 package com.example.temporal;
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,18 +22,14 @@ import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class challengeMain extends Fragment implements OnItemClickForChallenge, MapView.MapViewEventListener {
+    TextView textCount;
     // 챌린지 목록 -> 등록순으로 보여주기
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
@@ -76,12 +60,16 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
                 mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat, lon), true);
             }
         });
+        textCount = view.findViewById(R.id.todayCount);
 
 
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));
         adapter = new challengeItemAdapter(aCurrentData.listMyChallenge, this);
+        textCount.setText(aCurrentData.listMyChallenge.size() + " 개");
         viewList.setAdapter(adapter);
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(new challengeItemSwipeController(adapter));
+        itemTouchhelper.attachToRecyclerView(viewList);
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(viewList);
 
@@ -152,7 +140,7 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
         public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
             mChallengeItemList = mRetrofitAPI.getChallengeList(mapPOIItem.getTag());
             if (mapPOIItem.getTag() == aCurrentData.myInfo.id) {
-                AsyncTask.execute(new Runnable() {
+                Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         aCurrentData.listMyChallenge.clear();
@@ -191,12 +179,19 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
                         }
                     }
                 });
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                textCount.setText(aCurrentData.listMyChallenge.size() + " 개");
                 adapter.changeData(aCurrentData.listMyChallenge);
                 viewList.removeAllViewsInLayout();
                 viewList.setAdapter(adapter);
             }
             else {
-                AsyncTask.execute(new Runnable() {
+                Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         aCurrentData.listChallenge.clear();
@@ -235,6 +230,13 @@ public class challengeMain extends Fragment implements OnItemClickForChallenge, 
                         }
                     }
                 });
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                textCount.setText(aCurrentData.listChallenge.size() + " 개");
                 adapter.changeData(aCurrentData.listChallenge);
                 viewList.removeAllViewsInLayout();
                 viewList.setAdapter(adapter);

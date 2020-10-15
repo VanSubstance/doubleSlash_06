@@ -3,6 +3,7 @@ package com.example.temporal;
 
 import android.app.Fragment;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager;
 import com.applikeysolutions.cosmocalendar.utils.SelectionType;
 import com.applikeysolutions.cosmocalendar.view.CalendarView;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,7 +35,7 @@ public class challengeEnrollItemSpecific extends Fragment {
         item.clone(newOne);
     }
     private Call<List<challengeItem>> mChallengeItemList;
-    Call<challengeItemForPost> newChallenge;
+    Call<Boolean> newChallenge;
     Callback<challengeItemForPost> mChallengePostCallback = new Callback<challengeItemForPost>() {
         @Override
         public void onResponse(Call<challengeItemForPost> call, Response<challengeItemForPost> response) {
@@ -79,28 +81,31 @@ public class challengeEnrollItemSpecific extends Fragment {
                 itemPost.chalfrId = item.chalId;
                 item.chalPoint = item.chalPoint * calendarView.getSelectedDates().size();
                 itemPost.chalPoint = item.chalPoint;
-                aCurrentData.listMyChallenge.add(item);
                 newChallenge = mRetrofitAPI.setChallenge(itemPost);
-                newChallenge.enqueue(mChallengePostCallback);
                 mChallengeItemList = mRetrofitAPI.getChallengeList(aCurrentData.myInfo.id);
-                mChallengeItemList.enqueue(new Callback<List<challengeItem>>() {
+                Thread thread = new Thread(new Runnable() {
                     @Override
-                    public void onResponse(Call<List<challengeItem>> call, Response<List<challengeItem>> response) {
-                        System.out.println("챌린지 수신 성공");
-                        for (challengeItem item :
-                                response.body()) {
-                            item.setDatesFromServer();
-                            aCurrentData.listMyChallenge.add(item);
+                    public void run() {
+                        try {
+                            newChallenge.execute();
+                            aCurrentData.listMyChallenge.clear();
+                            for (challengeItem item :
+                                    mChallengeItemList.execute().body()) {
+                                item.setDatesFromServer();
+                                aCurrentData.listMyChallenge.add(item);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
-
-                    @Override
-                    public void onFailure(Call<List<challengeItem>> call, Throwable t) {
-                        System.out.println("챌린지 수신 실패");
-                        t.printStackTrace();
-                    }
                 });
-                ((interfaceMain)getActivity()).callMenu(R.id.menuHome);
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                ((interfaceMain)getActivity()).callMenu(R.id.menuChallenge);
             }
         });
 

@@ -18,7 +18,9 @@ interface retrofitAPI {
     Call<List<fundingItem>> getFundingList();
 
     @POST("funding_activity/{fund_id}")
-    Call<fundingItemActivity> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
+    Call<Boolean> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
+    @GET("funding_activity_mem/{mem_id}")
+    Call<List<fundingItemActivityForGet>> getFundingActivityListByUser(@Path("mem_id") int mem_id);
 
     @GET("/trash")
     Call<List<wasteItem>> getWasteList();
@@ -26,14 +28,14 @@ interface retrofitAPI {
     @GET("/member")
     Call<List<userItem>> getUserList();
     @POST("/member")
-    Call<userItem> setUser(@Body userItem post);
+    Call<Boolean> setUser(@Body userItem post);
     @PUT("member/location/{memId}")
-    Call<location> putLocation(@Path("memId") int memId, @Body location newOne);
+    Call<Boolean> putLocation(@Path("memId") int memId, @Body location newOne);
     @PUT("member/point/{memId}")
-    Call<point> changePoint(@Path("memId") int memId, @Body point newOne);
+    Call<Boolean> changePoint(@Path("memId") int memId, @Body point newOne);
 
     @POST("/challenge")
-    Call<challengeItemForPost> setChallenge(@Body challengeItemForPost post);
+    Call<Boolean> setChallenge(@Body challengeItemForPost post);
     @GET("/challenge/{memId}")
     Call<List<challengeItem>> getChallengeList(@Path("memId") int memId);
     @DELETE("/challenge/{chalId}")
@@ -42,8 +44,12 @@ interface retrofitAPI {
 
 
     @POST("/challengeactivity")
-    Call<challengeItemActivity> postChallengeActivity(@Body challengeItemActivity newOne);
+    Call<Boolean> postChallengeActivity(@Body challengeItemActivity newOne);
     @GET("/challengeactivity/actlist/{chalId}")
     Call<List<challengeItemActivityForGet>> getChallengeActivityList(@Path("chalId") int chalId);
+    @GET("challengeactivity/{memId}")
+    Call<List<challengeItemActivityForGet>> getChallengeActivityListByUser(@Path("memId") int memId);
+    @DELETE("/challengeactivity/{chalId}")
+    Call<Void> deleteChallengeActivities(@Path("chalId") int chalId);
 
 }
