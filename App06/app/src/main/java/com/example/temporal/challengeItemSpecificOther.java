@@ -21,6 +21,9 @@ public class challengeItemSpecificOther extends Fragment {
     CalendarView calendarView;
     TextView textPointTotal;
 
+    private int num;
+    private ImageView[] newActivity;
+
     public void setItem(challengeItem newOne) {
         item.clone(newOne);
     }
@@ -49,25 +52,34 @@ public class challengeItemSpecificOther extends Fragment {
 
 
         // 이미지 동적 생성
+        newActivity= new ImageView[item.acvts.size()];
+        // 이미지 동적 생성
         for (int i = 0; i < item.acvts.size(); i++) {
+            num=i;
             if ( i % 3 == 0) {
                 rowImages = new LinearLayout(this.getContext());
                 rowImages.setOrientation(LinearLayout.HORIZONTAL);
                 rowImages.setLayoutParams(settingRow);
             }
-            ImageView newActivity = new ImageView(this.getContext());
+            newActivity[num]=new ImageView(this.getContext());
+            newActivity[num].setTag(num);
             LinearLayout slotActivity = new LinearLayout(this.getContext());
             slotActivity.setOrientation(LinearLayout.HORIZONTAL);
-            newActivity.setImageResource(R.drawable.image_default);
+            // 엑티비티 존재할 경우
+            if (item.acvts.get(num).img == null) {
+                newActivity[num].setImageResource(R.drawable.image_default);
+            } else {
+                newActivity[num].setImageResource(R.drawable.image_enrolled);
+            }
             LinearLayout.LayoutParams settingImage = new LinearLayout.LayoutParams(400, 400);
-            settingImage.setMargins(20, 0, 20, 0);
-            newActivity.setLayoutParams(settingImage);
-            newActivity.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            settingImage.setMargins(10, 0, 10, 0);
+            newActivity[num].setLayoutParams(settingImage);
+            newActivity[num].setScaleType(ImageView.ScaleType.CENTER_CROP);
             LinearLayout.LayoutParams settingSlot = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             settingSlot.weight = 1;
             settingSlot.gravity = Gravity.CENTER;
             slotActivity.setLayoutParams(settingSlot);
-            slotActivity.addView(newActivity);
+            slotActivity.addView(newActivity[num]);
             rowImages.addView(slotActivity);
             if (i % 3 == 2 || i + 1 == item.acvts.size()) {
                 layoutImages.addView(rowImages);

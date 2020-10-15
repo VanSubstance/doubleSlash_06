@@ -36,6 +36,8 @@ interface retrofitAPI {
 
     @POST("/challenge")
     Call<Boolean> setChallenge(@Body challengeItemForPost post);
+    @GET("/challenge/completed/{memId}")
+    Call<List<challengeItem>> getCompletedChallengeList(@Path("memId") int memId);
     @GET("/challenge/{memId}")
     Call<List<challengeItem>> getChallengeList(@Path("memId") int memId);
     @DELETE("/challenge/{chalId}")

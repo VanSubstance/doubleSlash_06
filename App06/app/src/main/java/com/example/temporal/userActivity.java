@@ -42,4 +42,5 @@ public class userActivity {
         title = ori.fund_inst;
         point = 0;
     }
+
 }

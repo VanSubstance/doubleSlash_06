@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,6 +40,7 @@ public class userMain extends Fragment implements OnItemClickForInfo {
 
     private Call<List<challengeItemActivityForGet>> mCallChallengeActivity;
     private Call<List<fundingItemActivityForGet>> mCallFundingActivity;
+    private Call<List<challengeItem>> mCallChallenge;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class userMain extends Fragment implements OnItemClickForInfo {
         setRetrofitInit();
         mCallChallengeActivity = mRetrofitAPI.getChallengeActivityListByUser(aCurrentData.myInfo.id);
         mCallFundingActivity = mRetrofitAPI.getFundingActivityListByUser(aCurrentData.myInfo.id);
+        mCallChallenge = mRetrofitAPI.getCompletedChallengeList(aCurrentData.myInfo.id);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -59,6 +64,11 @@ public class userMain extends Fragment implements OnItemClickForInfo {
                         newOne.setFromFundingActivity(item);
                         aCurrentData.listActivity.add(newOne);
                     }
+                    for (challengeItem item : mCallChallenge.execute().body()) {
+                        userActivity newOne = new userActivity();
+                        newOne.setFromChallengeItem(item);
+                        aCurrentData.listActivity.add(newOne);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -70,6 +80,12 @@ public class userMain extends Fragment implements OnItemClickForInfo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        Collections.sort(aCurrentData.listActivity, new Comparator<userActivity>() {
+            @Override
+            public int compare(userActivity userActivity, userActivity t1) {
+                return userActivity.date.compareTo(t1.date);
+            }
+        });
 
         viewList = view.findViewById(R.id.recyclerView);
         viewList.setLayoutManager(new LinearLayoutManager(this.getContext()));

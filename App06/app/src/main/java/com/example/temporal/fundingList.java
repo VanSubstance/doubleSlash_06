@@ -146,14 +146,12 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         newOne.acu_point = accu;
 
         fundingItemActivity newActivity = new fundingItemActivity();
-//        newActivity.fund_act_id = newOne.fund_id;
         newActivity.fund_id = newOne.fund_id;
         newActivity.mem_id = aCurrentData.myInfo.id;
         newActivity.point = Integer.parseInt((pointSpent.getText().toString()));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         newActivity.funddate = sdf.format(Calendar.getInstance().getTime());
         newActivity.acu_point = accu;
-//        newActivity.acu_point = Integer.parseInt((acu_point.getText().toString())) + fund_point;
 
         aCurrentData.myInfo.point = Integer.parseInt((pointRest.getText().toString()));
         point newpointActivity = new point();
