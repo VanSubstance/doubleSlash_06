@@ -30,5 +30,15 @@ public class ChallengeService {
 		return challengeMapper.selectChallengeList(memId);
 	}
 	
+	public List<ChallengeList> selectChallengeCompletedList(){
+		return challengeMapper.selectChallengeCompletedList();
+	}
+	
+	public boolean updateChallengeCompleted(int chalId, Challenge challenge) {
+		
+		return challengeMapper.updateChallengeCompleted(chalId, challenge) > 0 ? true : false;
+		
+	}
+
 
 }

@@ -20,4 +20,8 @@ public interface ChallengeMapper {
 	
 	List<ChallengeList> selectChallengeList(int memId);
 	
+	List<ChallengeList> selectChallengeCompletedList();
+	
+	int updateChallengeCompleted(@Param("chalId") int chalId, @Param("item") Challenge challenge);
+	
 }

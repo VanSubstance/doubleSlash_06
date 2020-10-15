@@ -29,6 +29,18 @@
 		WHERE mem_id = #{memId}
 	</select>
 	
+	<select id="selectChallengeCompletedList" resultType="server06.miniproject.model.Challenge">
+		SELECT chal_id, mem_id, regdate, deadline, chal_fr_id, completed, chal_point
+		FROM challenge
+		WHERE completed = 1
+	</select>
+	
+	<update id="updateChallengeCompleted" parameterType="server06.miniproject.model.Challenge">
+		UPDATE challenge
+		SET completed = #{item.completed}
+		WHERE chal_id = #{chalId}
+	</update>
+	
 
 
 </mapper>

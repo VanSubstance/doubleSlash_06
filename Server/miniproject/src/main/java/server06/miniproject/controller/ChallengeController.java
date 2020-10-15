@@ -34,5 +34,14 @@ public class ChallengeController {
 		return challengeService.selectChallengeList(memId);
 	}
 	
+	@RequestMapping(value="/challenge/completed", method = RequestMethod.GET)
+	public List<ChallengeList> selectChallengeCompletedList(){
+		return challengeService.selectChallengeCompletedList();
+	}
+	
+	@RequestMapping(value="/challenge/completed/{chalId}", method = RequestMethod.PUT)
+	public Boolean updateChallengeCompleted(@PathVariable int chalId, @RequestBody Challenge challenge) {
+		return challengeService.updateChallengeCompleted(chalId, challenge);
+	}
 
 }

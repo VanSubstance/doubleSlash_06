@@ -6,15 +6,18 @@ public class Challenge {
 	private String regdate;
 	private String deadline;
 	private int chalfrId;
+	private char completed;
 	private int chalPoint;
 
-	public Challenge(int chalId, int memId, String regdate, String deadline, int chalfrId, int chalPoint) {
+	public Challenge(int chalId, int memId, String regdate, String deadline, int chalfrId, char completed,
+			int chalPoint) {
 		super();
 		this.chalId = chalId;
 		this.memId = memId;
 		this.regdate = regdate;
 		this.deadline = deadline;
 		this.chalfrId = chalfrId;
+		this.completed = completed;
 		this.chalPoint = chalPoint;
 	}
 
@@ -58,6 +61,14 @@ public class Challenge {
 		this.chalfrId = chalfrId;
 	}
 
+	public char getCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(char completed) {
+		this.completed = completed;
+	}
+
 	public int getChalPoint() {
 		return chalPoint;
 	}
@@ -69,7 +80,7 @@ public class Challenge {
 	@Override
 	public String toString() {
 		return "Challenge [chalId=" + chalId + ", memId=" + memId + ", regdate=" + regdate + ", deadline=" + deadline
-				+ ", chalfrId=" + chalfrId + ", chalPoint=" + chalPoint + "]";
+				+ ", chalfrId=" + chalfrId + ", completed=" + completed + ", chalPoint=" + chalPoint + "]";
 	}
 
 }
