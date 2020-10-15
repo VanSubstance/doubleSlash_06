@@ -17,8 +17,8 @@ interface retrofitAPI {
     @GET("/funding/all")
     Call<List<fundingItem>> getFundingList();
 
-    @POST("funding_activity/{fund_id}")
-    Call<Boolean> postFundingActivity(@Path("fund_id") int fund_id, @Body fundingItemActivity newOne);
+    @POST("funding_activity")
+    Call<Boolean> postFundingActivity(@Body fundingItemActivity newOne);
     @GET("funding_activity_mem/{mem_id}")
     Call<List<fundingItemActivityForGet>> getFundingActivityListByUser(@Path("mem_id") int mem_id);
 
@@ -42,6 +42,8 @@ interface retrofitAPI {
     Call<List<challengeItem>> getChallengeList(@Path("memId") int memId);
     @DELETE("/challenge/{chalId}")
     Call<Void> deleteChallengeItem(@Path("chalId") int chalId);
+    @PUT("challenge/completed/{chalId}")
+    Call<Boolean> putChallengeComplete(@Path("chalId") int chalId, @Body int completed);
 
 
 

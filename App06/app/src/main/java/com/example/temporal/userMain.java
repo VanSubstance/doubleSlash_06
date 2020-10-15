@@ -59,14 +59,14 @@ public class userMain extends Fragment implements OnItemClickForInfo {
                         newOne.setFromChallengeActivity(item);
                         aCurrentData.listActivity.add(newOne);
                     }
-                    for (fundingItemActivityForGet item : mCallFundingActivity.execute().body()) {
-                        userActivity newOne = new userActivity();
-                        newOne.setFromFundingActivity(item);
-                        aCurrentData.listActivity.add(newOne);
-                    }
                     for (challengeItem item : mCallChallenge.execute().body()) {
                         userActivity newOne = new userActivity();
                         newOne.setFromChallengeItem(item);
+                        aCurrentData.listActivity.add(newOne);
+                    }
+                    for (fundingItemActivityForGet item : mCallFundingActivity.execute().body()) {
+                        userActivity newOne = new userActivity();
+                        newOne.setFromFundingActivity(item);
                         aCurrentData.listActivity.add(newOne);
                     }
                 } catch (IOException e) {

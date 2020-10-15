@@ -157,7 +157,7 @@ public class fundingList extends Fragment implements OnItemClickForFunding {
         point newpointActivity = new point();
         newpointActivity.point = Integer.parseInt((pointRest.getText().toString()));
 
-        mPostFundingActivity = mRetrofitAPI.postFundingActivity(newOne.fund_id, newActivity);
+        mPostFundingActivity = mRetrofitAPI.postFundingActivity(newActivity);
         mchangePoint = mRetrofitAPI.changePoint(aCurrentData.myInfo.id, newpointActivity);
         Thread thread = new Thread(new Runnable() {
             @Override

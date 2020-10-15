@@ -44,6 +44,7 @@ public class challengeItemSpecific extends Fragment {
     private retrofitAPI mRetrofitAPI;
     private Retrofit mRetrofit;
     private Call<Boolean> mChallengeItemActivity;
+    private Call<Boolean> mPutChallengeComplete;
     private Callback<challengeItemActivity> challengeItemActivityCallback = new Callback<challengeItemActivity>() {
         @Override
         public void onResponse(Call<challengeItemActivity> call, Response<challengeItemActivity> response) {
@@ -109,11 +110,15 @@ public class challengeItemSpecific extends Fragment {
                 postOne.img = "0";
                 postOne.chalId = item.chalId;
                 mChallengeItemActivity = mRetrofitAPI.postChallengeActivity(postOne);
+                mPutChallengeComplete = mRetrofitAPI.putChallengeComplete(postOne.chalId, 1);
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             mChallengeItemActivity.execute();
+                            if (item.progress == 99 || item.progress == 100) {
+                                mPutChallengeComplete.execute();
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
