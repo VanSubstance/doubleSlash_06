@@ -33,7 +33,7 @@ public class interfaceMain extends AppCompatActivity {
 
         // 데이터베이스에서 ctgr 맞는거 불러오기
         aCurrentData.listWasteBanner.clear();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             wasteItemBanner newOne = new wasteItemBanner();
             switch (i) {
                 case 0:

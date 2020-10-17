@@ -32,8 +32,8 @@ public class challengeItemSpecificOther extends Fragment {
         View view = inflater.inflate(R.layout.challenge_item_specific, container,false);
         TextView textTitle = view.findViewById(R.id.textTitle);
         TextView textDescription = view.findViewById(R.id.textDescription);
-        textTitle.setText("남의 것: " + item.title);
-        textDescription.setText("남의 것: " + item.des);
+        textTitle.setText(item.title);
+        textDescription.setText(item.des);
         textPointTotal = view.findViewById(R.id.textPointTotal);
         textPointTotal.setText(String.valueOf(item.chalPoint));
 
